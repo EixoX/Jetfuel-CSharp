@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX", "EixoX\EixoX.csproj", "{0A418683-14D0-433F-BA4D-C4919C8069A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Database", "EixoX.Database\EixoX.Database.csproj", "{67AA3F56-A9BC-4D08-848B-FE3AD2827004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Html", "EixoX.Html\EixoX.Html.csproj", "{21B68128-666F-4113-9C12-570836A1BBCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.MongoDb", "EixoX.MongoDb\EixoX.MongoDb.csproj", "{37DC95F2-6427-4373-9575-AD56644CC20A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.MySql", "EixoX.MySql\EixoX.MySql.csproj", "{22AED1B7-4D64-4240-9A18-B26D03533C57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Xml", "EixoX.Xml\EixoX.Xml.csproj", "{3F4F35A8-1970-4D6B-9EAF-9B650DB4EBFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Text", "EixoX.Text\EixoX.Text.csproj", "{C891FED5-B23F-4ADE-9B04-34CE6597D6E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67AA3F56-A9BC-4D08-848B-FE3AD2827004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67AA3F56-A9BC-4D08-848B-FE3AD2827004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67AA3F56-A9BC-4D08-848B-FE3AD2827004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67AA3F56-A9BC-4D08-848B-FE3AD2827004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B68128-666F-4113-9C12-570836A1BBCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B68128-666F-4113-9C12-570836A1BBCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B68128-666F-4113-9C12-570836A1BBCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B68128-666F-4113-9C12-570836A1BBCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37DC95F2-6427-4373-9575-AD56644CC20A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37DC95F2-6427-4373-9575-AD56644CC20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37DC95F2-6427-4373-9575-AD56644CC20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37DC95F2-6427-4373-9575-AD56644CC20A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22AED1B7-4D64-4240-9A18-B26D03533C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22AED1B7-4D64-4240-9A18-B26D03533C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22AED1B7-4D64-4240-9A18-B26D03533C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22AED1B7-4D64-4240-9A18-B26D03533C57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F4F35A8-1970-4D6B-9EAF-9B650DB4EBFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F4F35A8-1970-4D6B-9EAF-9B650DB4EBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F4F35A8-1970-4D6B-9EAF-9B650DB4EBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F4F35A8-1970-4D6B-9EAF-9B650DB4EBFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C891FED5-B23F-4ADE-9B04-34CE6597D6E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C891FED5-B23F-4ADE-9B04-34CE6597D6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C891FED5-B23F-4ADE-9B04-34CE6597D6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C891FED5-B23F-4ADE-9B04-34CE6597D6E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
