@@ -4,7 +4,9 @@ using System.Text;
 
 namespace EixoX.Interceptors
 {
-    class WhitespaceStrategy
+    public enum WhitespaceStrategy
     {
+        Collapse,
+        Replace
     }
 }

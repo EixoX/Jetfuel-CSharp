@@ -4,7 +4,8 @@ using System.Text;
 
 namespace EixoX.Interceptors
 {
-    class Interceptor
+    public interface Interceptor
     {
+        object Intercept(object input);
     }
 }

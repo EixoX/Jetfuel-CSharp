@@ -4,7 +4,9 @@ using System.Text;
 
 namespace EixoX.Restrictions
 {
-    class Restriction
+    public interface Restriction
     {
+        bool Validate(object input);
+        string GetRestrictionMessage(object input);
     }
 }
