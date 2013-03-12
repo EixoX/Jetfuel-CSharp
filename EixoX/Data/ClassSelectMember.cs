@@ -10,7 +10,7 @@ namespace EixoX.Data
     /// <summary>
     /// Represents a selection of class member values.
     /// </summary>
-    public class ClassSelectMember : 
+    public class ClassSelectMember :
         IEnumerable<object>,
         ClassFilterAspect<ClassSelectMember>,
         ClassSortAspect<ClassSelectMember>
@@ -445,6 +445,17 @@ namespace EixoX.Data
             {
                 return ie.MoveNext() ? ie.Current : null;
             }
+        }
+
+        /// <summary>
+        /// Gets the single result of the member select.
+        /// </summary>
+        /// <typeparam name="T">The type to convert the result.</typeparam>
+        /// <returns>A first value or default.</returns>
+        public T SingleResult<T>()
+        {
+            object value = SingleResult();
+            return value == null ? default(T) : (T)Convert.ChangeType(value, typeof(T));
         }
     }
 }
