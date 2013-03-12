@@ -347,5 +347,15 @@ namespace EixoX.Html
         {
             WriteInputs(new HtmlWriter(writer), entity, fieldset, validateRestrictions);
         }
+
+        public void WriteInput(HtmlWriter writer, string memberName, T entity, int lcid, bool validateRestrictions)
+        {
+            WriteInput(writer, base[memberName].CreateTerm(entity, lcid, validateRestrictions));
+        }
+
+        public void WriteInput(System.IO.TextWriter writer, string memberName, T entity, int lcid, bool validateRestrictions)
+        {
+            WriteInput(new HtmlWriter(writer), base[memberName].CreateTerm(entity, lcid, validateRestrictions));
+        }
     }
 }

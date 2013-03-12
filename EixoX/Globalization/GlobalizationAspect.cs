@@ -19,9 +19,11 @@ namespace EixoX.Globalization
         {
 
             
-            string fileName = System.IO.Path.GetDirectoryName(dataType.Assembly.Location);
+            string fileName = System.IO.Path.GetDirectoryName(dataType.Assembly.CodeBase);
+            fileName = fileName.Replace("file:\\", "");
             fileName = System.IO.Path.Combine(fileName, "Globalization");
             fileName = System.IO.Path.Combine(fileName, dataType.FullName + ".xml");
+            
             
             if (System.IO.File.Exists(fileName))
             {

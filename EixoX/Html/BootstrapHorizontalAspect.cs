@@ -43,16 +43,17 @@ namespace EixoX.Html
 
         protected override void WriteHint(HtmlWriter writer, HtmlInputTerm term)
         {
-            writer.WriteCloseTag("div");
             writer.WriteLine();
             if (!string.IsNullOrEmpty(term.ErrorMessage))
             {
-                writer.WriteSimpleTag("span", term.ErrorMessage, new HtmlAttribute("class", "help-block"));
+                writer.WriteSimpleTag("span", term.ErrorMessage, new HtmlAttribute("class", "help-inline"));
             }
             else if (!string.IsNullOrEmpty(term.Hint))
             {
-                writer.WriteSimpleTag("span", term.Hint, new HtmlAttribute("class", "help-block"));
+                writer.WriteSimpleTag("span", term.Hint, new HtmlAttribute("class", "help-inline"));
             }
+            writer.WriteCloseTag("div");
+            
         }
 
         public override void WriteError(HtmlWriter writer, HtmlInputTerm term)

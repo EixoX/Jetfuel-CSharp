@@ -63,6 +63,18 @@ namespace EixoX
         /// <param name="value">The value to set.</param>
         public virtual void SetValue(object entity, object value)
         {
+            if (value != null)
+            {
+                if (!_Acessor.DataType.IsEnum)
+                {
+                    if (value.GetType() != _Acessor.DataType)
+                    {
+                        value = Convert.ChangeType(value, _Acessor.DataType);
+                    }
+                }
+
+            }
+
             _Acessor.SetValue(entity, value);
         }
 

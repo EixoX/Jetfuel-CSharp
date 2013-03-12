@@ -10,7 +10,7 @@ namespace EixoX.Data
     /// Represents an abstract data aspect with useful methods.
     /// </summary>
     public abstract class DataAspect
-        : AbstractAspect<DataMember>
+        : AbstractAspect<DataAspectMember>
     {
         private readonly int _IdentityOrdinal;
         private readonly LinkedList<int> _Uniques;
@@ -44,7 +44,7 @@ namespace EixoX.Data
             int count = base.Count;
             for (int i = 0; i < count; i++)
             {
-                DataMember member = base[i];
+                DataAspectMember member = base[i];
                 if (member.IsIdentity)
                 {
                     if (identityOrdinal < 0)
@@ -91,7 +91,7 @@ namespace EixoX.Data
         /// <summary>
         /// Gets the identity member or null if no identity is present.
         /// </summary>
-        public DataMember IdentityMember
+        public DataAspectMember IdentityMember
         {
             get { return this._IdentityOrdinal >= 0 ? base[_IdentityOrdinal] : null; }
         }
@@ -115,7 +115,7 @@ namespace EixoX.Data
         /// <summary>
         /// Gets an enumeration of unique members.
         /// </summary>
-        public IEnumerable<DataMember> UniqueMembers
+        public IEnumerable<DataAspectMember> UniqueMembers
         {
             get
             {
@@ -143,7 +143,7 @@ namespace EixoX.Data
         /// <summary>
         /// Gets an enumeration of primary key members.
         /// </summary>
-        public IEnumerable<DataMember> PrimaryKeys
+        public IEnumerable<DataAspectMember> PrimaryKeys
         {
             get
             {
@@ -208,7 +208,7 @@ namespace EixoX.Data
                 {
                     int fieldCount = record.Current.FieldCount;
                     bool initializable = typeof(Initializable).IsAssignableFrom(DataType);
-                    DataMember[] members = new DataMember[fieldCount];
+                    DataAspectMember[] members = new DataAspectMember[fieldCount];
 
                     for (int i = 0; i < fieldCount; i++)
                     {

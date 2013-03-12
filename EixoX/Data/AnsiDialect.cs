@@ -104,6 +104,10 @@ namespace EixoX.Data
                 }
                 builder.Append(")");
             }
+            else if (value is Enum)
+            {
+                builder.Append((int)value);
+            }
             else
                 throw new ArgumentException("Unable to serialize to sql " + value.GetType(), "value");
         }

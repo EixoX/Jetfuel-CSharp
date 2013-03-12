@@ -56,7 +56,7 @@ namespace EixoX.Data
         /// <summary>
         /// Gets the actual member.
         /// </summary>
-        public DataMember Member { get { return _Aspect[_Ordinal]; } }
+        public DataAspectMember Member { get { return _Aspect[_Ordinal]; } }
 
 
         #region Class Filter

@@ -8,7 +8,7 @@ namespace EixoX.Data
     /// <summary>
     /// Represents a data member that can be used on data storage operations.
     /// </summary>
-    public class DataMember
+    public class DataAspectMember
         : AspectMember
     {
         private readonly string _StoredName;
@@ -28,7 +28,7 @@ namespace EixoX.Data
         /// <param name="primaryKey">The primary key flag (only used if not an identity or unique).</param>
         /// <param name="nullable">The nullable flag.</param>
         /// <param name="generator">The value generators for storage io.</param>
-        public DataMember(
+        public DataAspectMember(
             ClassAcessor acessor,
             string storedName,
             bool identity,
@@ -106,9 +106,14 @@ namespace EixoX.Data
                     value = _Generator.Generate();
                     SetValue(entity, value);
                 }
+                return value;
+            }
+            else
+            {
+                return _Nullable && ValidationHelper.IsNullOrEmpty(value) ? null : value;
             }
 
-            return value;
+            
         }
     }
 }

@@ -24,6 +24,15 @@ namespace EixoX.Restrictions
             return true;
         }
 
+        public bool Validate(object entity, params string[] names)
+        {
+            for (int i = 0; i < names.Length; i++)
+                if (!base[names[i]].Validate(entity))
+                    return false;
+
+            return true;
+        }
+
         public void AssertValid(object entity)
         {
             foreach (RestrictionAspectMember ram in this)

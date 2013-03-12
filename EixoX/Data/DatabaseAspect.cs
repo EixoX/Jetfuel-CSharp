@@ -21,7 +21,7 @@ namespace EixoX.Data
 
         }
 
-        protected override bool CreateAspectFor(ClassAcessor acessor, out DataMember member)
+        protected override bool CreateAspectFor(ClassAcessor acessor, out DataAspectMember member)
         {
             DatabaseColumnAttribute dca = acessor.GetAttribute<DatabaseColumnAttribute>(true);
             if (dca == null)
@@ -31,7 +31,7 @@ namespace EixoX.Data
             }
             else
             {
-                member = new DataMember(
+                member = new DataAspectMember(
                     acessor,
                     dca.StoredName,
                     dca.ColumnKind == DatabaseColumnKind.Identity,

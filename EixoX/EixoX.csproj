@@ -110,7 +110,7 @@
     <Compile Include="Data\ClassSortAspect.cs" />
     <Compile Include="Data\ClassUpdate.cs" />
     <Compile Include="Data\DataAspect.cs" />
-    <Compile Include="Data\DataMember.cs" />
+    <Compile Include="Data\DataAspectMember.cs" />
     <Compile Include="Data\ClassSelectResult.cs" />
     <Compile Include="Data\ClassSortExpression.cs" />
     <Compile Include="Data\ClassSortTerm.cs" />

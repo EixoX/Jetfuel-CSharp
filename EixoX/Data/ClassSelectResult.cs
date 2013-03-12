@@ -72,7 +72,7 @@ namespace EixoX.Data
         /// </summary>
         public bool HasMorePages
         {
-            get { return _pageOrdinal < (_pageCount - 1); }
+            get { return _pageOrdinal >= 0 && _pageOrdinal < (_pageCount - 1); }
         }
 
         /// <summary>
