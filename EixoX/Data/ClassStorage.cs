@@ -52,6 +52,26 @@ namespace EixoX.Data
         /// <returns>A select command.</returns>
         public ClassSelect<T> Select() { return new ClassSelect<T>(this._Engine, _Aspect); }
 
+        /// <summary>
+        /// Creates a select member command.
+        /// </summary>
+        /// <param name="memberOrdinal">The ordinal position of the member to retrieve.</param>
+        /// <returns>A select member wrapper</returns>
+        public ClassSelectMember SelectMember(int memberOrdinal)
+        {
+            return new ClassSelectMember(this._Engine, this._Aspect, memberOrdinal);
+        }
+
+        /// <summary>
+        /// Creates a select member command.
+        /// </summary>
+        /// <param name="memberName">The name of the member to retrieve.</param>
+        /// <returns>A select member wrapper</returns>
+        public ClassSelectMember SelectMember(string memberName)
+        {
+            return SelectMember(_Aspect.GetOrdinalOrException(memberName);
+        }
+
         #region Helpers
         /// <summary>
         /// Enumerates values for an insert or update excluding specific member.
