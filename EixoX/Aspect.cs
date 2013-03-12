@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 /*
  * First Author: Rodrigo Portela (rodrigo.portela@gmail.com) in 2013-01-01
  */
 namespace EixoX
 {
-   
     /// <summary>
     /// Represents the aspect of a class.
     /// </summary>
-    public interface Aspect
+    public interface Aspect : ICustomAttributeProvider
     {
         /// <summary>
         /// Gets the data type of the class.
@@ -63,5 +63,26 @@ namespace EixoX
         /// </summary>
         /// <returns>An aspect member enumeration.</returns>
         IEnumerable<AspectMember> GetMembers();
+        /// <summary>
+        /// Gets an attribute.
+        /// </summary>
+        /// <typeparam name="TAttribute">Type of attribute to get.</typeparam>
+        /// <param name="inherit">Indicates that it may be inherited.</param>
+        /// <returns>The attribute or default.</returns>
+        TAttribute GetAttribute<TAttribute>(bool inherit);
+        /// <summary>
+        /// Gets typed attributes.
+        /// </summary>
+        /// <typeparam name="TAttribute">The type of attribute to get.</typeparam>
+        /// <param name="inherit">Indicates that it may be inherited.</param>
+        /// <returns>An array of typed attributes.</returns>
+        TAttribute[] GetAttributes<TAttribute>(bool inherit);
+        /// <summary>
+        /// Indicates that an attribute exists.
+        /// </summary>
+        /// <typeparam name="TAttribute">The type of attributes.</typeparam>
+        /// <param name="inherit">The </param>
+        /// <returns></returns>
+        bool HasAttribute<TAttribute>(bool inherit);
     }
 }

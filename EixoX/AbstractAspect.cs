@@ -63,6 +63,7 @@ namespace EixoX
             }
             return -1;
         }
+        
         public int GetOrdinalOrException(string name)
         {
             int ordinal = GetOrdinal(name);
@@ -120,6 +121,76 @@ namespace EixoX
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return _Members.GetEnumerator();
+        }
+
+        /// Gets custom attributes for the field.
+        /// </summary>
+        /// <param name="inherit"></param>
+        /// <returns></returns>
+        public object[] GetCustomAttributes(bool inherit)
+        {
+            return _DataType.GetCustomAttributes(inherit);
+        }
+
+        /// <summary>
+        /// Gets custom attributes for the field.
+        /// </summary>
+        /// <param name="attributeType">The type of attribute to get.</param>
+        /// <param name="inherit">Indicates that it may be inherited.</param>
+        /// <returns>An array of attributes.</returns>
+        public object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return _DataType.GetCustomAttributes(attributeType, inherit);
+        }
+
+        /// <summary>
+        /// Checks if an attribute is defined.
+        /// </summary>
+        /// <param name="attributeType">The type of attribute to check.</param>
+        /// <param name="inherit">Indicates that it may be inherited.</param>
+        /// <returns>True if defined.</returns>
+        public bool IsDefined(Type attributeType, bool inherit)
+        {
+            return _DataType.IsDefined(attributeType, inherit);
+        }
+
+        /// <summary>
+        /// Gets an attribute.
+        /// </summary>
+        /// <typeparam name="TAttribute">Type of attribute to get.</typeparam>
+        /// <param name="inherit">Indicates that it may be inherited.</param>
+        /// <returns>The attribute or default.</returns>
+        public TAttribute GetAttribute<TAttribute>(bool inherit)
+        {
+            object[] attributes = _DataType.GetCustomAttributes(typeof(TAttribute), inherit);
+
+            return attributes != null && attributes.Length > 0 ? (TAttribute) attributes[0] : default(TAttribute);
+        }
+        /// <summary>
+        /// Gets typed attributes.
+        /// </summary>
+        /// <typeparam name="TAttribute">The type of attribute to get.</typeparam>
+        /// <param name="inherit">Indicates that it may be inherited.</param>
+        /// <returns>An array of typed attributes.</returns>
+        public TAttribute[] GetAttributes<TAttribute>(bool inherit)
+        {
+            object[] attributes = _DataType.GetCustomAttributes(typeof(TAttribute), inherit);
+            TAttribute[] newAttributes = new TAttribute[attributes.Length];
+
+            for (int i = 0; i < attributes.Length; i++)
+                newAttributes[i] = (TAttribute) attributes[i];
+            
+            return newAttributes;
+        }
+        /// <summary>
+        /// Indicates that an attribute exists.
+        /// </summary>
+        /// <typeparam name="TAttribute">The type of attributes.</typeparam>
+        /// <param name="inherit">The </param>
+        /// <returns></returns>
+        public bool HasAttribute<TAttribute>(bool inherit)
+        {
+            return _DataType.IsDefined(typeof(TAttribute), inherit);
         }
     }
 }

@@ -13,7 +13,6 @@ namespace EixoX.Collections
     public class Tree<T>
         : LinkedList<TreeNode<T>>
     {
-
         /// <summary>
         /// Constructs a new tree.
         /// </summary>
@@ -26,6 +25,30 @@ namespace EixoX.Collections
         {
             foreach (T item in nodes)
                 base.AddLast(new TreeNode<T>(item));
+        }
+
+        public IEnumerable<TreeNode<T>> AllNodes()
+        {
+            foreach (TreeNode<T> node in this)
+            {
+                yield return node;
+                foreach (TreeNode<T> grandNode in node.AllNodes())
+                    yield return grandNode;
+            }
+        }
+
+        public TreeNode<T> AddLast(T value)
+        {
+            TreeNode<T> node = new TreeNode<T>(value);
+            base.AddLast(node);
+            return node;
+        }
+
+        public TreeNode<T> AddFirst(T value)
+        {
+            TreeNode<T> node = new TreeNode<T>(value);
+            base.AddFirst(node);
+            return node;
         }
 
         /// <summary>
