@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class ByteArrayAdapter
-        : TextAdapterBase<byte[]>
+        : AbstractTextAdapter<byte[]>
     {
         protected override byte[] Parse(string text, IFormatProvider formatProvider)
         {

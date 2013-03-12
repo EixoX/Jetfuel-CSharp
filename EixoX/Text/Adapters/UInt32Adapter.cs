@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class UInt32Adapter
-        : TextAdapterBase<UInt32>
+        : AbstractTextAdapter<UInt32>
     {
 
         protected override uint Parse(string text, IFormatProvider formatProvider)

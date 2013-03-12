@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using EixoX.Reflection;
+
 
 namespace EixoX.Data
 {
@@ -16,6 +16,9 @@ namespace EixoX.Data
             this._dialect = dialect;
             this._ConnectionString = connectionString;
         }
+
+        public DatabaseDialect Dialect { get { return this._dialect; } }
+        public string ConnectionString { get { return this._ConnectionString; } }
 
         public int ExecuteNonQuery(CommandType commandType, string commandText, params object[] commandParameters)
         {

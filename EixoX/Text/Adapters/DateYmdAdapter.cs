@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class DateYmdAdapter
-        : TextAdapterBase<DateTime>
+        : AbstractTextAdapter<DateTime>
     {
 
         protected override DateTime Parse(string text, IFormatProvider formatProvider)

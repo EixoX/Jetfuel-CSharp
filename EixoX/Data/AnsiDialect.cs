@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using EixoX.Reflection;
+
 /*
  * First Author: Rodrigo Portela (rodrigo.portela@gmail.com) in 2013-01-01
  */
@@ -29,53 +29,31 @@ namespace EixoX.Data
         }
 
         /// <summary>
-        /// Appends a table name to a string builder.
+        /// Appends a name to a string builder.
         /// </summary>
         /// <param name="builder">The builder to append to.</param>
-        /// <param name="aspect">The aspect to extract the storage name from.</param>
-        protected virtual void AppendTableName(StringBuilder builder, DataAspect aspect)
+        /// <param name="name">The name to write.</param>
+        public virtual void AppendName(StringBuilder builder, string name)
         {
-            string tableName = aspect.StoredName;
-
-            if (string.IsNullOrEmpty(tableName))
+            if (string.IsNullOrEmpty(name))
                 throw new ArgumentNullException("aspect");
 
-            if (tableName.IndexOfAny(InvalidNameChars) >= 0)
-                throw new ArgumentException("Invalid name chars on " + tableName, "aspect");
+            if (name.IndexOfAny(InvalidNameChars) >= 0)
+                throw new ArgumentException("Invalid name chars on " + name, "aspect");
 
             builder.Append(_NamePrefix);
-            builder.Append(tableName);
+            builder.Append(name);
             builder.Append(_NameSuffix);
 
         }
 
-        /// <summary>
-        /// Appends a column name to a string builder.
-        /// </summary>
-        /// <param name="builder">The builder to append to.</param>
-        /// <param name="aspect">The data aspect of the class.</param>
-        /// <param name="ordinal">The ordinal position of the member.</param>
-        protected virtual void AppendColumnName(StringBuilder builder, DataAspect aspect, int ordinal)
-        {
-            string columnName = aspect[ordinal].StoredName;
-
-            if (string.IsNullOrEmpty(columnName))
-                throw new ArgumentNullException("ordinal");
-
-            if (columnName.IndexOfAny(InvalidNameChars) >= 0)
-                throw new ArgumentException("Invalid name chars on " + columnName, "ordinal");
-
-            builder.Append(_NamePrefix);
-            builder.Append(columnName);
-            builder.Append(_NameSuffix);
-        }
 
         /// <summary>
         /// Apppends a column value to a string builder.
         /// </summary>
         /// <param name="builder">The string builder to append to.</param>
         /// <param name="value">The value to append.</param>
-        protected virtual void AppendColumnValue(StringBuilder builder, object value)
+        public virtual void AppendValue(StringBuilder builder, object value)
         {
             if (value == null)
                 builder.Append("NULL");
@@ -122,7 +100,7 @@ namespace EixoX.Data
                     else
                         prependComma = true;
 
-                    AppendColumnValue(builder, o);
+                    AppendValue(builder, o);
                 }
                 builder.Append(")");
             }
@@ -130,7 +108,7 @@ namespace EixoX.Data
                 throw new ArgumentException("Unable to serialize to sql " + value.GetType(), "value");
         }
 
-        protected virtual void AppendFilter(StringBuilder builder, DataAspect aspect, ClassFilter filter)
+        public virtual void AppendFilter(StringBuilder builder, DataAspect aspect, ClassFilter filter)
         {
             if (filter is ClassFilterTerm)
                 AppendFilterTerm(builder, aspect, (ClassFilterTerm)filter);
@@ -142,9 +120,9 @@ namespace EixoX.Data
                 throw new ArgumentException("Unknown filter type: " + filter.GetType(), "filter");
         }
 
-        protected virtual void AppendFilterTerm(StringBuilder builder, DataAspect aspect, ClassFilterTerm term)
+        public virtual void AppendFilterTerm(StringBuilder builder, DataAspect aspect, ClassFilterTerm term)
         {
-            AppendColumnName(builder, aspect, term.Ordinal);
+            AppendName(builder, aspect[term.Ordinal].StoredName);
             switch (term.Comparison)
             {
                 case FilterComparison.EqualTo:
@@ -153,32 +131,32 @@ namespace EixoX.Data
                     else
                     {
                         builder.Append(" = ");
-                        AppendColumnValue(builder, term.Value);
+                        AppendValue(builder, term.Value);
                     }
                     break;
                 case FilterComparison.GreaterOrEqual:
                     builder.Append(" >= ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 case FilterComparison.GreaterThan:
                     builder.Append(" > ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 case FilterComparison.InCollection:
                     builder.Append(" IN ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 case FilterComparison.Like:
                     builder.Append(" LIKE ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 case FilterComparison.LowerOrEqual:
                     builder.Append(" <= ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 case FilterComparison.LowerThan:
                     builder.Append(" < ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 case FilterComparison.NotEqualTo:
                     if (term.Value == null)
@@ -186,23 +164,23 @@ namespace EixoX.Data
                     else
                     {
                         builder.Append(" != ");
-                        AppendColumnValue(builder, term.Value);
+                        AppendValue(builder, term.Value);
                     }
                     break;
                 case FilterComparison.NotInCollection:
                     builder.Append(" NOT IN ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 case FilterComparison.NotLike:
                     builder.Append(" NOT LIKE ");
-                    AppendColumnValue(builder, term.Value);
+                    AppendValue(builder, term.Value);
                     break;
                 default:
                     throw new ArgumentException("Unknown filter comparion " + term.Comparison, "term");
             }
         }
 
-        protected virtual void AppendFilterNodes(StringBuilder builder, DataAspect aspect, ClassFilterNode node)
+        public virtual void AppendFilterNodes(StringBuilder builder, DataAspect aspect, ClassFilterNode node)
         {
             AppendFilter(builder, aspect, node.Filter);
             if (node.Next != null)
@@ -223,14 +201,14 @@ namespace EixoX.Data
             }
         }
 
-        protected virtual void AppendFilterExpression(StringBuilder builder, DataAspect aspect, ClassFilterExpression expression)
+        public virtual void AppendFilterExpression(StringBuilder builder, DataAspect aspect, ClassFilterExpression expression)
         {
             builder.Append("(");
             AppendFilterNodes(builder, aspect, expression.First);
             builder.Append(")");
         }
 
-        protected virtual void AppendSort(StringBuilder builder, DataAspect aspect, ClassSort sort)
+        public virtual void AppendSort(StringBuilder builder, DataAspect aspect, ClassSort sort)
         {
             if (sort is ClassSortNode)
                 AppendSortNodes(builder, aspect, (ClassSortNode)sort);
@@ -242,14 +220,14 @@ namespace EixoX.Data
                 throw new ArgumentException("Unknown sort type " + sort.GetType(), "sort");
         }
 
-        protected virtual void AppendSortTerm(StringBuilder builder, DataAspect aspect, ClassSortTerm term)
+        public virtual void AppendSortTerm(StringBuilder builder, DataAspect aspect, ClassSortTerm term)
         {
-            AppendColumnName(builder, aspect, term.Ordinal);
-            if (term.Direction == SortDirection.Ascending)
+            AppendName(builder, aspect[term.Ordinal].StoredName);
+            if (term.Direction == SortDirection.Descending)
                 builder.Append(" DESC");
         }
 
-        protected virtual void AppendSortNodes(StringBuilder builder, DataAspect aspect, ClassSortNode node)
+        public virtual void AppendSortNodes(StringBuilder builder, DataAspect aspect, ClassSortNode node)
         {
             AppendSort(builder, aspect, node.Term);
             if (node.Next != null)
@@ -259,17 +237,17 @@ namespace EixoX.Data
             }
         }
 
-        protected virtual void AppendSortExpression(StringBuilder builder, DataAspect aspect, ClassSortExpression expression)
+        public virtual void AppendSortExpression(StringBuilder builder, DataAspect aspect, ClassSortExpression expression)
         {
             AppendSortNodes(builder, aspect, expression.First);
         }
 
-        protected virtual void AppendScopeIdentity(StringBuilder builder, DataAspect aspect)
+        public virtual void AppendScopeIdentity(StringBuilder builder, DataAspect aspect)
         {
             builder.Append("SELECT MAX(");
-            AppendColumnName(builder, aspect, aspect.IdentityOrdinal);
+            AppendName(builder, aspect.IdentityMember.StoredName);
             builder.Append(") FROM ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
         }
 
         public abstract IDbConnection CreateConnection(string connectionString);
@@ -288,7 +266,7 @@ namespace EixoX.Data
         {
             StringBuilder builder = new StringBuilder(255);
             builder.Append("DELETE FROM ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             if (filter != null)
             {
                 builder.Append(" WHERE ");
@@ -304,7 +282,7 @@ namespace EixoX.Data
         {
             StringBuilder builder = new StringBuilder(512);
             builder.Append("UPDATE ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             builder.Append(" SET ");
             bool prependComma = false;
             foreach (AspectMemberValue value in values)
@@ -314,9 +292,9 @@ namespace EixoX.Data
                 else
                     prependComma = true;
 
-                AppendColumnName(builder, aspect, value.Ordinal);
+                AppendName(builder, aspect[value.Ordinal].StoredName);
                 builder.Append(" = ");
-                AppendColumnValue(builder, value.Value);
+                AppendValue(builder, value.Value);
             }
             if (filter != null)
             {
@@ -334,7 +312,7 @@ namespace EixoX.Data
             StringBuilder builder = new StringBuilder(512);
             StringBuilder valueBuilder = new StringBuilder(255);
             builder.Append("INSERT INTO  ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             builder.Append(" (");
 
             bool prependComma = false;
@@ -348,8 +326,8 @@ namespace EixoX.Data
                 else
                     prependComma = true;
 
-                AppendColumnName(builder, aspect, value.Ordinal);
-                AppendColumnValue(valueBuilder, value.Value);
+                AppendName(builder, aspect[value.Ordinal].StoredName);
+                AppendValue(valueBuilder, value.Value);
             }
 
             builder.Append(") VALUES (");
@@ -380,7 +358,7 @@ namespace EixoX.Data
             int count = aspect.Count;
 
             builder.Append("INSERT INTO ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             builder.Append("(");
 
             bool prependComma = false;
@@ -393,7 +371,7 @@ namespace EixoX.Data
                     else
                         prependComma = true;
 
-                    AppendColumnName(builder, aspect, i);
+                    AppendName(builder, aspect[i].StoredName);
                 }
 
             builder.Append(") VALUES ");
@@ -418,7 +396,7 @@ namespace EixoX.Data
                             innerComma = true;
 
 
-                        AppendColumnValue(builder, aspect[i].GetValue(entity, DataScope.Insert));
+                        AppendValue(builder, aspect[i].GetValue(entity, DataScope.Insert));
                     }
 
                 builder.Append(")");
@@ -438,14 +416,14 @@ namespace EixoX.Data
             int count = aspect.Count;
 
             builder.Append("SELECT ");
-            AppendColumnName(builder, aspect, 0);
+            AppendName(builder, aspect[0].StoredName);
             for (int i = 1; i < count; i++)
             {
                 builder.Append(", ");
-                AppendColumnName(builder, aspect, i);
+                AppendName(builder, aspect[i].StoredName);
             }
             builder.Append(" FROM ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             if (filter != null)
             {
                 builder.Append(" WHERE ");
@@ -468,9 +446,9 @@ namespace EixoX.Data
             int count = aspect.Count;
 
             builder.Append("SELECT ");
-            AppendColumnName(builder, aspect, ordinal);
+            AppendName(builder, aspect[ordinal].StoredName);
             builder.Append(" FROM ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             if (filter != null)
             {
                 builder.Append(" WHERE ");
@@ -493,7 +471,7 @@ namespace EixoX.Data
             int count = aspect.Count;
 
             builder.Append("SELECT COUNT(*) FROM ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             if (filter != null)
             {
                 builder.Append(" WHERE ");
@@ -511,7 +489,7 @@ namespace EixoX.Data
             int count = aspect.Count;
 
             builder.Append("SELECT 1 WHERE EXISTS (SELECT * FROM ");
-            AppendTableName(builder, aspect);
+            AppendName(builder, aspect.StoredName);
             if (filter != null)
             {
                 builder.Append(" WHERE ");

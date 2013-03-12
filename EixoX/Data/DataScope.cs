@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EixoX
+namespace EixoX.Data
 {
     public enum DataScope
     {

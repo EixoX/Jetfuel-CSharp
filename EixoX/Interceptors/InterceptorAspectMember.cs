@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EixoX.Reflection;
+
 
 namespace EixoX.Interceptors
 {
@@ -20,6 +20,15 @@ namespace EixoX.Interceptors
         public void Intercept(object entity)
         {
             SetValue(entity, _interceptors.Intercept(GetValue(entity)));
+        }
+        public override object GetValue(object entity)
+        {
+            return _interceptors.Intercept(base.GetValue(entity));
+        }
+
+        public override void SetValue(object entity, object value)
+        {
+            base.SetValue(entity, _interceptors.Intercept(value));
         }
     }
 }

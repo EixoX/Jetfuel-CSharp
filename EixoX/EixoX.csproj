@@ -37,6 +37,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositeAnnotationAspect.cs" />
+    <Compile Include="CompositeAnnotationMember.cs" />
     <Compile Include="Data\ClassSelectMember.cs" />
     <Compile Include="Data\ClassStorageEngine.cs" />
     <Compile Include="Data\Database.cs" />
@@ -55,11 +57,25 @@
     <Compile Include="Data\SqlServer.cs" />
     <Compile Include="Data\DatabaseTableAttribute.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="Html\BootstrapHorizontalAspect.cs" />
+    <Compile Include="Html\HtmlInputAspect.cs" />
+    <Compile Include="Html\HtmlAttribute.cs" />
+    <Compile Include="Html\HtmlAttributeCollection.cs" />
+    <Compile Include="Html\HtmlInputAspectMember.cs" />
+    <Compile Include="Html\HtmlInputAttribute.cs" />
+    <Compile Include="Html\HtmlInputOption.cs" />
+    <Compile Include="Html\HtmlInputOptionSource.cs" />
+    <Compile Include="Html\HtmlInputTerm.cs" />
+    <Compile Include="Html\HtmlInputType.cs" />
+    <Compile Include="Html\HtmlWriter.cs" />
+    <Compile Include="SingleAnnotationAspect.cs" />
+    <Compile Include="SingleAnnotationAspectMember.cs" />
     <Compile Include="Text\Adapters\ByteAdapter.cs" />
     <Compile Include="Text\Adapters\ByteArrayAdapter.cs" />
     <Compile Include="Text\Adapters\DateTimeAdapter.cs" />
     <Compile Include="Text\Adapters\DateYmdAdapter.cs" />
     <Compile Include="Text\Adapters\DecimalAdapter.cs" />
+    <Compile Include="Text\DelimitedTextTableAttribute.cs" />
     <Compile Include="Text\Adapters\DoubleAdapter.cs" />
     <Compile Include="Text\Adapters\FloatAdapter.cs" />
     <Compile Include="Text\Adapters\GuidAdapter.cs" />
@@ -69,7 +85,7 @@
     <Compile Include="Text\Adapters\Int64Adapter.cs" />
     <Compile Include="Text\Adapters\SByteAdapter.cs" />
     <Compile Include="Text\Adapters\TextAdapter.cs" />
-    <Compile Include="Text\Adapters\TextAdapterBase.cs" />
+    <Compile Include="Text\Adapters\AbstractTextAdapter.cs" />
     <Compile Include="Text\Adapters\TextAdapters.cs" />
     <Compile Include="Text\Adapters\TimespanAdapter.cs" />
     <Compile Include="Text\Adapters\UInt16Adapter.cs" />
@@ -78,26 +94,25 @@
     <Compile Include="Data\ClassStorage.cs" />
     <Compile Include="Collections\Tree.cs" />
     <Compile Include="Collections\TreeNode.cs" />
-    <Compile Include="Reflection\HashcodeComparer.cs" />
-    <Compile Include="Reflection\Aspect.cs" />
-    <Compile Include="Reflection\AbstractAspect.cs" />
-    <Compile Include="Reflection\AspectMember.cs" />
-    <Compile Include="Reflection\AspectMemberValue.cs" />
-    <Compile Include="Reflection\ClassAcessor.cs" />
-    <Compile Include="Reflection\ClassField.cs" />
-    <Compile Include="Reflection\ClassFilterAspect.cs" />
-    <Compile Include="Reflection\ClassProperty.cs" />
-    <Compile Include="Reflection\ClassSchema.cs" />
+    <Compile Include="HashcodeComparer.cs" />
+    <Compile Include="Aspect.cs" />
+    <Compile Include="AbstractAspect.cs" />
+    <Compile Include="AspectMember.cs" />
+    <Compile Include="AspectMemberValue.cs" />
+    <Compile Include="ClassAcessor.cs" />
+    <Compile Include="ClassField.cs" />
+    <Compile Include="Data\ClassFilterAspect.cs" />
+    <Compile Include="ClassProperty.cs" />
+    <Compile Include="ClassSchema.cs" />
     <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
-    <Compile Include="Reflection\AbstractSortAspect.cs" />
-    <Compile Include="Reflection\ClassSortAspect.cs" />
+    <Compile Include="Data\ClassSortAspect.cs" />
     <Compile Include="Data\ClassUpdate.cs" />
     <Compile Include="Data\DataAspect.cs" />
     <Compile Include="Data\DataMember.cs" />
     <Compile Include="Data\ClassSelectResult.cs" />
-    <Compile Include="Reflection\ClassSortExpression.cs" />
-    <Compile Include="Reflection\ClassSortTerm.cs" />
+    <Compile Include="Data\ClassSortExpression.cs" />
+    <Compile Include="Data\ClassSortTerm.cs" />
     <Compile Include="Data\ClassDelete.cs" />
     <Compile Include="Data\ClassInsert.cs" />
     <Compile Include="Data\ClassSelect.cs" />
@@ -105,16 +120,16 @@
     <Compile Include="Collections\EnumerableOffset.cs" />
     <Compile Include="Collections\EnumerablePager.cs" />
     <Compile Include="Collections\EnumerableSelect.cs" />
-    <Compile Include="Reflection\ClassFilter.cs" />
+    <Compile Include="Data\ClassFilter.cs" />
     <Compile Include="Data\DataScope.cs" />
-    <Compile Include="Reflection\FilterComparison.cs" />
-    <Compile Include="Reflection\ClassFilterExpression.cs" />
-    <Compile Include="Reflection\ClassFilterNode.cs" />
-    <Compile Include="Reflection\FilterOperation.cs" />
-    <Compile Include="Reflection\ClassFilterTerm.cs" />
-    <Compile Include="Reflection\ClassSort.cs" />
-    <Compile Include="Reflection\SortDirection.cs" />
-    <Compile Include="Reflection\ClassSortNode.cs" />
+    <Compile Include="Data\FilterComparison.cs" />
+    <Compile Include="Data\ClassFilterExpression.cs" />
+    <Compile Include="Data\ClassFilterNode.cs" />
+    <Compile Include="Data\FilterOperation.cs" />
+    <Compile Include="Data\ClassFilterTerm.cs" />
+    <Compile Include="Data\ClassSort.cs" />
+    <Compile Include="Data\SortDirection.cs" />
+    <Compile Include="Data\ClassSortNode.cs" />
     <Compile Include="Helpers\FormatHelper.cs" />
     <Compile Include="Data\Generator.cs" />
     <Compile Include="Data\GeneratorAspect.cs" />
@@ -157,9 +172,13 @@
     <Compile Include="Restrictions\RestrictionList.cs" />
     <Compile Include="Restrictions\Url.cs" />
     <Compile Include="Patterns\Singleton.cs" />
-    <Compile Include="Text\AbstractTextAdapter.cs" />
     <Compile Include="Text\DelimitedTextAspect.cs" />
     <Compile Include="Text\DelimitedTextAspectMember.cs" />
+    <Compile Include="Text\DelimitedTextColumnAttribute.cs" />
+    <Compile Include="Text\FixedLengthAspect.cs" />
+    <Compile Include="Text\FixedLengthColumnAttribute.cs" />
+    <Compile Include="Text\FixedLengthTableAttribute.cs" />
+    <Compile Include="Text\FixedLengthAspectMember.cs" />
     <Compile Include="Text\TextColumn.cs" />
     <Compile Include="Text\TextColumnSchema.cs" />
     <Compile Include="Text\TextDataReader.cs" />
@@ -170,6 +189,7 @@
   <ItemGroup>
     <Content Include="Globalization\EixoX.Globalization.Example.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Restrictions\RestrictionMessages.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -15,7 +15,7 @@ namespace EixoX.Restrictions
 
             _Messages = new Dictionary<string, Dictionary<int, string>>();
 
-            string fileName = System.IO.Path.GetDirectoryName(typeof(RestrictionMessages).Assembly.Location);
+            string fileName = System.IO.Path.GetDirectoryName(typeof(RestrictionMessages).Assembly.CodeBase).Replace("file:\\", "");
             fileName = System.IO.Path.Combine(fileName, "Restrictions");
             fileName = System.IO.Path.Combine(fileName, "RestrictionMessages.xml");
 

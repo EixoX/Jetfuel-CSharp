@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EixoX.Reflection;
+
 namespace EixoX.Data
 {
     /// <summary>
     /// A useful helper class for a paged select result.
     /// </summary>
     /// <typeparam name="TClass">The type of class returned.</typeparam>
-    public class DataSelectResult<TClass> : List<TClass>
+    public class ClassSelectResult<TClass> : List<TClass>
     {
         private readonly ClassSelect<TClass> _Select;
         private readonly int _pageSize;
@@ -20,7 +20,7 @@ namespace EixoX.Data
         /// Constructs a new class select result.
         /// </summary>
         /// <param name="select">The select command</param>
-        public DataSelectResult(ClassSelect<TClass> select)
+        public ClassSelectResult(ClassSelect<TClass> select)
             : base(select)
         {
             this._Select = select;
@@ -79,10 +79,10 @@ namespace EixoX.Data
         /// Gets the next page of the results.
         /// </summary>
         /// <returns>A new data select result.</returns>
-        public DataSelectResult<TClass> NextPage()
+        public ClassSelectResult<TClass> NextPage()
         {
             _Select.Page(_pageSize, _pageOrdinal + 1);
-            return new DataSelectResult<TClass>(_Select);
+            return new ClassSelectResult<TClass>(_Select);
         }
     }
 }

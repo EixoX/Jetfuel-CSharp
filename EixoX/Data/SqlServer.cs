@@ -7,5 +7,6 @@ namespace EixoX.Data
     public class SqlServer : Database
     {
         public SqlServer(string connectionString) : base(new SqlServerDialect(), connectionString) { }
+
     }
 }

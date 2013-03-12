@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class Int64Adapter
-        : TextAdapterBase<Int64>
+        : AbstractTextAdapter<Int64>
     {
 
         protected override long Parse(string text, IFormatProvider formatProvider)

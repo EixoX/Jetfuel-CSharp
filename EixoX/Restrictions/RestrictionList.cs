@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EixoX.Reflection;
+
 
 namespace EixoX.Restrictions
 {
@@ -37,9 +37,8 @@ namespace EixoX.Restrictions
         {
             foreach (Restriction r in this)
             {
-                string msg = r.GetRestrictionMessage(input);
-                if (msg != null)
-                    return msg;
+                if (!r.Validate(input))
+                    return r.GetRestrictionMessage(input);
             }
 
             return null;

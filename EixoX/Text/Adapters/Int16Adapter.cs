@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EixoX.Text.Adapters
 {
-    public class Int16Adapter : TextAdapterBase<Int16>
+    public class Int16Adapter : AbstractTextAdapter<Int16>
     {
         protected override short Parse(string text, IFormatProvider formatProvider)
         {

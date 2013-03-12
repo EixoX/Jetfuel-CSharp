@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class DecimalAdapter
-        : TextAdapterBase<Decimal>
+        : AbstractTextAdapter<Decimal>
     {
         protected override decimal Parse(string text, IFormatProvider formatProvider)
         {

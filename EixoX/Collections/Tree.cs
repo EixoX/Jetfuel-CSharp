@@ -52,7 +52,7 @@ namespace EixoX.Collections
         /// <returns>The first tree node found.</returns>
         public TreeNode<T> DepthSearch(T value)
         {
-            return DepthSearch(value, new EixoX.Reflection.HashcodeComparer<T>());
+            return DepthSearch(value, new HashcodeComparer<T>());
         }
 
         /// <summary>

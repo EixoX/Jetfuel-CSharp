@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class ImageAdapter
-        : TextAdapterBase<System.Drawing.Image>
+        : AbstractTextAdapter<System.Drawing.Image>
     {
         private System.Drawing.Imaging.ImageFormat _imageFormat = System.Drawing.Imaging.ImageFormat.Jpeg;
 

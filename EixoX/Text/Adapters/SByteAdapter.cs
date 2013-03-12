@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class SByteAdapter
-        : TextAdapterBase<sbyte>
+        : AbstractTextAdapter<sbyte>
     {
         protected override sbyte Parse(string text, IFormatProvider formatProvider)
         {

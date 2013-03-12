@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class FloatAdapter
-        : TextAdapterBase<float>
+        : AbstractTextAdapter<float>
     {
         protected override float Parse(string text, IFormatProvider formatProvider)
         {

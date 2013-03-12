@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using EixoX.Reflection;
+
 /*
  * First Author: Rodrigo Portela (rodrigo.portela@gmail.com) in 2013-01-01
  */
@@ -451,6 +451,15 @@ namespace EixoX.Data
         public bool Exists()
         {
             return _Storage.Exists(_Aspect, _WhereFirst);
+        }
+
+        /// <summary>
+        /// Executes select and creates a select result based on this select.
+        /// </summary>
+        /// <returns>A class select result.</returns>
+        public ClassSelectResult<T> ToResult()
+        {
+            return new ClassSelectResult<T>(this);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class GuidAdapter
-        : TextAdapterBase<Guid>
+        : AbstractTextAdapter<Guid>
     {
         protected override Guid Parse(string text, IFormatProvider formatProvider)
         {

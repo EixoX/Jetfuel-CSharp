@@ -6,7 +6,8 @@ using System.Text;
 
 namespace EixoX.Text
 {
-    class TextColumn
+    public interface TextColumn
     {
+
     }
 }

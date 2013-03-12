@@ -7,9 +7,21 @@ namespace EixoX.Data
     public class DatabaseAspect
         : DataAspect
     {
+
         public DatabaseAspect(Type dataType) : base(dataType) { }
 
-        protected override bool CreateAspectFor(Reflection.ClassAcessor acessor, out DataMember member)
+        protected override string GetStoredName(Type dataType)
+        {
+            object[] obj = dataType.GetCustomAttributes(typeof(DatabaseTableAttribute), true);
+            if (obj == null || obj.Length < 1)
+                throw new ArgumentException(dataType.FullName + " needs to be annotated with a database table attribute.");
+
+            string name = ((DatabaseTableAttribute)obj[0]).Name;
+            return string.IsNullOrEmpty(name) ? dataType.Name : name;
+
+        }
+
+        protected override bool CreateAspectFor(ClassAcessor acessor, out DataMember member)
         {
             DatabaseColumnAttribute dca = acessor.GetAttribute<DatabaseColumnAttribute>(true);
             if (dca == null)

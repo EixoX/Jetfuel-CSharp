@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class TimespanAdapter
-        : TextAdapterBase<TimeSpan>
+        : AbstractTextAdapter<TimeSpan>
     {
         protected override TimeSpan Parse(string text, IFormatProvider formatProvider)
         {

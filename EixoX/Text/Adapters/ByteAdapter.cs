@@ -3,7 +3,7 @@
 namespace EixoX.Text
 {
     public class ByteAdapter
-        : TextAdapterBase<Byte>
+        : AbstractTextAdapter<Byte>
     {
         protected override byte Parse(string text, IFormatProvider formatProvider)
         {

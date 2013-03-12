@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class UInt64Adapter
-        : TextAdapterBase<UInt64>
+        : AbstractTextAdapter<UInt64>
     {
         protected override ulong Parse(string text, IFormatProvider formatProvider)
         {

@@ -3,7 +3,7 @@
 namespace EixoX.Text
 {
     public class Int32Adapter
-        : TextAdapterBase<Int32>
+        : AbstractTextAdapter<Int32>
     {
 
 

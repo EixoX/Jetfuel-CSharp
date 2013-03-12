@@ -6,7 +6,7 @@ using System.Text;
 namespace EixoX.Text
 {
     public class DoubleAdapter
-        : TextAdapterBase<Double>
+        : AbstractTextAdapter<Double>
     {
         protected override double Parse(string text, IFormatProvider formatProvider)
         {

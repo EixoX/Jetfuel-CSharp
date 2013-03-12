@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
-using EixoX.Reflection;
+
 
 namespace EixoX.Data
 {
@@ -197,6 +198,40 @@ namespace EixoX.Data
         public object NewInstance()
         {
             return _DefaultConstructor.Invoke(null);
+        }
+
+        public IEnumerable<T> Transform<T>(IEnumerable<IDataRecord> records)
+        {
+            using (IEnumerator<IDataRecord> record = records.GetEnumerator())
+            {
+                if (record.MoveNext())
+                {
+                    int fieldCount = record.Current.FieldCount;
+                    bool initializable = typeof(Initializable).IsAssignableFrom(DataType);
+                    DataMember[] members = new DataMember[fieldCount];
+
+                    for (int i = 0; i < fieldCount; i++)
+                    {
+                        int ordinal = GetStoredNameOrdinal(record.Current.GetName(i));
+                        if (ordinal >= 0)
+                            members[i] = this[ordinal];
+                    }
+
+                    do
+                    {
+                        T entity = (T)NewInstance();
+                        for (int i = 0; i < fieldCount; i++)
+                            if (members[i] != null && !record.Current.IsDBNull(i))
+                                members[i].SetValue(entity, record.Current.GetValue(i));
+
+                        if (initializable)
+                            ((Initializable)entity).Initialize();
+
+                        yield return entity;
+
+                    } while (record.MoveNext());
+                }
+            }
         }
     }
 }
