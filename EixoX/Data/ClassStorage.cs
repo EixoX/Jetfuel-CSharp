@@ -69,7 +69,7 @@ namespace EixoX.Data
         /// <returns>A select member wrapper</returns>
         public ClassSelectMember SelectMember(string memberName)
         {
-            return SelectMember(_Aspect.GetOrdinalOrException(memberName);
+            return SelectMember(_Aspect.GetOrdinalOrException(memberName));
         }
 
         #region Helpers
