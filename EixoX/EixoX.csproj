@@ -68,6 +68,7 @@
     <Compile Include="Html\HtmlInputTerm.cs" />
     <Compile Include="Html\HtmlInputType.cs" />
     <Compile Include="Html\HtmlWriter.cs" />
+    <Compile Include="Restrictions\CreditCardNumber.cs" />
     <Compile Include="SingleAnnotationAspect.cs" />
     <Compile Include="SingleAnnotationAspectMember.cs" />
     <Compile Include="Text\Adapters\ByteAdapter.cs" />
