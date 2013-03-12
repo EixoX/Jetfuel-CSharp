@@ -61,6 +61,10 @@ namespace EixoX
             return IsNumericDiscrete(value) || IsNumericFloatingPoint(value);
         }
 
+        public static bool IsEmail(string value)
+        {
+            return EixoX.Restrictions.Email.IsEmail(value);
+        }
         
         
     }

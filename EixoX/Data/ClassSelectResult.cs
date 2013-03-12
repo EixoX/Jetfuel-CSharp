@@ -84,5 +84,13 @@ namespace EixoX.Data
             _Select.Page(_pageSize, _pageOrdinal + 1);
             return new ClassSelectResult<TClass>(_Select);
         }
+        /// <summary>
+        /// Indicates that it has previous pages.
+        /// </summary>
+        public bool HasPreviousPages
+        {
+            get { return _pageOrdinal > 0; }
+        }
+
     }
 }
