@@ -14,6 +14,7 @@ namespace EixoX.Html
         Checkbox = 5,
         CheckboxGroup = 6,
         RadioGroup = 7,
-        Dropdown = 8
+        Dropdown = 8,
+        Date = 9
     }
 }

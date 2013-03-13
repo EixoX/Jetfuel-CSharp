@@ -4,14 +4,19 @@ using System.Text;
 
 namespace EixoX.Html
 {
-    public class BootstrapHorizontalAspect<T>
-        : HtmlInputAspect<T>
+    /// <summary>
+    /// Represents an Aspect to write Bootstrap HTML forms
+    /// </summary>
+    /// <typeparam name="T">Typeof the class that will be used to generate inputs</typeparam>
+    public class BootstrapHorizontalAspect<T> : HtmlInputAspect<T>
     {
+        #region Singleton
         private static BootstrapHorizontalAspect<T> _Instance;
         public static BootstrapHorizontalAspect<T> Instance
         {
             get { return _Instance ?? (_Instance = new BootstrapHorizontalAspect<T>()); }
         }
+        #endregion
 
         protected override void BeginWrapper(HtmlWriter writer, HtmlInputTerm term)
         {
@@ -24,6 +29,43 @@ namespace EixoX.Html
             {
                 writer.WriteBeginTag("div", false, new HtmlAttribute("class", "control-group error"));
             }
+        }
+
+        protected override void WriteInputCheckbox(HtmlWriter writer, HtmlInputTerm term)
+        {
+            BeginWrapper(writer, term);
+            WriteLabel(writer, new HtmlInputTerm() { Label = string.Empty });
+
+            writer.WriteBeginTag("label", false, new HtmlAttribute("class", "checkbox"));
+
+            if ((bool)term.Value)
+            {
+                writer.WriteBeginTag(
+                    "input",
+                    true,
+                    new HtmlAttribute("id", term.Name),
+                    new HtmlAttribute("name", term.Name),
+                    new HtmlAttribute("type", "checkbox"),
+                    new HtmlAttribute("value", "true"),
+                    new HtmlAttribute("checked", "checked"));
+            }
+            else
+            {
+                writer.WriteBeginTag(
+                    "input",
+                    true,
+                    new HtmlAttribute("id", term.Name),
+                    new HtmlAttribute("name", term.Name),
+                    new HtmlAttribute("type", "checkbox"),
+                    new HtmlAttribute("value", "true"));
+            }
+
+            writer.WriteHtml(term.Label);
+            writer.WriteCloseTag("label");
+
+            WriteHint(writer, term);
+            WriteError(writer, term);
+            EndWrapper(writer, term);
         }
 
         protected override void EndWrapper(HtmlWriter writer, HtmlInputTerm term)
@@ -60,5 +102,6 @@ namespace EixoX.Html
         {
             //written on the write hint text.
         }
+
     }
 }

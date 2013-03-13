@@ -6,15 +6,15 @@ using EixoX.Restrictions;
 using EixoX.Globalization;
 namespace EixoX.Html
 {
-    public class HtmlInputAspectMember
-        : AspectMember
+    public class HtmlInputAspectMember : AspectMember
     {
+        private readonly Type _DataType;
         private readonly string _Fieldset;
         private readonly HtmlInputType _InputType;
+        private readonly HtmlInputOptionSource _InputSource;
         private readonly InterceptorAspectMember _Interceptor;
         private readonly RestrictionAspectMember _Restriction;
         private readonly GlobalizationAspectMember _Globalization;
-        private readonly HtmlInputOptionSource _InputSource;
 
         public HtmlInputAspectMember(
             ClassAcessor acessor,
@@ -32,6 +32,16 @@ namespace EixoX.Html
             this._InputSource = inputSource;
             this._Restriction = restriction;
             this._Globalization = globalization;
+        }
+
+        public static HtmlInputType InferInputType(Type dataType)
+        {
+            if (dataType == typeof(DateTime))
+                return HtmlInputType.Date;
+            else if(dataType == typeof(bool))
+                return HtmlInputType.Checkbox;
+            
+            return HtmlInputType.Text;
         }
 
         public string Fieldset { get { return this._Fieldset; } }
@@ -66,7 +76,6 @@ namespace EixoX.Html
                 base.SetValue(entity, value);
         }
 
-
         public HtmlInputTerm CreateTerm(object entity, int lcid, bool validateRestrictions)
         {
             return new HtmlInputTerm()
@@ -82,7 +91,5 @@ namespace EixoX.Html
                 InputOptions = _InputSource
             };
         }
-
-
     }
 }

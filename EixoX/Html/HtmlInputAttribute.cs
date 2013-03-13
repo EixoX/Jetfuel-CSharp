@@ -4,6 +4,9 @@ using System.Text;
 
 namespace EixoX.Html
 {
+    /// <summary>
+    /// Attribute used to generate the field's html input 
+    /// </summary>
     [Serializable]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class HtmlInputAttribute : Attribute
@@ -11,10 +14,11 @@ namespace EixoX.Html
         private readonly string _fieldset;
         private readonly HtmlInputType _inputType;
         private readonly HtmlInputOptionSource _OptionSource;
+        private bool _inferType = false;
 
         public HtmlInputAttribute()
         {
-            this._inputType = HtmlInputType.Text;
+            this._inferType = true;
         }
 
         public HtmlInputAttribute(HtmlInputType inputType)
@@ -40,11 +44,22 @@ namespace EixoX.Html
             this._OptionSource = (HtmlInputOptionSource)(optionSourceType.GetConstructor(Type.EmptyTypes).Invoke(null));
         }
 
+        /// <summary>
+        /// Checks if the framework will try to infer the type
+        /// </summary>
+        public bool InferType
+        {
+            get { return this._inferType; }
+        }
+
         public string Fieldset
         {
             get { return this._fieldset; }
         }
 
+        /// <summary>
+        /// The HTML input type (checkbox, text, textarea, etc)
+        /// </summary>
         public HtmlInputType InputType
         {
             get { return this._inputType; }

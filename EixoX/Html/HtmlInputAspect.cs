@@ -7,8 +7,7 @@ using EixoX.Restrictions;
 
 namespace EixoX.Html
 {
-    public class HtmlInputAspect<T>
-        : AbstractAspect<HtmlInputAspectMember>
+    public class HtmlInputAspect<T> : AbstractAspect<HtmlInputAspectMember>
     {
         private static HtmlInputAspect<T> _HtmlDefault;
         public HtmlInputAspect() : base(typeof(T)) { }
@@ -28,17 +27,17 @@ namespace EixoX.Html
             else
             {
                 member = new HtmlInputAspectMember(
-                    acessor,
-                    hia.Fieldset,
-                    hia.InputType,
-                    hia.OptionSource,
-                    InterceptorAspect<T>.Instance.GetMemberOrDefault(acessor.Name),
-                    RestrictionAspect<T>.Instance.GetMemberOrDefault(acessor.Name),
-                    GlobalizationAspect<T>.Instance.GetMemberOrDefault(acessor.Name));
+                                acessor,
+                                hia.Fieldset,
+                                hia.InferType ? HtmlInputAspectMember.InferInputType(acessor.DataType) : hia.InputType,
+                                hia.OptionSource,
+                                InterceptorAspect<T>.Instance.GetMemberOrDefault(acessor.Name),
+                                RestrictionAspect<T>.Instance.GetMemberOrDefault(acessor.Name),
+                                GlobalizationAspect<T>.Instance.GetMemberOrDefault(acessor.Name));
+
                 return true;
             }
         }
-
 
         protected virtual void BeginWrapper(HtmlWriter writer, HtmlInputTerm term)
         {
@@ -80,9 +79,26 @@ namespace EixoX.Html
                     WriteInputRadioGroup(writer, term); break;
                 case HtmlInputType.Text:
                     WriteInputText(writer, term); break;
-
-
+                case HtmlInputType.Date:
+                    WriteInputDate(writer, term); break;
             }
+        }
+
+        protected virtual void WriteInputDate(HtmlWriter writer, HtmlInputTerm term)
+        {
+            BeginWrapper(writer, term);
+            WriteLabel(writer, term);
+
+            writer.WriteBeginTag("input", true,
+                new HtmlAttribute("type", "text"),
+                new HtmlAttribute("name", term.Name),
+                new HtmlAttribute("id", term.Name),
+                new HtmlAttribute("class", "date"),
+                new HtmlAttribute("placeholder", term.Placeholder));
+
+            WriteHint(writer, term);
+            WriteError(writer, term);
+            EndWrapper(writer, term);
         }
 
         protected virtual void WriteInputCheckbox(HtmlWriter writer, HtmlInputTerm term)
@@ -197,7 +213,8 @@ namespace EixoX.Html
                 new HtmlAttribute("id", term.Name),
                 new HtmlAttribute("rows", 5),
                 new HtmlAttribute("cols", 20),
-                new HtmlAttribute("class", "htmlEditor"));
+                new HtmlAttribute("class", "htmlEditor"),
+                new HtmlAttribute("placeholder", term.Placeholder));
             WriteHint(writer, term);
             WriteError(writer, term);
             EndWrapper(writer, term);
@@ -211,7 +228,8 @@ namespace EixoX.Html
                 new HtmlAttribute("type", "password"),
                 new HtmlAttribute("name", term.Name),
                 new HtmlAttribute("id", term.Name),
-                new HtmlAttribute("value", term.Value));
+                new HtmlAttribute("value", term.Value),
+                new HtmlAttribute("placeholder", term.Placeholder));
             WriteHint(writer, term);
             WriteError(writer, term);
             EndWrapper(writer, term);
@@ -260,7 +278,8 @@ namespace EixoX.Html
                 new HtmlAttribute("type", "text"),
                 new HtmlAttribute("name", term.Name),
                 new HtmlAttribute("id", term.Name),
-                new HtmlAttribute("value", term.Value));
+                new HtmlAttribute("value", term.Value),
+                new HtmlAttribute("placeholder", term.Placeholder));
 
             WriteHint(writer, term);
             WriteError(writer, term);
@@ -275,7 +294,8 @@ namespace EixoX.Html
                 new HtmlAttribute("name", term.Name),
                 new HtmlAttribute("id", term.Name),
                 new HtmlAttribute("rows", 5),
-                new HtmlAttribute("cols", 20));
+                new HtmlAttribute("cols", 20),
+                new HtmlAttribute("placeholder", term.Placeholder));
             WriteHint(writer, term);
             WriteError(writer, term);
             EndWrapper(writer, term);
