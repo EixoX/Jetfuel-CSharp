@@ -8,7 +8,6 @@ namespace EixoX.Html
 {
     public class HtmlInputAspectMember : AspectMember
     {
-        private readonly Type _DataType;
         private readonly string _Fieldset;
         private readonly HtmlInputType _InputType;
         private readonly HtmlInputOptionSource _InputSource;
@@ -38,9 +37,10 @@ namespace EixoX.Html
         {
             if (dataType == typeof(DateTime))
                 return HtmlInputType.Date;
-            else if(dataType == typeof(bool))
+            else if (dataType == typeof(bool))
                 return HtmlInputType.Checkbox;
             
+
             return HtmlInputType.Text;
         }
 

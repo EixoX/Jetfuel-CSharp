@@ -64,6 +64,7 @@
     <Compile Include="Html\HtmlInputAspectMember.cs" />
     <Compile Include="Html\HtmlInputAttribute.cs" />
     <Compile Include="Html\HtmlInputOption.cs" />
+    <Compile Include="Html\HtmlInputOptionEnum.cs" />
     <Compile Include="Html\HtmlInputOptionSource.cs" />
     <Compile Include="Html\HtmlInputTerm.cs" />
     <Compile Include="Html\HtmlInputType.cs" />

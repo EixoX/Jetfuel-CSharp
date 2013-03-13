@@ -30,7 +30,7 @@ namespace EixoX.Html
                                 acessor,
                                 hia.Fieldset,
                                 hia.InferType ? HtmlInputAspectMember.InferInputType(acessor.DataType) : hia.InputType,
-                                hia.OptionSource,
+                                hia.OptionSource == null && acessor.DataType.IsEnum ? new HtmlInputOptionEnum(acessor.DataType) : null,
                                 InterceptorAspect<T>.Instance.GetMemberOrDefault(acessor.Name),
                                 RestrictionAspect<T>.Instance.GetMemberOrDefault(acessor.Name),
                                 GlobalizationAspect<T>.Instance.GetMemberOrDefault(acessor.Name));
@@ -56,7 +56,7 @@ namespace EixoX.Html
             writer.WriteLine();
             writer.WriteSimpleTag("label", term.Label, new HtmlAttribute("for", term.Name));
             writer.WriteLine();
-            
+
         }
 
         protected virtual void WriteInput(HtmlWriter writer, HtmlInputTerm term)
