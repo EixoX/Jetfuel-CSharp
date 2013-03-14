@@ -89,6 +89,12 @@ namespace EixoX.Data
                 builder.Append(Convert.ToBase64String((byte[])value));
                 builder.Append('\'');
             }
+            else if (value is bool)
+            {
+                builder.Append('\'');
+                builder.Append(Convert.ToInt32(value));
+                builder.Append('\'');
+            }
             else if (value is System.Collections.IEnumerable)
             {
                 builder.Append("(");

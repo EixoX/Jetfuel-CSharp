@@ -81,7 +81,27 @@ namespace EixoX.Html
                     WriteInputText(writer, term); break;
                 case HtmlInputType.Date:
                     WriteInputDate(writer, term); break;
+                case HtmlInputType.File:
+                    WriteInputFile(writer, term); break;
+                case HtmlInputType.Textarea:
+                    WriteInputTextarea(writer, term); break;
             }
+        }
+
+        protected virtual void WriteInputFile(HtmlWriter writer, HtmlInputTerm term)
+        {
+            BeginWrapper(writer, term);
+            WriteLabel(writer, term);
+
+            writer.WriteBeginTag("input", true,
+                new HtmlAttribute("type", "file"),
+                new HtmlAttribute("name", term.Name),
+                new HtmlAttribute("id", term.Name),
+                new HtmlAttribute("placeholder", term.Placeholder));
+
+            WriteHint(writer, term);
+            WriteError(writer, term);
+            EndWrapper(writer, term);
         }
 
         protected virtual void WriteInputDate(HtmlWriter writer, HtmlInputTerm term)
