@@ -20,6 +20,8 @@ namespace EixoX.Html
         /// <param name="collection">The collection to base on .</param>
         public HtmlAttributeCollection(IEnumerable<HtmlAttribute> collection) : base(collection) { }
 
+        public HtmlAttributeCollection(params HtmlAttribute[] attributes) : base(attributes) { }
+
         /// <summary>
         /// Adds an attribute to the end.
         /// </summary>

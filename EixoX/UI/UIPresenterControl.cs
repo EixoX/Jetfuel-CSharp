@@ -7,39 +7,42 @@ using System.Text;
 
 namespace EixoX.UI
 {
+    /// <summary>
+    /// Represents an abstract control presenter.
+    /// </summary>
     public class UIPresenterControl
     {
-
-        private readonly AspectMember _Member;
+        private List<UIControlGroup> _Groups;
+        private readonly SingleAnnotationAspectMember<UIControlAttribute> _Member;
         private readonly RestrictionList _Restrictions;
         private readonly InterceptorList _Interceptors;
         private readonly GlobalizationList _Globalization;
-        private readonly UIControl _Control;
         private readonly string _Label;
         private readonly string _Hint;
         private readonly int _LCID;
 
         public UIPresenterControl(
-            AspectMember member,
+            SingleAnnotationAspectMember<UIControlAttribute> member,
             string label,
             string hint,
             int lcid,
             RestrictionList restrictions,
             InterceptorList interceptors,
-            GlobalizationList globalization,
-            UIControl control)
+            GlobalizationList globalization)
         {
             this._Member = member;
+            this._Groups = new List<UIControlGroup>(member.GetAttributes<UIControlGroup>(true));
             this._Label = string.IsNullOrEmpty(label) ? member.Name : label;
             this._Hint = hint;
+            this._LCID = lcid;
             this._Restrictions = restrictions;
             this._Interceptors = interceptors;
             this._Globalization = globalization;
-            this._Control = control;
-            this._LCID = lcid;
+
         }
 
         public string Name { get { return _Member.Name; } }
+
         public GlobalizationList Globalization { get { return this._Globalization; } }
 
         public string GetGlobalizationTerm(string termName)
@@ -50,12 +53,19 @@ namespace EixoX.UI
                 return _Globalization.GetTerm(termName, _LCID);
         }
 
-        public UIControlState GetState(object entity, bool validateRestrictions)
+        public bool InGroup(string name)
         {
-            return GetState(entity, validateRestrictions, null);
+            int count = _Groups.Count;
+            if (count > 0 && !string.IsNullOrEmpty(name))
+            {
+                for (int i = 0; i < count; i++)
+                    if (name.Equals(_Groups[i].Name, StringComparison.OrdinalIgnoreCase))
+                        return true;
+            }
+            return false;
         }
 
-        public UIControlState GetState(object entity, bool validateRestrictions, object options)
+        public UIControlState GetState(object entity, bool validateRestrictions)
         {
             object value = _Member.GetValue(entity);
 
@@ -72,14 +82,10 @@ namespace EixoX.UI
                 Name = _Member.Name,
                 Label = _Label,
                 Hint = _Hint,
-                Options = options,
+                Options = _Member.Annotation.GetControlOptions(),
                 Value = value
             };
         }
 
-        public void Render(object entity, bool validateRestrictions, object options, object output)
-        {
-            this._Control.Render(GetState(entity, validateRestrictions, options), output);
-        }
     }
 }

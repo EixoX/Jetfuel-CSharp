@@ -9,6 +9,10 @@ namespace EixoX.Html
     /// </summary>
     public static class HtmlHelper
     {
+        public static string HtmlDefaultTemplate = "<{{tagname}} {{attributes}}></{{tagname}}>";
+        public static string HtmlSingleTemplate = "<{{tagname}} {{attributes}} />";
+
+
         /// <summary>
         /// Formats the input as an html text. (Fast Format, no char replacements).
         /// </summary>

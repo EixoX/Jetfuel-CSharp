@@ -12,7 +12,7 @@ namespace EixoX.Tests
         {
             GlobalizationAspect exampleGlobalization = GlobalizationAspect<Example>.Instance;
 
-            string item = exampleGlobalization["FirstName"].GetItem("grayName", "pt-BR");
+            string item = exampleGlobalization["FirstName"].GetTerm("label", "pt-BR");
             Assert.IsNotNull(item);
         }
     }

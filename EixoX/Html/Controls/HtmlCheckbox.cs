@@ -7,16 +7,20 @@ namespace EixoX.Html.Controls
     public class HtmlCheckbox : HtmlControl
     {
 
-        public override void Render(System.IO.TextWriter writer, UI.UIControlState state)
+        protected override HtmlNode CreateInput(UI.UIControlState state)
         {
-            writer.WriteLine("<div>");
-            writer.Write("<label for=\"");
-            writer.Write(HtmlHelper.HtmlDoubleQuoted(state.Name));
-            writer.Write("\">");
-            writer.Write(HtmlHelper.HtmlFormat(state.Label));
-            writer.WriteLine("</label>");
-            writer.Write("<input type=\"checkbox\" value=\"
-        }
+            HtmlStandalone checkbox = new HtmlStandalone("input",
+                    new HtmlAttribute("type", "checkbox"),
+                    new HtmlAttribute("id", state.Name),
+                    new HtmlAttribute("name", state.Name),
+                    new HtmlAttribute("value", "True"));
+
+            if (Convert.ToBoolean(state.Value))
+            {
+                checkbox.Attributes.AddLast("checked", "checked");
+            }
+
+            return checkbox;
         }
     }
 }

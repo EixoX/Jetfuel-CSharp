@@ -461,5 +461,35 @@ namespace EixoX.Data
         {
             return new ClassSelectResult<T>(this);
         }
+
+
+        /// <summary>
+        /// Enumerates the selected entities as a key value pair of options.
+        /// </summary>
+        /// <returns>An enumeration of key and value pairs.</returns>
+        public IEnumerable<KeyValuePair<object, object>> ToOptions()
+        {
+            int identityOrdinal = _Aspect.IdentityOrdinal;
+            if (identityOrdinal >= 0)
+            {
+                foreach (T entity in this)
+                    yield return new KeyValuePair<object, object>(_Aspect[identityOrdinal].GetValue(entity), entity);
+            }
+            else if (_Aspect.HasUniqueMembers)
+            {
+                using (IEnumerator<int> uniqueOrdinalEnum = _Aspect.UniqueMemberOrdinals.GetEnumerator())
+                {
+                    uniqueOrdinalEnum.MoveNext();
+                    int uniqueOrdinal = uniqueOrdinalEnum.Current;
+                    foreach (T entity in this)
+                        yield return new KeyValuePair<object, object>(_Aspect[uniqueOrdinal].GetValue(entity), entity);
+                }
+
+            }
+            else
+            {
+                throw new ArgumentException("To enumerate options the entity must have an identity or unique member: " + _Aspect.DataType.ToString());
+            }
+        }
     }
 }

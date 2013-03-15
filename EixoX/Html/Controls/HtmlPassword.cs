@@ -4,7 +4,16 @@ using System.Text;
 
 namespace EixoX.Html.Controls
 {
-    class HtmlPassword
+    public class HtmlPassword: HtmlControl
     {
+
+        protected override HtmlNode CreateInput(UI.UIControlState state)
+        {
+            return new HtmlStandalone("input",
+                new HtmlAttribute("type", "password"),
+                new HtmlAttribute("name", state.Name),
+                new HtmlAttribute("id", state.Name),
+                new HtmlAttribute("value", state.Value));
+        }
     }
 }

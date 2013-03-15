@@ -62,8 +62,9 @@
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Html\Controls\HtmlCheckbox.cs" />
     <Compile Include="Html\Controls\HtmlCheckboxGroup.cs" />
-    <Compile Include="Html\Controls\HtmlControl.cs" />
-    <Compile Include="Html\Controls\HtmlControlFactory.cs" />
+    <Compile Include="Html\Controls\HtmlFile.cs" />
+    <Compile Include="Html\Controls\HtmlHidden.cs" />
+    <Compile Include="Html\HtmlControlFactory.cs" />
     <Compile Include="Html\Controls\HtmlDatepicker.cs" />
     <Compile Include="Html\Controls\HtmlDropdown.cs" />
     <Compile Include="Html\Controls\HtmlMultiline.cs" />
@@ -76,9 +77,11 @@
     <Compile Include="Html\HtmlAttributeCollection.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Html\HtmlBuilder.cs" />
     <Compile Include="Html\HtmlComposite.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Html\HtmlControl.cs" />
     <Compile Include="Html\HtmlHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,7 +97,8 @@
     <Compile Include="Html\HtmlOptionSource.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlPresentation.cs" />
+    <Compile Include="Html\HtmlPresenter.cs" />
+    <Compile Include="Html\HtmlPresenterControl.cs" />
     <Compile Include="Html\HtmlSimple.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -221,11 +225,13 @@
     <Compile Include="Text\TextColumnSchema.cs" />
     <Compile Include="Text\TextDataReader.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="UI\UIControl.cs" />
+    <Compile Include="UI\UIControlGroup.cs" />
+    <Compile Include="UI\UIControls\UIHidden.cs" />
     <Compile Include="UI\UIPresenter.cs" />
     <Compile Include="UI\UIAspect.cs" />
     <Compile Include="UI\UIControls\UICheckbox.cs" />
     <Compile Include="UI\UIControls\UICheckboxGroup.cs" />
-    <Compile Include="UI\UIControl.cs" />
     <Compile Include="UI\UIControlAttribute.cs" />
     <Compile Include="UI\UIControlFactory.cs" />
     <Compile Include="UI\UIControlState.cs" />
@@ -237,7 +243,7 @@
     <Compile Include="UI\UIPresenterControl.cs" />
     <Compile Include="UI\UIControls\UIRadioGroup.cs" />
     <Compile Include="UI\UIReflectionFactory.cs" />
-    <Compile Include="UI\UIControls\UISingleLine.cs" />
+    <Compile Include="UI\UIControls\UISingleline.cs" />
     <Compile Include="Xml\XmlAspect.cs" />
     <Compile Include="Xml\XmlAspectMember.cs" />
   </ItemGroup>
@@ -250,7 +256,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Html\Bootstrap\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

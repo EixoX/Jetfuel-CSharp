@@ -10,21 +10,27 @@ namespace EixoX.UI
     /// <summary>
     /// Represents the User Interface presentation object
     /// </summary>
-    public class UIPresenter<T> : IEnumerable<UIPresenterControl>
+    public abstract class UIPresenter<T, TControl> : IEnumerable<TControl> where TControl : UIPresenterControl
     {
-        private readonly List<UIPresenterControl> _Controls;
+        private readonly List<TControl> _Controls;
 
-        public UIPresenter(
-            UIControlFactory factory,
-            int localeCultureId)
+        protected abstract TControl CreateControl(
+            SingleAnnotationAspectMember<UIControlAttribute> member,
+            string label,
+            string hint,
+            int localeCultureId,
+            RestrictionList restrictions,
+            InterceptorList interceptors,
+            GlobalizationList globalization);
+
+        public UIPresenter(int localeCultureId)
         {
-
             UIAspect<T> aspect = UIAspect<T>.Instance;
             GlobalizationAspect<T> globalization = GlobalizationAspect<T>.Instance;
             RestrictionAspect<T> restrictions = RestrictionAspect<T>.Instance;
             InterceptorAspect<T> interceptors = InterceptorAspect<T>.Instance;
 
-            this._Controls = new List<UIPresenterControl>(aspect.Count);
+            this._Controls = new List<TControl>(aspect.Count);
 
             foreach (SingleAnnotationAspectMember<UIControlAttribute> child in aspect)
             {
@@ -37,42 +43,41 @@ namespace EixoX.UI
                 string label = globalizationList == null ? null : globalizationList.GetTerm("label", localeCultureId);
                 string hint = globalizationList == null ? null : globalizationList.GetTerm("hint", localeCultureId);
 
-                UIPresenterControl control = new UIPresenterControl(
+                _Controls.Add(CreateControl(
                     child,
                     string.IsNullOrEmpty(label) ? child.Annotation.DefaultLabel : label,
                     string.IsNullOrEmpty(hint) ? child.Annotation.DefaultHint : hint,
                     localeCultureId,
                     restrictions.GetRestrictionList(child.Name),
                     interceptors.GetInterceptorList(child.Name),
-                    globalizationList,
-                    factory.CreateControlFor(child.Annotation));
+                    globalizationList));
             }
 
         }
 
         public int Count { get { return this._Controls.Count; } }
 
-        public UIPresenterControl this[int ordinal]
+        public TControl this[int ordinal]
         {
             get { return _Controls[ordinal]; }
         }
 
-        public UIPresenterControl this[string name]
+        public TControl this[string name]
         {
             get { return _Controls[GetOrdinalOrException(name)]; }
         }
 
-
-        public void Render(object entity, bool validateRestrictions, object options, object output)
-        {
-            foreach (UIPresenterControl control in this._Controls)
-                control.Render(entity, validateRestrictions, options, output);
-        }
-
-        public void Render(object entity, bool validateRestrictions, object options, object output, params string[] names)
+        public IEnumerable<TControl> GetMembers(params string[] names)
         {
             for (int i = 0; i < names.Length; i++)
-                this[names[i]].Render(entity, validateRestrictions, options, output);
+                yield return _Controls[GetOrdinalOrException(names[i])];
+        }
+
+        public IEnumerable<TControl> GetGroupMembers(string groupName)
+        {
+            foreach (TControl child in _Controls)
+                if (child.InGroup(groupName))
+                    yield return child;
         }
 
         public int GetOrdinal(string name)
@@ -97,7 +102,7 @@ namespace EixoX.UI
                 return ordinal;
         }
 
-        public IEnumerator<UIPresenterControl> GetEnumerator()
+        public IEnumerator<TControl> GetEnumerator()
         {
             return _Controls.GetEnumerator();
         }

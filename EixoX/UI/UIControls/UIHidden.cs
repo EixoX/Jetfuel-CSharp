@@ -4,8 +4,7 @@ using System.Text;
 
 namespace EixoX.UI
 {
-    public interface UIControl
+    public class UIHidden : UIControlAttribute
     {
-
     }
 }

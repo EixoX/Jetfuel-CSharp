@@ -11,7 +11,7 @@ namespace EixoX.UI
         public string Name { get; set; }
         public string Label { get; set; }
         public string Hint { get; set; }
-        public object Options { get; set; }
+        public IEnumerable<KeyValuePair<object, object>> Options { get; set; }
         public string ErrorMessage { get; set; }
     }
 }

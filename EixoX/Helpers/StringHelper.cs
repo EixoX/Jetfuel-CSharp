@@ -37,5 +37,18 @@ namespace EixoX
             else
                 return input.Substring(0, length);
         }
+
+
+        public static IEnumerable<object> Split(string input, Type conversionType, params char[] separator)
+        {
+            return Split(input, conversionType, System.Globalization.CultureInfo.CurrentUICulture, separator);
+        }
+
+        public static IEnumerable<object> Split(string input, Type conversionType, IFormatProvider formatProvider, params char[] separator)
+        {
+            string[] spl = input.Split(separator);
+            for (int i = 0; i < spl.Length; i++)
+                yield return Convert.ChangeType(spl[i], conversionType, formatProvider);
+        }
     }
 }

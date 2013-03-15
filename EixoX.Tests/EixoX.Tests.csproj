@@ -53,6 +53,11 @@
     <Compile Include="InterceptorTests.cs" />
     <Compile Include="GlobalizationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDb.cs" />
+    <Compile Include="TestDbExtensions.cs" />
+    <Compile Include="TestDbModel.cs" />
+    <Compile Include="TestPerson.cs" />
+    <Compile Include="UITests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EixoX\EixoX.csproj">

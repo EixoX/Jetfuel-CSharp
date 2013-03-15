@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EixoX.UI
+namespace EixoX.Html.Controls
 {
-    public interface UIControl
+    public class HtmlFile
     {
-
     }
 }

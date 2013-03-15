@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EixoX.Html.Controls
+namespace EixoX.Html
 {
     public class HtmlControlFactory
         : UI.UIReflectionFactory
