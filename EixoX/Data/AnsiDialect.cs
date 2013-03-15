@@ -104,6 +104,10 @@ namespace EixoX.Data
                 }
                 builder.Append(")");
             }
+            else if (value is bool)
+            {
+                builder.Append(((bool)value) ? "1" : "0");
+            }
             else if (value is Enum)
             {
                 builder.Append((int)value);

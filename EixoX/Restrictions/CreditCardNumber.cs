@@ -15,7 +15,7 @@ namespace EixoX.Restrictions
             if (input == null)
                 return false;
 
-            string digits = FormatHelper.DigitsOnly(input.ToString());
+            string digits = StringHelper.DigitsOnly(input.ToString());
 
             if (digits.Length < 12 | digits.Length > 19)
                 return false;

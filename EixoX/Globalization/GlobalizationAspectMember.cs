@@ -6,60 +6,76 @@ using System.Text;
 namespace EixoX.Globalization
 {
     public class GlobalizationAspectMember
-        : AspectMember
+        : AspectMember, IGlobalization
     {
-        private readonly Dictionary<int, Dictionary<string, string>> _Elements;
+        private readonly GlobalizationList _Terms;
 
         public GlobalizationAspectMember(ClassAcessor acessor)
             : base(acessor)
         {
-            this._Elements = new Dictionary<int, Dictionary<string, string>>();
+            this._Terms = new GlobalizationList();
         }
 
-        public string GetItem(string name, int lcid)
+        public GlobalizationList Terms { get { return this._Terms; } }
+
+        public string GetTerm(string name)
         {
-            Dictionary<string, string> dic;
-            if (_Elements.TryGetValue(lcid, out dic))
-            {
-                string value;
-                dic.TryGetValue(name, out value);
-                return value;
-            }
-            else
-            {
-                return null;
-            }
+            return _Terms.GetTerm(name);
         }
 
-        public string GetItem(string name)
+        public string GetTerm(string name, int lcid)
         {
-            return GetItem(name, System.Globalization.CultureInfo.CurrentUICulture.LCID);
+            return _Terms.GetTerm(name, lcid);
         }
 
-        public string GetItem(string name, string culture)
+        public string GetTerm(string name, string culture)
         {
-            return GetItem(name, System.Globalization.CultureInfo.GetCultureInfo(culture).LCID);
+            return _Terms.GetTerm(name, culture);
         }
 
-
-        public void SetItem(string name, int lcid, string value)
+        public string GetTerm(string name, System.Globalization.CultureInfo culture)
         {
-            Dictionary<string, string> dic;
-            if (_Elements.TryGetValue(lcid, out dic))
-            {
-                if (dic.ContainsKey(name))
-                    dic[name] = value;
-                else
-                    dic.Add(name, value);
-            }
-            else
-            {
-                dic = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                dic.Add(name, value);
-                _Elements.Add(lcid, dic);
-            }
-
+            return _Terms.GetTerm(name, culture);
         }
 
+        public void SetTerm(string name, string value)
+        {
+            _Terms.SetTerm(name, value);
+        }
+
+        public void SetTerm(string name, int lcid, string value)
+        {
+            _Terms.SetTerm(name, lcid, value);
+        }
+
+        public void SetTerm(string name, string culture, string value)
+        {
+            _Terms.SetTerm(name, culture, value);
+        }
+
+        public void SetTerm(string name, System.Globalization.CultureInfo culture, string value)
+        {
+            _Terms.SetTerm(name, culture, value);
+        }
+
+        public int Count
+        {
+            get { return _Terms.Count; }
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetTerms(int lcid)
+        {
+            return _Terms.GetTerms(lcid);
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetTerms(string culture)
+        {
+            return _Terms.GetTerms(culture);
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetTerms(System.Globalization.CultureInfo culture)
+        {
+            return _Terms.GetTerms(culture);
+        }
     }
 }

@@ -57,18 +57,54 @@
     <Compile Include="Data\SqlServer.cs" />
     <Compile Include="Data\DatabaseTableAttribute.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="Html\BootstrapHorizontalAspect.cs" />
-    <Compile Include="Html\HtmlInputAspect.cs" />
-    <Compile Include="Html\HtmlAttribute.cs" />
-    <Compile Include="Html\HtmlAttributeCollection.cs" />
-    <Compile Include="Html\HtmlInputAspectMember.cs" />
-    <Compile Include="Html\HtmlInputAttribute.cs" />
-    <Compile Include="Html\HtmlInputOption.cs" />
-    <Compile Include="Html\HtmlInputOptionEnum.cs" />
-    <Compile Include="Html\HtmlInputOptionSource.cs" />
-    <Compile Include="Html\HtmlInputTerm.cs" />
-    <Compile Include="Html\HtmlInputType.cs" />
-    <Compile Include="Html\HtmlWriter.cs" />
+    <Compile Include="Globalization\GlobalizationList.cs" />
+    <Compile Include="Globalization\IGlobalization.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Html\Controls\HtmlCheckbox.cs" />
+    <Compile Include="Html\Controls\HtmlCheckboxGroup.cs" />
+    <Compile Include="Html\Controls\HtmlControl.cs" />
+    <Compile Include="Html\Controls\HtmlControlFactory.cs" />
+    <Compile Include="Html\Controls\HtmlDatepicker.cs" />
+    <Compile Include="Html\Controls\HtmlDropdown.cs" />
+    <Compile Include="Html\Controls\HtmlMultiline.cs" />
+    <Compile Include="Html\Controls\HtmlPassword.cs" />
+    <Compile Include="Html\Controls\HtmlRadioGroup.cs" />
+    <Compile Include="Html\Controls\HtmlSingleline.cs" />
+    <Compile Include="Html\HtmlAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlAttributeCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlComposite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlNodeCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlOption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlOptionSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlPresentation.cs" />
+    <Compile Include="Html\HtmlSimple.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlStandalone.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Html\HtmlText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interceptors\Lowercase.cs" />
     <Compile Include="Restrictions\CreditCardNumber.cs" />
     <Compile Include="SingleAnnotationAspect.cs" />
     <Compile Include="SingleAnnotationAspectMember.cs" />
@@ -185,6 +221,23 @@
     <Compile Include="Text\TextColumnSchema.cs" />
     <Compile Include="Text\TextDataReader.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="UI\UIPresenter.cs" />
+    <Compile Include="UI\UIAspect.cs" />
+    <Compile Include="UI\UIControls\UICheckbox.cs" />
+    <Compile Include="UI\UIControls\UICheckboxGroup.cs" />
+    <Compile Include="UI\UIControl.cs" />
+    <Compile Include="UI\UIControlAttribute.cs" />
+    <Compile Include="UI\UIControlFactory.cs" />
+    <Compile Include="UI\UIControlState.cs" />
+    <Compile Include="UI\UIControls\UIDatepicker.cs" />
+    <Compile Include="UI\UIControls\UIDropdown.cs" />
+    <Compile Include="UI\UIControls\UIHtmlEditor.cs" />
+    <Compile Include="UI\UIControls\UIMultiline.cs" />
+    <Compile Include="UI\UIControls\UIPassword.cs" />
+    <Compile Include="UI\UIPresenterControl.cs" />
+    <Compile Include="UI\UIControls\UIRadioGroup.cs" />
+    <Compile Include="UI\UIReflectionFactory.cs" />
+    <Compile Include="UI\UIControls\UISingleLine.cs" />
     <Compile Include="Xml\XmlAspect.cs" />
     <Compile Include="Xml\XmlAspectMember.cs" />
   </ItemGroup>

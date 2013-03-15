@@ -66,6 +66,12 @@ namespace EixoX.Restrictions
             }
             return null;
         }
+
+        public RestrictionList GetRestrictionList(string name)
+        {
+            int ordinal = base.GetOrdinal(name);
+            return ordinal < 0 ? null : base[ordinal].Restrictions;
+        }
     }
 
     public class RestrictionAspect<T>
