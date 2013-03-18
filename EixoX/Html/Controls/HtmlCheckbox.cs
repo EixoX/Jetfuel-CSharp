@@ -22,5 +22,15 @@ namespace EixoX.Html.Controls
 
             return checkbox;
         }
+
+        protected override bool WriteLabel
+        {
+            get { return true; }
+        }
+
+        protected override bool WriteHint
+        {
+            get { return true; }
+        }
     }
 }

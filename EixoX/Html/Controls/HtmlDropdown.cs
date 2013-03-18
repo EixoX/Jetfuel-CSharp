@@ -23,5 +23,15 @@ namespace EixoX.Html.Controls
 
             return select;
         }
+
+        protected override bool WriteLabel
+        {
+            get { return true; }
+        }
+
+        protected override bool WriteHint
+        {
+            get { return true; }
+        }
     }
 }

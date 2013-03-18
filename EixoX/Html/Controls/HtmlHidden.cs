@@ -14,5 +14,15 @@ namespace EixoX.Html.Controls
                 new HtmlAttribute("id", state.Name),
                 new HtmlAttribute("value", state.Value));
         }
+
+        protected override bool WriteLabel
+        {
+            get { return false; }
+        }
+
+        protected override bool WriteHint
+        {
+            get { return true; }
+        }
     }
 }

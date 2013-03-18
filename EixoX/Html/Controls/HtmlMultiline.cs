@@ -16,5 +16,15 @@ namespace EixoX.Html.Controls
                 new HtmlAttribute("rows", "5"),
                 new HtmlAttribute("cols", "40"));
         }
+
+        protected override bool WriteLabel
+        {
+            get { return true; }
+        }
+
+        protected override bool WriteHint
+        {
+            get { return true; }
+        }
     }
 }

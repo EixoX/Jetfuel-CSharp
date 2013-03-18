@@ -6,7 +6,6 @@ namespace EixoX.Html.Controls
 {
     public class HtmlSingleline : HtmlControl
     {
-
         protected override HtmlNode CreateInput(UI.UIControlState state)
         {
             return new HtmlStandalone("input",
@@ -14,6 +13,16 @@ namespace EixoX.Html.Controls
                 new HtmlAttribute("name", state.Name),
                 new HtmlAttribute("id", state.Name),
                 new HtmlAttribute("value", state.Value));
+        }
+
+        protected override bool WriteLabel
+        {
+            get { return true; }
+        }
+
+        protected override bool WriteHint
+        {
+            get { return true; }
         }
     }
 }

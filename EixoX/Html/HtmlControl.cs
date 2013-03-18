@@ -10,13 +10,14 @@ namespace EixoX.Html
         HtmlNode _Hint;
         HtmlNode _Input;
 
+        protected abstract HtmlNode CreateInput(UI.UIControlState state);
+        protected abstract bool WriteLabel  { get; }
+        protected abstract bool WriteHint   { get; }
 
         protected virtual HtmlNode CreateLabel(UI.UIControlState state)
         {
             return new HtmlSimple("label", state.Label, new HtmlAttribute("for", state.Name));
         }
-        
-        protected abstract HtmlNode CreateInput(UI.UIControlState state);
 
         protected virtual HtmlNode CreateHint(UI.UIControlState state)
         {
@@ -34,7 +35,8 @@ namespace EixoX.Html
             if (_Label == null)
                 _Label = CreateLabel(state);
 
-            _Label.Write(writer);
+            if (WriteLabel)
+                _Label.Write(writer);
 
             if (_Input == null)
                 _Input = CreateInput(state);
@@ -42,7 +44,8 @@ namespace EixoX.Html
             for (int i = 0; i < attributes.Length; i++)
                 _Input.Attributes[attributes[i].Name] = attributes[i].Value;
 
-            this._Input.Write(writer);
+            if (WriteHint)
+                this._Input.Write(writer);
 
             HtmlNode error = CreateError(state);
             if (error != null)
