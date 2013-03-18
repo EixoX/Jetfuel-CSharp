@@ -37,25 +37,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompositeAnnotationAspect.cs" />
-    <Compile Include="CompositeAnnotationMember.cs" />
+    <Compile Include="Reflection\CompositeAnnotationAspect.cs" />
+    <Compile Include="Reflection\CompositeAnnotationMember.cs" />
     <Compile Include="Data\ClassSelectMember.cs" />
     <Compile Include="Data\ClassStorageEngine.cs" />
-    <Compile Include="Data\Database.cs" />
-    <Compile Include="Data\DatabaseAspect.cs" />
-    <Compile Include="Data\DatabaseCommand.cs" />
-    <Compile Include="Data\DatabaseDialect.cs" />
-    <Compile Include="Data\AnsiDialect.cs" />
-    <Compile Include="Data\DatabaseStorage.cs" />
-    <Compile Include="Data\OdbcDialect.cs" />
-    <Compile Include="Data\Odbc.cs" />
-    <Compile Include="Data\OleDbDialect.cs" />
-    <Compile Include="Data\OleDb.cs" />
-    <Compile Include="Data\DatabaseColumnAttribute.cs" />
-    <Compile Include="Data\DatabaseColumnKind.cs" />
-    <Compile Include="Data\SqlServerDialect.cs" />
-    <Compile Include="Data\SqlServer.cs" />
-    <Compile Include="Data\DatabaseTableAttribute.cs" />
+    <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\DatabaseAspect.cs" />
+    <Compile Include="Database\DatabaseCommand.cs" />
+    <Compile Include="Database\DatabaseDialect.cs" />
+    <Compile Include="Database\AnsiDialect.cs" />
+    <Compile Include="Database\DatabaseStorage.cs" />
+    <Compile Include="Database\OdbcDialect.cs" />
+    <Compile Include="Database\Odbc.cs" />
+    <Compile Include="Database\OleDbDialect.cs" />
+    <Compile Include="Database\OleDb.cs" />
+    <Compile Include="Database\DatabaseColumnAttribute.cs" />
+    <Compile Include="Database\DatabaseColumnKind.cs" />
+    <Compile Include="Database\SqlServerDialect.cs" />
+    <Compile Include="Database\SqlServer.cs" />
+    <Compile Include="Database\DatabaseTableAttribute.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Globalization\GlobalizationList.cs" />
     <Compile Include="Globalization\IGlobalization.cs" />
@@ -91,12 +91,6 @@
     <Compile Include="Html\HtmlNodeCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlOption.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlOptionSource.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Html\HtmlPresenter.cs" />
     <Compile Include="Html\HtmlPresenterControl.cs" />
     <Compile Include="Html\HtmlSimple.cs">
@@ -110,8 +104,8 @@
     </Compile>
     <Compile Include="Interceptors\Lowercase.cs" />
     <Compile Include="Restrictions\CreditCardNumber.cs" />
-    <Compile Include="SingleAnnotationAspect.cs" />
-    <Compile Include="SingleAnnotationAspectMember.cs" />
+    <Compile Include="Reflection\SingleAnnotationAspect.cs" />
+    <Compile Include="Reflection\SingleAnnotationAspectMember.cs" />
     <Compile Include="Text\Adapters\ByteAdapter.cs" />
     <Compile Include="Text\Adapters\ByteArrayAdapter.cs" />
     <Compile Include="Text\Adapters\DateTimeAdapter.cs" />
@@ -136,25 +130,24 @@
     <Compile Include="Data\ClassStorage.cs" />
     <Compile Include="Collections\Tree.cs" />
     <Compile Include="Collections\TreeNode.cs" />
-    <Compile Include="HashcodeComparer.cs" />
-    <Compile Include="Aspect.cs" />
-    <Compile Include="AbstractAspect.cs" />
-    <Compile Include="AspectMember.cs" />
-    <Compile Include="AspectMemberValue.cs" />
-    <Compile Include="ClassAcessor.cs" />
-    <Compile Include="ClassField.cs" />
-    <Compile Include="Data\ClassFilterAspect.cs" />
-    <Compile Include="ClassProperty.cs" />
-    <Compile Include="ClassSchema.cs" />
+    <Compile Include="Reflection\Aspect.cs" />
+    <Compile Include="Reflection\AbstractAspect.cs" />
+    <Compile Include="Reflection\AspectMember.cs" />
+    <Compile Include="Reflection\AspectMemberValue.cs" />
+    <Compile Include="Reflection\ClassAcessor.cs" />
+    <Compile Include="Reflection\ClassField.cs" />
+    <Compile Include="Filters\ClassFilterAspect.cs" />
+    <Compile Include="Reflection\ClassProperty.cs" />
+    <Compile Include="Reflection\ClassSchema.cs" />
     <Compile Include="Helpers\CryptoHelper.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
-    <Compile Include="Data\ClassSortAspect.cs" />
+    <Compile Include="Sorters\ClassSortAspect.cs" />
     <Compile Include="Data\ClassUpdate.cs" />
     <Compile Include="Data\DataAspect.cs" />
     <Compile Include="Data\DataAspectMember.cs" />
     <Compile Include="Data\ClassSelectResult.cs" />
-    <Compile Include="Data\ClassSortExpression.cs" />
-    <Compile Include="Data\ClassSortTerm.cs" />
+    <Compile Include="Sorters\ClassSortExpression.cs" />
+    <Compile Include="Sorters\ClassSortTerm.cs" />
     <Compile Include="Data\ClassDelete.cs" />
     <Compile Include="Data\ClassInsert.cs" />
     <Compile Include="Data\ClassSelect.cs" />
@@ -162,26 +155,26 @@
     <Compile Include="Collections\EnumerableOffset.cs" />
     <Compile Include="Collections\EnumerablePager.cs" />
     <Compile Include="Collections\EnumerableSelect.cs" />
-    <Compile Include="Data\ClassFilter.cs" />
+    <Compile Include="Filters\ClassFilter.cs" />
     <Compile Include="Data\DataScope.cs" />
-    <Compile Include="Data\FilterComparison.cs" />
-    <Compile Include="Data\ClassFilterExpression.cs" />
-    <Compile Include="Data\ClassFilterNode.cs" />
-    <Compile Include="Data\FilterOperation.cs" />
-    <Compile Include="Data\ClassFilterTerm.cs" />
-    <Compile Include="Data\ClassSort.cs" />
-    <Compile Include="Data\SortDirection.cs" />
-    <Compile Include="Data\ClassSortNode.cs" />
+    <Compile Include="Filters\FilterComparison.cs" />
+    <Compile Include="Filters\ClassFilterExpression.cs" />
+    <Compile Include="Filters\ClassFilterNode.cs" />
+    <Compile Include="Filters\FilterOperation.cs" />
+    <Compile Include="Filters\ClassFilterTerm.cs" />
+    <Compile Include="Sorters\ClassSort.cs" />
+    <Compile Include="Sorters\SortDirection.cs" />
+    <Compile Include="Sorters\ClassSortNode.cs" />
     <Compile Include="Helpers\FormatHelper.cs" />
-    <Compile Include="Data\Generator.cs" />
-    <Compile Include="Data\GeneratorAspect.cs" />
-    <Compile Include="Data\GeneratorAspectMember.cs" />
-    <Compile Include="Data\GetDateGenerator.cs" />
-    <Compile Include="Data\NewGuidGenerator.cs" />
+    <Compile Include="Generators\Generator.cs" />
+    <Compile Include="Generators\GeneratorAspect.cs" />
+    <Compile Include="Generators\GeneratorAspectMember.cs" />
+    <Compile Include="Generators\GetDateGenerator.cs" />
+    <Compile Include="Generators\NewGuidGenerator.cs" />
     <Compile Include="Globalization\Example.cs" />
     <Compile Include="Globalization\GlobalizationAspect.cs" />
     <Compile Include="Globalization\GlobalizationAspectMember.cs" />
-    <Compile Include="Patterns\Initializable.cs" />
+    <Compile Include="Initializable.cs" />
     <Compile Include="Interceptors\Capitalize.cs" />
     <Compile Include="Interceptors\DigitsOnly.cs" />
     <Compile Include="Interceptors\Interceptor.cs" />
@@ -213,7 +206,7 @@
     <Compile Include="Restrictions\RestrictionMessages.cs" />
     <Compile Include="Restrictions\RestrictionList.cs" />
     <Compile Include="Restrictions\Url.cs" />
-    <Compile Include="Patterns\Singleton.cs" />
+    <Compile Include="Singleton.cs" />
     <Compile Include="Text\DelimitedTextAspect.cs" />
     <Compile Include="Text\DelimitedTextAspectMember.cs" />
     <Compile Include="Text\DelimitedTextColumnAttribute.cs" />
@@ -256,9 +249,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Html\Bootstrap\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

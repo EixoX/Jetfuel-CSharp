@@ -75,7 +75,7 @@ namespace EixoX.Collections
         /// <returns>The first tree node found.</returns>
         public TreeNode<T> DepthSearch(T value)
         {
-            return DepthSearch(value, new HashcodeComparer<T>());
+            return DepthSearch(value, EqualityComparer<T>.Default);
         }
 
         /// <summary>

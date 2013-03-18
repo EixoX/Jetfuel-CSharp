@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Tests", "EixoX.Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Net", "EixoX.Net\EixoX.Net.csproj", "{9ADFEA9D-F2D0-4D40-9EE1-929B3D96B24F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Html.Bootstrap", "EixoX.Html.Bootstrap\EixoX.Html.Bootstrap.csproj", "{6B0DA24B-2BD1-4EA9-8E0A-662C12B89EF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{9ADFEA9D-F2D0-4D40-9EE1-929B3D96B24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ADFEA9D-F2D0-4D40-9EE1-929B3D96B24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ADFEA9D-F2D0-4D40-9EE1-929B3D96B24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B0DA24B-2BD1-4EA9-8E0A-662C12B89EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B0DA24B-2BD1-4EA9-8E0A-662C12B89EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B0DA24B-2BD1-4EA9-8E0A-662C12B89EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B0DA24B-2BD1-4EA9-8E0A-662C12B89EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

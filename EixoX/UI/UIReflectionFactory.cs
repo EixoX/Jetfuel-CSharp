@@ -8,13 +8,20 @@ namespace EixoX.UI
     public class UIReflectionFactory
         : UIControlFactory
     {
-        private string _NamespacePrefix;
-        private string _ControlPrefix;
+        private readonly string _NamespacePrefix;
+        private readonly string _ControlPrefix;
+        private Assembly referenceAssembly;
 
         public UIReflectionFactory(string namespacePrefix, string controlPrefix)
         {
             this._NamespacePrefix = namespacePrefix;
             this._ControlPrefix = controlPrefix;
+        }
+
+
+        protected virtual Assembly GetAssembly()
+        {
+            return GetType().Assembly;
         }
 
         public UIControl CreateControlFor(UIControlAttribute attribute)
@@ -24,7 +31,10 @@ namespace EixoX.UI
                 ".",
                 attribute.GetType().Name.Replace("UI", _ControlPrefix));
 
-            Type type = Type.GetType(typeName);
+            if (referenceAssembly == null)
+                referenceAssembly = GetAssembly();
+
+            Type type = referenceAssembly.GetType(typeName);
 
             ConstructorInfo constructor = type.GetConstructor(Type.EmptyTypes);
 

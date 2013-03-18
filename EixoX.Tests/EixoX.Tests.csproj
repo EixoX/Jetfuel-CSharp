@@ -58,8 +58,13 @@
     <Compile Include="TestDbModel.cs" />
     <Compile Include="TestPerson.cs" />
     <Compile Include="UITests.cs" />
+    <Compile Include="HtmlBoostrapTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EixoX.Html.Bootstrap\EixoX.Html.Bootstrap.csproj">
+      <Project>{6b0da24b-2bd1-4ea9-8e0a-662c12b89ef9}</Project>
+      <Name>EixoX.Html.Bootstrap</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EixoX\EixoX.csproj">
       <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
       <Name>EixoX</Name>

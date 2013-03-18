@@ -28,7 +28,7 @@ namespace EixoX
         /// Gets the number of members associated with the aspect.
         /// </summary>
         int Count { get; }
-        /// <summary>
+        /// <summary>s
         /// Gets an aspect member.
         /// </summary>
         /// <param name="ordinal">The ordinal position of the member.</param>
