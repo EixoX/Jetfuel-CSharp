@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UIRadioGroup(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UIRadioGroup(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UIRadioGroup() { }
     }
 }

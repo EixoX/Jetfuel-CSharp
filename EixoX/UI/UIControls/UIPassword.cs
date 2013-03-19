@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UIPassword(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UIPassword(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UIPassword() { }
     }
 }

@@ -36,19 +36,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\BootstrapCheckbox.cs" />
-    <Compile Include="Controls\BootstrapCheckboxGroup.cs" />
-    <Compile Include="Controls\BootstrapDatepicker.cs" />
-    <Compile Include="Controls\BootstrapDropdown.cs" />
-    <Compile Include="Controls\BootstrapHidden.cs" />
-    <Compile Include="Controls\BootstrapMultiline.cs" />
-    <Compile Include="Controls\BootstrapPassword.cs" />
-    <Compile Include="Controls\BootstrapRadioGroup.cs" />
-    <Compile Include="Controls\BootstrapSingleline.cs" />
-    <Compile Include="BoostrapControl.cs" />
-    <Compile Include="BoostrapControlFactory.cs" />
-    <Compile Include="BoostrapPresenter.cs" />
-    <Compile Include="BoostrapPresenterControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +43,9 @@
       <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
       <Name>EixoX</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

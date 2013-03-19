@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UISingleline(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UISingleline(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UISingleline() { }
     }
 }

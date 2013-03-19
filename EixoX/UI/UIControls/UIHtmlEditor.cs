@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UIHtmlEditor(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UIHtmlEditor(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UIHtmlEditor() { }
     }
 }

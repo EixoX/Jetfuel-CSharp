@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UICheckbox(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UICheckbox(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UICheckbox() { }
     }
 }

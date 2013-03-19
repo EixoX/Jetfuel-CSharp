@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UIDropdown(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UIDropdown(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UIDropdown() { }
 
 

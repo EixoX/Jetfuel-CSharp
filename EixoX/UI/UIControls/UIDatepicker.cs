@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UIDatepicker(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UIDatepicker(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UIDatepicker() { }
     }
 }

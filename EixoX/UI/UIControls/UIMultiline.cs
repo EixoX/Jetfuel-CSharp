@@ -14,6 +14,8 @@ namespace EixoX.UI
             : base(defaultLabel, null, classStorageType) { }
         public UIMultiline(Type classStorageType)
             : base(null, null, classStorageType) { }
+        public UIMultiline(string defaultLabel)
+            : base(defaultLabel, null, null) { }
         public UIMultiline() { }
     }
 }

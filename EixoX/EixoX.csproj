@@ -37,6 +37,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Html\BoostrapControl.cs" />
+    <Compile Include="Html\BoostrapControlFactory.cs" />
+    <Compile Include="Html\BoostrapPresenter.cs" />
+    <Compile Include="Html\BoostrapPresenterControl.cs" />
+    <Compile Include="Html\Controls\BootstrapCheckbox.cs" />
+    <Compile Include="Html\Controls\BootstrapCheckboxGroup.cs" />
+    <Compile Include="Html\Controls\BootstrapDatepicker.cs" />
+    <Compile Include="Html\Controls\BootstrapDropdown.cs" />
+    <Compile Include="Html\Controls\BootstrapHidden.cs" />
+    <Compile Include="Html\Controls\BootstrapMultiline.cs" />
+    <Compile Include="Html\Controls\BootstrapPassword.cs" />
+    <Compile Include="Html\Controls\BootstrapRadioGroup.cs" />
+    <Compile Include="Html\Controls\BootstrapSingleline.cs" />
     <Compile Include="Reflection\CompositeAnnotationAspect.cs" />
     <Compile Include="Reflection\CompositeAnnotationMember.cs" />
     <Compile Include="Data\ClassSelectMember.cs" />
