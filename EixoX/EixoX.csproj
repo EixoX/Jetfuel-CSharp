@@ -232,6 +232,9 @@
     <Compile Include="Text\TextDataReader.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="UI\UIControl.cs" />
+    <Compile Include="UI\UIControlChoices.cs" />
+    <Compile Include="UI\UIControlClassStorageChoices.cs" />
+    <Compile Include="UI\UIControlEnumChoices.cs" />
     <Compile Include="UI\UIControlGroup.cs" />
     <Compile Include="UI\UIControls\UIHidden.cs" />
     <Compile Include="UI\UIPresenter.cs" />
