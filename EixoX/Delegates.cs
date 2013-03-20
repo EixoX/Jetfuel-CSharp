@@ -5,7 +5,7 @@ using EixoX.Data;
 
 namespace EixoX
 {
-    public delegate bool EqualsToHanlder<T>(T left, T right);
+    public delegate bool EqualsToHandler<T>(T left, T right);
     public delegate int ComparesToHandler<T>(T left, T right);
-    public delegate bool FilterHandlder<T>(T left, FilterComparison comparison, T rignt);
+    public delegate bool FilterHandler<T>(T left, FilterComparison comparison, T rignt);
 }
