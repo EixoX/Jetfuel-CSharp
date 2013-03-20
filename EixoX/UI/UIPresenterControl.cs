@@ -82,7 +82,7 @@ namespace EixoX.UI
                 Name = _Member.Name,
                 Label = _Label,
                 Hint = _Hint,
-                Options = _Member.Annotation.GetControlOptions(),
+                Options = _Member.Annotation.GetChoices(),
                 Value = value
             };
         }

@@ -14,7 +14,6 @@ namespace EixoX.Html
 
         public virtual void Render(System.IO.TextWriter writer, UI.UIControlState state, params HtmlAttribute[] attributes)
         {
-
             if (_Label == null)
                 _Label = new HtmlSimple("label", state.Label, new HtmlAttribute("for", state.Name));
 

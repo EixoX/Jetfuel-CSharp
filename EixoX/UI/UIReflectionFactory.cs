@@ -18,7 +18,6 @@ namespace EixoX.UI
             this._ControlPrefix = controlPrefix;
         }
 
-
         protected virtual Assembly GetAssembly()
         {
             return GetType().Assembly;

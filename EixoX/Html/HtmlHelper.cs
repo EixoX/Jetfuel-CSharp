@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EixoX.Collections;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,10 +10,6 @@ namespace EixoX.Html
     /// </summary>
     public static class HtmlHelper
     {
-        public static string HtmlDefaultTemplate = "<{{tagname}} {{attributes}}></{{tagname}}>";
-        public static string HtmlSingleTemplate = "<{{tagname}} {{attributes}} />";
-
-
         /// <summary>
         /// Formats the input as an html text. (Fast Format, no char replacements).
         /// </summary>
@@ -29,6 +26,30 @@ namespace EixoX.Html
                     .Replace(">", "&gt;")
                     .Replace("\"", "&quot;")
                     .Replace("'", "&apos;");
+        }
+
+        public static void WriteHtml<T>(EixoX.Collections.Tree<T> tree, System.IO.TextWriter writer)
+        {
+            HtmlSimple ulRoot = new HtmlSimple("ul", string.Empty);
+
+            foreach (TreeNode<T> node in tree)
+                ulRoot.Children.AddLast(GenerateHtml<T>(node));
+
+            ulRoot.Write(writer);
+        }
+
+        private static HtmlSimple GenerateHtml<T>(EixoX.Collections.TreeNode<T> treeNode)
+        {
+            HtmlSimple li = new HtmlSimple("li", treeNode.Value.ToString());
+
+            if (treeNode.Count > 0)
+            {
+                HtmlComposite ul = new HtmlComposite("ul");
+                ul.Children.AddLast(GenerateHtml<T>(treeNode));
+                li.Children.AddLast(ul);
+            }
+
+            return li;
         }
 
         /// <summary>
