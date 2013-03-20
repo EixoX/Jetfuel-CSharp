@@ -27,24 +27,10 @@ namespace EixoX.UI
 
         public UIControlAttribute(string defaultLabel, string defaultHint)
             : this(defaultLabel, defaultHint, null) { }
-<<<<<<< HEAD
-        public UIControlAttribute(string defaultLabel, Type classStorageType)
-            : this(defaultLabel, null, classStorageType) { }
-        public UIControlAttribute(string defaultLabel)
-            : this(defaultLabel, null, null) { }
-        public UIControlAttribute(Type classStorageType)
-            : this(null, null, classStorageType) { }
-        
-        public UIControlAttribute() { }
-=======
-
         public UIControlAttribute(string defaultLabel, Type choiceSource)
             : this(defaultLabel, null, choiceSource) { }
-
         public UIControlAttribute(string defaultLabel)
             : this(defaultLabel, null, null) { }
->>>>>>> 55ece08a0808c1e079fc6f101c68aee85f6e6e8e
-
         public UIControlAttribute()
             : this(null, null, null) { }
 

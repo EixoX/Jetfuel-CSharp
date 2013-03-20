@@ -46,6 +46,7 @@
     <Compile Include="Html\Controls\BootstrapDatepicker.cs" />
     <Compile Include="Html\Controls\BootstrapDropdown.cs" />
     <Compile Include="Html\Controls\BootstrapHidden.cs" />
+    <Compile Include="Html\Controls\BootstrapHtmlEditor.cs" />
     <Compile Include="Html\Controls\BootstrapMultiline.cs" />
     <Compile Include="Html\Controls\BootstrapPassword.cs" />
     <Compile Include="Html\Controls\BootstrapRadioGroup.cs" />
