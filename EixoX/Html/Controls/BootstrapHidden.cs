@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Html.Controls
 {
-    public class BoostrapHidden : BoostrapControl
+    public class BootstrapHidden : BootstrapControl
     {
         public override void Render(System.IO.TextWriter writer, UI.UIControlState state, params HtmlAttribute[] attributes)
         {

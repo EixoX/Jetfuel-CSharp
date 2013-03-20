@@ -37,10 +37,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Html\BoostrapControl.cs" />
-    <Compile Include="Html\BoostrapControlFactory.cs" />
-    <Compile Include="Html\BoostrapPresenter.cs" />
-    <Compile Include="Html\BoostrapPresenterControl.cs" />
+    <Compile Include="Html\BootstrapControl.cs" />
+    <Compile Include="Html\BootstrapControlFactory.cs" />
+    <Compile Include="Html\BootstrapPresenter.cs" />
+    <Compile Include="Html\BootstrapPresenterControl.cs" />
     <Compile Include="Html\Controls\BootstrapCheckbox.cs" />
     <Compile Include="Html\Controls\BootstrapCheckboxGroup.cs" />
     <Compile Include="Html\Controls\BootstrapDatepicker.cs" />
@@ -50,6 +50,7 @@
     <Compile Include="Html\Controls\BootstrapPassword.cs" />
     <Compile Include="Html\Controls\BootstrapRadioGroup.cs" />
     <Compile Include="Html\Controls\BootstrapSingleline.cs" />
+    <Compile Include="Html\Controls\BootstrapTimepicker.cs" />
     <Compile Include="Reflection\CompositeAnnotationAspect.cs" />
     <Compile Include="Reflection\CompositeAnnotationMember.cs" />
     <Compile Include="Data\ClassSelectMember.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="UI\UIControl.cs" />
     <Compile Include="UI\UIControlGroup.cs" />
     <Compile Include="UI\UIControls\UIHidden.cs" />
+    <Compile Include="UI\UIControls\UITimepicker.cs" />
     <Compile Include="UI\UIPresenter.cs" />
     <Compile Include="UI\UIAspect.cs" />
     <Compile Include="UI\UIControls\UICheckbox.cs" />

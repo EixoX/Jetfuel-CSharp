@@ -64,10 +64,11 @@ namespace EixoX.UI
             : this(defaultLabel, defaultHint, null) { }
         public UIControlAttribute(string defaultLabel, Type classStorageType)
             : this(defaultLabel, null, classStorageType) { }
-        public UIControlAttribute(Type classStorageType)
-            : this(null, null, classStorageType) { }
         public UIControlAttribute(string defaultLabel)
             : this(defaultLabel, null, null) { }
+        public UIControlAttribute(Type classStorageType)
+            : this(null, null, classStorageType) { }
+        
         public UIControlAttribute() { }
 
 

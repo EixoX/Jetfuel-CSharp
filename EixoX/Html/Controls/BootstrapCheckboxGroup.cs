@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Html.Controls
 {
-    public class BoostrapCheckboxGroup : BoostrapControl
+    public class BootstrapCheckboxGroup : BootstrapControl
     {
 
         private bool IsChecked(System.Collections.IEnumerable items, object value)

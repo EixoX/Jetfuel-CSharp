@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Html
 {
-    public abstract class BoostrapControl : UI.UIControl
+    public abstract class BootstrapControl : UI.UIControl
     {
         HtmlNode _Label;
         HtmlNode _Hint;

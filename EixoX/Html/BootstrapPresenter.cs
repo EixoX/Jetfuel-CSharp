@@ -7,41 +7,41 @@ using System.Text;
 
 namespace EixoX.Html
 {
-    public class BoostrapPresenter<T> : UI.UIPresenter<T, BoostrapPresenterControl>
+    public class BootstrapPresenter<T> : UI.UIPresenter<T, BootstrapPresenterControl>
     {
-        private static Dictionary<int, BoostrapPresenter<T>> _Instances;
-        private BoostrapPresenter(int lcid) : base(lcid) { }
+        private static Dictionary<int, BootstrapPresenter<T>> _Instances;
+        private BootstrapPresenter(int lcid) : base(lcid) { }
 
-        public static BoostrapPresenter<T> GetInstance(int lcid)
+        public static BootstrapPresenter<T> GetInstance(int lcid)
         {
-            BoostrapPresenter<T> instance = null;
+            BootstrapPresenter<T> instance = null;
             if (_Instances == null)
             {
-                _Instances = new Dictionary<int, BoostrapPresenter<T>>();
-                instance = new BoostrapPresenter<T>(lcid);
+                _Instances = new Dictionary<int, BootstrapPresenter<T>>();
+                instance = new BootstrapPresenter<T>(lcid);
                 _Instances.Add(lcid, instance);
             }
             else if (!_Instances.TryGetValue(lcid, out instance))
             {
-                instance = new BoostrapPresenter<T>(lcid);
+                instance = new BootstrapPresenter<T>(lcid);
                 _Instances.Add(lcid, instance);
             }
             return instance;
         }
 
-        public static BoostrapPresenter<T> GetInstance(CultureInfo culture)
+        public static BootstrapPresenter<T> GetInstance(CultureInfo culture)
         {
             return GetInstance(culture.LCID);
         }
 
-        public static BoostrapPresenter<T> GetInstance(string culture)
+        public static BootstrapPresenter<T> GetInstance(string culture)
         {
             return GetInstance(CultureInfo.GetCultureInfo(culture));
         }
 
-        protected override BoostrapPresenterControl CreateControl(SingleAnnotationAspectMember<UIControlAttribute> member, string label, string hint, int localeCultureId, Restrictions.RestrictionList restrictions, Interceptors.InterceptorList interceptors, Globalization.GlobalizationList globalization)
+        protected override BootstrapPresenterControl CreateControl(SingleAnnotationAspectMember<UIControlAttribute> member, string label, string hint, int localeCultureId, Restrictions.RestrictionList restrictions, Interceptors.InterceptorList interceptors, Globalization.GlobalizationList globalization)
         {
-            return new BoostrapPresenterControl(
+            return new BootstrapPresenterControl(
                 member,
                 label,
                 hint,
@@ -49,24 +49,24 @@ namespace EixoX.Html
                 restrictions,
                 interceptors,
                 globalization,
-                (BoostrapControl)BoostrapControlFactory.Instance.CreateControlFor(member.Annotation));
+                (BootstrapControl)BootstrapControlFactory.Instance.CreateControlFor(member.Annotation));
         }
 
         public void Render(System.IO.TextWriter writer, object entity, bool validateRestrictions)
         {
-            foreach (BoostrapPresenterControl item in this)
+            foreach (BootstrapPresenterControl item in this)
                 item.Render(writer, entity, validateRestrictions);
         }
 
         public void Render(System.IO.TextWriter writer, object entity, bool validateRestrictions, params string[] names)
         {
-            foreach (BoostrapPresenterControl item in GetMembers(names))
+            foreach (BootstrapPresenterControl item in GetMembers(names))
                 item.Render(writer, entity, validateRestrictions);
         }
 
         public void RenderGroup(System.IO.TextWriter writer, object entity, string groupName, bool validateRestrictions)
         {
-            foreach (BoostrapPresenterControl item in GetGroupMembers(groupName))
+            foreach (BootstrapPresenterControl item in GetGroupMembers(groupName))
                 item.Render(writer, entity, validateRestrictions);
         }
 

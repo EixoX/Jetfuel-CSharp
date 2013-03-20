@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Html.Controls
 {
-    public class BoostrapDatepicker : BoostrapControl
+    public class BootstrapDatepicker : BootstrapControl
     {
 
         protected override HtmlNode CreateInput(UI.UIControlState state)
@@ -14,7 +14,7 @@ namespace EixoX.Html.Controls
                 new HtmlAttribute("name", state.Name),
                 new HtmlAttribute("id", state.Name),
                 new HtmlAttribute("value", state.Value),
-                new HtmlAttribute("class", "date"));
+                new HtmlAttribute("class", "datepicker"));
         }   
     }
 }

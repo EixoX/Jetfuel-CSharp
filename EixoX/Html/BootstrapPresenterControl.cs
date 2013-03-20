@@ -9,11 +9,11 @@ using EixoX.Html.Controls;
 
 namespace EixoX.Html
 {
-    public class BoostrapPresenterControl : UI.UIPresenterControl
+    public class BootstrapPresenterControl : UI.UIPresenterControl
     {
-        private readonly BoostrapControl _Control;
+        private readonly BootstrapControl _Control;
 
-        public BoostrapPresenterControl(
+        public BootstrapPresenterControl(
             SingleAnnotationAspectMember<UIControlAttribute> member,
             string label,
             string hint,
@@ -21,7 +21,7 @@ namespace EixoX.Html
             RestrictionList restrictions,
             InterceptorList interceptors,
             GlobalizationList globalization,
-            BoostrapControl control)
+            BootstrapControl control)
             : base(member, label, hint, lcid, restrictions, interceptors, globalization)
         {
             this._Control = control;

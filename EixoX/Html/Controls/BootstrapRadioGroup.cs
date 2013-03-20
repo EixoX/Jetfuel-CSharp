@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Html.Controls
 {
-    public class BoostrapRadioGroup: BoostrapControl
+    public class BootstrapRadioGroup: BootstrapControl
     {
         protected override HtmlNode CreateInput(UI.UIControlState state)
         {

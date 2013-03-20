@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Html.Controls
 {
-    public class BoostrapDropdown : BoostrapControl
+    public class BootstrapDropdown : BootstrapControl
     {
         protected override HtmlNode CreateInput(UI.UIControlState state)
         {
