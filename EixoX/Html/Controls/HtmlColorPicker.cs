@@ -9,8 +9,6 @@ namespace EixoX.Html.Controls
     {
         protected override HtmlNode CreateInput(UI.UIControlState state)
         {
-            Tree<String> tree = new Tree<string>();
-
             return new HtmlSimple(
                 "input",
                 state.Value,
