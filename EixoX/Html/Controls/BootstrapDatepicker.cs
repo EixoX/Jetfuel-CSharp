@@ -13,7 +13,7 @@ namespace EixoX.Html.Controls
                 new HtmlAttribute("type", "date"),
                 new HtmlAttribute("name", state.Name),
                 new HtmlAttribute("id", state.Name),
-                new HtmlAttribute("value", state.Value),
+                new HtmlAttribute("value", Convert.ToDateTime(state.Value).ToString("yyyy-MM-dd")),
                 new HtmlAttribute("class", "datepicker"));
         }   
     }
