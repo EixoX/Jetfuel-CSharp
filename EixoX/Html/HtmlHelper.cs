@@ -30,7 +30,7 @@ namespace EixoX.Html
 
         public static void WriteHtml<T>(EixoX.Collections.Tree<T> tree, System.IO.TextWriter writer)
         {
-            HtmlSimple ulRoot = new HtmlSimple("ul", string.Empty);
+            HtmlComposite ulRoot = new HtmlComposite("ul");
 
             foreach (TreeNode<T> node in tree)
                 ulRoot.Children.AddLast(GenerateHtml<T>(node));
@@ -38,14 +38,17 @@ namespace EixoX.Html
             ulRoot.Write(writer);
         }
 
-        private static HtmlSimple GenerateHtml<T>(EixoX.Collections.TreeNode<T> treeNode)
+        private static HtmlComposite GenerateHtml<T>(EixoX.Collections.TreeNode<T> treeNode)
         {
-            HtmlSimple li = new HtmlSimple("li", treeNode.Value.ToString());
+            HtmlComposite li = new HtmlComposite("li");
+            li.Children.AddLast(new HtmlSimple("span", treeNode.Value.ToString()));
 
             if (treeNode.Count > 0)
             {
                 HtmlComposite ul = new HtmlComposite("ul");
-                ul.Children.AddLast(GenerateHtml<T>(treeNode));
+                foreach (TreeNode<T> child in treeNode)
+                    ul.Children.AddLast(GenerateHtml<T>(child));
+                
                 li.Children.AddLast(ul);
             }
 
