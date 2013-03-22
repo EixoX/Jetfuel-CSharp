@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EixoX
+namespace EixoX.Mathematica
 {
-    public interface Initializable
+    public interface R1 : Function<double, double>
     {
-        void Initialize();
+
     }
 }

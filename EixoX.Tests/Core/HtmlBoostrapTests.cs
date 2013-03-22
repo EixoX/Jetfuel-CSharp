@@ -10,7 +10,7 @@ namespace EixoX.Tests
         [TestMethod]
         public void TestPerson()
         {
-            BoostrapPresenter<TestPerson> presenter = BoostrapPresenter<TestPerson>.GetInstance(1033);
+            BootstrapPresenter<TestPerson> presenter = BootstrapPresenter<TestPerson>.GetInstance(1033);
             TestPerson person  = new Tests.TestPerson(){
                 FirstName = "Rodrigo",
                 LastName = "Portela"

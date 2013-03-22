@@ -50,20 +50,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="InterceptorTests.cs" />
-    <Compile Include="GlobalizationTests.cs" />
+    <Compile Include="Core\InterceptorTests.cs" />
+    <Compile Include="Core\GlobalizationTests.cs" />
+    <Compile Include="Mathematica\CellularAutomata\ElementaryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDb.cs" />
     <Compile Include="TestDbExtensions.cs" />
     <Compile Include="TestDbModel.cs" />
     <Compile Include="TestPerson.cs" />
-    <Compile Include="UITests.cs" />
-    <Compile Include="HtmlBoostrapTests.cs" />
+    <Compile Include="Core\UITests.cs" />
+    <Compile Include="Core\HtmlBoostrapTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EixoX.Html.Bootstrap\EixoX.Html.Bootstrap.csproj">
-      <Project>{6b0da24b-2bd1-4ea9-8e0a-662c12b89ef9}</Project>
-      <Name>EixoX.Html.Bootstrap</Name>
+    <ProjectReference Include="..\EixoX.Mathematica\EixoX.Mathematica.csproj">
+      <Project>{f3311647-002f-4488-8677-5d7c3569dd19}</Project>
+      <Name>EixoX.Mathematica</Name>
     </ProjectReference>
     <ProjectReference Include="..\EixoX\EixoX.csproj">
       <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
