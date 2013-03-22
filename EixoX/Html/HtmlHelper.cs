@@ -28,28 +28,46 @@ namespace EixoX.Html
                     .Replace("'", "&apos;");
         }
 
-        public static void WriteHtml<T>(EixoX.Collections.Tree<T> tree, System.IO.TextWriter writer)
+
+
+
+        public static HtmlComposite GenerateHtmlTreeNode<T>(EixoX.Collections.TreeNode<T> treeNode, string identityPrefix, ClassAcessor identityMember)
         {
-            HtmlSimple ulRoot = new HtmlSimple("ul", string.Empty);
+            HtmlComposite li = new HtmlComposite("li");
+            if (identityMember != null)
+                li.Attributes.AddLast("id", identityPrefix + identityMember.GetValue(treeNode.Value));
 
-            foreach (TreeNode<T> node in tree)
-                ulRoot.Children.AddLast(GenerateHtml<T>(node));
-
-            ulRoot.Write(writer);
-        }
-
-        private static HtmlSimple GenerateHtml<T>(EixoX.Collections.TreeNode<T> treeNode)
-        {
-            HtmlSimple li = new HtmlSimple("li", treeNode.Value.ToString());
+            li.Children.AddLast(new HtmlSimple("span", treeNode.Value));
 
             if (treeNode.Count > 0)
-            {
-                HtmlComposite ul = new HtmlComposite("ul");
-                ul.Children.AddLast(GenerateHtml<T>(treeNode));
-                li.Children.AddLast(ul);
-            }
+                li.Children.AddLast(GenerateHtmlTree<T>(treeNode, identityPrefix, identityMember));
 
             return li;
+        }
+
+        public static HtmlComposite GenerateHtmlTree<T>(Tree<T> tree, string identityPrefix, ClassAcessor identityMember)
+        {
+            HtmlComposite ul = new HtmlComposite("ul");
+            foreach (TreeNode<T> child in tree)
+                ul.Children.AddLast(GenerateHtmlTreeNode<T>(child, identityPrefix, identityMember));
+            return ul;
+        }
+
+        private static HtmlComposite GenerateHtmlTreeNode<T>(EixoX.Collections.TreeNode<T> treeNode)
+        {
+            return GenerateHtmlTreeNode<T>(treeNode, null, null);
+        }
+
+        public static HtmlComposite GenerateHtmlTree<T>(Tree<T> tree)
+        {
+            return GenerateHtmlTree<T>(tree, null, null);
+        }
+
+        public static HtmlComposite GenerateHtmlTreeWithId<T>(Tree<T> tree)
+        {
+            Data.DatabaseAspect<T> dbAspect = Data.DatabaseAspect<T>.Instance;
+
+            return GenerateHtmlTree<T>(tree, dbAspect.IdentityMember.Name, dbAspect.IdentityMember);
         }
 
         /// <summary>
