@@ -52,6 +52,8 @@
     <Compile Include="Html\Controls\BootstrapRadioGroup.cs" />
     <Compile Include="Html\Controls\BootstrapSingleline.cs" />
     <Compile Include="Html\Controls\BootstrapTimepicker.cs" />
+    <Compile Include="Html\Controls\BootstrapFileUploader.cs" />
+    <Compile Include="Html\Controls\HtmlFileUploader.cs" />
     <Compile Include="Html\Controls\HtmlColorPicker.cs" />
     <Compile Include="Reflection\CompositeAnnotationAspect.cs" />
     <Compile Include="Reflection\CompositeAnnotationMember.cs" />
@@ -239,6 +241,7 @@
     <Compile Include="UI\UIControlClassStorageChoices.cs" />
     <Compile Include="UI\UIControlEnumChoices.cs" />
     <Compile Include="UI\UIControlGroup.cs" />
+    <Compile Include="UI\UIControls\UIFileUploader.cs" />
     <Compile Include="UI\UIControls\UIColorPicker.cs" />
     <Compile Include="UI\UIControls\UIHidden.cs" />
     <Compile Include="UI\UIControls\UITimepicker.cs" />

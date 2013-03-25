@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EixoX.Html.Bootstrap")]
+[assembly: AssemblyTitle("EixoX.Mathematica")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EixoX.Html.Bootstrap")]
+[assembly: AssemblyProduct("EixoX.Mathematica")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f6acaa8c-4ad9-4440-af8e-9f9ee7d5fbbb")]
+[assembly: Guid("9021c6b8-4bb7-4c95-8050-5e3369901c22")]
 
 // Version information for an assembly consists of the following four values:
 //
