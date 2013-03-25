@@ -10,11 +10,11 @@ namespace EixoX.Html.Controls
         protected override HtmlNode CreateInput(UI.UIControlState state)
         {
             return new HtmlStandalone("input",
-                new HtmlAttribute("type", "date"),
+                new HtmlAttribute("type", "text"),
                 new HtmlAttribute("name", state.Name),
                 new HtmlAttribute("id", state.Name),
                 new HtmlAttribute("value", state.Value),
-                new HtmlAttribute("class", "datepicker"));
+                new HtmlAttribute("class", "date datepicker"));
         }   
     }
 }
