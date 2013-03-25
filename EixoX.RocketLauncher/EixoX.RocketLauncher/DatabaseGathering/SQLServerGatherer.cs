@@ -48,7 +48,7 @@ namespace EixoX.RocketLauncher
             StringBuilder query = new StringBuilder();
             query.Append("USE [");
             query.Append(this.Credentials.Database);
-            query.Append("] SELECT * FROM information_schema.columns WHERE TABLE_CATALOG = '");
+            query.Append("] SELECT *, columnproperty(object_id(table_name), column_name, 'IsIdentity') as is_identity FROM information_schema.columns WHERE TABLE_CATALOG = '");
             query.Append(this.Credentials.Database);
             query.Append("' AND TABLE_NAME='");
             query.Append(table);
@@ -63,6 +63,7 @@ namespace EixoX.RocketLauncher
                 column.IsNullable = ((string) GetValue("IS_NULLABLE", record)).Equals("yes", StringComparison.OrdinalIgnoreCase);
                 column.MaxLength = Convert.ToInt32(GetValue("CHARACTER_MAXIMUM_LENGTH", record));
                 column.OrdinalPosition = Convert.ToInt32(GetValue("ORDINAL_POSITION", record));
+                column.IsIdentity = Convert.ToBoolean(GetValue("is_identity", record));
 
                 yield return column;
             }
@@ -71,7 +72,7 @@ namespace EixoX.RocketLauncher
         private Type InferType(string dataType)
         {
             if (dataType.Equals("nvarchar", StringComparison.OrdinalIgnoreCase) ||
-                dataType.Equals("varchar", StringComparison.OrdinalIgnoreCase)  ||
+                dataType.Equals("varchar", StringComparison.OrdinalIgnoreCase) ||
                 dataType.Equals("text", StringComparison.OrdinalIgnoreCase))
                 return typeof(String);
             else if (dataType.Equals("int", StringComparison.OrdinalIgnoreCase))
@@ -83,6 +84,8 @@ namespace EixoX.RocketLauncher
                 return typeof(double);
             else if (dataType.Equals("bit", StringComparison.OrdinalIgnoreCase))
                 return typeof(bool);
+            else if (dataType.Equals("sql_variant", StringComparison.OrdinalIgnoreCase))
+                return typeof(object);
 
             return null;
         }
@@ -102,7 +105,7 @@ namespace EixoX.RocketLauncher
             StringBuilder query = new StringBuilder();
             query.Append("USE [");
             query.Append(this.Credentials.Database);
-            query.Append("] SELECT * FROM information_schema.tables");
+            query.Append("] SELECT object_id(table_name) as object_id, * FROM information_schema.tables");
 
             foreach (System.Data.IDataRecord record in SqlServer.ExecuteQueryText(query.ToString()))
             {
@@ -111,7 +114,8 @@ namespace EixoX.RocketLauncher
                     Name = record.GetString(record.GetOrdinal("TABLE_NAME")),
                     DatabaseName = record.GetString(record.GetOrdinal("TABLE_CATALOG")),
                     Schema = record.GetString(record.GetOrdinal("TABLE_SCHEMA")),
-                    Type = record.GetString(record.GetOrdinal("TABLE_TYPE"))
+                    Type = record.GetString(record.GetOrdinal("TABLE_TYPE")),
+                    ObjectId = record.GetInt32(record.GetOrdinal("object_id"))
                 };
             }
         }

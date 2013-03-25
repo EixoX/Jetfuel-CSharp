@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher
 {
+    /// <summary>
+    /// Annotations available for using in attributes
+    /// </summary>
     public static class Annotations
     {
         public static string DatabaseColumn
         {
             get { return "[DatabaseColumn]"; }
+        }
+
+        public static string DatabaseIdentityColumn
+        {
+            get { return "[DatabaseColumn(DatabaseColumnKind.Identity)]"; }
         }
 
         public static string DatabaseTable
@@ -28,9 +36,19 @@ namespace EixoX.RocketLauncher
             get { return "[GetDateGenerator(DataScope.Update)]"; }
         }
 
+        public static string UISingleLine
+        {
+            get { return "[UISingleLine]"; }
+        }
+
         public static string MaxLength
         {
             get { return "[MaxLength({{value}})]"; }
+        }
+
+        public static string UIHidden 
+        {
+            get { return "[UIHidden]"; }
         }
     }
 }

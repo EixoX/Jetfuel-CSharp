@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher.DatabaseGathering
 {
+    /// <summary>
+    /// A generic database credential
+    /// </summary>
     public class DatabaseCredentials
     {
         public string Database { get; set; }

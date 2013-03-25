@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher
 {
+    /// <summary>
+    /// An interface for a generic command
+    /// </summary>
     public interface ICommand
     {
         Commands Command { get; }

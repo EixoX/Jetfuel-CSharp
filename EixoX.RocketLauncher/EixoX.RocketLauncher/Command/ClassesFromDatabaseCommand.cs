@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher.Command
 {
+    /// <summary>
+    /// Command logic for creating classes from a database source
+    /// </summary>
     public class ClassesFromDatabaseCommand : ICommand
     {
         public ClassGenerator ClassGenerator { get; set; }
         public ProgrammingLanguage Language { get; set; }
         public IRocketLauncherView View { get; set; }
 
+        /// <summary>
+        /// Gets the command enum value it uses
+        /// </summary>
         public Commands Command
         {
             get { return Commands.ClassesFromDatabase; }
@@ -36,6 +42,10 @@ namespace EixoX.RocketLauncher.Command
             }
         }
 
+        /// <summary>
+        /// Run the command
+        /// </summary>
+        /// <param name="args">Excepts an boolean, indication verbose mode value</param>
         public void Run(params object[] args)
         {
             bool verbose = (bool) args[0];

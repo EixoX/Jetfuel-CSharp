@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher
 {
+    /// <summary>
+    /// Contract for any application that can be used as view with Rocket Launcher App
+    /// </summary>
     public interface IRocketLauncherView
     {
         Commands GetMenuCommand();

@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher
 {
+    /// <summary>
+    /// An object that controls all of the Rocket Launcher execution
+    /// </summary>
     public class RocketLauncherFacade
     {
+        /// <summary>
+        /// The view, used to get and send messages
+        /// </summary>
         private readonly IRocketLauncherView View;
 
         public RocketLauncherFacade(IRocketLauncherView view)
@@ -16,6 +22,9 @@ namespace EixoX.RocketLauncher
             this.View = view;
         }
 
+        /// <summary>
+        /// Executes the program, starting an infinite loop, that'll break only with command Quit.
+        /// </summary>
         public void Main()
         {
             this.View.ShowWelcomeMessage();

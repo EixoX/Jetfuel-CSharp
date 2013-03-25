@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher
 {
+    /// <summary>
+    /// Represents a class file
+    /// </summary>
     public class ClassFile
     {
         public string FileName { get; set; }

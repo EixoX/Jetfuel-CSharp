@@ -41,7 +41,13 @@ namespace EixoX.RocketLauncher
             _Directory = directory;
         }
 
-        public ClassFile CreateClass(GenericDatabaseTable table, ProgrammingLanguage programmingLanguage)
+        /// <summary>
+        /// Creates a class file, based on a table and it's columns
+        /// </summary>
+        /// <param name="table">the database table to be based in</param>
+        /// <param name="programmingLanguage">the programming language used (some may differ from one another)</param>
+        /// <returns></returns>
+        public virtual ClassFile CreateClass(GenericDatabaseTable table, ProgrammingLanguage programmingLanguage)
         {
             ClassFile file = new ClassFile();
             file.FileName = ClassFileName(table.Name);
@@ -56,18 +62,29 @@ namespace EixoX.RocketLauncher
             foreach (GenericDatabaseColumn column in table.Columns)
             {
                 List<string> annotations = new List<string>();
-                annotations.Add(Annotations.DatabaseColumn);
 
+                // Adding restriction annotation
                 if (column.MaxLength > 0)
                     annotations.Add(Annotations.MaxLength.Replace("{{value}}", column.MaxLength.ToString()));
 
-                if (column.Name.Equals("DateCreated", StringComparison.OrdinalIgnoreCase))
+                // Adding UI annotations
+                if (column.IsIdentity)
+                    annotations.Add(Annotations.UIHidden);
+                else
+                    annotations.Add(Annotations.UISingleLine);
+
+                // Adding database annotations
+                if (column.IsIdentity)
+                    annotations.Add(Annotations.DatabaseIdentityColumn);
+                else if (column.Name.Equals("DateCreated", StringComparison.OrdinalIgnoreCase))
                     annotations.Add(Annotations.DateGeneratorInsert);
                 else if (column.Name.Equals("DateUpdated", StringComparison.OrdinalIgnoreCase))
                     annotations.Add(Annotations.DateGeneratorUpdate);
+                else
+                    annotations.Add(Annotations.DatabaseColumn);
 
                 attributes.Add(attributeTemplate
-                    .Replace("{{annotations}}", "\t\t" + String.Join("\n\t\t", annotations))
+                    .Replace("{{annotations}}", String.Join("\n\t\t", annotations))
                     .Replace("{{datatype}}", column.DataType.Name.ToString())
                     .Replace("{{name}}", column.Name)
                     .Replace("{{visibility}}", "\t\tpublic"));
@@ -76,7 +93,7 @@ namespace EixoX.RocketLauncher
             file.FileContent = classTemplate
                 .Replace("{{namespace}}", table.DatabaseName)
                 .Replace("{{classname}}", table.Name)
-                .Replace("{{attributes}}", String.Join("\n\n", attributes));
+                .Replace("{{attributes}}", String.Join("\n\n\t\t", attributes));
 
             return file;
         }

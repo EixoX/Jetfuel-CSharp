@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace EixoX.RocketLauncher
 {
+    /// <summary>
+    /// Enumator of all programming languages supported
+    /// </summary>
     public enum ProgrammingLanguage
     {
         Csharp,
