@@ -38,7 +38,7 @@ namespace EixoX.RocketLauncher
 
         public static string UISingleLine
         {
-            get { return "[UISingleLine]"; }
+            get { return "[UISingleline]"; }
         }
 
         public static string MaxLength

@@ -95,9 +95,10 @@ namespace EixoX.RocketLauncher.Command
             }
 
             if (verbose)
-                this.View.DisplayMessage("Created all files (" + DateTime.Now.Subtract(tStart).TotalSeconds + " seconds)");
+                this.View.DisplayMessage("Created " + tables.Count + " files (" + DateTime.Now.Subtract(tStart).TotalSeconds + " seconds)");
 
-            this.View.DisplayMessage("Command run succesfully\n");
+            this.View.DisplayMessage("Command run succesfully");
+            this.View.DisplayMessage("----------------------");
         }
     }
 }

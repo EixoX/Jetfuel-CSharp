@@ -87,7 +87,7 @@ namespace EixoX.RocketLauncher
             else if (dataType.Equals("sql_variant", StringComparison.OrdinalIgnoreCase))
                 return typeof(object);
 
-            return null;
+            return typeof(object);
         }
 
         private object GetValue(string columnName, System.Data.IDataRecord record)
