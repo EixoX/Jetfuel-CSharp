@@ -13,7 +13,8 @@ namespace EixoX.Html.Controls
                 new HtmlAttribute("type", "text"),
                 new HtmlAttribute("name", state.Name),
                 new HtmlAttribute("id", state.Name),
-                new HtmlAttribute("value", state.Value));
+                new HtmlAttribute("value", state.Value),
+                new HtmlAttribute("placeholder", state.Control.GetGlobalizationTerm("placeholder")));
         }
     }
 }
