@@ -98,5 +98,10 @@ namespace EixoX.Html
             else if (name.Contains(" ") || name.Contains("\t") || name.Contains("\r") || name.Contains("\n"))
                 throw new ArgumentException("Invalid name: " + name);
         }
+
+        public static string OptionHtml(object value, object label)
+        {
+            return string.Concat("<option value=\"", value.ToString(), "\">", label.ToString(), "</option>");
+        }
     }
 }
