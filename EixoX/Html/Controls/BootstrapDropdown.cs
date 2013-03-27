@@ -12,14 +12,15 @@ namespace EixoX.Html.Controls
                 new HtmlAttribute("id", state.Name),
                 new HtmlAttribute("name", state.Name));
 
-            foreach (KeyValuePair<object, object> item in state.Options)
-            {
-                HtmlSimple option = new HtmlSimple("option", item.Value);
-                if (item.Key.ToString().Equals(state.Value.ToString()))
-                    option.Attributes.AddLast("selected", "selected");
+            if (state.Options != null)
+                foreach (KeyValuePair<object, object> item in state.Options)
+                {
+                    HtmlSimple option = new HtmlSimple("option", item.Value);
+                    if (item.Key.ToString().Equals(state.Value.ToString()))
+                        option.Attributes.AddLast("selected", "selected");
 
-                select.Children.AddLast(option);
-            }
+                    select.Children.AddLast(option);
+                }
 
             return select;
         }

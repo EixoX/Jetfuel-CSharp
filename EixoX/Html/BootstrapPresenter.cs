@@ -52,6 +52,12 @@ namespace EixoX.Html
                 (BootstrapControl)BootstrapControlFactory.Instance.CreateControlFor(member.Annotation));
         }
 
+        public void Render(System.IO.TextWriter writer, object entity, bool validateRestrictions, params HtmlAttribute[] attributes)
+        {
+            foreach (BootstrapPresenterControl control in this)
+                control.Render(writer, entity, validateRestrictions, attributes);
+        }
+
         public void Render(System.IO.TextWriter writer, object entity, bool validateRestrictions)
         {
             foreach (BootstrapPresenterControl item in this)
