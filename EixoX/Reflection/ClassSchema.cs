@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Text;
 
 namespace EixoX
@@ -35,6 +36,39 @@ namespace EixoX
         {
             member = new AspectMember(acessor);
             return true;
+        }
+
+
+        public int Parse(NameValueCollection collection, object entity, IFormatProvider provider)
+        {
+            int foundMemberCounter = 0;
+            foreach (string key in collection.Keys)
+            {
+                int ordinal = GetOrdinal(key);
+                if (ordinal >= 0)
+                {
+                    AspectMember member = base[ordinal];
+
+                    string collectionValue = collection[key];
+                    object value = null;
+                    if (!string.IsNullOrEmpty(collectionValue))
+                    {
+                        value = member.DataType.IsEnum ?
+                                Enum.Parse(member.DataType, collection[key]) :
+                                Convert.ChangeType(collectionValue, member.DataType, provider);
+                    }
+
+                    member.SetValue(entity, value);
+                    foundMemberCounter++;
+                }
+            }
+
+            return foundMemberCounter;
+        }
+
+        public int Parse(NameValueCollection collection, object entity)
+        {
+            return Parse(collection, entity, System.Globalization.CultureInfo.CurrentUICulture);
         }
     }
 }
