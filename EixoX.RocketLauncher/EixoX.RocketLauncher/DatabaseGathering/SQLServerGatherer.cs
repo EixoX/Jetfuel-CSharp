@@ -71,21 +71,20 @@ namespace EixoX.RocketLauncher
 
         private Type InferType(string dataType)
         {
-            if (dataType.Equals("nvarchar", StringComparison.OrdinalIgnoreCase) ||
-                dataType.Equals("varchar", StringComparison.OrdinalIgnoreCase) ||
-                dataType.Equals("text", StringComparison.OrdinalIgnoreCase))
-                return typeof(String);
-            else if (dataType.Equals("int", StringComparison.OrdinalIgnoreCase))
-                return typeof(int);
-            else if (dataType.Equals("datetime", StringComparison.OrdinalIgnoreCase))
-                return typeof(DateTime);
-            else if (dataType.Equals("double", StringComparison.OrdinalIgnoreCase) ||
-                     dataType.Equals("money", StringComparison.OrdinalIgnoreCase))
-                return typeof(double);
-            else if (dataType.Equals("bit", StringComparison.OrdinalIgnoreCase))
-                return typeof(bool);
-            else if (dataType.Equals("sql_variant", StringComparison.OrdinalIgnoreCase))
-                return typeof(object);
+            Dictionary<string, Type> sqlDataTypeConvertionList = new Dictionary<string, Type>()
+            {
+                {"nvarchar", typeof(String)}, {"varchar", typeof(String)}, {"text", typeof(String)},
+                {"int", typeof(int)},
+                {"datetime", typeof(DateTime)}, {"date", typeof(DateTime)},
+                {"double", typeof(double)},
+                {"money", typeof(decimal)},
+                {"bit", typeof(bool)},
+                {"sql_variant", typeof(object)}
+            };
+
+            foreach (string sqlDataType in sqlDataTypeConvertionList.Keys)
+                if (sqlDataType.Equals(dataType, StringComparison.OrdinalIgnoreCase))
+                    return sqlDataTypeConvertionList[sqlDataType];
 
             return typeof(object);
         }

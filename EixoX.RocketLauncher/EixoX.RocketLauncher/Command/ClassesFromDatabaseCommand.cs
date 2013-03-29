@@ -9,7 +9,7 @@ namespace EixoX.RocketLauncher.Command
     /// <summary>
     /// Command logic for creating classes from a database source
     /// </summary>
-    public class ClassesFromDatabaseCommand : ICommand
+    public class ClassesFromDatabaseCommand : SettingsBasedCommand, ICommand
     {
         public ClassGenerator ClassGenerator { get; set; }
         public ProgrammingLanguage Language { get; set; }
@@ -49,8 +49,9 @@ namespace EixoX.RocketLauncher.Command
         public void Run(params object[] args)
         {
             bool verbose = (bool) args[0];
-            SQLServerGatherer sqlGatherer = new SQLServerGatherer(System.Configuration.ConfigurationSettings.AppSettings["DefaultConnectionString"].ToString());
 
+            SQLServerGatherer sqlGatherer = new SQLServerGatherer(this.DefaultSettings["DefaultConnectionString"]);
+                
             this.View.DisplayMessage("\n -- Running Command: Classes from database ---");
             DateTime tStart = DateTime.Now;
 
@@ -98,7 +99,7 @@ namespace EixoX.RocketLauncher.Command
                 this.View.DisplayMessage("Created " + tables.Count + " files (" + DateTime.Now.Subtract(tStart).TotalSeconds + " seconds)");
 
             this.View.DisplayMessage("Command run succesfully");
-            this.View.DisplayMessage("----------------------");
+            this.View.DisplayMessage("-----------------------------");
         }
     }
 }
