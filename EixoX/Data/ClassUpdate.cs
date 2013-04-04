@@ -26,6 +26,11 @@ namespace EixoX.Data
             this._Values = new LinkedList<AspectMemberValue>();
         }
 
+        public int Execute()
+        {
+            return this._Storage.Update(this._Aspect, this._Values, this._WhereFirst);
+        }
+
         /// <summary>
         /// Gets the data sotrage.
         /// </summary>

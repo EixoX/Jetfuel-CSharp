@@ -15,19 +15,6 @@
  * limitations under the License.
  */
 
-package org.apache.commons.math3.complex;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.math3.FieldElement;
-import org.apache.commons.math3.exception.NotPositiveException;
-import org.apache.commons.math3.exception.NullArgumentException;
-import org.apache.commons.math3.exception.util.LocalizedFormats;
-import org.apache.commons.math3.util.FastMath;
-import org.apache.commons.math3.util.MathUtils;
-
 /**
  * Representation of a Complex number, i.e. a number which has both a
  * real and imaginary part.
@@ -54,22 +41,24 @@ import org.apache.commons.math3.util.MathUtils;
  *
  * @version $Id: Complex.java 1416643 2012-12-03 19:37:14Z tn $
  */
-public class Complex implements FieldElement<Complex>, Serializable  {
+namespace EixoX.Mathematica {
+	[System.Serializable]
+public class Complex : FieldElement<Complex> {
     /** The square root of -1. A number representing "0.0 + 1.0i" */
-    public static final Complex I = new Complex(0.0, 1.0);
+    public static Complex I = new Complex(0.0, 1.0);
     // CHECKSTYLE: stop ConstantName
     /** A complex number representing "NaN + NaNi" */
-    public static final Complex NaN = new Complex(Double.NaN, Double.NaN);
+    public static Complex NaN = new Complex(double.NaN, double.NaN);
     // CHECKSTYLE: resume ConstantName
     /** A complex number representing "+INF + INFi" */
-    public static final Complex INF = new Complex(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+    public static Complex INF = new Complex(double.PositiveInfinity, double.PositiveInfinity);
     /** A complex number representing "1.0 + 0.0i" */
-    public static final Complex ONE = new Complex(1.0, 0.0);
+    public static Complex ONE = new Complex(1.0, 0.0);
     /** A complex number representing "0.0 + 0.0i" */
-    public static final Complex ZERO = new Complex(0.0, 0.0);
+    public static Complex ZERO = new Complex(0.0, 0.0);
 
     /** Serializable version identifier */
-    private static final long serialVersionUID = -6195664516687396620L;
+    private static long serialVersionUID = -6195664516687396620L;
 
     /** The imaginary part. */
     private final double imaginary;
@@ -79,221 +68,6 @@ public class Complex implements FieldElement<Complex>, Serializable  {
     private final transient boolean isNaN;
     /** Record whether this complex number is infinite. */
     private final transient boolean isInfinite;
-
-    /**
-     * Create a complex number given only the real part.
-     *
-     * @param real Real part.
-     */
-    public Complex(double real) {
-        this(real, 0.0);
-    }
-
-    /**
-     * Create a complex number given the real and imaginary parts.
-     *
-     * @param real Real part.
-     * @param imaginary Imaginary part.
-     */
-    public Complex(double real, double imaginary) {
-        this.real = real;
-        this.imaginary = imaginary;
-
-        isNaN = Double.isNaN(real) || Double.isNaN(imaginary);
-        isInfinite = !isNaN &&
-            (Double.isInfinite(real) || Double.isInfinite(imaginary));
-    }
-
-    /**
-     * Return the absolute value of this complex number.
-     * Returns {@code NaN} if either real or imaginary part is {@code NaN}
-     * and {@code Double.POSITIVE_INFINITY} if neither part is {@code NaN},
-     * but at least one part is infinite.
-     *
-     * @return the absolute value.
-     */
-    public double abs() {
-        if (isNaN) {
-            return Double.NaN;
-        }
-        if (isInfinite()) {
-            return Double.POSITIVE_INFINITY;
-        }
-        if (FastMath.abs(real) < FastMath.abs(imaginary)) {
-            if (imaginary == 0.0) {
-                return FastMath.abs(real);
-            }
-            double q = real / imaginary;
-            return FastMath.abs(imaginary) * FastMath.sqrt(1 + q * q);
-        } else {
-            if (real == 0.0) {
-                return FastMath.abs(imaginary);
-            }
-            double q = imaginary / real;
-            return FastMath.abs(real) * FastMath.sqrt(1 + q * q);
-        }
-    }
-
-    /**
-     * Returns a {@code Complex} whose value is
-     * {@code (this + addend)}.
-     * Uses the definitional formula
-     * <pre>
-     *  <code>
-     *   (a + bi) + (c + di) = (a+c) + (b+d)i
-     *  </code>
-     * </pre>
-     * <br/>
-     * If either {@code this} or {@code addend} has a {@code NaN} value in
-     * either part, {@link #NaN} is returned; otherwise {@code Infinite}
-     * and {@code NaN} values are returned in the parts of the result
-     * according to the rules for {@link java.lang.Double} arithmetic.
-     *
-     * @param  addend Value to be added to this {@code Complex}.
-     * @return {@code this + addend}.
-     * @throws NullArgumentException if {@code addend} is {@code null}.
-     */
-    public Complex add(Complex addend) throws NullArgumentException {
-        MathUtils.checkNotNull(addend);
-        if (isNaN || addend.isNaN) {
-            return NaN;
-        }
-
-        return createComplex(real + addend.getReal(),
-                             imaginary + addend.getImaginary());
-    }
-
-    /**
-     * Returns a {@code Complex} whose value is {@code (this + addend)},
-     * with {@code addend} interpreted as a real number.
-     *
-     * @param addend Value to be added to this {@code Complex}.
-     * @return {@code this + addend}.
-     * @see #add(Complex)
-     */
-    public Complex add(double addend) {
-        if (isNaN || Double.isNaN(addend)) {
-            return NaN;
-        }
-
-        return createComplex(real + addend, imaginary);
-    }
-
-     /**
-     * Return the conjugate of this complex number.
-     * The conjugate of {@code a + bi} is {@code a - bi}.
-     * <br/>
-     * {@link #NaN} is returned if either the real or imaginary
-     * part of this Complex number equals {@code Double.NaN}.
-     * <br/>
-     * If the imaginary part is infinite, and the real part is not
-     * {@code NaN}, the returned value has infinite imaginary part
-     * of the opposite sign, e.g. the conjugate of
-     * {@code 1 + POSITIVE_INFINITY i} is {@code 1 - NEGATIVE_INFINITY i}.
-     *
-     * @return the conjugate of this Complex object.
-     */
-    public Complex conjugate() {
-        if (isNaN) {
-            return NaN;
-        }
-
-        return createComplex(real, -imaginary);
-    }
-
-    /**
-     * Returns a {@code Complex} whose value is
-     * {@code (this / divisor)}.
-     * Implements the definitional formula
-     * <pre>
-     *  <code>
-     *    a + bi          ac + bd + (bc - ad)i
-     *    ----------- = -------------------------
-     *    c + di         c<sup>2</sup> + d<sup>2</sup>
-     *  </code>
-     * </pre>
-     * but uses
-     * <a href="http://doi.acm.org/10.1145/1039813.1039814">
-     * prescaling of operands</a> to limit the effects of overflows and
-     * underflows in the computation.
-     * <br/>
-     * {@code Infinite} and {@code NaN} values are handled according to the
-     * following rules, applied in the order presented:
-     * <ul>
-     *  <li>If either {@code this} or {@code divisor} has a {@code NaN} value
-     *   in either part, {@link #NaN} is returned.
-     *  </li>
-     *  <li>If {@code divisor} equals {@link #ZERO}, {@link #NaN} is returned.
-     *  </li>
-     *  <li>If {@code this} and {@code divisor} are both infinite,
-     *   {@link #NaN} is returned.
-     *  </li>
-     *  <li>If {@code this} is finite (i.e., has no {@code Infinite} or
-     *   {@code NaN} parts) and {@code divisor} is infinite (one or both parts
-     *   infinite), {@link #ZERO} is returned.
-     *  </li>
-     *  <li>If {@code this} is infinite and {@code divisor} is finite,
-     *   {@code NaN} values are returned in the parts of the result if the
-     *   {@link java.lang.Double} rules applied to the definitional formula
-     *   force {@code NaN} results.
-     *  </li>
-     * </ul>
-     *
-     * @param divisor Value by which this {@code Complex} is to be divided.
-     * @return {@code this / divisor}.
-     * @throws NullArgumentException if {@code divisor} is {@code null}.
-     */
-    public Complex divide(Complex divisor)
-        throws NullArgumentException {
-        MathUtils.checkNotNull(divisor);
-        if (isNaN || divisor.isNaN) {
-            return NaN;
-        }
-
-        final double c = divisor.getReal();
-        final double d = divisor.getImaginary();
-        if (c == 0.0 && d == 0.0) {
-            return NaN;
-        }
-
-        if (divisor.isInfinite() && !isInfinite()) {
-            return ZERO;
-        }
-
-        if (FastMath.abs(c) < FastMath.abs(d)) {
-            double q = c / d;
-            double denominator = c * q + d;
-            return createComplex((real * q + imaginary) / denominator,
-                (imaginary * q - real) / denominator);
-        } else {
-            double q = d / c;
-            double denominator = d * q + c;
-            return createComplex((imaginary * q + real) / denominator,
-                (imaginary - real * q) / denominator);
-        }
-    }
-
-    /**
-     * Returns a {@code Complex} whose value is {@code (this / divisor)},
-     * with {@code divisor} interpreted as a real number.
-     *
-     * @param  divisor Value by which this {@code Complex} is to be divided.
-     * @return {@code this / divisor}.
-     * @see #divide(Complex)
-     */
-    public Complex divide(double divisor) {
-        if (isNaN || Double.isNaN(divisor)) {
-            return NaN;
-        }
-        if (divisor == 0d) {
-            return NaN;
-        }
-        if (Double.isInfinite(divisor)) {
-            return !isInfinite() ? ZERO : NaN;
-        }
-        return createComplex(real / divisor,
-                             imaginary  / divisor);
-    }
 
     /** {@inheritDoc} */
     public Complex reciprocal() {
@@ -1228,4 +1002,5 @@ public class Complex implements FieldElement<Complex>, Serializable  {
         return "(" + real + ", " + imaginary + ")";
     }
 
+}
 }

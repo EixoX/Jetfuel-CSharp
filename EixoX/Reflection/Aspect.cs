@@ -35,6 +35,17 @@ namespace EixoX
         /// <returns>The aspect member on that position.</returns>
         AspectMember GetMember(int ordinal);
         /// <summary>
+        /// Gets all aspect members.
+        /// </summary>
+        /// <returns>All the members as an array of members.</returns>
+        AspectMember[] GetMemberArray();
+        /// <summary>
+        /// Gets aspect members by name.
+        /// </summary>
+        /// <param name="names">The names of the members.</param>
+        /// <returns>The member array.</returns>
+        AspectMember[] GetMemberArray(params string[] names);
+        /// <summary>
         /// Gets an aspect member.
         /// </summary>
         /// <param name="name">The name of the aspect member.</param>

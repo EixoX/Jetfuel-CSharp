@@ -8,11 +8,11 @@ namespace EixoX.Mathematica
     /// Represents a complex number.
     /// </summary>
     public struct Complex :
-        IComparable, IFormattable, IConvertible, IComparable<double>, IEquatable<double>, IComparable<Complex>, IEquatable<Complex>,
-        Field<Complex>
+        IComparable, IFormattable, IConvertible, IComparable<double>, IEquatable<double>, IComparable<Complex>, IEquatable<Complex>
     {
         public double x;
         public double y;
+
 
         public Complex(double x, double y)
         {
@@ -38,7 +38,7 @@ namespace EixoX.Mathematica
             if (obj is Complex)
                 return this == (Complex)obj;
             else if (obj is IConvertible)
-                return this.AbsoluteValue() == Convert.ToDouble(obj);
+                return this == Convert.ToDouble(obj);
             else
                 return base.Equals(obj);
         }
@@ -48,9 +48,29 @@ namespace EixoX.Mathematica
             return a.x == b.x && a.y == b.y;
         }
 
+        public static bool operator ==(Complex a, double b)
+        {
+            return a.x == b && a.y == 0.0;
+        }
+
+        public static bool operator ==(double a, Complex b)
+        {
+            return a == b.x && b.y == 0.0;
+        }
+
         public static bool operator !=(Complex a, Complex b)
         {
             return a.x != b.x || a.y != b.y;
+        }
+
+        public static bool operator !=(Complex a, double b)
+        {
+            return a.x != b || a.y != 0.0;
+        }
+
+        public static bool operator !=(double a, Complex b)
+        {
+            return a != b.x || b.y != 0.0;
         }
 
         public static Complex operator +(Complex a, Complex b)
@@ -58,9 +78,27 @@ namespace EixoX.Mathematica
             return new Complex(a.x + b.x, a.y + b.y);
         }
 
+        public static Complex operator +(Complex a, double b)
+        {
+            return new Complex(a.x + b, a.y);
+        }
+
+        public static Complex operator +(double a, Complex b)
+        {
+            return new Complex(a + b.x, b.y);
+        }
+
         public static Complex operator -(Complex a, Complex b)
         {
             return new Complex(a.x - b.x, a.y - b.y);
+        }
+        public static Complex operator -(Complex a, double b)
+        {
+            return new Complex(a.x - b, a.y);
+        }
+        public static Complex operator -(double a, Complex b)
+        {
+            return new Complex(a - b.x, -b.y);
         }
 
         public static Complex operator *(Complex a, Complex b)
@@ -84,6 +122,22 @@ namespace EixoX.Mathematica
             return new Complex(
                 ((a.x * b.x) + (a.y * b.y)) / div,
                 ((a.y * b.x) - (a.x * b.y)) / div);
+        }
+
+        public static Complex operator /(Complex a, double b)
+        {
+            double div = (b * b);
+            return new Complex(
+                (a.x * b) / div,
+                (a.y * b) / div);
+        }
+
+        public static Complex operator /(double a, Complex b)
+        {
+            double div = (b.x * b.x) + (b.y * b.y);
+            return new Complex(
+                (a * b.x) / div,
+                -(a * b.y) / div);
         }
 
         public int CompareTo(object obj)
@@ -222,120 +276,6 @@ namespace EixoX.Mathematica
             return new Complex(this.x, -this.y);
         }
 
-        public static Complex Conjugate(Complex a)
-        {
-            return new Complex(a.x, -a.y);
-        }
 
-
-        public static Complex Moivre(double r, double theta, double power)
-        {
-            double ro = Math.Pow(r, power);
-            return new Complex(
-                ro * Math.Cos(theta * power),
-                ro * Math.Sin(theta * power));
-
-        }
-
-        public static Complex Pow(Complex a, int b)
-        {
-            if (b < 0)
-                throw new ArgumentOutOfRangeException("b");
-            else if (b == 0)
-                return new Complex(1.0, 0.0);
-            else if (b == 1)
-                return a;
-            else if (b == 2)
-                return a * a;
-            else if (b == 3)
-                return a * a * a;
-            {
-                for (int i = 2; i <= b; i++)
-                    a *= a;
-                return a;
-            }
-        }
-
-
-        public static double Distance(Complex a, Complex b)
-        {
-            double x1 = a.x - b.x;
-            double x2 = a.y - b.y;
-            return Math.Sqrt(x1 * x1 + x2 * x2);
-        }
-
-        public static Complex MidPoint(Complex a, Complex b)
-        {
-            return new Complex((a.x + b.x) / 2.0, (a.y + b.y) / 2.0);
-        }
-
-        public static double AngularCoefficient(Complex a, Complex b)
-        {
-            return (b.y - a.y) / (b.x - a.x);
-        }
-
-
-
-        public Complex Add(Complex other)
-        {
-            return new Complex(this.x + other.x, this.y + other.y);
-        }
-
-        public Complex Subtract(Complex other)
-        {
-            return new Complex(this.x - other.x, this.y - other.y);
-        }
-
-        public Complex Multiply(Complex other)
-        {
-            return new Complex(
-                (this.x * other.x) - (this.y * other.y),
-                (this.x * other.y) + (this.y * other.x));
-        }
-
-        public Complex Divide(Complex other)
-        {
-            double den = (this.y * this.y) + (other.y * other.y);
-            return new Complex(
-                ((this.x * other.x) + (this.y * other.y)) / den,
-                ((this.y * other.x) - (this.x * other.y)) / den);
-
-        }
-
-        public Complex Negate()
-        {
-            return new Complex(-this.x, -this.y);
-        }
-
-        public Complex Inverse()
-        {
-            double den = (this.x * this.x) + (this.y * this.y);
-            return new Complex(this.x / den, -this.y / den);
-        }
-
-        public bool EqualTo(Complex other)
-        {
-            return this.x == other.x && this.y == other.y;
-        }
-
-        public bool GreaterThan(Complex other)
-        {
-            return this.AbsoluteValue() > other.AbsoluteValue();
-        }
-
-        public bool GreaterOrEqual(Complex other)
-        {
-            return this.AbsoluteValue() >= other.AbsoluteValue();
-        }
-
-        public bool LowerThan(Complex other)
-        {
-            return this.AbsoluteValue() < other.AbsoluteValue();
-        }
-
-        public bool LowerOrEqual(Complex other)
-        {
-            return this.AbsoluteValue() <= other.AbsoluteValue();
-        }
     }
 }

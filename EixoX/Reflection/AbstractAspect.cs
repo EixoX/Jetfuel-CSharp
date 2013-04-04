@@ -5,12 +5,22 @@ using System.Reflection;
 
 namespace EixoX
 {
+    /// <summary>
+    /// Represents the base class for an aspect.
+    /// </summary>
+    /// <typeparam name="TMember">The type of members that the aspect holds.</typeparam>
     public abstract class AbstractAspect<TMember> : Aspect, IEnumerable<TMember>
         where TMember : AspectMember
     {
         private readonly List<TMember> _Members;
         private readonly Type _DataType;
 
+        /// <summary>
+        /// Creates a new aspec for a member accessor.
+        /// </summary>
+        /// <param name="acessor">The member accessor.</param>
+        /// <param name="member">The member instance to create.</param>
+        /// <returns>True if it's validated and created.</returns>
         protected abstract bool CreateAspectFor(ClassAcessor acessor, out TMember member);
         
         public AbstractAspect(Type dataType)
@@ -191,6 +201,23 @@ namespace EixoX
         public bool HasAttribute<TAttribute>(bool inherit)
         {
             return _DataType.IsDefined(typeof(TAttribute), inherit);
+        }
+
+
+
+
+        public AspectMember[] GetMemberArray()
+        {
+            return this._Members.ToArray();
+        }
+
+
+        public AspectMember[] GetMemberArray(params string[] names)
+        {
+            AspectMember[] children = new AspectMember[names.Length];
+            for (int i = 0; i < names.Length; i++)
+                children[i] = _Members[GetOrdinalOrException(names[i])];
+            return children;
         }
     }
 }

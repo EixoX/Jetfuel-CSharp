@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EixoX.Mathematica\EixoX.Mathematica.csproj">
-      <Project>{f3311647-002f-4488-8677-5d7c3569dd19}</Project>
+      <Project>{a3d56e5c-6ec6-4fc7-bcd6-7e19a013a949}</Project>
       <Name>EixoX.Mathematica</Name>
     </ProjectReference>
     <ProjectReference Include="..\EixoX\EixoX.csproj">

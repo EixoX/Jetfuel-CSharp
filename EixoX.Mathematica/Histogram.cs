@@ -6,90 +6,78 @@ namespace EixoX.Mathematica
 {
     public class Histogram<T> : IEnumerable<KeyValuePair<T, int>>
     {
-        private readonly IDictionary<T, int> _AbsFrequencies;
-        private int _TotalCount;
+        private readonly SortedList<T, int> _Counter;
+        private int _CountTotal;
+        private T _Mode;
         private int _ModeCount;
-        private int _MinFreq;
-        private T _MinFreqValue;
-        private int _MaxFreq;
-        private T _MaxFreqValue;
-        private T _ModeValue;
 
         public Histogram()
         {
-            this._AbsFrequencies = new SortedDictionary<T, int>();
-            this._TotalCount = 0;
-            this._ModeCount = 0;
+            this._Counter = new SortedList<T, int>();
         }
 
-        public Histogram(IEnumerable<T> items)
-            : this()
+        public Histogram(IEnumerable<T> collection)
         {
-            foreach (T item in items)
-                Acknowledge(item);
+            this._Counter = new SortedList<T, int>();
+            foreach (T item in collection)
+                Add(item);
         }
 
-        public void Clear()
-        {
-            this._AbsFrequencies.Clear();
-            this._TotalCount = 0;
-        }
-
-        public void Acknowledge(T item)
+        public int Add(T item)
         {
             int count;
-            if (_AbsFrequencies.TryGetValue(item, out count))
+            if (_Counter.TryGetValue(item, out count))
             {
                 count++;
-                _AbsFrequencies[item] = count;
+                _Counter[item] = count;
                 if (count > _ModeCount)
                 {
+                    _Mode = item;
                     _ModeCount = count;
-                    _ModeValue = item;
-                }
-                if (count > _MaxFreq)
-                {
-                    _MaxFreq = count;
-                    _MaxFreqValue = item;
-                }
-                if (item.Equals(_MinFreqValue))
-                {
-                    _MinFreqValue = item;
-                    _MinFreq = count;
                 }
             }
             else
             {
-                _AbsFrequencies.Add(item, 1);
-                _MinFreq = 1;
-                _MinFreqValue = item;
+                _Counter.Add(item, 1);
+                if (_ModeCount == 0)
+                {
+                    _Mode = item;
+                    _ModeCount = 1;
+                }
             }
 
-            _TotalCount++;
+            _CountTotal++;
+            return count;
         }
 
-        public int TotalCount { get { return _TotalCount; } }
-        public int ValueCount { get { return _AbsFrequencies.Count; } }
-        public int MinFreq { get { return this._MinFreq; } }
-        public int MaxFreq { get { return this._MaxFreq; } }
+        public void Clear()
+        {
+            this._Counter.Clear();
+            _CountTotal = 0;
+        }
 
-        public int this[T value]
+        public int CountTotal
+        {
+            get { return this._CountTotal; }
+        }
+
+        public int CountDistinct
+        {
+            get { return this._Counter.Count; }
+        }
+
+        public int this[T item]
         {
             get
             {
-                int count;
-                return _AbsFrequencies.TryGetValue(value, out count) ? count : 0;
+                int c;
+                return _Counter.TryGetValue(item, out c) ? c : 0;
             }
-        }
-
-        public double Frequency(T value)
-        {
-            return ((double)this[value]) / _TotalCount;
         }
 
         public T Mode
         {
-            get { return _ModeValue; }
+            get { return this._Mode; }
         }
 
         public int ModeCount
@@ -97,20 +85,26 @@ namespace EixoX.Mathematica
             get { return this._ModeCount; }
         }
 
-        public double ModeFrequency
+        public IList<T> Items
         {
-            get { return ((double)_ModeCount) / _TotalCount; }
+            get { return this._Counter.Keys; }
         }
+
+        public IList<int> Frequencies
+        {
+            get { return this._Counter.Values; }
+        }
+
 
 
         public IEnumerator<KeyValuePair<T, int>> GetEnumerator()
         {
-            return _AbsFrequencies.GetEnumerator();
+            return _Counter.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return _AbsFrequencies.GetEnumerator();
+            return _Counter.GetEnumerator();
         }
     }
 }
