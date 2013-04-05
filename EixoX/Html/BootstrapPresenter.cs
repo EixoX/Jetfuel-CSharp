@@ -76,6 +76,12 @@ namespace EixoX.Html
                 item.Render(writer, entity, validateRestrictions);
         }
 
+        public void RenderGroup(System.IO.TextWriter writer, object entity, string groupName, bool validateRestrictions, params HtmlAttribute[] attributes)
+        {
+            foreach (BootstrapPresenterControl item in GetGroupMembers(groupName))
+                item.Render(writer, entity, validateRestrictions, attributes);
+        }
+
         public void RenderGroupFieldset(System.IO.TextWriter writer, object entity, string groupName, bool validateRestrictions)
         {
             writer.WriteLine("<fieldset>");

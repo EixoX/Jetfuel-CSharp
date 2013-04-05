@@ -58,6 +58,7 @@
     <Compile Include="Html\Controls\HtmlColorPicker.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Reflection\PrimitiveTypes.cs" />
+    <Compile Include="LazyLoad.cs" />
     <Compile Include="Reflection\CompositeAnnotationAspect.cs" />
     <Compile Include="Reflection\CompositeAnnotationMember.cs" />
     <Compile Include="Data\ClassSelectMember.cs" />
