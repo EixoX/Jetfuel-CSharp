@@ -11,6 +11,9 @@ namespace EixoX.Interceptors
 
         public static string Intercept(string input)
         {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
             char prev = Char.MinValue;
             int length = input.Length;
             char[] chars = new char[input.Length];
