@@ -25,31 +25,5 @@ namespace EixoX.Data
         }
 
 
-        public ClassSelect<T> Search(string filter)
-        {
-            if (string.IsNullOrEmpty(filter))
-                filter = "%";
-            else if (filter.Length < 3)
-                filter = filter + "%";
-            else
-                filter = "%" + filter.Replace(' ', '%') + "%";
-
-            Type stringType = typeof(string);
-            ClassFilterExpression expression = null;
-            DataAspect dataAspect = base.Aspect;
-            int count = dataAspect.Count;
-            for (int i = 0; i < count; i++)
-            {
-                //if (dataAspect[i].DataType == stringType)
-                    expression =
-                        expression == null ?
-                        new ClassFilterExpression(dataAspect, i, FilterComparison.Like, filter) :
-                        expression.Or(i, FilterComparison.Like, filter);
-            }
-
-
-            return Select().Where(expression);
-        }
-
     }
 }

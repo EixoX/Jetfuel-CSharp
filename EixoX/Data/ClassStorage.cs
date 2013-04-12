@@ -508,5 +508,12 @@ namespace EixoX.Data
                     default(T);
             }
         }
+
+
+        public ClassSelect<T> Search(string filter)
+        {
+            ClassFilter searchFilter = _Engine.CreateSearchFilter(this._Aspect, filter);
+            return searchFilter != null ? Select().Where(searchFilter) : Select();
+        }
     }
 }
