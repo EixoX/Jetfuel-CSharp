@@ -38,6 +38,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Dictionary.cs" />
+    <Compile Include="Helpers\CharHelper.cs" />
+    <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Html\BootstrapControl.cs" />
     <Compile Include="Html\BootstrapControlFactory.cs" />
     <Compile Include="Html\BootstrapPresenter.cs" />
@@ -58,7 +60,6 @@
     <Compile Include="Html\Controls\HtmlColorPicker.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Reflection\PrimitiveTypes.cs" />
-    <Compile Include="LazyLoad.cs" />
     <Compile Include="Reflection\CompositeAnnotationAspect.cs" />
     <Compile Include="Reflection\CompositeAnnotationMember.cs" />
     <Compile Include="Data\ClassSelectMember.cs" />

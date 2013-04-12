@@ -17,6 +17,19 @@ namespace EixoX.Restrictions
 
             string digits = StringHelper.DigitsOnly(input.ToString());
 
+            return IsValid(digits);
+            
+        }
+
+
+        public string GetRestrictionMessage(object input)
+        {
+            return "Invalid credit card number";
+        }
+
+
+        public static bool IsValid(string digits)
+        {
             if (digits.Length < 12 | digits.Length > 19)
                 return false;
 
@@ -31,12 +44,6 @@ namespace EixoX.Restrictions
                 luhn += (d / 10) + (d % 10);
             }
             return (luhn != 0) && (luhn % 10 == 0);
-        }
-
-
-        public string GetRestrictionMessage(object input)
-        {
-            return "Invalid credit card number";
         }
     }
 }

@@ -26,7 +26,7 @@ namespace EixoX.UI
     /// Represents an user interface aspect.
     /// </summary>
     public class UIAspect<T>
-        :UIAspect
+        : UIAspect
     {
         private static UIAspect<T> _Instance;
         private UIAspect() : base(typeof(T)) { }
