@@ -15,7 +15,7 @@ namespace EixoX.Interceptors
             if (input != null)
                 while (input.Contains("  "))
                     input = input.Replace("  ", " ");
-            return input;
+            return input.Trim();
         }
 
         public static string Replace(string input)
