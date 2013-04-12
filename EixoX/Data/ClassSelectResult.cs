@@ -8,7 +8,7 @@ namespace EixoX.Data
     /// A useful helper class for a paged select result.
     /// </summary>
     /// <typeparam name="TClass">The type of class returned.</typeparam>
-    public class ClassSelectResult<TClass> : List<TClass>
+    public sealed class ClassSelectResult<TClass> : List<TClass>
     {
         private readonly ClassSelect<TClass> _Select;
         private readonly int _pageSize;
