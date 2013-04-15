@@ -27,7 +27,7 @@ namespace EixoX.Data
             this._pageSize = select.PageSize;
             this._pageOrdinal = select.PageOrdinal;
             this._recordCount = select.Count();
-            this._pageCount = _pageCount > 0 ? (_recordCount / _pageSize) + 1 : 0;
+            this._pageCount = _pageSize > 0 ? (_recordCount / _pageSize) + 1 : 0;
         }
 
         /// <summary>
