@@ -11,10 +11,13 @@ namespace EixoX.Interceptors
     {
         public static string Collapse(string input)
         {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
             input = Replace(input);
-            if (input != null)
-                while (input.Contains("  "))
-                    input = input.Replace("  ", " ");
+            while (input.Contains("  "))
+                input = input.Replace("  ", " ");
+            
             return input.Trim();
         }
 
