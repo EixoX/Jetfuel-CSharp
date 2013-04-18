@@ -134,5 +134,11 @@ namespace EixoX
         {
             return _Property.IsDefined(typeof(TAttribute), inherit);
         }
+
+
+        public void SetValue(object entity, object value, IFormatProvider formatProvider)
+        {
+            _Property.SetValue(entity, Convert.ChangeType(value, _Property.PropertyType, formatProvider), null);
+        }
     }
 }

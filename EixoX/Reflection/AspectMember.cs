@@ -61,7 +61,8 @@ namespace EixoX
         /// </summary>
         /// <param name="entity">The entity to set value on.</param>
         /// <param name="value">The value to set.</param>
-        public virtual void SetValue(object entity, object value)
+        /// <param name="formatProvider">The format provider to use.</param>
+        public virtual void SetValue(object entity, object value, IFormatProvider formatProvider)
         {
             if (value != null)
             {
@@ -69,7 +70,7 @@ namespace EixoX
                 {
                     if (value.GetType() != _Acessor.DataType)
                     {
-                        value = Convert.ChangeType(value, _Acessor.DataType);
+                        value = Convert.ChangeType(value, _Acessor.DataType, formatProvider);
                     }
                 }
 
@@ -77,6 +78,19 @@ namespace EixoX
 
             _Acessor.SetValue(entity, value);
         }
+
+
+        /// <summary>
+        /// Sets a value to a member.
+        /// </summary>
+        /// <param name="entity">The entity to set value on.</param>
+        /// <param name="value">The value to set.</param>
+        public virtual void SetValue(object entity, object value)
+        {
+            SetValue(entity, value, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+
 
         /// <summary>
         /// Gets a string representation of the member.

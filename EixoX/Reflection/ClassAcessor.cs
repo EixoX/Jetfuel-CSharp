@@ -37,6 +37,13 @@ namespace EixoX
         /// <param name="value">The value to set.</param>
         void SetValue(object entity, object value);
         /// <summary>
+        /// Sets value on an entity.
+        /// </summary>
+        /// <param name="entity">The entity to write to.</param>
+        /// <param name="value">The value to set.</param>
+        /// <param name="formatProvider">The format provider to use if changing object types.</param>
+        void SetValue(object entity, object value, IFormatProvider formatProvider);
+        /// <summary>
         /// Gets an attribute.
         /// </summary>
         /// <typeparam name="TAttribute">Type of attribute to get.</typeparam>

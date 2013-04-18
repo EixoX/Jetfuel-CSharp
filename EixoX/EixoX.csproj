@@ -269,6 +269,8 @@
     <Compile Include="UI\UIControls\UISingleline.cs" />
     <Compile Include="Xml\XmlAspect.cs" />
     <Compile Include="Xml\XmlAspectMember.cs" />
+    <Compile Include="Xml\XmlType.cs" />
+    <Compile Include="Xml\XmlAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Globalization\EixoX.Globalization.Example.xml">
