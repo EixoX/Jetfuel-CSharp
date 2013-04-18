@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 
@@ -92,45 +93,87 @@ namespace EixoX.Xml
         }
 
 
+        private void ReadXmlCollection(object entity, XmlElement element)
+        {
+            ICollection<object> collection = (ICollection<object>)entity;
+
+            Type[] genericTypes = this.DataType.GetGenericArguments();
+            if (genericTypes == null || genericTypes.Length != 1)
+                throw new ArgumentException("Collections need to be typed for this xml serialization");
+
+            ConstructorInfo constructor = genericTypes[0].GetConstructor(Type.EmptyTypes);
+            if (constructor == null)
+                throw new ArgumentException("The collection members must have a default constructor");
+
+            XmlAspect innerAspect = GetInstance(genericTypes[0]);
+
+
+            foreach (XmlElement child in element.GetElementsByTagName(innerAspect._XmlName))
+            {
+                object entry = constructor.Invoke(null);
+                innerAspect.ReadXml(entry, element);
+                collection.Add(entry);
+            }
+        }
+
+        private void ReadXmlMembers(object entity, XmlElement element)
+        {
+            foreach (XmlAspectMember member in this)
+            {
+                switch (member.XmlType)
+                {
+                    case XmlType.Attribute:
+                        member.SetValue(
+                            entity,
+                            element.GetAttribute(member.XmlName),
+                            member.Culture == null ? _Culture : member.Culture);
+                        break;
+                    case XmlType.Element:
+
+                        XmlElement child = element[member.XmlName];
+                        if (child == null)
+                            member.SetValue(entity, null);
+
+                        else
+                        {
+                            //Parse a primitive type
+                            if (member.DataType.IsPrimitive)
+                            {
+                                member.SetValue(
+                                    entity,
+                                    child.InnerText,
+                                    member.Culture == null ? _Culture : member.Culture);
+
+                            }
+                            //Locate the schema and use it
+                            else
+                            {
+                                object instance = Activator.CreateInstance(member.DataType);
+                                XmlAspect.GetInstance(member.DataType).ReadXml(instance, child);
+                                member.SetValue(
+                                    entity,
+                                    instance);
+                            }
+                        }
+                        break;
+                    default:
+                        throw new ArgumentException("Unknown xml type " + member.XmlType);
+                }
+            }
+        }
+
         public void ReadXml(object entity, XmlElement element)
         {
             if (_XmlName.Equals(element.Name, StringComparison.OrdinalIgnoreCase))
             {
-                foreach (XmlAspectMember member in this)
+                //Is this a collection object?
+                if (typeof(System.Collections.ICollection).IsAssignableFrom(this.DataType))
                 {
-                    switch (member.XmlType)
-                    {
-                        case XmlType.Attribute:
-                            member.SetValue(
-                                entity,
-                                element.GetAttribute(member.XmlName),
-                                member.Culture == null ? _Culture : member.Culture);
-                            break;
-                        case XmlType.Element:
-                            //Parse a primitive type
-                            if (member.DataType.IsPrimitive)
-                            {
-                                XmlElement child = element[member.XmlName];
-                                if (child == null)
-                                    member.SetValue(entity, null);
-                                else
-                                {
-                                    member.SetValue(
-                                        entity,
-                                        child.InnerText,
-                                        member.Culture == null ? _Culture : member.Culture);
-                                }
-                            }
-                            //Parse a collection of items.
-                            else if (typeof(System.Collections.ICollection).IsAssignableFrom(member.DataType))
-                            {
-                                System.Collections.ICollection collection = (System.Collections.ICollection)member.GetValue(entity);
-
-                            }
-                            break;
-                        default:
-                            throw new ArgumentException("Unknown xml type " + member.XmlType);
-                    }
+                    ReadXmlCollection(entity, element);
+                }
+                else
+                {
+                    ReadXmlMembers(entity, element);
                 }
             }
             else

@@ -60,6 +60,7 @@
     <Compile Include="TestPerson.cs" />
     <Compile Include="Core\UITests.cs" />
     <Compile Include="Core\HtmlBoostrapTests.cs" />
+    <Compile Include="Xml\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EixoX.Mathematica\EixoX.Mathematica.csproj">
