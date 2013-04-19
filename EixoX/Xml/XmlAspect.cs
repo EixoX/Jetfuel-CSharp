@@ -92,7 +92,6 @@ namespace EixoX.Xml
             get { return this._Culture; }
         }
 
-
         private void ReadXmlCollection(object entity, XmlElement element)
         {
             ICollection<object> collection = (ICollection<object>)entity;
@@ -113,6 +112,24 @@ namespace EixoX.Xml
                 object entry = constructor.Invoke(null);
                 innerAspect.ReadXml(entry, element);
                 collection.Add(entry);
+            }
+        }
+        private void WriteXmlCollection(object entity, XmlElement element)
+        {
+            ICollection<object> collection = (ICollection<object>)entity;
+
+            Type[] genericTypes = this.DataType.GetGenericArguments();
+            if (genericTypes == null || genericTypes.Length != 1)
+                throw new ArgumentException("Collections need to be typed for this xml serialization");
+
+            if (collection != null)
+            {
+                XmlAspect innerAspect = GetInstance(genericTypes[0]);
+
+                foreach (object child in collection)
+                {
+                    innerAspect.WriteXml(child, element);
+                }
             }
         }
 
@@ -161,6 +178,49 @@ namespace EixoX.Xml
                 }
             }
         }
+        private void WriteXmlMembers(object entity, XmlElement element)
+        {
+            foreach (XmlAspectMember member in this)
+            {
+                switch (member.XmlType)
+                {
+                    case XmlType.Attribute:
+                        element.SetAttribute(
+                            member.XmlName,
+                            string.Format(
+                            member.Culture == null ? _Culture : member.Culture,
+                            "{0}",
+                            member.GetValue(entity)));
+
+                        break;
+                    case XmlType.Element:
+
+                        //Write a primitive type
+                        if (member.DataType.IsPrimitive)
+                        {
+                            XmlElement childElement = element.OwnerDocument.CreateElement(member.XmlName);
+                            childElement.AppendChild(
+                                element.OwnerDocument.CreateTextNode(
+                                    string.Format(
+                                        member.Culture == null ? _Culture : member.Culture,
+                                        "{0}",
+                                        member.GetValue(entity))));
+
+                        }
+                        //Locate the schema and use it
+                        else
+                        {
+
+                            XmlAspect.GetInstance(member.DataType).WriteXml(
+                                member.GetValue(entity),
+                                element);
+                        }
+                        break;
+                    default:
+                        throw new ArgumentException("Unknown xml type " + member.XmlType);
+                }
+            }
+        }
 
         public void ReadXml(object entity, XmlElement element)
         {
@@ -180,12 +240,29 @@ namespace EixoX.Xml
                 throw new ArgumentException("Expected element with name " + _XmlName + " and got " + element.Name);
         }
 
+        public void WriteXml(object entity, XmlElement parent)
+        {
+            XmlElement element = parent.OwnerDocument.CreateElement(this._XmlName);
+            parent.AppendChild(element);
+
+            //Is this a collection object?
+            if (typeof(System.Collections.ICollection).IsAssignableFrom(this.DataType))
+            {
+                WriteXmlCollection(entity, element);
+            }
+            else
+            {
+                WriteXmlMembers(entity, element);
+            }
+        }
+
         public object ReadXml(XmlElement element)
         {
             object entity = Activator.CreateInstance(this.DataType);
             ReadXml(entity, element);
             return entity;
         }
+
     }
 
 
@@ -199,30 +276,6 @@ namespace EixoX.Xml
         {
             get { return _Instance ?? (_Instance = new XmlAspect<T>()); }
         }
-    }
-
-
-
-    [Xml(Xml.XmlType.Element, "Cartao")]
-    public class Cartao
-    {
-        [Xml]
-        public int Numero;
-        [Xml]
-        public string Nome;
-    }
-
-
-    [Xml]
-    public class Carteira
-        : List<Cartao>
-    {
-        [Xml]
-        public string Marca;
-        [Xml]
-        public string Modelo;
-        [Xml]
-        public string Tamanho;
     }
 
 
