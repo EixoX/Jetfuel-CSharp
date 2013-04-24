@@ -135,7 +135,44 @@ namespace EixoX
             _Acessor.SetValue(entity, memberValue);
         }
 
+        public string GetTextValue(object entity, IFormatProvider formatProvider, string formatString)
+        {
+            object memberValue = _Acessor.GetValue(entity);
+            if (memberValue == null)
+                return "";
+            else if (_Acessor.DataType == PrimitiveTypes.String)
+            {
+                return (string)memberValue;
+            }
+            else if (_Acessor.DataType.IsEnum)
+            {
+                return memberValue.ToString();
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.DateTime)
+            {
+                return ((DateTime)memberValue).ToString(formatString, formatProvider);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.TimeSpan)
+            {
+                return memberValue.ToString();
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.Guid)
+            {
+                return ((Guid)memberValue) == Guid.Empty ? "" : memberValue.ToString();
+            }
+            else
+            {
+                return string.Format(
+                    formatProvider,
+                    formatString,
+                    memberValue);
+            }
+        }
 
+        public string GetTextValue(object entity, IFormatProvider formatProvider)
+        {
+            return GetTextValue(entity, formatProvider, "{0}");
+        }
 
         /// <summary>
         /// Gets a string representation of the member.

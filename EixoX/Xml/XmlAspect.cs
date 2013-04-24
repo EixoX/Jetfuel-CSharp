@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-
+using EixoX;
 
 namespace EixoX.Xml
 {
@@ -92,73 +92,6 @@ namespace EixoX.Xml
             get { return this._Culture; }
         }
 
-        private void ReadXmlCollection(object entity, XmlElement element)
-        {
-
-        }
-
-        private void WriteXmlCollection(object entity, XmlElement element)
-        {
-            ICollection<object> collection = (ICollection<object>)entity;
-
-            Type[] genericTypes = this.DataType.GetGenericArguments();
-            if (genericTypes == null || genericTypes.Length != 1)
-                throw new ArgumentException("Collections need to be typed for this xml serialization");
-
-            if (collection != null)
-            {
-                XmlAspect innerAspect = GetInstance(genericTypes[0]);
-
-                foreach (object child in collection)
-                {
-                    innerAspect.WriteXml(child, element);
-                }
-            }
-        }
-
-        private void WriteXmlMembers(object entity, XmlElement element)
-        {
-            foreach (XmlAspectMember member in this)
-            {
-                switch (member.XmlType)
-                {
-                    case XmlType.Attribute:
-                        element.SetAttribute(
-                            member.XmlName,
-                            string.Format(
-                            member.Culture == null ? _Culture : member.Culture,
-                            "{0}",
-                            member.GetValue(entity)));
-
-                        break;
-                    case XmlType.Element:
-
-                        //Write a primitive type
-                        if (member.DataType.IsPrimitive)
-                        {
-                            XmlElement childElement = element.OwnerDocument.CreateElement(member.XmlName);
-                            childElement.AppendChild(
-                                element.OwnerDocument.CreateTextNode(
-                                    string.Format(
-                                        member.Culture == null ? _Culture : member.Culture,
-                                        "{0}",
-                                        member.GetValue(entity))));
-
-                        }
-                        //Locate the schema and use it
-                        else
-                        {
-
-                            XmlAspect.GetInstance(member.DataType).WriteXml(
-                                member.GetValue(entity),
-                                element);
-                        }
-                        break;
-                    default:
-                        throw new ArgumentException("Unknown xml type " + member.XmlType);
-                }
-            }
-        }
 
         public void ReadXml(object entity, XmlElement element)
         {
@@ -168,6 +101,75 @@ namespace EixoX.Xml
             }
             else
                 throw new ArgumentException("Expected element with name " + _XmlName + " and got " + element.Name);
+        }
+
+        private void ExecuteWriteXml(object entity, XmlElement element)
+        {
+            foreach (XmlAspectMember member in this)
+            {
+
+                switch (member.XmlType)
+                {
+                    case XmlType.Attribute:
+                        element.SetAttribute(
+                            member.XmlName,
+                            member.GetTextValue(entity, member.Culture == null ? _Culture : member.Culture));
+                        break;
+                    case XmlType.Element:
+                        //is this a value type, a string or enum?
+                        if (member.DataType.IsValueType || member.DataType.IsEnum || member.DataType == PrimitiveTypes.String)
+                        {
+                            XmlElement child = element.OwnerDocument.CreateElement(member.XmlName);
+                            element.AppendChild(child);
+                            child.AppendChild(
+                                child.OwnerDocument.CreateTextNode(
+                                member.GetTextValue(entity, member.Culture == null ? _Culture : member.Culture)));
+
+
+                        }
+                        //Is this a collection object?
+                        else if (typeof(System.Collections.IList).IsAssignableFrom(member.DataType))
+                        {
+                            object memberValue = member.GetValue(entity);
+
+                            if (memberValue != null)
+                            {
+                                Type[] genericTypes = member.DataType.GetGenericArguments();
+                                if (genericTypes == null || genericTypes.Length != 1)
+                                    throw new ArgumentException("Collections need to be typed for this xml serialization");
+
+                                XmlAspect innerAspect = GetInstance(genericTypes[0]);
+
+                                foreach (object childObject in ((System.Collections.IList)memberValue))
+                                {
+                                    XmlElement childElement = element.OwnerDocument.CreateElement(member.XmlName);
+                                    element.AppendChild(childElement);
+                                    innerAspect.ExecuteWriteXml(childObject, childElement);
+                                }
+                            }
+
+                        } // a generic composite object
+                        else
+                        {
+
+                            XmlElement childElement = element.OwnerDocument.CreateElement(member.XmlName);
+                            element.AppendChild(childElement);
+
+                            object memberValue =
+                                member.GetValue(entity);
+
+                            if (memberValue != null)
+                            {
+                                XmlAspect childAspect = XmlAspect.GetInstance(member.DataType);
+                                childAspect.ExecuteWriteXml(memberValue, childElement);
+                            }
+                        }
+                        break;
+                    default:
+                        throw new ArgumentException("Unknown xml type " + member.XmlType);
+                }
+
+            }
         }
 
         private void ExecuteReadXml(object entity, XmlElement element)
@@ -256,23 +258,22 @@ namespace EixoX.Xml
                     throw new ArgumentException("Pau no membro " + member.Name + " da classe " + this.FullName, ex);
                 }
             }
-
         }
 
         public void WriteXml(object entity, XmlElement parent)
         {
             XmlElement element = parent.OwnerDocument.CreateElement(this._XmlName);
             parent.AppendChild(element);
+            ExecuteWriteXml(entity, element);
+        }
 
-            //Is this a collection object?
-            if (typeof(System.Collections.ICollection).IsAssignableFrom(this.DataType))
-            {
-                WriteXmlCollection(entity, element);
-            }
-            else
-            {
-                WriteXmlMembers(entity, element);
-            }
+        public XmlDocument CreateXmlDocument(object entity)
+        {
+            XmlDocument document = new XmlDocument();
+            XmlElement element = document.CreateElement(this.XmlName);
+            document.AppendChild(element);
+            ExecuteWriteXml(entity, element);
+            return document;
         }
 
         public object ReadXml(XmlElement element)
