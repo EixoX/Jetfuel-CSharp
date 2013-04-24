@@ -26,6 +26,12 @@ namespace EixoX.Xml
             this._Culture = culture;
         }
 
+        public XmlAttribute(string name)
+        {
+            this._XmlType = Xml.XmlType.Element;
+            this._Name = name;
+        }
+
         public XmlType XmlType
         {
             get { return this._XmlType; }

@@ -90,6 +90,51 @@ namespace EixoX
             SetValue(entity, value, System.Globalization.CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Parses and sets a text value to a member
+        /// </summary>
+        /// <param name="entity">The entity to set the value on.</param>
+        /// <param name="textValue">The value to set.</param>
+        /// <param name="formatProvider">The format provider to use.</param>
+        public void SetParsedValue(object entity, string textValue, IFormatProvider formatProvider)
+        {
+            object memberValue;
+
+            if (_Acessor.DataType == PrimitiveTypes.String)
+            {
+                memberValue = textValue;
+            }
+            else if (_Acessor.DataType.IsEnum)
+            {
+                memberValue = string.IsNullOrEmpty(textValue) ? null :
+                    Enum.Parse(_Acessor.DataType, textValue);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.DateTime)
+            {
+                memberValue =
+                    string.IsNullOrEmpty(textValue) ? DateTime.MinValue :
+                    DateTime.Parse(textValue, formatProvider);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.TimeSpan)
+            {
+
+                memberValue = string.IsNullOrEmpty(textValue) ? TimeSpan.Zero :
+                    TimeSpan.Parse(textValue);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.Guid)
+            {
+                memberValue = string.IsNullOrEmpty(textValue) ? Guid.Empty :
+                    new Guid(textValue);
+            }
+            else
+            {
+                memberValue = string.IsNullOrEmpty(textValue) ? null :
+                    Convert.ChangeType(textValue, _Acessor.DataType, formatProvider);
+            }
+
+            _Acessor.SetValue(entity, memberValue);
+        }
+
 
 
         /// <summary>

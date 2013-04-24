@@ -26,7 +26,7 @@ namespace EixoX.Xml
             }
             else
             {
-                this._XmlName = xa.Name;
+                this._XmlName = string.IsNullOrEmpty(xa.Name) ? dataType.Name : xa.Name;
                 this._Culture =
                     string.IsNullOrEmpty(xa.Culture) ?
                     CultureInfo.InvariantCulture :
@@ -47,7 +47,7 @@ namespace EixoX.Xml
                 member = new XmlAspectMember(
                     acessor,
                     xa.XmlType,
-                    xa.Name,
+                    string.IsNullOrEmpty(xa.Name) ? acessor.Name : xa.Name,
                     string.IsNullOrEmpty(xa.Culture) ?
                     null :
                     System.Globalization.CultureInfo.GetCultureInfo(xa.Culture));
@@ -94,26 +94,9 @@ namespace EixoX.Xml
 
         private void ReadXmlCollection(object entity, XmlElement element)
         {
-            ICollection<object> collection = (ICollection<object>)entity;
 
-            Type[] genericTypes = this.DataType.GetGenericArguments();
-            if (genericTypes == null || genericTypes.Length != 1)
-                throw new ArgumentException("Collections need to be typed for this xml serialization");
-
-            ConstructorInfo constructor = genericTypes[0].GetConstructor(Type.EmptyTypes);
-            if (constructor == null)
-                throw new ArgumentException("The collection members must have a default constructor");
-
-            XmlAspect innerAspect = GetInstance(genericTypes[0]);
-
-
-            foreach (XmlElement child in element.GetElementsByTagName(innerAspect._XmlName))
-            {
-                object entry = constructor.Invoke(null);
-                innerAspect.ReadXml(entry, element);
-                collection.Add(entry);
-            }
         }
+
         private void WriteXmlCollection(object entity, XmlElement element)
         {
             ICollection<object> collection = (ICollection<object>)entity;
@@ -133,51 +116,6 @@ namespace EixoX.Xml
             }
         }
 
-        private void ReadXmlMembers(object entity, XmlElement element)
-        {
-            foreach (XmlAspectMember member in this)
-            {
-                switch (member.XmlType)
-                {
-                    case XmlType.Attribute:
-                        member.SetValue(
-                            entity,
-                            element.GetAttribute(member.XmlName),
-                            member.Culture == null ? _Culture : member.Culture);
-                        break;
-                    case XmlType.Element:
-
-                        XmlElement child = element[member.XmlName];
-                        if (child == null)
-                            member.SetValue(entity, null);
-
-                        else
-                        {
-                            //Parse a primitive type
-                            if (member.DataType.IsPrimitive)
-                            {
-                                member.SetValue(
-                                    entity,
-                                    child.InnerText,
-                                    member.Culture == null ? _Culture : member.Culture);
-
-                            }
-                            //Locate the schema and use it
-                            else
-                            {
-                                object instance = Activator.CreateInstance(member.DataType);
-                                XmlAspect.GetInstance(member.DataType).ReadXml(instance, child);
-                                member.SetValue(
-                                    entity,
-                                    instance);
-                            }
-                        }
-                        break;
-                    default:
-                        throw new ArgumentException("Unknown xml type " + member.XmlType);
-                }
-            }
-        }
         private void WriteXmlMembers(object entity, XmlElement element)
         {
             foreach (XmlAspectMember member in this)
@@ -226,18 +164,99 @@ namespace EixoX.Xml
         {
             if (_XmlName.Equals(element.Name, StringComparison.OrdinalIgnoreCase))
             {
-                //Is this a collection object?
-                if (typeof(System.Collections.ICollection).IsAssignableFrom(this.DataType))
-                {
-                    ReadXmlCollection(entity, element);
-                }
-                else
-                {
-                    ReadXmlMembers(entity, element);
-                }
+                ExecuteReadXml(entity, element);
             }
             else
                 throw new ArgumentException("Expected element with name " + _XmlName + " and got " + element.Name);
+        }
+
+        private void ExecuteReadXml(object entity, XmlElement element)
+        {
+            foreach (XmlAspectMember member in this)
+            {
+                try
+                {
+                    switch (member.XmlType)
+                    {
+                        case XmlType.Attribute:
+                            member.SetParsedValue(
+                                entity,
+                                element.GetAttribute(member.XmlName),
+                                member.Culture == null ? _Culture : member.Culture);
+
+                            break;
+                        case XmlType.Element:
+                            //is this a value type, a string or enum?
+                            if (member.DataType.IsValueType || member.DataType.IsEnum || member.DataType == PrimitiveTypes.String)
+                            {
+                                XmlElement child = element[member.XmlName];
+                                if (child == null)
+                                    break;
+
+                                member.SetParsedValue(
+                                    entity,
+                                    child.InnerText,
+                                    member.Culture == null ? _Culture : member.Culture);
+                            }
+                            //Is this a collection object?
+                            else if (typeof(System.Collections.IList).IsAssignableFrom(member.DataType))
+                            {
+                                XmlNodeList children = element.GetElementsByTagName(member.XmlName);
+                                if (children == null || children.Count == 0)
+                                    break;
+
+                                Type[] genericTypes = member.DataType.GetGenericArguments();
+                                if (genericTypes == null || genericTypes.Length != 1)
+                                    throw new ArgumentException("Collections need to be typed for this xml serialization");
+
+                                ConstructorInfo constructor = genericTypes[0].GetConstructor(Type.EmptyTypes);
+                                if (constructor == null)
+                                    throw new ArgumentException("The collection members must have a default constructor");
+
+
+                                XmlAspect innerAspect = GetInstance(genericTypes[0]);
+
+                                System.Collections.IList memberValue = (System.Collections.IList)member.GetValue(entity);
+                                if (memberValue == null)
+                                {
+                                    memberValue = (System.Collections.IList)Activator.CreateInstance(member.DataType);
+                                    member.SetValue(entity, memberValue);
+                                }
+
+                                int count = children.Count;
+                                for (int i = 0; i < count; i++)
+                                {
+                                    object memberInstance = constructor.Invoke(null);
+                                    innerAspect.ExecuteReadXml(memberInstance, children[i] as XmlElement);
+                                    memberValue.Add(memberInstance);
+                                }
+
+                            } // a generic composite object
+                            else
+                            {
+                                XmlElement child = element[member.XmlName];
+                                if (child == null)
+                                    break;
+
+                                object memberValue =
+                                    member.GetValue(entity) ?? (memberValue = Activator.CreateInstance(member.DataType));
+
+                                XmlAspect childAspect = XmlAspect.GetInstance(member.DataType);
+
+                                childAspect.ExecuteReadXml(memberValue, child);
+                                member.SetValue(entity, memberValue);
+                            }
+                            break;
+                        default:
+                            throw new ArgumentException("Unknown xml type " + member.XmlType);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException("Pau no membro " + member.Name + " da classe " + this.FullName, ex);
+                }
+            }
+
         }
 
         public void WriteXml(object entity, XmlElement parent)
@@ -263,6 +282,10 @@ namespace EixoX.Xml
             return entity;
         }
 
+        public object ReadXml(XmlDocument document)
+        {
+            return ReadXml(document.DocumentElement);
+        }
     }
 
 

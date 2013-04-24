@@ -20,5 +20,8 @@ namespace EixoX
         public static readonly Type ULong = typeof(ulong);
         public static readonly Type String = typeof(string);
         public static readonly Type IEnumerable = typeof(System.Collections.IEnumerable);
+        public static readonly Type DateTime = typeof(DateTime);
+        public static readonly Type TimeSpan = typeof(TimeSpan);
+        public static readonly Type Guid = typeof(Guid);
     }
 }
