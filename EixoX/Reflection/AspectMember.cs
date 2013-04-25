@@ -106,7 +106,7 @@ namespace EixoX
             }
             else if (_Acessor.DataType.IsEnum)
             {
-                memberValue = string.IsNullOrEmpty(textValue) ? null :
+                memberValue = string.IsNullOrEmpty(textValue) ? null : 
                     Enum.Parse(_Acessor.DataType, textValue);
             }
             else if (_Acessor.DataType == PrimitiveTypes.DateTime)
@@ -138,15 +138,17 @@ namespace EixoX
         public string GetTextValue(object entity, IFormatProvider formatProvider, string formatString)
         {
             object memberValue = _Acessor.GetValue(entity);
+
             if (memberValue == null)
-                return "";
+                return null;
+
             else if (_Acessor.DataType == PrimitiveTypes.String)
             {
                 return (string)memberValue;
             }
             else if (_Acessor.DataType.IsEnum)
             {
-                return memberValue.ToString();
+                return string.Format(formatString, (int)memberValue);
             }
             else if (_Acessor.DataType == PrimitiveTypes.DateTime)
             {
@@ -158,7 +160,7 @@ namespace EixoX
             }
             else if (_Acessor.DataType == PrimitiveTypes.Guid)
             {
-                return ((Guid)memberValue) == Guid.Empty ? "" : memberValue.ToString();
+                return ((Guid)memberValue) == Guid.Empty ? null : memberValue.ToString();
             }
             else
             {
@@ -169,7 +171,7 @@ namespace EixoX
             }
         }
 
-        public string GetTextValue(object entity, IFormatProvider formatProvider)
+        public virtual string GetTextValue(object entity, IFormatProvider formatProvider)
         {
             return GetTextValue(entity, formatProvider, "{0}");
         }

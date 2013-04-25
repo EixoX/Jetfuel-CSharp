@@ -11,6 +11,7 @@ namespace EixoX.Xml
         private XmlType _XmlType;
         private readonly string _Name;
         private readonly string _Culture;
+        private string _FormatString = "{0}";
 
         public XmlAttribute() { this._XmlType = Xml.XmlType.Element; }
         public XmlAttribute(XmlType type) { this._XmlType = type; }
@@ -46,5 +47,19 @@ namespace EixoX.Xml
         {
             get { return this._Culture; }
         }
+
+        public string FormatString
+        {
+            get
+            {
+                return this._FormatString;
+            }
+            set
+            {
+                _FormatString = value;
+            }
+        }
+
+        public bool IsMandatory { get; set; }
     }
 }
