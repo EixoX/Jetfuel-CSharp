@@ -11,7 +11,7 @@ namespace EixoX.Xml
         private XmlType _XmlType;
         private readonly string _Name;
         private readonly string _Culture;
-        private string _FormatString = "{0}";
+        private string _FormatString;
 
         public XmlAttribute() { this._XmlType = Xml.XmlType.Element; }
         public XmlAttribute(XmlType type) { this._XmlType = type; }

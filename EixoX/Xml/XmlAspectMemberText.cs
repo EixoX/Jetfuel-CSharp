@@ -26,6 +26,10 @@ namespace EixoX.Xml
                 {
                     XmlElement member = parent.OwnerDocument.CreateElement(localName);
                     parent.AppendChild(member);
+
+                    string content = _Adapter.FormatObject(value);
+                    if (!string.IsNullOrEmpty(content))
+                        member.AppendChild(member.OwnerDocument.CreateTextNode(content));
                 }
             }
             else

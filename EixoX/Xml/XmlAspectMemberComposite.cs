@@ -53,7 +53,7 @@ namespace EixoX.Xml
                 SetValue(entity, value);
             }
             foreach (XmlAspectMember member in _Aspect)
-                member.ReadXml(entity, element);
+                member.ReadXml(value, element);
         }
     }
 }
