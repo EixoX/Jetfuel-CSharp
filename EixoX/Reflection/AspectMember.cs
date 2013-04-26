@@ -96,7 +96,7 @@ namespace EixoX
         /// <param name="entity">The entity to set the value on.</param>
         /// <param name="textValue">The value to set.</param>
         /// <param name="formatProvider">The format provider to use.</param>
-        public void SetParsedValue(object entity, string textValue, IFormatProvider formatProvider)
+        public virtual void SetParsedValue(object entity, string textValue, IFormatProvider formatProvider)
         {
             object memberValue;
 

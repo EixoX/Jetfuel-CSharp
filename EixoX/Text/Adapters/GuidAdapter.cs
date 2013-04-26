@@ -1,21 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Text;
 
-namespace EixoX.Text
+namespace EixoX.Text.Adapters
 {
-    public class GuidAdapter
-        : AbstractTextAdapter<Guid>
+    public class GuidAdapter : TextAdapter<Guid>
     {
-        protected override Guid Parse(string text, IFormatProvider formatProvider)
+        public bool IsEmpty(Guid value)
         {
-            return new Guid(text);
+            return value != Guid.Empty;
         }
 
-        protected override string Format(Guid value, IFormatProvider formatProvider)
+        public Guid ParseValue(string input)
         {
-            return value.ToString();
+            return string.IsNullOrEmpty(input) ?
+                Guid.Empty :
+                new Guid(input);
+        }
+
+        public string FormatValue(Guid input)
+        {
+            return input.ToString();
+        }
+
+        public bool IsEmpty(object input)
+        {
+            return input == null || ((Guid)input) == Guid.Empty;
+        }
+
+        public object ParseObject(string input)
+        {
+            return string.IsNullOrEmpty(input) ? null : (object)new Guid(input);
+        }
+
+        public string FormatObject(object input)
+        {
+            return input == null ? null : ((Guid)input).ToString();
         }
     }
 }

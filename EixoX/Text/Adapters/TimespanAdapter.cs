@@ -1,21 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Text;
 
-namespace EixoX.Text
+namespace EixoX.Text.Adapters
 {
-    public class TimespanAdapter
-        : AbstractTextAdapter<TimeSpan>
+    public class TimeSpanAdapter : TextAdapter<TimeSpan>
     {
-        protected override TimeSpan Parse(string text, IFormatProvider formatProvider)
+        public bool IsEmpty(TimeSpan value)
         {
-            return TimeSpan.Parse(text);
+            return value == TimeSpan.Zero;
         }
 
-        protected override string Format(TimeSpan value, IFormatProvider formatProvider)
+        public TimeSpan ParseValue(string input)
         {
-            return value.ToString();
+            return string.IsNullOrEmpty(input) ? TimeSpan.Zero : TimeSpan.Parse(input);
+        }
+
+        public string FormatValue(TimeSpan input)
+        {
+            return input.ToString();
+        }
+
+        public bool IsEmpty(object input)
+        {
+            return input == null || ((TimeSpan)input) == TimeSpan.Zero;
+        }
+
+        public object ParseObject(string input)
+        {
+            return string.IsNullOrEmpty(input) ? null : (object)TimeSpan.Parse(input);
+        }
+
+        public string FormatObject(object input)
+        {
+            return input == null ? null : ((TimeSpan)input).ToString();
         }
     }
 }

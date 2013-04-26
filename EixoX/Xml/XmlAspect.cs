@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using EixoX;
+using EixoX.Text.Adapters;
+using System.Collections;
 
 namespace EixoX.Xml
 {
@@ -44,15 +46,64 @@ namespace EixoX.Xml
             }
             else
             {
-                member = new XmlAspectMember(
-                    acessor,
-                    xa.XmlType,
-                    string.IsNullOrEmpty(xa.Name) ? acessor.Name : xa.Name,
-                    string.IsNullOrEmpty(xa.Culture) ?
-                    null :
-                    System.Globalization.CultureInfo.GetCultureInfo(xa.Culture),
+                TextAdapter adapter = TextAdapters.Create(
+                    acessor.DataType,
+                    string.IsNullOrEmpty(xa.Culture) ? CultureInfo.InvariantCulture :
+                    CultureInfo.GetCultureInfo(xa.Culture),
                     xa.FormatString,
-                    xa.IsMandatory);
+                    NumberStyles.Any,
+                    DateTimeStyles.None);
+
+                if (adapter != null)
+                {
+                    switch (xa.XmlType)
+                    {
+                        case XmlType.Attribute:
+                            member = new XmlAspectMemberAttribute(
+                                acessor,
+                                string.IsNullOrEmpty(xa.Name) ? acessor.Name : xa.Name,
+                                xa.IsMandatory,
+                                adapter);
+                            return true;
+
+                        case XmlType.CDATA:
+                            member = new XmlAspectMemberCDATA(
+                                acessor,
+                                string.IsNullOrEmpty(xa.Name) ? acessor.Name : xa.Name,
+                                xa.IsMandatory,
+                                adapter);
+                            return true;
+
+                        case XmlType.Element:
+                            member = new XmlAspectMemberText(
+                                acessor,
+                                string.IsNullOrEmpty(xa.Name) ? acessor.Name : xa.Name,
+                                xa.IsMandatory,
+                                adapter);
+                            return true;
+
+                        default:
+                            throw new NotImplementedException("Unable to serialize primitive type with " + xa.XmlType);
+                    
+                    }
+                }
+                else if (typeof(IList).IsAssignableFrom(acessor.DataType))
+                {
+                    member = new XmlAspectMemberList(
+                        acessor,
+                        string.IsNullOrEmpty(xa.Name) ? acessor.Name : xa.Name,
+                        xa.IsMandatory);
+                    return true;
+                }
+                else
+                {
+                    member = new XmlAspectMemberComposite(
+                        acessor,
+                        string.IsNullOrEmpty(xa.Name) ? acessor.Name : xa.Name,
+                        xa.IsMandatory,
+                        GetInstance(acessor.DataType),
+                        acessor.DataType.GetConstructor(Type.EmptyTypes));
+                }
 
                 return true;
             }
@@ -100,7 +151,7 @@ namespace EixoX.Xml
             if (_XmlName.Equals(element.Name, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (XmlAspectMember xam in this)
-                    xam.ReadXml(entity, element, _Culture);
+                    xam.ReadXml(entity, element);
             }
             else
                 throw new ArgumentException("Expected element with name " + _XmlName + " and got " + element.Name);
@@ -123,7 +174,7 @@ namespace EixoX.Xml
             XmlElement element = parent.OwnerDocument.CreateElement(this._XmlName);
             parent.AppendChild(element);
             foreach (XmlAspectMember xam in this)
-                xam.WriteXml(entity, element, _Culture);
+                xam.WriteXml(entity, element);
         }
 
         public XmlDocument WriteXml(object entity)
@@ -132,7 +183,7 @@ namespace EixoX.Xml
             XmlElement element = document.CreateElement(this.XmlName);
             document.AppendChild(element);
             foreach (XmlAspectMember xam in this)
-                xam.WriteXml(entity, element, _Culture);
+                xam.WriteXml(entity, element);
             return document;
         }
 
