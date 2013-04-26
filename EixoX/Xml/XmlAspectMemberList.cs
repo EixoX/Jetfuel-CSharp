@@ -57,8 +57,8 @@ namespace EixoX.Xml
                 {
                     XmlElement element = parent.OwnerDocument.CreateElement(localName);
                     parent.AppendChild(element);
-
-                    _Aspect.WriteXml(obj, element);
+                    foreach (XmlAspectMember xam in _Aspect)
+                        xam.WriteXml(obj, element);
                 }
             }
         }
@@ -79,6 +79,7 @@ namespace EixoX.Xml
                     object child = _Constructor.Invoke(null);
                     foreach (XmlAspectMember xam in _Aspect)
                         xam.ReadXml(child, element);
+                    list.Add(child);
                 }
             }
         }

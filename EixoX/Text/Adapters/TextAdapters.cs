@@ -21,8 +21,10 @@ namespace EixoX.Text.Adapters
                 return new CharAdapter();
             else if (dataType == PrimitiveTypes.DateTime)
                 return new DateTimeAdapter(formatProvider, formatString, dateTimeStyles);
+            else if (dataType == PrimitiveTypes.TimeSpan)
+                return new TimeSpanAdapter();
             else if (dataType.IsEnum)
-                return new EnumAdapter(dataType);
+                return new EnumAdapter(dataType, formatString);
             else if (dataType == PrimitiveTypes.Guid)
                 return new GuidAdapter();
 
