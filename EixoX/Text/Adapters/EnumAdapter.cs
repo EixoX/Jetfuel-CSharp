@@ -5,7 +5,7 @@ using System.Text;
 namespace EixoX.Text.Adapters
 {
     public class EnumAdapter
-        : TextAdapter
+        : TextAdapterBase<Enum>
     {
         private readonly Type _DataType;
         private readonly string _FormatString;
@@ -16,19 +16,33 @@ namespace EixoX.Text.Adapters
             this._FormatString = string.IsNullOrEmpty(formatString) ? "{0}" : formatString;
         }
 
-        public bool IsEmpty(object input)
+
+        public override bool IsEmpty(Enum value)
         {
-            return input == null || !Enum.IsDefined(_DataType, input);
+            return value == null || !Enum.IsDefined(_DataType, value);
         }
 
-        public object ParseObject(string input)
+        public override Enum ParseValue(string input)
         {
-            return string.IsNullOrEmpty(input) ? null : Enum.Parse(_DataType, input);
+            if (string.IsNullOrEmpty(input))
+                return null;
+            else
+                return (Enum)Enum.Parse(_DataType, input);
         }
 
-        public string FormatObject(object input)
+        public override string FormatValue(Enum input)
         {
-            return input == null ? null : string.Format(_FormatString, (int)input);
+            return input.ToString();
+        }
+
+        public override Enum ParseValue(string input, IFormatProvider formatProvider)
+        {
+            return ParseValue(input);
+        }
+
+        public override string FormatValue(Enum input, IFormatProvider formatProvider)
+        {
+            return FormatValue(input);
         }
     }
 }

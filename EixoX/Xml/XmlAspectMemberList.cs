@@ -40,7 +40,7 @@ namespace EixoX.Xml
 
         }
 
-        protected override void WriteXml(object entity, System.Xml.XmlElement parent, string localName, bool mandatory)
+        protected override void WriteXml(object entity, System.Xml.XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory)
         {
             object value = GetValue(entity);
             if (value == null)
@@ -58,12 +58,12 @@ namespace EixoX.Xml
                     XmlElement element = parent.OwnerDocument.CreateElement(localName);
                     parent.AppendChild(element);
                     foreach (XmlAspectMember xam in _Aspect)
-                        xam.WriteXml(obj, element);
+                        xam.WriteXml(obj, element, formatProvider);
                 }
             }
         }
 
-        protected override void ReadXml(object entity, System.Xml.XmlElement parent, string localName, bool mandatory)
+        protected override void ReadXml(object entity, System.Xml.XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory)
         {
             XmlNodeList nodes = parent.GetElementsByTagName(localName);
             if (nodes.Count > 0)
@@ -78,7 +78,7 @@ namespace EixoX.Xml
                 {
                     object child = _Constructor.Invoke(null);
                     foreach (XmlAspectMember xam in _Aspect)
-                        xam.ReadXml(child, element);
+                        xam.ReadXml(child, element, formatProvider);
                     list.Add(child);
                 }
             }

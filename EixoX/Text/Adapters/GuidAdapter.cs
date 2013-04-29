@@ -4,38 +4,34 @@ using System.Text;
 
 namespace EixoX.Text.Adapters
 {
-    public class GuidAdapter : TextAdapter<Guid>
+    public class GuidAdapter : TextAdapterBase<Guid>
     {
-        public bool IsEmpty(Guid value)
+
+        public override bool IsEmpty(Guid value)
         {
-            return value != Guid.Empty;
+            return value == Guid.Empty;
         }
 
-        public Guid ParseValue(string input)
+        public override Guid ParseValue(string input)
         {
             return string.IsNullOrEmpty(input) ?
                 Guid.Empty :
                 new Guid(input);
         }
 
-        public string FormatValue(Guid input)
+        public override string FormatValue(Guid input)
         {
             return input.ToString();
         }
 
-        public bool IsEmpty(object input)
+        public override Guid ParseValue(string input, IFormatProvider formatProvider)
         {
-            return input == null || ((Guid)input) == Guid.Empty;
+            return ParseValue(input);
         }
 
-        public object ParseObject(string input)
+        public override string FormatValue(Guid input, IFormatProvider formatProvider)
         {
-            return string.IsNullOrEmpty(input) ? null : (object)new Guid(input);
-        }
-
-        public string FormatObject(object input)
-        {
-            return input == null ? null : ((Guid)input).ToString();
+            return FormatValue(input);
         }
     }
 }

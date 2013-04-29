@@ -35,5 +35,26 @@ namespace EixoX.Text.Adapters
             else
                 return FormatValue((T)input);
         }
+
+        public abstract T ParseValue(string input, IFormatProvider formatProvider);
+
+        public abstract string FormatValue(T input, IFormatProvider formatProvider);
+
+
+        public object ParseObject(string input, IFormatProvider formatProvider)
+        {
+            if (string.IsNullOrEmpty(input))
+                return null;
+            else
+                return ParseValue(input, formatProvider);
+        }
+
+        public string FormatObject(object input, IFormatProvider formatProvider)
+        {
+            if (input == null)
+                return null;
+            else
+                return FormatValue((T)input, formatProvider);
+        }
     }
 }

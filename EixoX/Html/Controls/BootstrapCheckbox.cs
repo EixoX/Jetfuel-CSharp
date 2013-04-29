@@ -8,7 +8,20 @@ namespace EixoX.Html.Controls
     {
         public override void Render(System.IO.TextWriter writer, UI.UIControlState state, params HtmlAttribute[] attributes)
         {
-            base.Render(writer, state, attributes);
+            writer.Write("<div class=\"");
+            writer.Write(string.IsNullOrEmpty(state.ErrorMessage) ? "control-group" : "control-group error");
+            writer.WriteLine("\">");
+
+            writer.WriteLine("<div class=\"controls\">");
+            writer.Write("<label class=\"checkbox\">");
+            writer.Write(HtmlHelper.HtmlFormat(state.Label));
+            RenderInput(writer, state, attributes);
+            writer.WriteLine("</label>");
+            RenderHintOrError(writer, state);
+            writer.WriteLine("</div>");
+
+
+            writer.WriteLine("</div>");
         }
 
         protected override HtmlNode CreateInput(UI.UIControlState state)

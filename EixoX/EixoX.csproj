@@ -37,6 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base36.cs" />
     <Compile Include="Collections\Dictionary.cs" />
     <Compile Include="Helpers\CharHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="UI\UIControls\UIRadioGroup.cs" />
     <Compile Include="UI\UIReflectionFactory.cs" />
     <Compile Include="UI\UIControls\UISingleline.cs" />
+    <Compile Include="UsecaseResult.cs" />
     <Compile Include="Xml\XmlAspect.cs" />
     <Compile Include="Xml\XmlAspectMember.cs" />
     <Compile Include="Xml\XmlAspectMemberCDATA.cs" />

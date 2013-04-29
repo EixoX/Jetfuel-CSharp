@@ -48,7 +48,7 @@ namespace EixoX.Xml
             {
                 TextAdapter adapter = TextAdapters.Create(
                     acessor.DataType,
-                    string.IsNullOrEmpty(xa.Culture) ? CultureInfo.InvariantCulture :
+                    string.IsNullOrEmpty(xa.Culture) ? null :
                     CultureInfo.GetCultureInfo(xa.Culture),
                     xa.FormatString,
                     NumberStyles.Any,
@@ -84,7 +84,7 @@ namespace EixoX.Xml
 
                         default:
                             throw new NotImplementedException("Unable to serialize primitive type with " + xa.XmlType);
-                    
+
                     }
                 }
                 else if (typeof(IList).IsAssignableFrom(acessor.DataType))
@@ -145,13 +145,17 @@ namespace EixoX.Xml
             get { return this._Culture; }
         }
 
-
         public void ReadXml(object entity, XmlElement element)
+        {
+            ReadXml(entity, element, _Culture);
+        }
+
+        public void ReadXml(object entity, XmlElement element, IFormatProvider formatProvider)
         {
             if (_XmlName.Equals(element.Name, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (XmlAspectMember xam in this)
-                    xam.ReadXml(entity, element);
+                    xam.ReadXml(entity, element, formatProvider);
             }
             else
                 throw new ArgumentException("Expected element with name " + _XmlName + " and got " + element.Name);
@@ -159,31 +163,47 @@ namespace EixoX.Xml
 
         public object ReadXml(XmlElement element)
         {
+            return ReadXml(element, _Culture);
+        }
+        public object ReadXml(XmlElement element, IFormatProvider formatProvider)
+        {
             object entity = Activator.CreateInstance(this.DataType);
-            ReadXml(entity, element);
+            ReadXml(entity, element, formatProvider);
             return entity;
         }
 
         public object ReadXml(XmlDocument document)
         {
-            return ReadXml(document.DocumentElement);
+            return ReadXml(document, _Culture);
+        }
+        public object ReadXml(XmlDocument document, IFormatProvider formatProvider)
+        {
+            return ReadXml(document.DocumentElement, formatProvider);
         }
 
         public void WriteXml(object entity, XmlElement parent)
         {
+            WriteXml(entity, parent, _Culture);
+        }
+        public void WriteXml(object entity, XmlElement parent, IFormatProvider formatProvider)
+        {
             XmlElement element = parent.OwnerDocument.CreateElement(this._XmlName);
             parent.AppendChild(element);
             foreach (XmlAspectMember xam in this)
-                xam.WriteXml(entity, element);
+                xam.WriteXml(entity, element, formatProvider);
         }
 
         public XmlDocument WriteXml(object entity)
+        {
+            return WriteXml(entity, _Culture);
+        }
+        public XmlDocument WriteXml(object entity, IFormatProvider formatProvider)
         {
             XmlDocument document = new XmlDocument();
             XmlElement element = document.CreateElement(this.XmlName);
             document.AppendChild(element);
             foreach (XmlAspectMember xam in this)
-                xam.WriteXml(entity, element);
+                xam.WriteXml(entity, element, formatProvider);
             return document;
         }
 

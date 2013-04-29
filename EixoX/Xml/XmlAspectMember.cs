@@ -40,8 +40,8 @@ namespace EixoX.Xml
         }
 
 
-        protected abstract void WriteXml(object entity, XmlElement parent, string localName, bool mandatory);
-        protected abstract void ReadXml(object entity, XmlElement parent, string localName, bool mandatory);
+        protected abstract void WriteXml(object entity, XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory);
+        protected abstract void ReadXml(object entity, XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory);
 
         /// <summary>
         /// Serializes the content of the member to an xml element.
@@ -49,9 +49,9 @@ namespace EixoX.Xml
         /// <param name="entity">The entity to read from.</param>
         /// <param name="parent">The xml element to write to.</param>
         /// <param name="defaultCulture">The default culture to use when formatting values.</param>
-        public void WriteXml(object entity, XmlElement parent)
+        public void WriteXml(object entity, XmlElement parent, IFormatProvider formatProvider)
         {
-            WriteXml(entity, parent, _LocalName, _Mandatory);
+            WriteXml(entity, parent, formatProvider, _LocalName, _Mandatory);
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace EixoX.Xml
         /// <param name="entity">The entity to write to.</param>
         /// <param name="parent">The parent element to read from.</param>
         /// <param name="defaultCulture">The default culture to use when parsing.</param>
-        public void ReadXml(object entity, XmlElement parent)
+        public void ReadXml(object entity, XmlElement parent, IFormatProvider formatProvider)
         {
-            ReadXml(entity, parent, _LocalName, _Mandatory);
+            ReadXml(entity, parent, formatProvider, _LocalName, _Mandatory);
         }
 
 

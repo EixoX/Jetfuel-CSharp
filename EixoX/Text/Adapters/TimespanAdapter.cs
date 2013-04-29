@@ -4,36 +4,36 @@ using System.Text;
 
 namespace EixoX.Text.Adapters
 {
-    public class TimeSpanAdapter : TextAdapter<TimeSpan>
+    public class TimeSpanAdapter : TextAdapterBase<TimeSpan>
     {
-        public bool IsEmpty(TimeSpan value)
+
+        public override bool IsEmpty(TimeSpan value)
         {
             return value == TimeSpan.Zero;
         }
 
-        public TimeSpan ParseValue(string input)
+        public override TimeSpan ParseValue(string input)
         {
-            return string.IsNullOrEmpty(input) ? TimeSpan.Zero : TimeSpan.Parse(input);
+            return string.IsNullOrEmpty(input) ?
+                TimeSpan.Zero :
+                TimeSpan.Parse(input);
         }
 
-        public string FormatValue(TimeSpan input)
+        public override string FormatValue(TimeSpan input)
         {
             return input.ToString();
         }
 
-        public bool IsEmpty(object input)
+        public override TimeSpan ParseValue(string input, IFormatProvider formatProvider)
         {
-            return input == null || ((TimeSpan)input) == TimeSpan.Zero;
+            return string.IsNullOrEmpty(input) ?
+                TimeSpan.Zero :
+                TimeSpan.Parse(input);
         }
 
-        public object ParseObject(string input)
+        public override string FormatValue(TimeSpan input, IFormatProvider formatProvider)
         {
-            return string.IsNullOrEmpty(input) ? null : (object)TimeSpan.Parse(input);
-        }
-
-        public string FormatObject(object input)
-        {
-            return input == null ? null : ((TimeSpan)input).ToString();
+            return input.ToString();
         }
     }
 }

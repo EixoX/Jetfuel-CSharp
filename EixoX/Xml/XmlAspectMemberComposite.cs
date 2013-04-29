@@ -19,7 +19,7 @@ namespace EixoX.Xml
             this._Constructor = constructor;
         }
 
-        protected override void WriteXml(object entity, System.Xml.XmlElement parent, string localName, bool mandatory)
+        protected override void WriteXml(object entity, System.Xml.XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory)
         {
             object value = GetValue(entity);
             if (value == null)
@@ -36,11 +36,11 @@ namespace EixoX.Xml
                 parent.AppendChild(element);
 
                 foreach (XmlAspectMember member in _Aspect)
-                    member.WriteXml(value, element);
+                    member.WriteXml(value, element, formatProvider);
             }
         }
 
-        protected override void ReadXml(object entity, System.Xml.XmlElement parent, string localName, bool mandatory)
+        protected override void ReadXml(object entity, System.Xml.XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory)
         {
             XmlElement element = parent[localName];
             if (element == null)
@@ -53,7 +53,7 @@ namespace EixoX.Xml
                 SetValue(entity, value);
             }
             foreach (XmlAspectMember member in _Aspect)
-                member.ReadXml(value, element);
+                member.ReadXml(value, element, formatProvider);
         }
     }
 }

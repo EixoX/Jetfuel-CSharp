@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EixoX.Text.Adapters
 {
-    public class DateTimeAdapter : TextAdapter<DateTime>
+    public class DateTimeAdapter : TextAdapterBase<DateTime>
     {
         private readonly IFormatProvider _FormatProvider;
         private readonly DateTimeStyles _DateTimeStyles;
@@ -41,44 +41,54 @@ namespace EixoX.Text.Adapters
 
 
 
-
-        public bool IsEmpty(DateTime value)
+        public override bool IsEmpty(DateTime value)
         {
             return value == DateTime.MinValue;
         }
 
-        public DateTime ParseValue(string input)
+        public override DateTime ParseValue(string input)
         {
-            return DateTime.Parse(input, _FormatProvider, _DateTimeStyles);
+            return string.IsNullOrEmpty(input) ?
+                DateTime.MinValue :
+                this._FormatProvider == null ?
+                DateTime.Parse(input) :
+                DateTime.Parse(input, this._FormatProvider, this._DateTimeStyles);
         }
 
-        public string FormatValue(DateTime input)
+        public override string FormatValue(DateTime input)
         {
-            return input.ToString(_FormatString, _FormatProvider);
-        }
-
-        public bool IsEmpty(object input)
-        {
-            if (input == null)
-                return true;
-            else
-                return IsEmpty((DateTime)input);
-        }
-
-        public object ParseObject(string input)
-        {
-            if (string.IsNullOrEmpty(input))
+            if (input == DateTime.MinValue)
                 return null;
+
+            if (this._FormatProvider == null)
+            {
+                return this._FormatString == null ?
+                    input.ToString() : input.ToString(_FormatString);
+            }
             else
-                return DateTime.Parse(input, _FormatProvider, _DateTimeStyles);
+            {
+                return this._FormatString == null ?
+                    input.ToString(_FormatProvider) :
+                    input.ToString(_FormatString, _FormatProvider);
+            }
         }
 
-        public string FormatObject(object input)
+        public override DateTime ParseValue(string input, IFormatProvider formatProvider)
         {
-            if (input == null)
+            return string.IsNullOrEmpty(input) ?
+                DateTime.MinValue :
+                DateTime.Parse(input, formatProvider);
+        }
+
+        public override string FormatValue(DateTime input, IFormatProvider formatProvider)
+        {
+            if (input == DateTime.MinValue)
                 return null;
-            else
-                return FormatValue((DateTime)input);
+
+            return _FormatString == null ?
+                input.ToString(formatProvider) :
+                input.ToString(_FormatString, _FormatProvider);
+
         }
     }
 }

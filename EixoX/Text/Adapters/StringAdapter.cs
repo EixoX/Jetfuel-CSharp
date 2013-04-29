@@ -4,36 +4,32 @@ using System.Text;
 
 namespace EixoX.Text.Adapters
 {
-    public class StringAdapter : TextAdapter<string>
+    public class StringAdapter : TextAdapterBase<string>
     {
-        public bool IsEmpty(string value)
+
+        public override bool IsEmpty(string value)
         {
             return string.IsNullOrEmpty(value);
         }
 
-        public string ParseValue(string input)
+        public override string ParseValue(string input)
         {
             return input;
         }
 
-        public string FormatValue(string input)
+        public override string FormatValue(string input)
         {
             return input;
         }
 
-        public bool IsEmpty(object input)
-        {
-            return input == null || string.IsNullOrEmpty((string)input);
-        }
-
-        public object ParseObject(string input)
+        public override string ParseValue(string input, IFormatProvider formatProvider)
         {
             return input;
         }
 
-        public string FormatObject(object input)
+        public override string FormatValue(string input, IFormatProvider formatProvider)
         {
-            return input == null ? null : (string)input;
+            return input;
         }
     }
 }

@@ -212,5 +212,33 @@ namespace EixoX.Text.Adapters
             else
                 return FormatValue((T)input, _FormatProvider, _FormatString);
         }
+
+        /// <summary>
+        /// Parses an object.
+        /// </summary>
+        /// <param name="input">The input string to parse.</param>
+        /// <param name="formatProvider">The format provider to use.</param>
+        /// <returns>The parsed object.</returns>
+        public object ParseObject(string input, IFormatProvider formatProvider)
+        {
+            if (string.IsNullOrEmpty(input))
+                return null;
+            else
+                return ParseValue(input, formatProvider, _NumberStyles);
+        }
+
+        /// <summary>
+        /// Formats an object.
+        /// </summary>
+        /// <param name="input">The object to format.</param>
+        /// <param name="formatProvider">The format provider to use.</param>
+        /// <returns>A formatted string of an object.</returns>
+        public string FormatObject(object input, IFormatProvider formatProvider)
+        {
+            if (input == null)
+                return null;
+            else
+                return FormatValue((T)input, formatProvider, _FormatString);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace EixoX.Xml
             this._Adapter = adapter;
         }
 
-        protected override void WriteXml(object entity, XmlElement parent, string localName, bool mandatory)
+        protected override void WriteXml(object entity, XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory)
         {
             object value = GetValue(entity);
             if (_Adapter.IsEmpty(value))
@@ -29,16 +29,16 @@ namespace EixoX.Xml
             }
             else
             {
-                string content = _Adapter.FormatObject(value);
+                string content = _Adapter.FormatObject(value, formatProvider);
                 parent.SetAttribute(localName, content);
             }
 
         }
 
-        protected override void ReadXml(object entity, XmlElement parent, string localName, bool mandatory)
+        protected override void ReadXml(object entity, XmlElement parent, IFormatProvider formatProvider, string localName, bool mandatory)
         {
             string content = parent.GetAttribute(localName);
-            object value = _Adapter.ParseObject(content);
+            object value = _Adapter.ParseObject(content, formatProvider);
             SetValue(entity, value);
         }
     }
