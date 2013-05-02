@@ -1,4 +1,4 @@
-﻿using EixoX.Text.Adapters;
+﻿using EixoX.Adapters;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

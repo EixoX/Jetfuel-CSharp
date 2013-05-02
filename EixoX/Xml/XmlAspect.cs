@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using EixoX;
-using EixoX.Text.Adapters;
+using EixoX.Adapters;
 using System.Collections;
 
 namespace EixoX.Xml
@@ -46,13 +46,12 @@ namespace EixoX.Xml
             }
             else
             {
-                TextAdapter adapter = TextAdapters.Create(
+                SimpleAdapter adapter = SimpleAdapters.CreateInstance(
                     acessor.DataType,
-                    string.IsNullOrEmpty(xa.Culture) ? null :
-                    CultureInfo.GetCultureInfo(xa.Culture),
                     xa.FormatString,
-                    NumberStyles.Any,
-                    DateTimeStyles.None);
+                    string.IsNullOrEmpty(xa.Culture) ? null :
+                    CultureInfo.GetCultureInfo(xa.Culture)
+                    );
 
                 if (adapter != null)
                 {

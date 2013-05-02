@@ -65,5 +65,11 @@ namespace EixoX
                 start++;
             return start;
         }
+
+
+        public static string SqlSafeString(string input)
+        {
+            return input.Replace("'", "''").Replace("\\", "\\\\");
+        }
     }
 }

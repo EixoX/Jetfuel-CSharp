@@ -1,4 +1,4 @@
-﻿using EixoX.Text.Adapters;
+﻿using EixoX.Adapters;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +9,9 @@ namespace EixoX.Xml
     public class XmlAspectMemberAttribute
         : XmlAspectMember
     {
-        private TextAdapter _Adapter;
+        private SimpleAdapter _Adapter;
 
-        public XmlAspectMemberAttribute(ClassAcessor acessor, string localName, bool mandatory, TextAdapter adapter)
+        public XmlAspectMemberAttribute(ClassAcessor acessor, string localName, bool mandatory, SimpleAdapter adapter)
             : base(acessor, localName, mandatory)
         {
             this._Adapter = adapter;
