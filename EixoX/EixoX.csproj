@@ -41,6 +41,7 @@
     <Compile Include="Collections\Dictionary.cs" />
     <Compile Include="Helpers\CharHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
+    <Compile Include="Helpers\UrlPathHelper.cs" />
     <Compile Include="Html\BootstrapControl.cs" />
     <Compile Include="Html\BootstrapControlFactory.cs" />
     <Compile Include="Html\BootstrapHelper.cs" />
