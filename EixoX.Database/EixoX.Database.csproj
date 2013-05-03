@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DE721FE3-4943-48E0-8236-D0346A2284F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EixoX.Database</RootNamespace>
+    <AssemblyName>EixoX.Database</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\AnsiStringAdapter.cs" />
+    <Compile Include="Adapters\Base64Adapter.cs" />
+    <Compile Include="Adapters\BooleanAdapter.cs" />
+    <Compile Include="Adapters\ByteAdapter.cs" />
+    <Compile Include="Adapters\GuidAdapter.cs" />
+    <Compile Include="Adapters\Int16Adapter.cs" />
+    <Compile Include="Adapters\Int32Adapter.cs" />
+    <Compile Include="Adapters\Int64Adapter.cs" />
+    <Compile Include="Adapters\NTextAdapter.cs" />
+    <Compile Include="Adapters\NVarcharAdapter.cs" />
+    <Compile Include="Adapters\TextAdapter.cs" />
+    <Compile Include="Adapters\VarcharAdapter.cs" />
+    <Compile Include="Adapters\XmlStringAdapter.cs" />
+    <Compile Include="DatabaseAspect.cs" />
+    <Compile Include="DatabaseAspectMember.cs" />
+    <Compile Include="DatabaseAspectParameter.cs" />
+    <Compile Include="DatabaseCommand.cs" />
+    <Compile Include="DatabaseDialect.cs" />
+    <Compile Include="DatabaseAspectAdapter.cs" />
+    <Compile Include="DatabaseDialectBase.cs" />
+    <Compile Include="DatabaseEngine.cs" />
+    <Compile Include="DatabaseStorage.cs" />
+    <Compile Include="PreparedCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServer\Adapters\SqlInt32Adapter.cs" />
+    <Compile Include="SqlServer\Adapters\SqlInt64Adapter.cs" />
+    <Compile Include="SqlServer\SqlServerAspect.cs" />
+    <Compile Include="SqlServer\SqlServerAspectMember.cs" />
+    <Compile Include="SqlServer\SqlServerEngine.cs" />
+    <Compile Include="SqlServer\SqlServerStorage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Odbc\" />
+    <Folder Include="OleDb\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EixoX\EixoX.csproj">
+      <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
+      <Name>EixoX</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

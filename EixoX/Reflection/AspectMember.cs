@@ -61,7 +61,8 @@ namespace EixoX
         /// </summary>
         /// <param name="entity">The entity to set value on.</param>
         /// <param name="value">The value to set.</param>
-        public virtual void SetValue(object entity, object value)
+        /// <param name="formatProvider">The format provider to use.</param>
+        public virtual void SetValue(object entity, object value, IFormatProvider formatProvider)
         {
             if (value != null)
             {
@@ -69,13 +70,110 @@ namespace EixoX
                 {
                     if (value.GetType() != _Acessor.DataType)
                     {
-                        value = Convert.ChangeType(value, _Acessor.DataType);
+                        value = Convert.ChangeType(value, _Acessor.DataType, formatProvider);
                     }
                 }
 
             }
 
             _Acessor.SetValue(entity, value);
+        }
+
+
+        /// <summary>
+        /// Sets a value to a member.
+        /// </summary>
+        /// <param name="entity">The entity to set value on.</param>
+        /// <param name="value">The value to set.</param>
+        public virtual void SetValue(object entity, object value)
+        {
+            SetValue(entity, value, System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Parses and sets a text value to a member
+        /// </summary>
+        /// <param name="entity">The entity to set the value on.</param>
+        /// <param name="textValue">The value to set.</param>
+        /// <param name="formatProvider">The format provider to use.</param>
+        public virtual void SetParsedValue(object entity, string textValue, IFormatProvider formatProvider)
+        {
+            object memberValue;
+
+            if (_Acessor.DataType == PrimitiveTypes.String)
+            {
+                memberValue = textValue;
+            }
+            else if (_Acessor.DataType.IsEnum)
+            {
+                memberValue = string.IsNullOrEmpty(textValue) ? null : 
+                    Enum.Parse(_Acessor.DataType, textValue);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.DateTime)
+            {
+                memberValue =
+                    string.IsNullOrEmpty(textValue) ? DateTime.MinValue :
+                    DateTime.Parse(textValue, formatProvider);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.TimeSpan)
+            {
+
+                memberValue = string.IsNullOrEmpty(textValue) ? TimeSpan.Zero :
+                    TimeSpan.Parse(textValue);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.Guid)
+            {
+                memberValue = string.IsNullOrEmpty(textValue) ? Guid.Empty :
+                    new Guid(textValue);
+            }
+            else
+            {
+                memberValue = string.IsNullOrEmpty(textValue) ? null :
+                    Convert.ChangeType(textValue, _Acessor.DataType, formatProvider);
+            }
+
+            _Acessor.SetValue(entity, memberValue);
+        }
+
+        public string GetTextValue(object entity, IFormatProvider formatProvider, string formatString)
+        {
+            object memberValue = _Acessor.GetValue(entity);
+
+            if (memberValue == null)
+                return null;
+
+            else if (_Acessor.DataType == PrimitiveTypes.String)
+            {
+                return (string)memberValue;
+            }
+            else if (_Acessor.DataType.IsEnum)
+            {
+                return string.Format(formatString, (int)memberValue);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.DateTime)
+            {
+                return ((DateTime)memberValue).ToString(formatString, formatProvider);
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.TimeSpan)
+            {
+                return memberValue.ToString();
+            }
+            else if (_Acessor.DataType == PrimitiveTypes.Guid)
+            {
+                return ((Guid)memberValue) == Guid.Empty ? null : memberValue.ToString();
+            }
+            else
+            {
+                return string.Format(
+                    formatProvider,
+                    formatString,
+                    memberValue);
+            }
+        }
+
+        public virtual string GetTextValue(object entity, IFormatProvider formatProvider)
+        {
+            return GetTextValue(entity, formatProvider, "{0}");
         }
 
         /// <summary>
