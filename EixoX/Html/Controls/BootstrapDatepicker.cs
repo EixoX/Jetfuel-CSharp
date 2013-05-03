@@ -9,11 +9,12 @@ namespace EixoX.Html.Controls
 
         protected override HtmlNode CreateInput(UI.UIControlState state)
         {
+            DateTime value = Convert.ToDateTime(state.Value, System.Globalization.CultureInfo.CurrentCulture);
             return new HtmlStandalone("input",
                 new HtmlAttribute("type", "text"),
                 new HtmlAttribute("name", state.Name),
                 new HtmlAttribute("id", state.Name),
-                new HtmlAttribute("value", Convert.ToDateTime(state.Value).ToString("yyyy-MM-dd")),
+                new HtmlAttribute("value", value != DateTime.MinValue ? value.ToShortDateString() : ""),
                 new HtmlAttribute("class", "datepicker"));
         }   
     }
