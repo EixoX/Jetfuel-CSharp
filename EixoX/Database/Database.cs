@@ -95,6 +95,7 @@ namespace EixoX.Data
                     {
                         cmd.CommandType = commandType;
                         cmd.CommandText = commandText;
+                        cmd.Parameters.Clear();
                         for (int i = 0; i < commandParameters.Length; i++)
                             cmd.Parameters.Add(commandParameters[i]);
 
