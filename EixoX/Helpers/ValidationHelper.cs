@@ -67,7 +67,5 @@ namespace EixoX
         {
             return EixoX.Restrictions.Email.IsEmail(value);
         }
-        
-        
     }
 }

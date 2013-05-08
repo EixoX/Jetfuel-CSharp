@@ -6,6 +6,8 @@ namespace EixoX
 {
     public static class StringHelper
     {
+        public const string HexAlphabet = "0123456789abcdef";
+
         public static string DigitsOnly(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -38,7 +40,6 @@ namespace EixoX
                 return input.Substring(0, length);
         }
 
-
         public static IEnumerable<object> Split(string input, Type conversionType, params char[] separator)
         {
             return Split(input, conversionType, System.Globalization.CultureInfo.CurrentUICulture, separator);
@@ -50,7 +51,6 @@ namespace EixoX
             for (int i = 0; i < spl.Length; i++)
                 yield return Convert.ChangeType(spl[i], conversionType, formatProvider);
         }
-
 
         public static int NextNonWhiteSpaceIndex(string input, int start, int maxlength)
         {
@@ -66,10 +66,44 @@ namespace EixoX
             return start;
         }
 
-
         public static string SqlSafeString(string input)
         {
             return input.Replace("'", "''").Replace("\\", "\\\\");
+        }
+
+        public static string HexEncode(byte[] input, int offset, int length)
+        {
+            char[] chars = new char[length * 2];
+            for (int i = 0; i < length; i++)
+            {
+                chars[(i * 2)] = HexAlphabet[input[i + offset] / 16];
+                chars[(i * 2) + 1] = HexAlphabet[input[i + offset] % 16];
+            }
+            return new string(chars);
+        }
+
+        public static string HexEncode(byte[] input)
+        {
+            return HexEncode(input, 0, input.Length);
+        }
+
+        public static byte[] HexDecode(string input, int offset, int length)
+        {
+            byte[] arr = new byte[length / 2];
+            for (int i = 0; i < length; i++)
+            {
+                arr[i] =
+                    (byte)(HexAlphabet.IndexOf(input[((offset + i) * 2)]) * 16);
+
+                arr[i] +=
+                    (byte)(HexAlphabet.IndexOf(input[((offset + i) * 2) + 1]));
+            }
+            return arr;
+        }
+
+        public static byte[] HexDecode(string input)
+        {
+            return HexDecode(input, 0, input.Length);
         }
     }
 }
