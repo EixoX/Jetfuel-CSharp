@@ -32,6 +32,7 @@ namespace EixoX.RocketLauncher
 
             do
             {
+                #region Getting command action
                 this.View.ShowCommandMenu();
 
                 Commands selectedCommand = Commands.Quit;
@@ -58,22 +59,28 @@ namespace EixoX.RocketLauncher
                 // Stops infite loop
                 if (selectedCommand == Commands.Quit)
                     break;
+                #endregion
+
 
                 List<object> args = new List<object>();
 
+                ProgrammingLanguage language;
+                string directory = null;
+                List<ClassFile> classesGenerated;
+                
                 switch (selectedCommand)
                 {
                     case Commands.ClassesFromDatabase:
-                        ProgrammingLanguage language = this.View.GetProgrammingLanguage();
-                        string directory = this.View.GetDirectory();
+                        language = this.View.GetProgrammingLanguage();
+                        directory = this.View.GetDirectory();
+
                         commandToRun = new Command.ClassesFromDatabaseCommand(language, directory, this.View);
                         commandToRun.Run(this.View.YesOrNo("Run command in verbose mode?"));
                         break;
-                    case Commands.MVCScaffold:
-                        commandToRun = new MVCScaffoldCommand();
-                        break;
                     case Commands.GlobalizationFiles:
-                        // commandToRun = new GlobalizationFilesCommand();
+                        language  = this.View.GetProgrammingLanguage();
+                        directory = this.View.GetDirectory();
+                        commandToRun = new GlobalizationFilesCommand(language, directory, classesGenerated);
                         break;
                 }
 

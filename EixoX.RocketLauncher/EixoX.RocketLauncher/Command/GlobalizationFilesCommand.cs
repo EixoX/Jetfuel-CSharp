@@ -13,26 +13,16 @@ namespace EixoX.RocketLauncher.Command
             get { return Commands.GlobalizationFiles; }
         }
 
-        public void Run(params object[] args)
+        public bool GatherClassesFromDb { get; set; }
+
+        public GlobalizationFilesCommand(string directory, ProgrammingLanguage language, List<ClassFile> preGeneratedClasses)
         {
-            throw new NotImplementedException();
-
-            bool fromDatabase = (bool)args[0];
-
-            if (fromDatabase)
-            {
-                /// TODO: Implement globalization files generation from database
-            }
-            else
-            {
-                /// TODO: Implement globalizatio files generation from classes
-            }
+            
         }
 
-        private List<GenericDatabaseTable> GetTables(string connectionString)
+        public void Run(params object[] args)
         {
-            SQLServerGatherer gatherer = new SQLServerGatherer(connectionString);
-            return gatherer.GetTables().ToList();
+
         }
     }
 }
