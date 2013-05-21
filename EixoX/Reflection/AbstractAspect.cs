@@ -219,5 +219,11 @@ namespace EixoX
                 children[i] = _Members[GetOrdinalOrException(names[i])];
             return children;
         }
+
+
+        public object GetValue(object entity, string name)
+        {
+            return _Members[GetOrdinalOrException(name)].GetValue(entity);
+        }
     }
 }
