@@ -101,7 +101,12 @@ namespace EixoX.Html
 
         public static string OptionHtml(object value, object label)
         {
-            return string.Concat("<option value=\"", value.ToString(), "\">", label.ToString(), "</option>");
+            return OptionHtml(value, label, false);
+        }
+
+        public static string OptionHtml(object value, object label, bool selected)
+        {
+            return string.Concat("<option value=\"", value.ToString(), "\"", (selected ? " selected=\"selected\" " : ""), "\">", label.ToString(), "</option>");
         }
     }
 }
