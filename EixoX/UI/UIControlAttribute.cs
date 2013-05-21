@@ -1,5 +1,7 @@
-﻿using EixoX.Data;
+﻿using EixoX.Collections;
+using EixoX.Data;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -23,6 +25,27 @@ namespace EixoX.UI
                 (choiceSource.IsEnum ?
                 (UIControlChoices)new UIControlEnumChoices(choiceSource) :
                 new UIControlClassStorageChoices(choiceSource));
+        }
+
+        public UIControlAttribute(int[] array)
+        {
+            this._ControlChoices = new UIControlArrayChoices(array);
+        }
+
+        public UIControlAttribute(string defaultLabel, int[] array)
+        {
+            this._DefaultLabel = defaultLabel;
+            this._ControlChoices = new UIControlArrayChoices(array);
+        }
+
+        public UIControlAttribute(int minInclusive, int maxExclusive)
+        {
+            int[] aux = new int[maxExclusive - minInclusive];
+            int j = 0;
+            for (int i = minInclusive; i < maxExclusive; i++)
+                aux[j++] = i;
+
+            this._ControlChoices = new UIControlArrayChoices(aux);
         }
 
         public UIControlAttribute(string defaultLabel, string defaultHint)

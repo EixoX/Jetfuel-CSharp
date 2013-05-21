@@ -16,6 +16,8 @@ namespace EixoX.Html.Controls
                 foreach (KeyValuePair<object, object> item in state.Options)
                 {
                     HtmlSimple option = new HtmlSimple("option", item.Value);
+                    option.Attributes.AddLast(new HtmlAttribute("value", item.Key));
+
                     if (item.Key.ToString().Equals(state.Value.ToString()))
                         option.Attributes.AddLast("selected", "selected");
 

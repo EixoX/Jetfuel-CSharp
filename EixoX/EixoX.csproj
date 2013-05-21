@@ -266,6 +266,7 @@
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Text\Tokenizer.cs" />
     <Compile Include="UI\UIControl.cs" />
+    <Compile Include="UI\UIControlArrayChoices.cs" />
     <Compile Include="UI\UIControlChoices.cs" />
     <Compile Include="UI\UIControlClassStorageChoices.cs" />
     <Compile Include="UI\UIControlEnumChoices.cs" />

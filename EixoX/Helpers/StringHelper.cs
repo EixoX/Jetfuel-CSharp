@@ -105,5 +105,21 @@ namespace EixoX
         {
             return HexDecode(input, 0, input.Length);
         }
+
+        public static string StringMaxLength(string input, int maxLenght)
+        {
+
+            string output = "";
+            if (input.Length > maxLenght)
+            {
+                output = input.Substring(0, (maxLenght - 1)) + "..." ;
+            }
+            else
+            {
+                output = input;
+            }
+
+            return output;
+        }
     }
 }
