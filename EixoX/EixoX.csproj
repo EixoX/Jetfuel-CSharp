@@ -77,9 +77,7 @@
     <Compile Include="Adapters\XmlElementStringAdapter.cs" />
     <Compile Include="Base36.cs" />
     <Compile Include="Collections\Dictionary.cs" />
-    <Compile Include="EmailTemplate.cs" />
     <Compile Include="Helpers\CharHelper.cs" />
-    <Compile Include="Helpers\EnumerationHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Helpers\UrlPathHelper.cs" />
     <Compile Include="Html\BootstrapControl.cs" />
@@ -264,7 +262,6 @@
     <Compile Include="Text\TextColumnSchema.cs" />
     <Compile Include="Text\TextDataReader.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
-    <Compile Include="Text\Tokenizer.cs" />
     <Compile Include="UI\UIControl.cs" />
     <Compile Include="UI\UIControlArrayChoices.cs" />
     <Compile Include="UI\UIControlChoices.cs" />
