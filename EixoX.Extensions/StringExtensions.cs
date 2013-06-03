@@ -37,5 +37,10 @@ namespace System
         {
             return EixoX.FormatHelper.Cnpj(value);
         }
+
+        public static bool EqualsIfNotNull(this string obj, string compareTo, StringComparison comparison)
+        {
+            return string.IsNullOrEmpty(obj) ? false : obj.ToString().Equals(compareTo, comparison);
+        }
     }
 }
