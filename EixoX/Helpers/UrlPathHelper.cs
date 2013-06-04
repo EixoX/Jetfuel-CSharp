@@ -15,7 +15,8 @@ namespace EixoX
 
             addition = addition.Replace("&", "").Replace(" ", "-");
             addition = addition.Replace("--", "-");
-
+            addition = addition.Replace(".", "");
+            
             sb.Append("~/");
             sb.Append(View);
             sb.Append("/");
