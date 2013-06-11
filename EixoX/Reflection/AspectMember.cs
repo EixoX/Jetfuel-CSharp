@@ -70,7 +70,14 @@ namespace EixoX
                 {
                     if (value.GetType() != _Acessor.DataType)
                     {
-                        value = Convert.ChangeType(value, _Acessor.DataType, formatProvider);
+                        if (PrimitiveTypes.String == _Acessor.DataType)
+                        {
+                            value = string.Format(formatProvider, "{0}", value);
+                        }
+                        else
+                        {
+                            value = Convert.ChangeType(value, _Acessor.DataType, formatProvider);
+                        }
                     }
                 }
 
@@ -106,7 +113,7 @@ namespace EixoX
             }
             else if (_Acessor.DataType.IsEnum)
             {
-                memberValue = string.IsNullOrEmpty(textValue) ? null : 
+                memberValue = string.IsNullOrEmpty(textValue) ? null :
                     Enum.Parse(_Acessor.DataType, textValue);
             }
             else if (_Acessor.DataType == PrimitiveTypes.DateTime)
