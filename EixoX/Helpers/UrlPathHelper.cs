@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EixoX.Helpers
+namespace EixoX
 {
     /// <summary>
     /// Create a Url with an addition information in the end of it
@@ -15,7 +15,8 @@ namespace EixoX.Helpers
 
             addition = addition.Replace("&", "").Replace(" ", "-");
             addition = addition.Replace("--", "-");
-
+            addition = addition.Replace(".", "");
+            
             sb.Append("~/");
             sb.Append(View);
             sb.Append("/");
@@ -58,6 +59,27 @@ namespace EixoX.Helpers
             sb.Append(addition);
 
             return sb.ToString(); ;
+        }
+
+        public static string GetFriendlyUrlName(string text)
+        {
+            int length = text.Length;
+            bool addedLetter = false;
+            StringBuilder builder = new StringBuilder(length);
+            for (int i = 0; i < length; i++)
+            {
+                if (char.IsLetterOrDigit(text, i))
+                {
+                    builder.Append(text[i]);
+                    addedLetter = true;
+                }
+                else if (addedLetter && char.IsWhiteSpace(text, i))
+                {
+                    addedLetter = false;
+                    builder.Append('-');
+                }
+            }
+            return builder.ToString();
         }
 
     }

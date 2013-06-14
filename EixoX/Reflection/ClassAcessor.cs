@@ -64,7 +64,17 @@ namespace EixoX
         /// <param name="inherit">The </param>
         /// <returns></returns>
         bool HasAttribute<TAttribute>(bool inherit);
-        
+
+        /// <summary>
+        /// Indicates that the acessor can read values from instances.
+        /// </summary>
+        bool CanRead { get; }
+
+        /// <summary>
+        /// Indicates that the acessor can write values to instances.
+        /// </summary>
+        bool CanWrite { get; }
+
 
     }
 }

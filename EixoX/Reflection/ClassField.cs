@@ -143,5 +143,16 @@ namespace EixoX
         {
             _Field.SetValue(entity, Convert.ChangeType(value, _Field.FieldType, formatProvider));
         }
+
+
+        public bool CanRead
+        {
+            get { return true; }
+        }
+
+        public bool CanWrite
+        {
+            get { return this._Field.IsLiteral == false && this._Field.IsInitOnly == false; }
+        }
     }
 }

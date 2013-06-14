@@ -1,6 +1,8 @@
 ﻿using EixoX.Collections;
+using EixoX.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace EixoX.Html
@@ -106,7 +108,28 @@ namespace EixoX.Html
 
         public static string OptionHtml(object value, object label, bool selected)
         {
-            return string.Concat("<option value=\"", value.ToString(), "\"", (selected ? " selected=\"selected\" " : ""), "\">", label.ToString(), "</option>");
+            return string.Concat("<option value=\"", HtmlDoubleQuoted(value), "\"", (selected ? " selected=\"selected\" " : ""), ">", label.ToString(), "</option>");
+        }
+
+        public static void WriteHiddenFields<T>(T entity, TextWriter writer, IFormatProvider formatProvider)
+        {
+            ClassSchema<T> schema = ClassSchema<T>.Instance;
+
+            foreach (AspectMember uca in schema)
+            {
+                if (uca.DataType.IsValueType || uca.DataType.IsEnum || uca.DataType == PrimitiveTypes.String)
+                {
+                    writer.Write("<input type=\"hidden\" name=\"");
+                    writer.Write(uca.Name);
+                    writer.Write("\" value=\"");
+
+                    object value = uca.GetValue(entity);
+                    string attributeValue = string.Format(formatProvider, "{0}", value);
+
+                    writer.Write(HtmlDoubleQuoted(attributeValue));
+                    writer.WriteLine("\" />");
+                }
+            }
         }
     }
 }
