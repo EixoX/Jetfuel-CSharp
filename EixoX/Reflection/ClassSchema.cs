@@ -51,22 +51,25 @@ namespace EixoX
                 {
                     AspectMember member = base[ordinal];
 
-                    string collectionValue = collection[key];
-
-                    int interceptorOrdinal = interceptors.GetOrdinal(key);
-                    if (interceptorOrdinal >= 0)
-                        collectionValue = (string)interceptors[interceptorOrdinal].Interceptors.Intercept(collectionValue);
-
-                    object value = null;
-                    if (!string.IsNullOrEmpty(collectionValue))
+                    if (member.CanWrite)
                     {
-                        value = member.DataType.IsEnum ?
-                                Enum.Parse(member.DataType, collection[key]) :
-                                Convert.ChangeType(collectionValue, member.DataType, provider);
-                    }
+                        string collectionValue = collection[key];
 
-                    member.SetValue(entity, value);
-                    foundMemberCounter++;
+                        int interceptorOrdinal = interceptors.GetOrdinal(key);
+                        if (interceptorOrdinal >= 0)
+                            collectionValue = (string)interceptors[interceptorOrdinal].Interceptors.Intercept(collectionValue);
+
+                        object value = null;
+                        if (!string.IsNullOrEmpty(collectionValue))
+                        {
+                            value = member.DataType.IsEnum ?
+                                    Enum.Parse(member.DataType, collection[key]) :
+                                    Convert.ChangeType(collectionValue, member.DataType, provider);
+                        }
+
+                        member.SetValue(entity, value);
+                        foundMemberCounter++;
+                    }
                 }
             }
 

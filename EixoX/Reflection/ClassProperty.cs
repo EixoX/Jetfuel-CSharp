@@ -140,5 +140,16 @@ namespace EixoX
         {
             _Property.SetValue(entity, Convert.ChangeType(value, _Property.PropertyType, formatProvider), null);
         }
+
+
+        public bool CanRead
+        {
+            get { return this._Property.CanRead; }
+        }
+
+        public bool CanWrite
+        {
+            get { return this._Property.CanWrite; }
+        }
     }
 }

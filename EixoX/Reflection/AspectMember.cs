@@ -307,5 +307,16 @@ namespace EixoX
         {
             return Convert.ToUInt64(_Acessor.GetValue(entity));
         }
+
+
+        public bool CanRead
+        {
+            get { return this._Acessor.CanRead; }
+        }
+
+        public bool CanWrite
+        {
+            get { return this._Acessor.CanWrite; }
+        }
     }
 }
