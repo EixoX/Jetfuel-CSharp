@@ -15,5 +15,20 @@ namespace EixoX.RocketLauncher.DatabaseGathering
         public string Server { get; set; }
         public string UserId { get; set; }
         public string Password { get; set; }
+
+        public string ToSqlServerConnectionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Initial Catalog=");
+            sb.Append(this.Database);
+            sb.Append(";Data Source=");
+            sb.Append(this.Server);
+            sb.Append(";User Id=");
+            sb.Append(this.UserId);
+            sb.Append(";Password=");
+            sb.Append(this.Password);
+
+            return sb.ToString();
+        }
     }
 }

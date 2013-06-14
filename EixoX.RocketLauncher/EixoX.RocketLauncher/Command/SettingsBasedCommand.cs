@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EixoX.Interceptors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ namespace EixoX.RocketLauncher
     /// </summary>
     public abstract class SettingsBasedCommand
     {
+        private Dictionary<string, string> _defaultSettings;
+
+
         /// <summary>
         /// Default dictionary of settings from a default settings file
         /// </summary>
@@ -18,21 +22,32 @@ namespace EixoX.RocketLauncher
         {
             get
             {
-                Dictionary<string, string> KeyValueSettings = new Dictionary<string, string>();
-                string[] settings = System.IO.File.ReadAllText(DefaultSettingsFilePath).Split(';');
-
-                foreach (string setting in settings)
+                if (_defaultSettings == null)
                 {
-                    string[] kvp = setting.Split('=');
-                    if (kvp.Length == 2)
-                        if (!KeyValueSettings.ContainsKey(kvp[0]))
-                            KeyValueSettings.Add(kvp[0], kvp[1]);
+                    Dictionary<string, string> KeyValueSettings = new Dictionary<string, string>();
+                    string[] settings = System.IO.File.ReadAllText(DefaultSettingsFile).Split('\n');
+
+                    foreach (string setting in settings)
+                    {
+                        string[] kvp = setting.Split('=');
+                        if (kvp.Length == 2)
+                            if (!KeyValueSettings.ContainsKey(kvp[0]))
+                            {
+                                string key = Whitespace.Collapse(kvp[0]).Replace("\r", "");
+                                string value = Whitespace.Collapse(kvp[1]).Replace("\r", "");
+                                KeyValueSettings.Add(key, value);
+                            }
+                    }
+
+                    _defaultSettings = KeyValueSettings;
                 }
 
-                return KeyValueSettings;
+                return _defaultSettings;
             }
         }
 
-        public string DefaultSettingsFilePath { get { return AppDomain.CurrentDomain.BaseDirectory + "\\settings.eixox"; } }
+        public abstract string Directory { get; }
+
+        public string DefaultSettingsFile { get { return this.Directory + "\\settings.eixox"; } }
     }
 }

@@ -11,7 +11,7 @@ namespace EixoX.Html.Controls
         {
             DateTime value = Convert.ToDateTime(state.Value, System.Globalization.CultureInfo.CurrentCulture);
             return new HtmlStandalone("input",
-                new HtmlAttribute("type", "text"),
+                new HtmlAttribute("type", "date"),
                 new HtmlAttribute("name", state.Name),
                 new HtmlAttribute("id", state.Name),
                 new HtmlAttribute("value", value != DateTime.MinValue ? value.ToShortDateString() : ""),

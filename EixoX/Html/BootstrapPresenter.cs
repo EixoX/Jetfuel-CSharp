@@ -3,6 +3,7 @@ using EixoX.UI;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 
 namespace EixoX.Html
@@ -92,6 +93,15 @@ namespace EixoX.Html
             writer.WriteLine("</fieldset>");
         }
 
+        public void RenderGroupFieldset(TextWriter writer, object entity, string groupName, bool validateRestrictions, params HtmlAttribute[] attributes)
+        {
+            writer.WriteLine("<fieldset>");
+            writer.Write("<legend>");
+            writer.Write(HtmlHelper.HtmlFormat(groupName));
+            writer.WriteLine("</legend>");
+            RenderGroup(writer, entity, groupName, validateRestrictions, attributes);
+            writer.WriteLine("</fieldset>");
+        }
 
     }
 }

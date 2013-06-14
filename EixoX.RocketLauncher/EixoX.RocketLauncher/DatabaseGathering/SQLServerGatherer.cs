@@ -37,6 +37,12 @@ namespace EixoX.RocketLauncher
             return credentials;
         }
 
+        public SQLServerGatherer(DatabaseCredentials credentials)
+        {
+            this.Credentials = credentials;
+            this.SqlServer = new Data.SqlServer(this.Credentials.ToSqlServerConnectionString());
+        }
+
         public SQLServerGatherer(string connectionString)
         {
             this.Credentials = Parse(connectionString);

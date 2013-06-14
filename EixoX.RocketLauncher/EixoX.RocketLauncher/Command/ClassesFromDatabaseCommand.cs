@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EixoX.RocketLauncher.DatabaseGathering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace EixoX.RocketLauncher.Command
         public ClassGenerator ClassGenerator { get; set; }
         public ProgrammingLanguage Language { get; set; }
         public IRocketLauncherView View { get; set; }
+        private string _Directory { get; set; }
 
         /// <summary>
         /// Gets the command enum value it uses
@@ -27,6 +29,7 @@ namespace EixoX.RocketLauncher.Command
         {
             this.Language = language;
             this.View = view;
+            this._Directory = directory;
 
             switch (language)
             {
@@ -42,16 +45,64 @@ namespace EixoX.RocketLauncher.Command
             }
         }
 
+        private DatabaseCredentials GetDatabaseCredentialsFromSettings()
+        {
+            DatabaseCredentials databaseCredentials = new DatabaseCredentials()
+            {
+                Database = this.DefaultSettings["Initial Catalog"],
+                Password = this.DefaultSettings["Password"],
+                Server = this.DefaultSettings["Data Source"],
+                UserId = this.DefaultSettings["User Id"]
+            };
+
+            return databaseCredentials;
+        }
+
+
         /// <summary>
         /// Run the command
         /// </summary>
         /// <param name="args">Excepts an boolean, indication verbose mode value</param>
         public void Run(params object[] args)
         {
-            bool verbose = (bool) args[0];
+            bool verbose = (bool)args[0];
 
-            SQLServerGatherer sqlGatherer = new SQLServerGatherer(this.DefaultSettings["DefaultConnectionString"]);
-                
+            SQLServerGatherer sqlGatherer = null;
+            try
+            {
+                string connectionString = this.DefaultSettings["DefaultConnectionString"];
+                if (!string.IsNullOrEmpty(connectionString))
+                    sqlGatherer = new SQLServerGatherer(connectionString);
+                else
+                {
+                    try
+                    {
+                        sqlGatherer = new SQLServerGatherer(GetDatabaseCredentialsFromSettings());
+                    }
+                    catch
+                    {
+                        this.View.DisplayMessage("Could not get database information from settings.eixox.");
+                        return;
+                    }
+
+                }
+            }
+            catch (KeyNotFoundException)
+            {
+                this.View.DisplayMessage("DefaultConnectionString key not found in settings.eixox file.");
+                this.View.DisplayMessage("Trying to get database credential information...");
+
+                try
+                {
+                    sqlGatherer = new SQLServerGatherer(GetDatabaseCredentialsFromSettings());
+                }
+                catch
+                {
+                    this.View.DisplayMessage("Could not get database information from settings.eixox.");
+                    return;
+                }
+            }
+
             this.View.DisplayMessage("\n -- Running Command: Classes from database ---");
             DateTime tStart = DateTime.Now;
 
@@ -100,6 +151,11 @@ namespace EixoX.RocketLauncher.Command
 
             this.View.DisplayMessage("Command run succesfully");
             this.View.DisplayMessage("-----------------------------");
+        }
+
+        public override string Directory
+        {
+            get { return this._Directory; }
         }
     }
 }

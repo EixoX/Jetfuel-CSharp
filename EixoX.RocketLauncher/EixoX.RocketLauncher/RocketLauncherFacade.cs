@@ -78,9 +78,9 @@ namespace EixoX.RocketLauncher
                         commandToRun.Run(this.View.YesOrNo("Run command in verbose mode?"));
                         break;
                     case Commands.GlobalizationFiles:
-                        language  = this.View.GetProgrammingLanguage();
-                        directory = this.View.GetDirectory();
-                        commandToRun = new GlobalizationFilesCommand(language, directory, classesGenerated);
+                        //language  = this.View.GetProgrammingLanguage();
+                        //directory = this.View.GetDirectory();
+                        //commandToRun = new GlobalizationFilesCommand(language, directory, classesGenerated);
                         break;
                 }
 
