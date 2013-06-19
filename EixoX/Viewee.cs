@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX
 {
-    public interface IContract
+    public interface Viewee
     {
         void OnException(Exception ex);
     }

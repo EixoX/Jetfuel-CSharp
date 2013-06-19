@@ -112,7 +112,7 @@ namespace EixoX
             string output = "";
             if (input.Length > maxLenght)
             {
-                output = input.Substring(0, (maxLenght - 1)) + "..." ;
+                output = input.Substring(0, (maxLenght - 1)) + "...";
             }
             else
             {
@@ -120,6 +120,18 @@ namespace EixoX
             }
 
             return output;
+        }
+
+
+        public static IEnumerable<int> ParseInt(params string[] strings)
+        {
+            if (strings != null)
+                for (int i = 0; i < strings.Length; i++)
+                {
+                    int value;
+                    if (int.TryParse(strings[i], out value) && value != 0)
+                        yield return value;
+                }
         }
     }
 }

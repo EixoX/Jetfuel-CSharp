@@ -78,6 +78,7 @@
     <Compile Include="Base36.cs" />
     <Compile Include="Collections\Dictionary.cs" />
     <Compile Include="Helpers\CharHelper.cs" />
+    <Compile Include="Helpers\EnumerationHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Helpers\UrlPathHelper.cs" />
     <Compile Include="Html\BootstrapControl.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="Html\Controls\BootstrapFileUploader.cs" />
     <Compile Include="Html\Controls\HtmlFileUploader.cs" />
     <Compile Include="Html\Controls\HtmlColorPicker.cs" />
-    <Compile Include="IContract.cs" />
+    <Compile Include="Viewee.cs" />
     <Compile Include="LazyConstructor.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Reflection\PrimitiveTypes.cs" />
