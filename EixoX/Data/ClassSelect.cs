@@ -223,6 +223,13 @@ namespace EixoX.Data
             return Or(new ClassFilterTerm(_Aspect, name, value));
         }
 
+        public ClassSelect<T> AppendAnd(string name, FilterComparison comparison, object value)
+        {
+            return this._WhereFirst == null ?
+                Where(name, comparison, value) :
+                And(name, comparison, value);
+        }
+
         #endregion
 
         #region Class Sort

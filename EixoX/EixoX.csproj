@@ -76,7 +76,6 @@
     <Compile Include="Adapters\XmlDocumentStringAdapter.cs" />
     <Compile Include="Adapters\XmlElementStringAdapter.cs" />
     <Compile Include="Base36.cs" />
-    <Compile Include="Collections\Dictionary.cs" />
     <Compile Include="Helpers\CharHelper.cs" />
     <Compile Include="Helpers\EnumerationHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />

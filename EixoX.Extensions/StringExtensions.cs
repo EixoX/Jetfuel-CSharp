@@ -18,6 +18,22 @@ namespace System
                 return input.Substring(0, length);
         }
 
+        public static string LeftAndEllipsis(this string input, int length)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+            else if (length > input.Length)
+                return input;
+            else
+            {
+                while (!char.IsWhiteSpace(input, length) && length > 0)
+                    length--;
+
+                return input.Substring(0, length) + "...";
+            }
+
+        }
+
         public static string ToStringOrEmpty<T>(this T entity)
         {
             return entity == null || default(T).Equals(entity) ? "" : entity.ToString();
