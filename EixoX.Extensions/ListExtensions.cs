@@ -28,5 +28,12 @@ namespace System
                 return newList;
             }
         }
+
+        public static List<T> Shuffle<T>(this List<T> list)
+            where T : class
+        {
+            Random random = new Random();
+            return list.OrderBy(x => random.Next()).ToList();
+        }
     }
 }
