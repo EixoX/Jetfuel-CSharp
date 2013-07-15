@@ -35,7 +35,8 @@ namespace EixoX.Restrictions
                 value == 66666666666L ||
                 value == 77777777777L ||
                 value == 88888888888L ||
-                value == 99999999999L)
+                value == 99999999999L ||
+                value == 0)
                 return false;
 
 
