@@ -62,9 +62,14 @@ namespace EixoX
                         object value = null;
                         if (!string.IsNullOrEmpty(collectionValue))
                         {
-                            value = member.DataType.IsEnum ?
-                                    Enum.Parse(member.DataType, collection[key]) :
-                                    Convert.ChangeType(collectionValue, member.DataType, provider);
+                            if (member.DataType.IsEnum)
+                            {
+                                value = Enum.Parse(member.DataType, collectionValue);
+                            }
+                            else
+                            {
+                                value = Convert.ChangeType(collectionValue, member.DataType);
+                            }
                         }
 
                         member.SetValue(entity, value);
