@@ -83,7 +83,8 @@ namespace EixoX.UI
                 Label = _Label,
                 Hint = _Hint,
                 Options = _Member.Annotation.GetChoices(),
-                Value = value
+                Value = value,
+                Validated = validateRestrictions
             };
         }
 

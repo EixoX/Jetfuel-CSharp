@@ -38,12 +38,21 @@ namespace EixoX.Html
 
                     _Hint.Write(writer);
                 }
+                else if (state.Validated)
+                {
+                    if (_Hint == null)
+                        _Hint = new HtmlSimple("span", " ", new HtmlAttribute("class", "help-inline"));
+
+                    _Hint.Write(writer);
+
+                }
             }
+
         }
 
         protected void RenderInput(System.IO.TextWriter writer, UI.UIControlState state, params HtmlAttribute[] attributes)
         {
-            
+
             _Input = CreateInput(state);
 
             for (int i = 0; i < attributes.Length; i++)
@@ -55,8 +64,24 @@ namespace EixoX.Html
         public virtual void Render(System.IO.TextWriter writer, UI.UIControlState state, params HtmlAttribute[] attributes)
         {
 
+
             writer.Write("<div class=\"");
-            writer.Write(string.IsNullOrEmpty(state.ErrorMessage) ? "control-group" : "control-group error");
+            if (state.Validated)
+            {
+                if (string.IsNullOrEmpty(state.ErrorMessage))
+                {
+                    writer.Write("control-group success");
+                }
+                else
+                {
+                    writer.Write("control-group error");
+                }
+            }
+            else
+            {
+                writer.Write("control-group");
+            }
+
             writer.WriteLine("\">");
 
             RenderLabel(writer, state);

@@ -13,5 +13,6 @@ namespace EixoX.UI
         public string Hint { get; set; }
         public IEnumerable<KeyValuePair<object, object>> Options { get; set; }
         public string ErrorMessage { get; set; }
+        public bool Validated { get; set; }
     }
 }
