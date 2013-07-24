@@ -27,26 +27,18 @@ namespace EixoX.Html
 
         protected void RenderHintOrError(System.IO.TextWriter writer, UI.UIControlState state)
         {
+
             if (!string.IsNullOrEmpty(state.ErrorMessage))
-                new HtmlSimple("span", state.ErrorMessage, new HtmlAttribute("class", "help-inline")).Write(writer);
+            {
+                _Hint = new HtmlSimple("span", state.ErrorMessage, new HtmlAttribute("class", "help-inline"));
+            }
             else
             {
-                if (!string.IsNullOrEmpty(state.Hint))
-                {
-                    if (_Hint == null)
-                        _Hint = new HtmlSimple("span", state.Hint, new HtmlAttribute("class", "help-inline"));
-
-                    _Hint.Write(writer);
-                }
-                else if (state.Validated)
-                {
-                    if (_Hint == null)
-                        _Hint = new HtmlSimple("span", " ", new HtmlAttribute("class", "help-inline"));
-
-                    _Hint.Write(writer);
-
-                }
+                string hintText = string.IsNullOrEmpty(state.Hint) ? " " : state.Hint;
+                _Hint = new HtmlSimple("span", hintText, new HtmlAttribute("class", "help-inline"));
             }
+
+            _Hint.Write(writer);
 
         }
 
