@@ -38,5 +38,37 @@ namespace EixoX
                 "-",
                 (value % 100).ToString("00"));
         }
+
+
+        public static string Filesize(long size, int digits)
+        {
+
+            double sz = size;
+            string term = " B";
+            if (sz > 1024.0)
+            {
+                sz /= 1024.0;
+                if (sz > 1024.0)
+                {
+                    sz /= 1024.0;
+                    if (sz > 1024)
+                    {
+                        sz /= 1024.0;
+                        term = " GB";
+                    }
+                    else
+                    {
+                        term = " MB";
+                    }
+                }
+                else
+                {
+                    term = " KB";
+                }
+            }
+
+            return Math.Round(sz, digits) + term;
+
+        }
     }
 }
