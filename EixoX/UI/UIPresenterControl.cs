@@ -20,6 +20,7 @@ namespace EixoX.UI
         private readonly string _Label;
         private readonly string _Hint;
         private readonly int _LCID;
+        private readonly System.Globalization.CultureInfo _FormatProvider;
 
         public UIPresenterControl(
             SingleAnnotationAspectMember<UIControlAttribute> member,
@@ -35,6 +36,7 @@ namespace EixoX.UI
             this._Label = string.IsNullOrEmpty(label) ? member.Name : label;
             this._Hint = hint;
             this._LCID = lcid;
+            this._FormatProvider = System.Globalization.CultureInfo.GetCultureInfo(lcid);
             this._Restrictions = restrictions;
             this._Interceptors = interceptors;
             this._Globalization = globalization;
@@ -84,7 +86,8 @@ namespace EixoX.UI
                 Hint = _Hint,
                 Options = _Member.Annotation.GetChoices(),
                 Value = value,
-                Validated = validateRestrictions
+                Validated = validateRestrictions,
+                FormatProvider = _FormatProvider
             };
         }
 

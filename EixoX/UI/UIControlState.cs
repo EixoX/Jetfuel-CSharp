@@ -14,5 +14,6 @@ namespace EixoX.UI
         public IEnumerable<KeyValuePair<object, object>> Options { get; set; }
         public string ErrorMessage { get; set; }
         public bool Validated { get; set; }
+        public IFormatProvider FormatProvider { get; set; }
     }
 }

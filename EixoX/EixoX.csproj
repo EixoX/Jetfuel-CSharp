@@ -76,6 +76,7 @@
     <Compile Include="Adapters\XmlDocumentStringAdapter.cs" />
     <Compile Include="Adapters\XmlElementStringAdapter.cs" />
     <Compile Include="Base36.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\CharHelper.cs" />
     <Compile Include="Helpers\EnumerationHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
@@ -99,6 +100,8 @@
     <Compile Include="Html\Controls\BootstrapFileUploader.cs" />
     <Compile Include="Html\Controls\HtmlFileUploader.cs" />
     <Compile Include="Html\Controls\HtmlColorPicker.cs" />
+    <Compile Include="Restrictions\MaxAge.cs" />
+    <Compile Include="Restrictions\MinAge.cs" />
     <Compile Include="Viewee.cs" />
     <Compile Include="LazyConstructor.cs" />
     <Compile Include="Pair.cs" />
