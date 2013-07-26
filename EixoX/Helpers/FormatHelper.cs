@@ -12,6 +12,11 @@ namespace EixoX
             return string.Concat((value / 1000).ToString("00000"), "-", (value % 1000).ToString("000"));
         }
 
+        public static string CpfOrCnpj(long value)
+        {
+            return value > 99999999999L ? Cnpj(value) : Cpf(value);
+        }
+
         public static string Cpf(long value)
         {
             return
