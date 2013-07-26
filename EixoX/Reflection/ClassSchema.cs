@@ -44,47 +44,45 @@ namespace EixoX
             Interceptors.InterceptorAspect<T> interceptors = Interceptors.InterceptorAspect<T>.Instance;
 
             int foundMemberCounter = 0;
-            foreach (string key in collection.Keys)
+            foreach (AspectMember member in this)
             {
-                int ordinal = GetOrdinal(key);
-                if (ordinal >= 0)
+                if (member.CanWrite)
                 {
-                    AspectMember member = base[ordinal];
-
-                    if (member.CanWrite)
+                    string collectionValue = collection[member.Name];
+                    if (!string.IsNullOrEmpty(collectionValue))
                     {
-                        string collectionValue = collection[key];
-
-                        int interceptorOrdinal = interceptors.GetOrdinal(key);
+                        foundMemberCounter++;
+                        int interceptorOrdinal = interceptors.GetOrdinal(member.Name);
                         if (interceptorOrdinal >= 0)
                             collectionValue = (string)interceptors[interceptorOrdinal].Interceptors.Intercept(collectionValue);
 
                         object value = null;
-                        if (!string.IsNullOrEmpty(collectionValue))
+                        try
                         {
-                            try
+                            if (member.DataType.IsEnum)
                             {
-                                if (member.DataType.IsEnum)
-                                {
-                                    value = Enum.Parse(member.DataType, collectionValue);
-                                }
-                                else
-                                {
-                                    value = Convert.ChangeType(collectionValue, member.DataType, provider);
-                                }
+                                value = Enum.Parse(member.DataType, collectionValue);
                             }
-                            catch
+                            else
                             {
-                                value = member.DataType.IsValueType ? Activator.CreateInstance(member.DataType) : null;
+                                value = Convert.ChangeType(collectionValue, member.DataType, provider);
                             }
                         }
-
+                        catch
+                        {
+                            value = member.DataType.IsValueType ? Activator.CreateInstance(member.DataType) : null;
+                        }
                         member.SetValue(entity, value);
-                        foundMemberCounter++;
+
+                    }
+                    else
+                    {
+                        if (member.DataType == PrimitiveTypes.Boolean)
+                            member.SetValue(entity, false);
                     }
                 }
             }
-
+            
             return foundMemberCounter;
         }
 
