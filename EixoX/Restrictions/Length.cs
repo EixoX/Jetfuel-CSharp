@@ -27,7 +27,6 @@ namespace EixoX.Restrictions
 
         public int Min { get { return this._Min; } }
         public int Max { get { return this._Max; } }
-        public override string ToString() { return "Length restriction [" + _Min + ", " + _Max + "]"; }
 
         public bool Validate(object input)
         {
@@ -40,11 +39,20 @@ namespace EixoX.Restrictions
             }
         }
 
-        
 
-        public string GetRestrictionMessage(object input)
+        public string RestrictionMessageFormat
         {
-            return "Text length not in [" + _Min + ", " + _Max + "]";
+            get { return "Text length not in [" + _Min + ", " + _Max + "]"; }
         }
+
+
+        public override string ToString()
+        {
+            return this.RestrictionMessageFormat;
+        }
+
+
+
+
     }
 }

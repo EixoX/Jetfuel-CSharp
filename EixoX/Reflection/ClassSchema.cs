@@ -49,7 +49,7 @@ namespace EixoX
                 if (member.CanWrite)
                 {
                     string collectionValue = collection[member.Name];
-                    if (!string.IsNullOrEmpty(collectionValue))
+                    if (collectionValue != null)
                     {
                         foundMemberCounter++;
                         int interceptorOrdinal = interceptors.GetOrdinal(member.Name);

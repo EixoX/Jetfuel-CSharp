@@ -36,9 +36,9 @@ namespace EixoX.Restrictions
 
         }
 
-        public string GetRestrictionMessage(object input)
+        public string RestrictionMessageFormat
         {
-            return Validate(input) ? null : _Message;
+            get { return _Message; }
         }
     }
 }

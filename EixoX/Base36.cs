@@ -51,7 +51,7 @@ namespace EixoX
 
         public static Base36 Parse(string input)
         {
-            throw new NotImplementedException();
+            return new Base36(ToDecimalRecursive(input));
         }
 
         private static long ParseRecursive(string input, int power, int charCounter)

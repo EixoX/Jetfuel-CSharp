@@ -245,7 +245,6 @@
     <Compile Include="Restrictions\MinExclusive.cs" />
     <Compile Include="Restrictions\MinInclusive.cs" />
     <Compile Include="Restrictions\MinLength.cs" />
-    <Compile Include="Restrictions\Pattern.cs" />
     <Compile Include="Restrictions\Required.cs" />
     <Compile Include="Restrictions\Restriction.cs" />
     <Compile Include="Restrictions\RestrictionAspect.cs" />

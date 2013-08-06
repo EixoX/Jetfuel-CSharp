@@ -33,13 +33,13 @@ namespace EixoX.Restrictions
                 return true;
 
             return DateTimeHelper.GetAgeInYears(DateTime.Now, date) >= _Years;
-
-
         }
 
-        public string GetRestrictionMessage(object input)
+
+
+        public string RestrictionMessageFormat
         {
-            return Validate(input) ? null : _Message;
+            get { return this._Message; }
         }
     }
 }

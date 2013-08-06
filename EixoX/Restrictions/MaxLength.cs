@@ -24,14 +24,15 @@ namespace EixoX.Restrictions
             return input == null ? true : input.ToString().Length <= _Value;
         }
 
-        public string GetRestrictionMessage(object input)
-        {
-            return "Text length above maximum of " + _Value; 
-        }
-
         public override string ToString()
         {
-            return "Max length of " + _Value.ToString();
+            return this.RestrictionMessageFormat;
+        }
+
+
+        public string RestrictionMessageFormat
+        {
+            get { return "Text length above maximum of " + _Value; }
         }
     }
 }

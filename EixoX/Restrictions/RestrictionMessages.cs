@@ -71,10 +71,10 @@ namespace EixoX.Restrictions
                 if (local.TryGetValue(lcid, out msg))
                     return string.Format(msg, input);
                 else
-                    return restriction.GetRestrictionMessage(input);
+                    return string.Format(restriction.RestrictionMessageFormat, input);
             }
             else
-                return restriction.GetRestrictionMessage(input);
+                return string.Format(restriction.RestrictionMessageFormat, input);
         }
     }
 }

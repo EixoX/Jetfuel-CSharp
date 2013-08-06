@@ -1,29 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Text;
 
 
 namespace EixoX.Restrictions
 {
+    /// <summary>
+    /// Represents a CPF number restriction.
+    /// </summary>
     [Serializable]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class Cpf : Attribute, Restriction
     {
-
-
-        
+        /// <summary>
+        /// Validates an input object as a valid CPF number or an empty value.
+        /// </summary>
+        /// <param name="input">The input to validate.</param>
+        /// <returns>True if the value is a valid CPF or empty.</returns>
         public bool Validate(object input)
         {
-            return input == null ?
-                false :
-                (input is long || input is int ?
-                    IsValid((long)input) :
-                    IsValid(long.Parse(Interceptors.DigitsOnly.Intercept(input.ToString())))
-                    );
+            if (ValidationHelper.IsNullOrEmpty(input))
+                return true;
+            else if (input is long)
+                return IsValid((long)input);
+            else
+                return IsValid(long.Parse(input.ToString()));
         }
 
-
+        /// <summary>
+        /// Checks if a given value is a valid CPF number.
+        /// </summary>
+        /// <param name="value">The value to check for a valid CPF number.</param>
+        /// <returns>True if the given number is a valid cpf number.</returns>
         public static bool IsValid(long value)
         {
 
@@ -66,15 +74,30 @@ namespace EixoX.Restrictions
             return (d1 == ((value / 10) % 10) && d2 == (value % 10));
         }
 
+        /// <summary>
+        /// Formats the given input number as a CPF.
+        /// </summary>
+        /// <param name="value">The input number to format.</param>
+        /// <returns>The formatted CPF number.</returns>
         public static string Format(long value)
         {
-            return value.ToString();
+            return
+                string.Concat(
+                    ((value / 100000000) % 1000).ToString("000"),
+                    ".",
+                    ((value / 100000) % 1000).ToString("000"),
+                    ".",
+                    ((value / 100) % 1000).ToString("000"),
+                    "-",
+                    (value % 100).ToString("00"));
         }
 
-
-        public string GetRestrictionMessage(object input)
+        /// <summary>
+        /// Gets the restriction message format for an invalid CPF number.
+        /// </summary>
+        public string RestrictionMessageFormat
         {
-            return "Not a valid cpf number";
+            get { return "Not a valid cpf number"; }
         }
     }
 }

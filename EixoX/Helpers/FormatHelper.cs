@@ -75,5 +75,34 @@ namespace EixoX
             return Math.Round(sz, digits) + term;
 
         }
+
+
+        public static string DateOrDash(DateTime date, string datePattern)
+        {
+            if (date == DateTime.MinValue)
+                return "-";
+            else
+                return date.ToString(datePattern);
+        }
+
+        public static string DateRangeOrDash(DateTime startdate, DateTime enddate, string datePattern)
+        {
+            if (startdate == DateTime.MinValue)
+            {
+                if (enddate == DateTime.MinValue)
+                    return "-";
+                else
+                {
+                    return enddate.ToString(datePattern);
+                }
+            }
+            else
+            {
+                if (enddate == DateTime.MinValue)
+                    return startdate.ToString(datePattern);
+                else
+                    return startdate.ToString(datePattern) + " - " + enddate.ToString(datePattern);
+            }
+        }
     }
 }

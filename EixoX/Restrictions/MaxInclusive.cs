@@ -29,14 +29,17 @@ namespace EixoX.Restrictions
             return _Value.CompareTo(Convert.ChangeType(input, _Value.GetType())) >= 0;
         }
 
-        public string GetRestrictionMessage(object input)
+        public string RestrictionMessageFormat
         {
-            return "Value is below the maximum (Inclusive) of " + _Value.ToString(); 
+            get { return "Value is below the maximum (Inclusive) of " + _Value.ToString(); }
         }
 
         public override string ToString()
         {
-            return "Max Inclusive of " + _Value.ToString();
+            return this.RestrictionMessageFormat;
         }
+
+
+
     }
 }
