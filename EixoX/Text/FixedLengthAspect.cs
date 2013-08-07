@@ -92,6 +92,22 @@ namespace EixoX.Text
             return counter;
         }
 
+        public int WriteTo(System.IO.TextWriter output, T entity)
+        {
+            int lineWidth = this.LineWidth;
+            if (lineWidth < 1)
+                return 0;
+
+            CultureInfo cultureInfo = CultureInfo;
+
+            char[] buffer = new char[lineWidth];
+            foreach (FixedLengthAspectMember flam in this)
+                flam.PutFormattedMember(entity, cultureInfo, buffer);
+
+            output.WriteLine(buffer);
+            return 1;
+        }
+
 
         public IEnumerable<T> ReadFrom(IEnumerable<string> lines)
         {
