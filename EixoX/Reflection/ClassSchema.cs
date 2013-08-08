@@ -63,6 +63,10 @@ namespace EixoX
                             {
                                 value = Enum.Parse(member.DataType, collectionValue);
                             }
+                            else if (member.DataType == PrimitiveTypes.TimeSpan)
+                            {
+                                value = TimeSpan.Parse(collectionValue);
+                            }
                             else
                             {
                                 value = Convert.ChangeType(collectionValue, member.DataType, provider);
