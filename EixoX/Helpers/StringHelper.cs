@@ -141,5 +141,36 @@ namespace EixoX
                         yield return value;
                 }
         }
+
+
+
+        public static string Join(string separator, System.Collections.IEnumerable items)
+        {
+            if (items != null)
+            {
+                StringBuilder builder = new StringBuilder();
+                bool prependComma = false;
+                foreach (Object o in items)
+                {
+                    if (o != null)
+                    {
+                        if (prependComma)
+                            builder.Append(separator);
+                        else
+                            prependComma = true;
+
+                        builder.Append(o.ToString());
+                    }
+                }
+
+                return builder.ToString();
+            }
+            else
+                return null;
+
+            
+
+
+        }
     }
 }
