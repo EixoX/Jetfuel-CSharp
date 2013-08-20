@@ -122,6 +122,14 @@ namespace EixoX
             return output;
         }
 
+        public static string Join<T>(string separator, IList<T> objects)
+        {
+            List<string> aux = new List<string>();
+            foreach (object obj in objects)
+                aux.Add(obj.ToString());
+
+            return String.Join(separator, aux.ToArray());
+        }
 
         public static IEnumerable<int> ParseInt(params string[] strings)
         {

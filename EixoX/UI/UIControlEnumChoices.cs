@@ -16,7 +16,7 @@ namespace EixoX.UI
         public IEnumerable<KeyValuePair<object, object>> GetChoices()
         {
             foreach (var enumValue in Enum.GetValues(_EnumType))
-                yield return new KeyValuePair<object, object>(enumValue, Enum.GetName(_EnumType, enumValue));
+                yield return new KeyValuePair<object, object>((int) enumValue, enumValue);
         }
     }
 }
