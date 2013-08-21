@@ -33,6 +33,16 @@ namespace EixoX.Restrictions
             return true;
         }
 
+        public bool Validate(object entity, List<string> exceptions)
+        {
+            foreach (RestrictionAspectMember ram in this)
+                if (!exceptions.Contains(ram.Name))
+                    if (!ram.Validate(entity))
+                        return false;
+
+            return true;
+        }
+
         public void AssertValid(object entity)
         {
             foreach (RestrictionAspectMember ram in this)
