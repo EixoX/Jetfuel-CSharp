@@ -116,7 +116,13 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelect<T> And(ClassFilter filter)
         {
-            this._WhereLast = this._WhereLast.SetNext(FilterOperation.And, filter);
+            if (this._WhereFirst == null)
+            {
+                this._WhereFirst = new ClassFilterNode(filter);
+                this._WhereLast = this._WhereFirst;
+            }
+            else
+                this._WhereLast = this._WhereLast.SetNext(FilterOperation.And, filter);
             return this;
         }
 
@@ -173,7 +179,13 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelect<T> Or(ClassFilter filter)
         {
-            this._WhereLast = this._WhereLast.SetNext(FilterOperation.Or, filter);
+            if (this._WhereFirst == null)
+            {
+                this._WhereFirst = new ClassFilterNode(filter);
+                this._WhereLast = this._WhereFirst;
+            }
+            else
+                this._WhereLast = this._WhereLast.SetNext(FilterOperation.Or, filter);
             return this;
         }
 
