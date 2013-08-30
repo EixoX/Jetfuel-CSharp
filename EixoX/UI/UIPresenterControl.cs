@@ -69,7 +69,7 @@ namespace EixoX.UI
 
         public UIControlState GetState(object entity, bool validateRestrictions)
         {
-            object value = _Member.GetValue(entity);
+            object value = _Member.DataType.IsEnum ? (int) _Member.GetValue(entity) : _Member.GetValue(entity);
 
             if (_Interceptors != null && _Interceptors.Count > 0)
                 value = _Interceptors.Intercept(value);
