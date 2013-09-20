@@ -86,7 +86,7 @@ namespace EixoX.Data
             int count = aspect.Count;
             int identityOrdinal = aspect.IdentityOrdinal;
             for (int i = 0; i < count; i++)
-                if (i != identityOrdinal && i != ordinal)
+                if (i != identityOrdinal && i != ordinal && aspect[i].IncludeInScope(scope))
                     yield return new AspectMemberValue(
                         aspect,
                         i,
@@ -103,7 +103,7 @@ namespace EixoX.Data
             int count = aspect.Count;
             int identityOrdinal = aspect.IdentityOrdinal;
             for (int i = 0; i < count; i++)
-                if (i != identityOrdinal && !aspect[i].IsPrimaryKey)
+                if (i != identityOrdinal && !aspect[i].IsPrimaryKey && aspect[i].IncludeInScope(DataScope.Update))
                     yield return new AspectMemberValue(
                         aspect,
                         i,

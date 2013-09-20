@@ -88,6 +88,15 @@ namespace EixoX.Data
                 null : value;
         }
 
+        public bool IncludeInScope(DataScope scope)
+        {
+            if (this._Generator == null)
+                return true;
+            else if (this._Generator.GeneratorScope == DataScope.Save)
+                return true;
+            else return this._Generator.GeneratorScope == scope;
+        }
+
         /// <summary>
         /// Gets the data value for a specific scope.
         /// </summary>
@@ -113,7 +122,7 @@ namespace EixoX.Data
                 return _Nullable && ValidationHelper.IsNullOrEmpty(value) ? null : value;
             }
 
-            
+
         }
     }
 }
