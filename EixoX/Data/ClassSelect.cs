@@ -481,7 +481,21 @@ namespace EixoX.Data
             return new ClassSelectResult<T>(this);
         }
 
-
+        public ClassSelect<T> Search(string filter, params string[] fields)
+        {
+            if (string.IsNullOrEmpty(filter))
+                return this;
+            else
+            {
+                ClassFilterExpression expression = new ClassFilterExpression(this._Aspect, fields[0], FilterComparison.Like, filter);
+                for (int i = 1; i < fields.Length; i++)
+                    expression.Or(fields[i], FilterComparison.Like, filter);
+                if (this._WhereFirst == null)
+                    return Where(expression);
+                else
+                    return And(expression);
+            }
+        }
         /// <summary>
         /// Enumerates the selected entities as a key value pair of options.
         /// </summary>
