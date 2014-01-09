@@ -21,6 +21,12 @@ namespace EixoX.Interceptors
             foreach (InterceptorAspectMember iam in this)
                 iam.Intercept(entity);
         }
+
+        public InterceptorList GetInterceptorList(string name)
+        {
+            int ordinal = GetOrdinal(name);
+            return ordinal < 0 ? null : base[ordinal].Interceptors;
+        }
     }
 
     public class InterceptorAspect<T>

@@ -1,17 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Text;
 
 
 namespace EixoX.Restrictions
 {
+    /// <summary>
+    /// Represents a CNPJ restriction.
+    /// </summary>
     [Serializable]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class Cnpj : Attribute, Restriction
     {
-        
+        private readonly string _RestrictionMessageFormat;
 
+        /// <summary>
+        /// Constructs a CNPJ validator with a custom restriction message format.
+        /// </summary>
+        /// <param name="restrictionMessageFormat">The custom CNPJ restriction message format.</param>
+        public Cnpj(string restrictionMessageFormat)
+        {
+            this._RestrictionMessageFormat = restrictionMessageFormat;
+        }
+
+        /// <summary>
+        /// Constructs a CNPJ restriction with a default english restriction message format.
+        /// </summary>
+        public Cnpj() : this("Not a valid CNPJ number") { }
+
+        /// <summary>
+        /// Checks if a given value is a valid CNPJ.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <returns>True if the given value is a valid CNPJ.</returns>
         public static bool IsCnpj(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -20,17 +41,26 @@ namespace EixoX.Restrictions
                 return IsValid(long.Parse(Interceptors.DigitsOnly.Intercept(value)));
         }
 
-
+        /// <summary>
+        /// Checks if a given object is a valid CNPJ or an empty string or number.
+        /// </summary>
+        /// <param name="input">The input to check.</param>
+        /// <returns>True if the given value is a valid CNPJ or an empty value.</returns>
         public bool Validate(object input)
         {
-            return input == null ? true : (input is long || input is int ? Validate((long)input) : Validate(input.ToString()));
+            if (ValidationHelper.IsNullOrEmpty(input))
+                return true;
+            else if (input is long)
+                return IsValid((long)input);
+            else
+                return IsValid(long.Parse(input.ToString()));
         }
 
-        public string RestrictionMessage
-        {
-            get { return "Invalid CNPJ"; }
-        }
-
+        /// <summary>
+        /// Checks if a given number is a valid CNPJ.
+        /// </summary>
+        /// <param name="value">The number to check.</param>
+        /// <returns>True if the value is a valid CNPJ.</returns>
         public static bool IsValid(long value)
         {
 
@@ -74,15 +104,32 @@ namespace EixoX.Restrictions
             return (d1 == ((value / 10) % 10) && d2 == (value % 10));
         }
 
+
+        /// <summary>
+        /// Formats a numeric value as a CNPJ.
+        /// </summary>
+        /// <param name="value">The value to format.</param>
+        /// <returns>The formatted CNPJ.</returns>
         public static string Format(long value)
         {
-            return value.ToString();
+            return string.Concat(
+                ((value / 1000000000000) % 100).ToString("00"),
+                ".",
+                ((value / 1000000000) % 1000).ToString("000"),
+                ".",
+                ((value / 1000000) % 1000).ToString("000"),
+                "/",
+                ((value / 100) % 10000).ToString("0000"),
+                "-",
+                (value % 100).ToString("00"));
         }
 
-
-        public string GetRestrictionMessage(object input)
+        /// <summary>
+        /// Gets the restriction message format for a CNPJ number.
+        /// </summary>
+        public string RestrictionMessageFormat
         {
-            return "Not a valid cnpj number";
+            get { return this._RestrictionMessageFormat; }
         }
     }
 }

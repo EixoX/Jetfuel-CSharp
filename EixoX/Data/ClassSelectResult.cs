@@ -8,7 +8,7 @@ namespace EixoX.Data
     /// A useful helper class for a paged select result.
     /// </summary>
     /// <typeparam name="TClass">The type of class returned.</typeparam>
-    public class ClassSelectResult<TClass> : List<TClass>
+    public sealed class ClassSelectResult<TClass> : List<TClass>
     {
         private readonly ClassSelect<TClass> _Select;
         private readonly int _pageSize;
@@ -27,7 +27,7 @@ namespace EixoX.Data
             this._pageSize = select.PageSize;
             this._pageOrdinal = select.PageOrdinal;
             this._recordCount = select.Count();
-            this._pageCount = (_recordCount / _pageSize) + 1;
+            this._pageCount = _pageSize > 0 ? (long)(Math.Ceiling((double)(_recordCount) / (double)(_pageSize))) : 0;
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace EixoX.Data
         /// </summary>
         public bool HasMorePages
         {
-            get { return _pageOrdinal >= 0 && _pageOrdinal < (_pageCount - 1); }
+            get { return _pageOrdinal >= 0 && _pageOrdinal < (_pageCount - 1) && _recordCount != _pageSize; }
         }
 
         /// <summary>

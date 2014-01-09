@@ -116,7 +116,13 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelect<T> And(ClassFilter filter)
         {
-            this._WhereLast = this._WhereLast.SetNext(FilterOperation.And, filter);
+            if (this._WhereFirst == null)
+            {
+                this._WhereFirst = new ClassFilterNode(filter);
+                this._WhereLast = this._WhereFirst;
+            }
+            else
+                this._WhereLast = this._WhereLast.SetNext(FilterOperation.And, filter);
             return this;
         }
 
@@ -173,7 +179,13 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelect<T> Or(ClassFilter filter)
         {
-            this._WhereLast = this._WhereLast.SetNext(FilterOperation.Or, filter);
+            if (this._WhereFirst == null)
+            {
+                this._WhereFirst = new ClassFilterNode(filter);
+                this._WhereLast = this._WhereFirst;
+            }
+            else
+                this._WhereLast = this._WhereLast.SetNext(FilterOperation.Or, filter);
             return this;
         }
 
@@ -221,6 +233,13 @@ namespace EixoX.Data
         public ClassSelect<T> Or(string name, object value)
         {
             return Or(new ClassFilterTerm(_Aspect, name, value));
+        }
+
+        public ClassSelect<T> AppendAnd(string name, FilterComparison comparison, object value)
+        {
+            return this._WhereFirst == null ?
+                Where(name, comparison, value) :
+                And(name, comparison, value);
         }
 
         #endregion
@@ -460,6 +479,50 @@ namespace EixoX.Data
         public ClassSelectResult<T> ToResult()
         {
             return new ClassSelectResult<T>(this);
+        }
+
+        public ClassSelect<T> Search(string filter, params string[] fields)
+        {
+            if (string.IsNullOrEmpty(filter))
+                return this;
+            else
+            {
+                ClassFilterExpression expression = new ClassFilterExpression(this._Aspect, fields[0], FilterComparison.Like, filter);
+                for (int i = 1; i < fields.Length; i++)
+                    expression.Or(fields[i], FilterComparison.Like, filter);
+                if (this._WhereFirst == null)
+                    return Where(expression);
+                else
+                    return And(expression);
+            }
+        }
+        /// <summary>
+        /// Enumerates the selected entities as a key value pair of options.
+        /// </summary>
+        /// <returns>An enumeration of key and value pairs.</returns>
+        public IEnumerable<KeyValuePair<object, object>> ToOptions()
+        {
+            int identityOrdinal = _Aspect.IdentityOrdinal;
+            if (identityOrdinal >= 0)
+            {
+                foreach (T entity in this)
+                    yield return new KeyValuePair<object, object>(_Aspect[identityOrdinal].GetValue(entity), entity);
+            }
+            else if (_Aspect.HasUniqueMembers)
+            {
+                using (IEnumerator<int> uniqueOrdinalEnum = _Aspect.UniqueMemberOrdinals.GetEnumerator())
+                {
+                    uniqueOrdinalEnum.MoveNext();
+                    int uniqueOrdinal = uniqueOrdinalEnum.Current;
+                    foreach (T entity in this)
+                        yield return new KeyValuePair<object, object>(_Aspect[uniqueOrdinal].GetValue(entity), entity);
+                }
+
+            }
+            else
+            {
+                throw new ArgumentException("To enumerate options the entity must have an identity or unique member: " + _Aspect.DataType.ToString());
+            }
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.RocketLauncher", "EixoX.RocketLauncher\EixoX.RocketLauncher.csproj", "{17FA7436-1C3F-4BDC-B0E8-791FE41604B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.RocketLauncher.ConsoleApp", "EixoX.RocketLauncher.ConsoleApp\EixoX.RocketLauncher.ConsoleApp.csproj", "{811142D0-720E-4588-BED8-77AB5E0CC662}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX", "..\EixoX\EixoX.csproj", "{0A418683-14D0-433F-BA4D-C4919C8069A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Generators", "..\..\csharp-eixox-library\EixoX.Generators\EixoX.Generators.csproj", "{77F1832F-BCC7-4C6E-B7A6-4F316595A845}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17FA7436-1C3F-4BDC-B0E8-791FE41604B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17FA7436-1C3F-4BDC-B0E8-791FE41604B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17FA7436-1C3F-4BDC-B0E8-791FE41604B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17FA7436-1C3F-4BDC-B0E8-791FE41604B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811142D0-720E-4588-BED8-77AB5E0CC662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811142D0-720E-4588-BED8-77AB5E0CC662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811142D0-720E-4588-BED8-77AB5E0CC662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811142D0-720E-4588-BED8-77AB5E0CC662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A418683-14D0-433F-BA4D-C4919C8069A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F1832F-BCC7-4C6E-B7A6-4F316595A845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F1832F-BCC7-4C6E-B7A6-4F316595A845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F1832F-BCC7-4C6E-B7A6-4F316595A845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F1832F-BCC7-4C6E-B7A6-4F316595A845}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

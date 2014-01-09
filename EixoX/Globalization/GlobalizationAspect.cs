@@ -43,7 +43,7 @@ namespace EixoX.Globalization
                             {
                                 GlobalizationAspectMember member = base[ordinal];
                                 foreach (System.Xml.XmlAttribute attribute in child.Attributes)
-                                    member.SetItem(attribute.Name, lcid, attribute.Value);
+                                    member.SetTerm(attribute.Name, lcid, attribute.Value);
                             }
                         }
                     }

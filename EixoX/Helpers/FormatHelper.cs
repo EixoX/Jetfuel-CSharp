@@ -7,11 +7,14 @@ namespace EixoX
     public static class FormatHelper
     {
 
-
-
         public static string Cep(int value)
         {
             return string.Concat((value / 1000).ToString("00000"), "-", (value % 1000).ToString("000"));
+        }
+
+        public static string CpfOrCnpj(long value)
+        {
+            return value > 99999999999L ? Cnpj(value) : Cpf(value);
         }
 
         public static string Cpf(long value)
@@ -27,16 +30,60 @@ namespace EixoX
                     (value % 100).ToString("00"));
         }
 
-        public static string DigitsOnly(string value)
+        public static string Cnpj(long value)
         {
-            if (string.IsNullOrEmpty(value))
-                return value;
-
-            StringBuilder builder = new StringBuilder(value.Length);
-            for (int i = 0; i < value.Length; i++)
-                if (Char.IsDigit(value, i))
-                    builder.Append(value[i]);
-            return builder.ToString();
+            return string.Concat(
+                ((value / 1000000000000) % 100).ToString("00"),
+                ".",
+                ((value / 1000000000) % 1000).ToString("000"),
+                ".",
+                ((value / 1000000) % 1000).ToString("000"),
+                "/",
+                ((value / 100) % 10000).ToString("0000"),
+                "-",
+                (value % 100).ToString("00"));
         }
+
+
+        public static string Filesize(long size, int digits)
+        {
+
+            double sz = size;
+            string term = " B";
+            if (sz > 1024.0)
+            {
+                sz /= 1024.0;
+                if (sz > 1024.0)
+                {
+                    sz /= 1024.0;
+                    if (sz > 1024)
+                    {
+                        sz /= 1024.0;
+                        term = " GB";
+                    }
+                    else
+                    {
+                        term = " MB";
+                    }
+                }
+                else
+                {
+                    term = " KB";
+                }
+            }
+
+            return Math.Round(sz, digits) + term;
+
+        }
+
+
+        public static string DateOrDash(DateTime date, string datePattern)
+        {
+            if (date == DateTime.MinValue)
+                return "-";
+            else
+                return date.ToString(datePattern);
+        }
+
     }
 }

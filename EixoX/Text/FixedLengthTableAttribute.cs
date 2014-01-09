@@ -4,7 +4,10 @@ using System.Text;
 
 namespace EixoX.Text
 {
-    class FixedLengthTableAttribute
+    [Serializable]
+    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class, AllowMultiple = false)]
+    public class FixedLengthTableAttribute : Attribute
     {
+        public string CultureInfo { get; set; }
     }
 }

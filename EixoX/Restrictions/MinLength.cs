@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Text;
 
 
@@ -24,14 +23,15 @@ namespace EixoX.Restrictions
             return input == null ? true : input.ToString().Length >= _Value;
         }
 
-        public string GetRestrictionMessage(object input)
-        {
-            return "Text length below Minimum of " + _Value;
-        }
-
         public override string ToString()
         {
             return "Min length of " + _Value.ToString();
+        }
+
+
+        public string RestrictionMessageFormat
+        {
+            get { return "Text length below Minimum of " + _Value; }
         }
     }
 }

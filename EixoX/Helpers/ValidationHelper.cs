@@ -40,6 +40,8 @@ namespace EixoX
                 return true;
             if (value is Array && ((Array)value).Length == 0)
                 return true;
+            if(value is Enum)
+            return !Enum.IsDefined(value.GetType(), value);
 
             return false;
         }
@@ -65,7 +67,5 @@ namespace EixoX
         {
             return EixoX.Restrictions.Email.IsEmail(value);
         }
-        
-        
     }
 }

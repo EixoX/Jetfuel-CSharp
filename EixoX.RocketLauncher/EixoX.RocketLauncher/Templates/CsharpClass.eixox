@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EixoX.Data;
+using EixoX.Restrictions;
+using EixoX.UI;
+
+namespace {{namespace}}
+{	
+	[DatabaseTable]
+    public class {{classname}}
+    {
+		{{attributes}}
+    }
+}

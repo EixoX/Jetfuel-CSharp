@@ -60,7 +60,7 @@ namespace EixoX.Collections
         public TreeNode<T> DepthSearch(T value, IEqualityComparer<T> comparer)
         {
             TreeNode<T> found = null;
-            for (LinkedListNode<TreeNode<T>> node = First; node != null && found != null; node = node.Next)
+            for (LinkedListNode<TreeNode<T>> node = First; node != null && found == null; node = node.Next)
                 found = comparer.Equals(value, node.Value.Value) ?
                     node.Value :
                     node.Value.DepthSearch(value, comparer);
@@ -75,7 +75,7 @@ namespace EixoX.Collections
         /// <returns>The first tree node found.</returns>
         public TreeNode<T> DepthSearch(T value)
         {
-            return DepthSearch(value, new HashcodeComparer<T>());
+            return DepthSearch(value, EqualityComparer<T>.Default);
         }
 
         /// <summary>
@@ -84,13 +84,11 @@ namespace EixoX.Collections
         /// <param name="value">The value to look for.</param>
         /// <param name="func">The delegate fuction to use.</param>
         /// <returns>The first tree node found.</returns>
-        public TreeNode<T> DepthSearch(T value, EqualsToHanlder<T> func)
+        public TreeNode<T> DepthSearch(EqualsToHandler<T> func)
         {
             TreeNode<T> found = null;
-            for (LinkedListNode<TreeNode<T>> node = First; node != null && found != null; node = node.Next)
-                found = func.Invoke(value, node.Value.Value) ?
-                    node.Value :
-                    node.Value.DepthSearch(value, func);
+            for (LinkedListNode<TreeNode<T>> node = First; node != null && found == null; node = node.Next)
+                found = func.Invoke(node.Value.Value) ? node.Value : node.Value.DepthSearch(func);
 
             return found;
         }

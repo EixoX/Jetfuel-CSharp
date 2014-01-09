@@ -92,5 +92,14 @@ namespace EixoX.Data
         /// <param name="filter">The filter.</param>
         /// <returns>The number of items.</returns>
         long Count(DataAspect aspect, ClassFilter filter);
+
+
+        /// <summary>
+        /// Creates a search filter based on a string.
+        /// </summary>
+        /// <param name="aspect">The data aspect to filter.</param>
+        /// <param name="filter">The content of the filter</param>
+        /// <returns>The filter term or expression, or null if nothing is filtered.</returns>
+        ClassFilter CreateSearchFilter(DataAspect aspect, string filter);
     }
 }
