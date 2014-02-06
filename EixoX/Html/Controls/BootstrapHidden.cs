@@ -8,7 +8,7 @@ namespace EixoX.Html.Controls
     {
         public override void Render(System.IO.TextWriter writer, UI.UIControlState state, params HtmlAttribute[] attributes)
         {
-            CreateInput(state).Write(writer);
+            RenderInput(writer, state, attributes);
         }
 
         protected override HtmlNode CreateInput(UI.UIControlState state)

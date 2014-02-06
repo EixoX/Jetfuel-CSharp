@@ -52,7 +52,14 @@ namespace EixoX
         /// <returns>The property value.</returns>
         public object GetValue(object entity)
         {
-            return this._Property.GetValue(entity, null);
+            try
+            {
+                return this._Property.GetValue(entity, null);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(this.Name + " had a problem: " + ex.Message, ex);
+            }
         }
 
         /// <summary>

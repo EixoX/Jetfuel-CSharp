@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D696A677-6467-4FEE-84B0-42FE47B04C7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EixoX.Data</RootNamespace>
+    <AssemblyName>EixoX.Data</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\DoubleAdapter.cs" />
+    <Compile Include="Adapters\FloatAdapter.cs" />
+    <Compile Include="Adapters\Int32Adapter.cs" />
+    <Compile Include="Adapters\VarcharAdapter.cs" />
+    <Compile Include="ClassAcessor.cs" />
+    <Compile Include="ClassDelete.cs" />
+    <Compile Include="ClassField.cs" />
+    <Compile Include="ClassFilter.cs" />
+    <Compile Include="ClassFilters\ClassFilterComparer.cs" />
+    <Compile Include="ClassFilters\ClassFilterEqualTo.cs" />
+    <Compile Include="ClassFilterExpression.cs" />
+    <Compile Include="ClassFilters\ClassFilterGreaterOrEqual.cs" />
+    <Compile Include="ClassFilters\ClassFilterGreaterThan.cs" />
+    <Compile Include="ClassFilters\ClassFilterIn.cs" />
+    <Compile Include="ClassFilters\ClassFilterLike.cs" />
+    <Compile Include="ClassFilters\ClassFilterLowerOrEqual.cs" />
+    <Compile Include="ClassFilters\ClassFilterLowerThan.cs" />
+    <Compile Include="ClassFilters\ClassFilterNotEqualTo.cs" />
+    <Compile Include="ClassFilters\ClassFilterNotIn.cs" />
+    <Compile Include="ClassFilters\ClassFilterNotLike.cs" />
+    <Compile Include="ClassFilterTerm.cs" />
+    <Compile Include="ClassFilterWhere.cs" />
+    <Compile Include="ClassFilterComparison.cs" />
+    <Compile Include="ClassInsert.cs" />
+    <Compile Include="ClassProperty.cs" />
+    <Compile Include="ClassSchema.cs" />
+    <Compile Include="ClassSelect.cs" />
+    <Compile Include="ClassSort.cs" />
+    <Compile Include="ClassSortDirection.cs" />
+    <Compile Include="ClassStorage.cs" />
+    <Compile Include="ClassUpdate.cs" />
+    <Compile Include="Column.cs" />
+    <Compile Include="ColumnAdapter.cs" />
+    <Compile Include="ColumnAttribute.cs" />
+    <Compile Include="ColumnMapping.cs" />
+    <Compile Include="ColumnMappingField.cs" />
+    <Compile Include="ColumnMappingProperty.cs" />
+    <Compile Include="ColumnType.cs" />
+    <Compile Include="Csv\CsvColumn.cs" />
+    <Compile Include="Csv\CsvColumnAttribute.cs" />
+    <Compile Include="Csv\CsvColumnMapping.cs" />
+    <Compile Include="Csv\CsvTable.cs" />
+    <Compile Include="Csv\CsvTableAttribute.cs" />
+    <Compile Include="Csv\CsvTableMapping.cs" />
+    <Compile Include="Database\Db.cs" />
+    <Compile Include="FixedLength\FixedLengthColumn.cs" />
+    <Compile Include="FixedLength\FixedLengthColumnAttribute.cs" />
+    <Compile Include="FixedLength\FixedLengthColumnMapping.cs" />
+    <Compile Include="FixedLength\FixedLengthTable.cs" />
+    <Compile Include="FixedLength\FixedLengthTableAttribute.cs" />
+    <Compile Include="FixedLength\FixedLengthTableMapping.cs" />
+    <Compile Include="MySql\MySqlColumn.cs" />
+    <Compile Include="MySql\MySqlColumnAttribute.cs" />
+    <Compile Include="MySql\MySqlColumnMapping.cs" />
+    <Compile Include="MySql\MySqlTable.cs" />
+    <Compile Include="MySql\MySqlTableAttribute.cs" />
+    <Compile Include="MySql\MySqlTableMapping.cs" />
+    <Compile Include="Odbc\OdbcColumn.cs" />
+    <Compile Include="Odbc\OdbColumnAttribute.cs" />
+    <Compile Include="Odbc\OdbColumnMapping.cs" />
+    <Compile Include="Odbc\OdbcTable.cs" />
+    <Compile Include="Odbc\OdbcTableAttribute.cs" />
+    <Compile Include="Odbc\OdbcTableMapping.cs" />
+    <Compile Include="OleDb\OdbcTable.cs" />
+    <Compile Include="OleDb\OdbcTableAttribute.cs" />
+    <Compile Include="OleDb\OdbcTableMapping.cs" />
+    <Compile Include="OleDb\OleDbColumn.cs" />
+    <Compile Include="OleDb\OleDbColumnAttribute.cs" />
+    <Compile Include="OleDb\OleDbColumnMapping.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServer\SqlObject.cs" />
+    <Compile Include="SqlServer\SqlProcedure.cs" />
+    <Compile Include="SqlServer\SqlServerColumn.cs" />
+    <Compile Include="SqlServer\SqlServerColumnAttribute.cs" />
+    <Compile Include="SqlServer\SqlServerColumnMapping.cs" />
+    <Compile Include="SqlServer\SqlServerTable.cs" />
+    <Compile Include="SqlServer\SqlServerTableAttribute.cs" />
+    <Compile Include="SqlServer\SqlServerTableMapping.cs" />
+    <Compile Include="SqlServer\SqlTable.cs" />
+    <Compile Include="SqlServer\SqlView.cs" />
+    <Compile Include="Table.cs" />
+    <Compile Include="TableAdapter.cs" />
+    <Compile Include="TableAttribute.cs" />
+    <Compile Include="TableMapping.cs" />
+    <Compile Include="Xml\XmlColumn.cs" />
+    <Compile Include="Xml\XmlColumnAttribute.cs" />
+    <Compile Include="Xml\XmlColumnMapping.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_References\mysql.data.cf.dll" />
+    <Content Include="App_References\mysql.data.dll" />
+    <Content Include="App_References\mysql.data.entity.dll" />
+    <Content Include="App_References\mysql.web.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
