@@ -91,9 +91,7 @@ namespace EixoX.Data
             }
             else if (value is bool)
             {
-                builder.Append('\'');
-                builder.Append(Convert.ToInt32(value));
-                builder.Append('\'');
+                builder.Append((bool)value ? "1" : "0");
             }
             else if (value is System.Collections.IEnumerable)
             {
