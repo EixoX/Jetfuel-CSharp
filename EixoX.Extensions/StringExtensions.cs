@@ -26,7 +26,7 @@ namespace System
                 return input;
             else
             {
-                while (!char.IsWhiteSpace(input, length) && length > 0)
+                while (!char.IsWhiteSpace(input, length - 1) && length > 0)
                     length--;
 
                 return input.Substring(0, length) + "...";
