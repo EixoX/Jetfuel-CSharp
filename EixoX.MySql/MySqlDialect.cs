@@ -2,13 +2,11 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EixoX.MySql
 {
     public class MySqlDialect : AnsiDialect
     {
-
         public MySqlDialect() : base('`','`')
         {
 
@@ -18,7 +16,6 @@ namespace EixoX.MySql
         {
             return new MySqlConnection(connectionString);
         }
-
 
     }
 }
