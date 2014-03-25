@@ -48,6 +48,13 @@ namespace EixoX.Data
             this._nullable = nullable;
         }
 
+        public DatabaseColumnAttribute(string name)
+        {
+            this._columnKind = DatabaseColumnKind.Normal;
+            this._nullable = true;
+            this._storedName = name;
+        }
+
 
         public DatabaseColumnKind ColumnKind
         {
