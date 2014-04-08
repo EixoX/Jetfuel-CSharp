@@ -43,6 +43,7 @@
     <Compile Include="Command\GlobalizationFilesCommand.cs" />
     <Compile Include="Command\SettingsBasedCommand.cs" />
     <Compile Include="DatabaseGathering\DatabaseCredentials.cs" />
+    <Compile Include="DatabaseGathering\DatabaseTableLister.cs" />
     <Compile Include="Generators\ClassFile.cs" />
     <Compile Include="Command\ClassesFromDatabaseCommand.cs" />
     <Compile Include="Command\Commands.cs" />

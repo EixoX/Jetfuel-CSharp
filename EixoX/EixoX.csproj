@@ -85,27 +85,43 @@
     <Compile Include="Helpers\EnumerationHelper.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Helpers\UrlPathHelper.cs" />
-    <Compile Include="Html\BootstrapControl.cs" />
-    <Compile Include="Html\BootstrapControlFactory.cs" />
-    <Compile Include="Html\BootstrapHelper.cs" />
-    <Compile Include="Html\BootstrapPresenter.cs" />
-    <Compile Include="Html\BootstrapPresenterControl.cs" />
-    <Compile Include="Html\Controls\BootstrapCheckbox.cs" />
-    <Compile Include="Html\Controls\BootstrapCheckboxGroup.cs" />
-    <Compile Include="Html\Controls\BootstrapDatepicker.cs" />
-    <Compile Include="Html\Controls\BootstrapDropdown.cs" />
-    <Compile Include="Html\Controls\BootstrapHidden.cs" />
-    <Compile Include="Html\Controls\BootstrapHtmlEditor.cs" />
-    <Compile Include="Html\Controls\BootstrapMultiline.cs" />
-    <Compile Include="Html\Controls\BootstrapPassword.cs" />
-    <Compile Include="Html\Controls\BootstrapRadioGroup.cs" />
-    <Compile Include="Html\Controls\BootstrapSingleline.cs" />
-    <Compile Include="Html\Controls\BootstrapTimepicker.cs" />
-    <Compile Include="Html\Controls\BootstrapFileUploader.cs" />
-    <Compile Include="Html\Controls\HtmlFileUploader.cs" />
-    <Compile Include="Html\Controls\HtmlColorPicker.cs" />
+    <Compile Include="Html\Bootstrap\BootstrapPresenter.cs" />
+    <Compile Include="Html\Bootstrap\BootstrapControl.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Bootstrap2Presenter.cs" />
+    <Compile Include="Html\Bootstrap\BootstrapControlFactory.cs" />
+    <Compile Include="Html\Bootstrap\BootstrapPresenterControl.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Checkbox.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2CheckboxGroup.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Datepicker.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Dropdown.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Hidden.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2HtmlEditor.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Multiline.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Password.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2RadioGroup.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Singleline.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2Timepicker.cs" />
+    <Compile Include="Html\Bootstrap\v2_3_2\Controls\Bootstrap2FileUploader.cs" />
+    <Compile Include="Html\Bootstrap\v3\Bootstrap3Presenter.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Checkbox.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3CheckboxGroup.cs" />
+    <Compile Include="Html\Bootstrap\v3\Bootstrap3Control.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Datepicker.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Dropdown.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3FileUploader.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Hidden.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3HtmlEditor.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Multiline.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Password.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3RadioGroup.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Singleline.cs" />
+    <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Timepicker.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlFileUploader.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlColorPicker.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />
     <Compile Include="Restrictions\MinAge.cs" />
+    <Compile Include="RestrictionViewee.cs" />
+    <Compile Include="UI\UIPresenterRenderable.cs" />
     <Compile Include="Viewee.cs" />
     <Compile Include="LazyConstructor.cs" />
     <Compile Include="Pair.cs" />
@@ -133,46 +149,46 @@
     <Compile Include="Globalization\GlobalizationList.cs" />
     <Compile Include="Globalization\IGlobalization.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Html\Controls\HtmlCheckbox.cs" />
-    <Compile Include="Html\Controls\HtmlCheckboxGroup.cs" />
-    <Compile Include="Html\Controls\HtmlFile.cs" />
-    <Compile Include="Html\Controls\HtmlHidden.cs" />
-    <Compile Include="Html\HtmlControlFactory.cs" />
-    <Compile Include="Html\Controls\HtmlDatepicker.cs" />
-    <Compile Include="Html\Controls\HtmlDropdown.cs" />
-    <Compile Include="Html\Controls\HtmlMultiline.cs" />
-    <Compile Include="Html\Controls\HtmlPassword.cs" />
-    <Compile Include="Html\Controls\HtmlRadioGroup.cs" />
-    <Compile Include="Html\Controls\HtmlSingleline.cs" />
-    <Compile Include="Html\HtmlAttribute.cs">
+    <Compile Include="Html\Vanilla\Controls\HtmlCheckbox.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlCheckboxGroup.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlFile.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlHidden.cs" />
+    <Compile Include="Html\Vanilla\HtmlControlFactory.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlDatepicker.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlDropdown.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlMultiline.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlPassword.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlRadioGroup.cs" />
+    <Compile Include="Html\Vanilla\Controls\HtmlSingleline.cs" />
+    <Compile Include="Html\Core\HtmlAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlAttributeCollection.cs">
+    <Compile Include="Html\Core\HtmlAttributeCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlBuilder.cs" />
-    <Compile Include="Html\HtmlComposite.cs">
+    <Compile Include="Html\Core\HtmlBuilder.cs" />
+    <Compile Include="Html\Core\HtmlComposite.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlControl.cs" />
-    <Compile Include="Html\HtmlHelper.cs">
+    <Compile Include="Html\Vanilla\HtmlControl.cs" />
+    <Compile Include="Html\Helpers\HtmlHelper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlNode.cs">
+    <Compile Include="Html\Core\HtmlNode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlNodeCollection.cs">
+    <Compile Include="Html\Core\HtmlNodeCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlPresenter.cs" />
-    <Compile Include="Html\HtmlPresenterControl.cs" />
-    <Compile Include="Html\HtmlSimple.cs">
+    <Compile Include="Html\Vanilla\HtmlPresenter.cs" />
+    <Compile Include="Html\Vanilla\HtmlPresenterControl.cs" />
+    <Compile Include="Html\Core\HtmlSimple.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlStandalone.cs">
+    <Compile Include="Html\Core\HtmlStandalone.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Html\HtmlText.cs">
+    <Compile Include="Html\Core\HtmlText.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interceptors\Lowercase.cs" />
@@ -319,6 +335,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

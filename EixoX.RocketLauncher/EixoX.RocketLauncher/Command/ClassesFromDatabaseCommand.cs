@@ -57,8 +57,7 @@ namespace EixoX.RocketLauncher.Command
 
             return databaseCredentials;
         }
-
-
+        
         /// <summary>
         /// Run the command
         /// </summary>
@@ -70,7 +69,12 @@ namespace EixoX.RocketLauncher.Command
             SQLServerGatherer sqlGatherer = null;
             try
             {
-                string connectionString = this.DefaultSettings["DefaultConnectionString"];
+                string connectionString;
+
+                connectionString = (string)args[1];
+                if (string.IsNullOrEmpty(connectionString))
+                    connectionString = this.DefaultSettings["DefaultConnectionString"];
+                
                 if (!string.IsNullOrEmpty(connectionString))
                     sqlGatherer = new SQLServerGatherer(connectionString);
                 else
@@ -84,7 +88,6 @@ namespace EixoX.RocketLauncher.Command
                         this.View.DisplayMessage("Could not get database information from settings.eixox.");
                         return;
                     }
-
                 }
             }
             catch (KeyNotFoundException)

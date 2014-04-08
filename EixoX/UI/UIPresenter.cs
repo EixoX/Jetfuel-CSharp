@@ -10,7 +10,8 @@ namespace EixoX.UI
     /// <summary>
     /// Represents the User Interface presentation object
     /// </summary>
-    public abstract class UIPresenter<T, TControl> : IEnumerable<TControl> where TControl : UIPresenterControl
+    public abstract class UIPresenter<T, TControl> : 
+        IEnumerable<TControl> where TControl : UIPresenterControl
     {
         private readonly List<TControl> _Controls;
 

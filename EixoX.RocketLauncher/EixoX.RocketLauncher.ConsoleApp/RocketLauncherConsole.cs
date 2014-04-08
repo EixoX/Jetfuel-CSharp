@@ -69,7 +69,7 @@ namespace EixoX.RocketLauncher.ConsoleApp
 
         public ProgrammingLanguage GetProgrammingLanguage()
         {
-            DisplayMessage("Choose the programming language your coding with: ");
+            DisplayMessage("Choose the programming language you're coding with: ");
 
             foreach (var enumValue in Enum.GetValues(typeof(ProgrammingLanguage)))
                 Console.WriteLine("   " + (int) enumValue + "- " + Enum.GetName(typeof(ProgrammingLanguage), enumValue));
