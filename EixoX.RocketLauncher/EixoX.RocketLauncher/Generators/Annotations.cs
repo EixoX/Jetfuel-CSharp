@@ -11,6 +11,11 @@ namespace EixoX.RocketLauncher
     /// </summary>
     public static class Annotations
     {
+        public static string CustomDatabaseColumn(string name)
+        {
+            return String.Format("[DatabaseColumn(\"{0}\")]", name);
+        }
+
         public static string DatabaseColumn
         {
             get { return "[DatabaseColumn]"; }

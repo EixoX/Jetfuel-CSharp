@@ -81,7 +81,16 @@ namespace EixoX.RocketLauncher
                 else if (column.Name.Equals("DateUpdated", StringComparison.OrdinalIgnoreCase))
                     annotations.Add(Annotations.DateGeneratorUpdate);
                 else
-                    annotations.Add(Annotations.DatabaseColumn);
+                {
+                    int columnNameAsInteger;
+                    if (int.TryParse(column.Name, out columnNameAsInteger))
+                    {
+                        annotations.Add(Annotations.CustomDatabaseColumn(column.Name));
+                        column.Name = "C_" + columnNameAsInteger;
+                    }
+                    else
+                        annotations.Add(Annotations.DatabaseColumn);
+                }
 
                 attributes.Add(attributeTemplate
                     .Replace("{{annotations}}", String.Join("\n\t\t", annotations))

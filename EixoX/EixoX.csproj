@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -118,11 +119,12 @@
     <Compile Include="Html\Bootstrap\v3\Controls\Bootstrap3Timepicker.cs" />
     <Compile Include="Html\Vanilla\Controls\HtmlFileUploader.cs" />
     <Compile Include="Html\Vanilla\Controls\HtmlColorPicker.cs" />
+    <Compile Include="Viewee\ListerViewee.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />
     <Compile Include="Restrictions\MinAge.cs" />
-    <Compile Include="RestrictionViewee.cs" />
+    <Compile Include="Viewee\RestrictionViewee.cs" />
     <Compile Include="UI\UIPresenterRenderable.cs" />
-    <Compile Include="Viewee.cs" />
+    <Compile Include="Viewee\Viewee.cs" />
     <Compile Include="LazyConstructor.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Reflection\PrimitiveTypes.cs" />
