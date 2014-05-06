@@ -17,6 +17,7 @@ namespace EixoX.Data
         private readonly bool _PrimaryKey;
         private readonly bool _Nullable;
         private readonly Generator _Generator;
+        private readonly string _Caption;
 
         /// <summary>
         /// Constructs the data member.
@@ -35,7 +36,8 @@ namespace EixoX.Data
             bool unique,
             bool primaryKey,
             bool nullable,
-            Generator generator)
+            Generator generator,
+            string caption)
             : base(acessor)
         {
             this._StoredName = string.IsNullOrEmpty(storedName) ? acessor.Name : storedName;
@@ -44,6 +46,7 @@ namespace EixoX.Data
             this._PrimaryKey = primaryKey;
             this._Nullable = nullable;
             this._Generator = generator;
+            this._Caption = string.IsNullOrEmpty(caption) ? acessor.Name : caption;
         }
 
         /// <summary>
@@ -75,6 +78,11 @@ namespace EixoX.Data
         /// Gets the value generator for this member.
         /// </summary>
         public Generator Generator { get { return this._Generator; } }
+
+        /// <summary>
+        /// Gets the caption (friendly) name.
+        /// </summary>
+        public string Caption { get { return this._Caption; } }
 
         /// <summary>
         /// Gets the data value (or null) for an entity.

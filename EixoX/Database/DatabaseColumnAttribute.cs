@@ -8,67 +8,53 @@ namespace EixoX.Data
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
     public class DatabaseColumnAttribute : Attribute
     {
-        private readonly DatabaseColumnKind _columnKind;
-        private readonly string _storedName;
-        private readonly bool _nullable;
-
         public DatabaseColumnAttribute()
         {
-            this._columnKind = DatabaseColumnKind.Normal;
+            this.ColumnKind = DatabaseColumnKind.Normal;
         }
 
         public DatabaseColumnAttribute(DatabaseColumnKind columnKind)
         {
-            this._columnKind = columnKind;
+            this.ColumnKind = columnKind;
         }
 
         public DatabaseColumnAttribute(DatabaseColumnKind columnKind, string storedName)
         {
-            this._columnKind = columnKind;
-            this._storedName = storedName;
+            this.ColumnKind = columnKind;
+            this.StoredName = storedName;
         }
 
         public DatabaseColumnAttribute(DatabaseColumnKind columnKind, string storedName, bool nullable)
         {
-            this._columnKind = columnKind;
-            this._storedName = storedName;
-            this._nullable = nullable;
+            this.ColumnKind = columnKind;
+            this.StoredName = storedName;
+            this.Nullable = nullable;
         }
 
         public DatabaseColumnAttribute(DatabaseColumnKind columnKind, bool nullable)
         {
-            this._columnKind = columnKind;
-            this._nullable = nullable;
+            this.ColumnKind = columnKind;
+            this.Nullable = nullable;
         }
 
 
         public DatabaseColumnAttribute(bool nullable)
         {
-            this._columnKind = DatabaseColumnKind.Normal;
-            this._nullable = nullable;
+            this.ColumnKind = DatabaseColumnKind.Normal;
+            this.Nullable = nullable;
         }
 
         public DatabaseColumnAttribute(string name)
         {
-            this._columnKind = DatabaseColumnKind.Normal;
-            this._nullable = true;
-            this._storedName = name;
+            this.ColumnKind = DatabaseColumnKind.Normal;
+            this.Nullable = true;
+            this.StoredName = name;
         }
 
 
-        public DatabaseColumnKind ColumnKind
-        {
-            get { return this._columnKind; }
-        }
-
-        public string StoredName
-        {
-            get { return this._storedName; }
-        }
-
-        public bool IsNullable
-        {
-            get { return this._nullable; }
-        }
+        public DatabaseColumnKind ColumnKind { get; set; }
+        public string StoredName { get; set; }
+        public bool Nullable { get; set; }
+        public string Caption { get; set; }
     }
 }

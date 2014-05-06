@@ -116,7 +116,7 @@
     <Compile Include="Html\Controls\HtmlFileUploader.cs" />
     <Compile Include="Html\Controls\HtmlColorPicker.cs" />
     <Compile Include="Html\Bootstrap3Control.cs" />
-    <Compile Include="Html\Bootstrap3ControlFactory.cs" />
+    <Compile Include="Html\Controls\Bootstrap3ControlFactory.cs" />
     <Compile Include="Html\Bootstrap3Presenter.cs" />
     <Compile Include="Html\Bootstrap3PresenterControl.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />

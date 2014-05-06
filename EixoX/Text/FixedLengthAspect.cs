@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Text;
 
 namespace EixoX.Text
@@ -108,6 +109,20 @@ namespace EixoX.Text
             return 1;
         }
 
+
+        public string WriteString(IEnumerable<T> entities)
+        {
+            StringWriter sw = new StringWriter();
+            WriteTo(sw, entities);
+            return sw.ToString();
+        }
+
+        public string WriteString(T entity)
+        {
+            StringWriter sw = new StringWriter();
+            WriteTo(sw, entity);
+            return sw.ToString();
+        }
 
         public IEnumerable<T> ReadFrom(IEnumerable<string> lines)
         {

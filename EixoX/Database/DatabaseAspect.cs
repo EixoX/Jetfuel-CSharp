@@ -37,8 +37,9 @@ namespace EixoX.Data
                     dca.ColumnKind == DatabaseColumnKind.Identity,
                     dca.ColumnKind == DatabaseColumnKind.Unique,
                     dca.ColumnKind == DatabaseColumnKind.PrimaryKey,
-                    dca.IsNullable,
-                    acessor.GetAttribute<Generator>(true));
+                    dca.Nullable,
+                    acessor.GetAttribute<Generator>(true),
+                    dca.Caption);
 
                 return true;
             }

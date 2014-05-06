@@ -17,7 +17,6 @@ namespace EixoX
             {
                 if (_Instance == null)
                     _Instance = new Singleton<T>();
-
                 return _Instance.child;
             }
         }

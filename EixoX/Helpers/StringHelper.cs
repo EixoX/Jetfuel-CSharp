@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace EixoX
@@ -168,7 +169,52 @@ namespace EixoX
             else
                 return null;
 
-            
+
+
+
+        }
+
+        public static string Join(string separator, System.Collections.IEnumerable items, string fieldOrProperty)
+        {
+
+            if (items != null)
+            {
+                Type type = null;
+                FieldInfo field = null;
+                PropertyInfo property = null;
+
+                StringBuilder builder = new StringBuilder();
+                bool prependComma = false;
+                foreach (Object o in items)
+                {
+                    if (o != null)
+                    {
+                        if (type == null)
+                        {
+                            type = o.GetType();
+                            field = type.GetField(fieldOrProperty);
+                            if (field == null)
+                            {
+                                property = type.GetProperty(fieldOrProperty);
+                                if (property == null)
+                                    throw new ArgumentException("There`s no property or field with the name " + fieldOrProperty + " on " + type);
+                            }
+                        }
+                        if (prependComma)
+                            builder.Append(separator);
+                        else
+                            prependComma = true;
+
+                        builder.Append(field == null ? property.GetValue(o, null) : field.GetValue(o));
+                    }
+                }
+
+                return builder.ToString();
+            }
+            else
+                return null;
+
+
 
 
         }
