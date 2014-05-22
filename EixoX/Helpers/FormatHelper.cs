@@ -85,5 +85,23 @@ namespace EixoX
                 return date.ToString(datePattern);
         }
 
+
+
+        public static string FixedLength(string input, int length)
+        {
+            if (string.IsNullOrEmpty(input))
+                return new string(' ', length);
+            else if (input.Length > length)
+                return input.Substring(0, length);
+            else
+            {
+                char[] chars = new char[length];
+                for (int i = 0; i < input.Length; i++)
+                    chars[i] = input[i];
+                for (int i = input.Length; i < length; i++)
+                    chars[i] = ' ';
+                return new string(chars);
+            }
+        }
     }
 }

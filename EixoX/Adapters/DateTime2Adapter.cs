@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Adapters
 {
-    class DataTime2Adapter
+    class DateTime2Adapter
     {
     }
 }

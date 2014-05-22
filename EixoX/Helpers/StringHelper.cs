@@ -175,6 +175,10 @@ namespace EixoX
         }
 
         public static string Join(string separator, System.Collections.IEnumerable items, string fieldOrProperty)
+        { 
+            return Join(separator, items, fieldOrProperty, System.Globalization.CultureInfo.CurrentUICulture);
+        }
+        public static string Join(string separator, System.Collections.IEnumerable items, string fieldOrProperty, IFormatProvider formatProvider)
         {
 
             if (items != null)
@@ -205,7 +209,9 @@ namespace EixoX
                         else
                             prependComma = true;
 
-                        builder.Append(field == null ? property.GetValue(o, null) : field.GetValue(o));
+                        Object value = field == null ? property.GetValue(o, null) : field.GetValue(o);
+
+                        builder.AppendFormat(formatProvider, "{0}", value);
                     }
                 }
 

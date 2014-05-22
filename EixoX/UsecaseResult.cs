@@ -4,11 +4,11 @@ using System.Text;
 
 namespace EixoX
 {
-    public enum UsecaseResult
+    public class UsecaseResult<T>
     {
-        Exception_Raised = 0,
-        Failed = 1,
-        Sucess = 2,
-        Restrictions_Failed = 3
+        public UsecaseResultType ResultType { get; set; }
+        public T Result { get; set; }
+        public Exception Exception { get; set; }
+        public string Message { get; set; }
     }
 }

@@ -51,10 +51,11 @@
     <Compile Include="Adapters\CharAdapter.cs" />
     <Compile Include="Adapters\CompositeAdapter.cs" />
     <Compile Include="Adapters\CurrencyAdapter.cs" />
-    <Compile Include="Adapters\DataTime2Adapter.cs" />
+    <Compile Include="Adapters\DateTime2Adapter.cs" />
     <Compile Include="Adapters\DateAdapter.cs" />
     <Compile Include="Adapters\DateTimeAdapter.cs" />
     <Compile Include="Adapters\DateTimeOffsetAdapter.cs" />
+    <Compile Include="Adapters\DateYmdAdapter.cs" />
     <Compile Include="Adapters\DecimalAdapter.cs" />
     <Compile Include="Adapters\DoubleAdapter.cs" />
     <Compile Include="Adapters\GuidAdapter.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Html\Bootstrap3PresenterControl.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />
     <Compile Include="Restrictions\MinAge.cs" />
+    <Compile Include="UsecaseResult.cs" />
     <Compile Include="Viewee.cs" />
     <Compile Include="LazyConstructor.cs" />
     <Compile Include="Pair.cs" />
@@ -310,7 +312,7 @@
     <Compile Include="UI\UIControls\UIRadioGroup.cs" />
     <Compile Include="UI\UIReflectionFactory.cs" />
     <Compile Include="UI\UIControls\UISingleline.cs" />
-    <Compile Include="UsecaseResult.cs" />
+    <Compile Include="UsecaseResultType.cs" />
     <Compile Include="Xml\XmlAspect.cs" />
     <Compile Include="Xml\XmlAspectMember.cs" />
     <Compile Include="Xml\XmlAspectMemberCDATA.cs" />
