@@ -21,5 +21,13 @@ namespace EixoX
             SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
             return BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
         }
+
+        public static string Sha1(string text)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(text);
+            SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
+            byte[] outbuffer = cryptoTransformSHA1.ComputeHash(buffer);
+            return Convert.ToBase64String(outbuffer);
+        }
     }
 }

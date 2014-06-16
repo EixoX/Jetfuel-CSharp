@@ -47,6 +47,10 @@ namespace EixoX.Data
 
         }
 
+        protected virtual string FormatBoolean(bool value)
+        {
+            return value ? "1" : "0";
+        }
 
         /// <summary>
         /// Apppends a column value to a string builder.
@@ -110,7 +114,7 @@ namespace EixoX.Data
             }
             else if (value is bool)
             {
-                builder.Append(((bool)value) ? "1" : "0");
+                builder.Append(FormatBoolean((bool)value));
             }
             else if (value is Enum)
             {
