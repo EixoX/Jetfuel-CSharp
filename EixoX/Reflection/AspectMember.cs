@@ -64,6 +64,7 @@ namespace EixoX
         /// <param name="formatProvider">The format provider to use.</param>
         public virtual void SetValue(object entity, object value, IFormatProvider formatProvider)
         {
+
             if (value != null)
             {
                 if (!_Acessor.DataType.IsEnum)
@@ -74,9 +75,20 @@ namespace EixoX
                         {
                             value = string.Format(formatProvider, "{0}", value);
                         }
+                        else if (value is string && ((string)value).Length == 0)
+                        {
+                            value = null;
+                        }
                         else
                         {
-                            value = Convert.ChangeType(value, _Acessor.DataType, formatProvider);
+                            try
+                            {
+                                value = Convert.ChangeType(value, _Acessor.DataType, formatProvider);
+                            }
+                            catch (Exception e)
+                            {
+                                throw new FormatException("\"" + value + "\":" + e.Message, e);
+                            }
                         }
                     }
                 }

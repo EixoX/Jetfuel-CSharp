@@ -524,5 +524,33 @@ namespace EixoX.Data
                 throw new ArgumentException("To enumerate options the entity must have an identity or unique member: " + _Aspect.DataType.ToString());
             }
         }
+
+
+        public Collections.Tree<T> ToTree(string primaryKeyName, string parentReferenceName)
+        {
+            DataAspectMember primaryKeyMember = this._Aspect[primaryKeyName];
+            DataAspectMember parentReferenceMember = this._Aspect[parentReferenceName];
+            Collections.Tree<T> tree = new Collections.Tree<T>();
+
+            foreach (T item in this)
+            {
+                object key = parentReferenceMember.GetValue(item);
+                Collections.TreeNode<T> parent = null;
+                if (!ValidationHelper.IsNullOrEmpty(key))
+                {
+                    parent = tree.DepthSearch(primaryKeyMember, key);
+                }
+                if (parent != null)
+                {
+                    parent.AddLast(item);
+                }
+                else
+                {
+                    tree.AddLast(item);
+                }
+            }
+
+            return tree;
+        }
     }
 }

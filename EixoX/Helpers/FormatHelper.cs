@@ -89,19 +89,28 @@ namespace EixoX
 
         public static string FixedLength(string input, int length)
         {
+            char[] chars = new char[length];
+
             if (string.IsNullOrEmpty(input))
-                return new string(' ', length);
+            {
+                for (int i = 0; i < length; i++)
+                    chars[i] = ' ';
+
+            }
             else if (input.Length > length)
-                return input.Substring(0, length);
+            {
+                for (int i = 0; i < length; i++)
+                    chars[i] = input[i];
+            }
             else
             {
-                char[] chars = new char[length];
                 for (int i = 0; i < input.Length; i++)
                     chars[i] = input[i];
                 for (int i = input.Length; i < length; i++)
                     chars[i] = ' ';
-                return new string(chars);
             }
+
+            return new string(chars, 0, length);
         }
     }
 }

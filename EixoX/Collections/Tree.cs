@@ -92,5 +92,21 @@ namespace EixoX.Collections
 
             return found;
         }
+
+
+        /// <summary>
+        /// Does a depth search based on an aspect member.
+        /// </summary>
+        /// <param name="member">The member to read values from.</param>
+        /// <param name="value">The value to look for</param>
+        /// <returns></returns>
+        public TreeNode<T> DepthSearch(EixoX.AspectMember member, object value)
+        {
+            TreeNode<T> found = null;
+            for (LinkedListNode<TreeNode<T>> node = First; node != null && found == null; node = node.Next)
+                found = value.Equals(member.GetValue(node.Value)) ? node.Value : node.Value.DepthSearch(member, value);
+
+            return found;
+        }
     }
 }

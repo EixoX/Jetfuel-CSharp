@@ -6,25 +6,25 @@ namespace EixoX
 {
     public static class EnumerationHelper
     {
-        public static IEnumerable<T[]> Segmentate<T>(IEnumerable<T> source, int size)
+        public static IEnumerable<List<T>> Segmentate<T>(IEnumerable<T> source, int size)
         {
             int count = 0;
-            T[] array = new T[size];
+            List<T> list = new List<T>(size);
 
             foreach (T item in source)
             {
-                if (count > 0 && (count % size == 0))
-                {
-                    yield return array;
-                    array = new T[size];
-                }
-
-                array[count % size] = item;
+                list.Add(item);
                 count++;
+
+                if (count > 0 && count % size == 0)
+                {
+                    yield return list;
+                    list = new List<T>(size);
+                }
             }
 
-            if (count % size != 0)
-                yield return array;
+            if (list.Count > 0)
+                yield return list;
         }
     }
 }
