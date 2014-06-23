@@ -36,9 +36,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Mono.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Glambox\WebApps\packages\Newtonsoft.Json.5.0.8\lib\net20\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Npgsql, Version=2.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Npgsql.dll</HintPath>
