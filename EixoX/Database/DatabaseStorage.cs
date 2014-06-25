@@ -25,5 +25,10 @@ namespace EixoX.Data
         }
 
 
+        public DataTable QueryTable(CommandType commandType, string commandText, params object[] commandParameters)
+        {
+            return _Database.ExecuteTable(commandType, commandText, commandParameters);
+        }
+
     }
 }
