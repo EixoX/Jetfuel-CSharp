@@ -38,5 +38,32 @@ namespace EixoX.Html
             this._Control.Render(writer, GetState(entity, validateRestrictions), attributes);
         }
 
+
+        public BootstrapPresenterControl SetLabel(string label)
+        {
+            base.Label = label;
+            return this;
+        }
+
+        public BootstrapPresenterControl SetRequired(bool required)
+        {
+
+            for (LinkedListNode<Restriction> node = base.Restrictions.First; node != null; node = node.Next)
+            {
+                if (node.Value is Required)
+                {
+                    if (!required)
+                        base.Restrictions.Remove(node);
+
+                    return this;
+                }
+            }
+
+            if (required)
+                base.Restrictions.AddLast(new Required());
+
+            return this;
+        }
+
     }
 }

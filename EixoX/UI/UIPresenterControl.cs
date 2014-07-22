@@ -17,8 +17,8 @@ namespace EixoX.UI
         private readonly RestrictionList _Restrictions;
         private readonly InterceptorList _Interceptors;
         private readonly GlobalizationList _Globalization;
-        private readonly string _Label;
-        private readonly string _Hint;
+        private string _Label;
+        private string _Hint;
         private readonly int _LCID;
         private readonly System.Globalization.CultureInfo _FormatProvider;
 
@@ -47,6 +47,22 @@ namespace EixoX.UI
 
         public GlobalizationList Globalization { get { return this._Globalization; } }
 
+        public RestrictionList Restrictions { get { return this._Restrictions; } }
+
+        public InterceptorList Interceptors { get { return this._Interceptors; } }
+
+        public string Label
+        {
+            get { return this._Label; }
+            set { this._Label = value; }
+        }
+
+        public string Hint
+        {
+            get { return this._Hint; }
+            set { this._Hint = value; }
+        }
+
         public string GetGlobalizationTerm(string termName)
         {
             if (_Globalization == null)
@@ -69,7 +85,7 @@ namespace EixoX.UI
 
         public UIControlState GetState(object entity, bool validateRestrictions)
         {
-            object value = _Member.DataType.IsEnum ? (int) _Member.GetValue(entity) : _Member.GetValue(entity);
+            object value = _Member.DataType.IsEnum ? (int)_Member.GetValue(entity) : _Member.GetValue(entity);
 
             if (_Interceptors != null && _Interceptors.Count > 0)
                 value = _Interceptors.Intercept(value);
