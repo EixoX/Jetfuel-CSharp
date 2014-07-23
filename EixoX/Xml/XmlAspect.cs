@@ -151,13 +151,13 @@ namespace EixoX.Xml
 
         public void ReadXml(object entity, XmlElement element, IFormatProvider formatProvider)
         {
-            if (_XmlName.Equals(element.Name, StringComparison.OrdinalIgnoreCase))
+            if (_XmlName.Equals(element.LocalName, StringComparison.OrdinalIgnoreCase))
             {
                 foreach (XmlAspectMember xam in this)
                     xam.ReadXml(entity, element, formatProvider);
             }
             else
-                throw new ArgumentException("Expected element with name " + _XmlName + " and got " + element.Name);
+                throw new ArgumentException("Expected element with name " + _XmlName + " and got " + element.LocalName);
         }
 
         public object ReadXml(XmlElement element)
