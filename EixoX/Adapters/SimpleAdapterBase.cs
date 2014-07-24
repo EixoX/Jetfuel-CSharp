@@ -121,10 +121,17 @@ namespace EixoX.Adapters
         /// <returns>A parsed object.</returns>
         public object ParseObject(string input, IFormatProvider formatProvider)
         {
-            if (string.IsNullOrEmpty(input))
-                return null;
-            else
-                return ParseValue(input, formatProvider);
+            try
+            {
+                if (string.IsNullOrEmpty(input))
+                    return null;
+                else
+                    return ParseValue(input, formatProvider);
+            }
+            catch (Exception e)
+            {
+                throw new FormatException(e.Message + " on \"" + input + "\".", e);
+            }
         }
 
 
@@ -135,10 +142,7 @@ namespace EixoX.Adapters
         /// <returns>A parsed object.</returns>
         public object ParseObject(string input)
         {
-            if (string.IsNullOrEmpty(input))
-                return null;
-            else
-                return ParseValue(input, _FormatProvider);
+            return ParseObject(input, _FormatProvider);
         }
 
         /// <summary>
