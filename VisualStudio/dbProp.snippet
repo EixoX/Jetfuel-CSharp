@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Database Column Property</Title>
+      <Author>Guilherme Rey</Author>
+      <Description />
+      <HelpUrl />
+      <SnippetTypes />
+      <Keywords />
+      <Shortcut>dbprop</Shortcut>
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations>
+        <Literal Editable="true">
+          <ID>PropType</ID>
+          <Type />
+          <ToolTip />
+          <Default>object</Default>
+          <Function />
+        </Literal>
+        <Literal Editable="true">
+          <ID>PropName</ID>
+          <Type />
+          <ToolTip />
+          <Default>PropName</Default>
+          <Function />
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Kind="method decl" Delimiter="$"><![CDATA[[DatabaseColumn]
+public $PropType$ $PropName$ { get; set; }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

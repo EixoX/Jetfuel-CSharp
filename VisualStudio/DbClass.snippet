@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Database table based class</Title>
+      <Author>Guilherme Rey</Author>
+      <Description>Creates a C# class that will be a map to a database table</Description>
+      <HelpUrl></HelpUrl>
+      <SnippetTypes />
+      <Keywords />
+      <Shortcut>dbclass</Shortcut>
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations>
+        <Literal Editable="true">
+          <ID>className</ID>
+          <Type />
+          <ToolTip>Your class name</ToolTip>
+          <Default>ClassName</Default>
+          <Function />
+        </Literal>
+        <Literal Editable="true">
+          <ID>TableName</ID>
+          <Type />
+          <ToolTip>The database's table name</ToolTip>
+          <Default>TableName</Default>
+          <Function />
+        </Literal>
+      </Declarations>
+      <Code Language="csharp" Kind="type decl" Delimiter="$"><![CDATA[[DatabaseTable("$TableName$")]
+public class $ClassName$ {
+	
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
