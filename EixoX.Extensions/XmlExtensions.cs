@@ -55,5 +55,12 @@ namespace System.Xml
             string childText = GetChildText(element, localName);
             return string.IsNullOrEmpty(childText) ? TimeSpan.Zero : TimeSpan.Parse(childText);
         }
+
+        public static XmlElement AppendElement(this XmlElement element, string localName)
+        {
+            XmlElement child = element.OwnerDocument.CreateElement(localName);
+            element.AppendChild(child);
+            return child;
+        }
     }
 }

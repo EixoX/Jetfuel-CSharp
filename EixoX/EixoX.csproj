@@ -87,6 +87,9 @@
     <Compile Include="Base36.cs" />
     <Compile Include="Cached.cs" />
     <Compile Include="Database\PostgresDialect.cs" />
+    <Compile Include="Formatters\CpfFormatter.cs" />
+    <Compile Include="Formatters\Formatter.cs" />
+    <Compile Include="Formatters\GenericFormatter.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\CharHelper.cs" />
     <Compile Include="Helpers\EnumerationHelper.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="Html\Controls\Bootstrap3ControlFactory.cs" />
     <Compile Include="Html\Bootstrap3Presenter.cs" />
     <Compile Include="Html\Bootstrap3PresenterControl.cs" />
+    <Compile Include="Html\HtmlRaw.cs" />
     <Compile Include="Restrictions\GuidAttribute.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />
     <Compile Include="Restrictions\MinAge.cs" />

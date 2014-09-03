@@ -18,9 +18,29 @@ namespace EixoX.Web
 
         public static HtmlComposite AppendText(this HtmlComposite element, string text)
         {
-            element.Children.AddLast(new HtmlText(text));
+            if (!string.IsNullOrEmpty(text))
+                element.Children.AddLast(new HtmlText(text));
             return element;
         }
+
+        public static HtmlComposite AppendText(this HtmlComposite element, object value)
+        {
+            if (value != null)
+                element.Children.AddLast(new HtmlText(value.ToString()));
+            return element;
+        }
+
+        public static HtmlComposite AppendText(this HtmlComposite element, string formatString, object value)
+        {
+            if (value != null)
+                element.Children.AddLast(new HtmlText(
+                    string.IsNullOrEmpty(formatString) ?
+                    value.ToString() :
+                    string.Format(formatString, value)
+                    ));
+            return element;
+        }
+
 
         public static HtmlComposite AppendStandalone(this HtmlComposite element, string tagName, params HtmlAttribute[] attributes)
         {

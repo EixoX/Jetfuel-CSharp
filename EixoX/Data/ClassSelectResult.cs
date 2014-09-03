@@ -92,5 +92,15 @@ namespace EixoX.Data
             get { return _pageOrdinal > 0; }
         }
 
+
+        public int FirstRecordOrdinal
+        {
+            get { return this._pageSize * this._pageOrdinal; }
+        }
+
+        public int LastRecordOrdinal
+        {
+            get { return (int)Math.Min(this._recordCount, _pageSize * (_pageOrdinal + 1)); }
+        }
     }
 }
