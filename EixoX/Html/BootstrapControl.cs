@@ -30,12 +30,12 @@ namespace EixoX.Html
 
             if (!string.IsNullOrEmpty(state.ErrorMessage))
             {
-                _Hint = new HtmlSimple("span", state.ErrorMessage, new HtmlAttribute("class", "help-inline"));
+                _Hint = new HtmlSimple("span", state.ErrorMessage, new HtmlAttribute("class", "help-inline help-block"));
             }
             else
             {
                 string hintText = string.IsNullOrEmpty(state.Hint) ? " " : state.Hint;
-                _Hint = new HtmlSimple("span", hintText, new HtmlAttribute("class", "help-inline"));
+                _Hint = new HtmlSimple("span", hintText, new HtmlAttribute("class", "help-inline help-block"));
             }
 
             _Hint.Write(writer);
@@ -62,16 +62,16 @@ namespace EixoX.Html
             {
                 if (string.IsNullOrEmpty(state.ErrorMessage))
                 {
-                    writer.Write("control-group success");
+                    writer.Write("control-group form-group success");
                 }
                 else
                 {
-                    writer.Write("control-group error");
+                    writer.Write("control-group form-group error");
                 }
             }
             else
             {
-                writer.Write("control-group");
+                writer.Write("control-group form-group");
             }
 
             writer.WriteLine("\">");

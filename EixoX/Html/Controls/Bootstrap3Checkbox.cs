@@ -12,7 +12,7 @@ namespace EixoX.Html.Controls
             writer.Write(string.IsNullOrEmpty(state.ErrorMessage) ? "form-group" : "form-group has-error");
             writer.WriteLine("\">");
 
-            writer.WriteLine("<div class=\"form-control\">");
+            writer.WriteLine("<div class=\"form-control form-group\">");
             writer.Write("<label class=\"checkbox\">");
             writer.Write(HtmlHelper.HtmlFormat(state.Label));
             RenderInput(writer, state, attributes);
