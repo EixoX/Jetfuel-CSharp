@@ -163,8 +163,7 @@ namespace EixoX.Web
 
             HtmlComposite pagingList = footerDiv.AppendComposite("div", new HtmlAttribute("class", "span6"))
                 .AppendComposite("div", new HtmlAttribute("class", "pull-right"))
-                .AppendComposite("div", new HtmlAttribute("class", "pagination"))
-                .AppendComposite("ul");
+                .AppendComposite("ul", new HtmlAttribute("class", "pagination"));
 
 
             pagingList
@@ -211,7 +210,6 @@ namespace EixoX.Web
             foreach (BootstrapQueryHelperColumn col in this.columns)
             {
                 HtmlComposite th = thead_tr.AppendComposite("th");
-
                 HtmlComposite tha = th.AppendComposite("a");
 
                 tha.AppendText(col.Caption + "   ");
@@ -299,7 +297,31 @@ namespace EixoX.Web
             return result;
         }
 
+        private void AppendUnrelatedFilters(HtmlComposite composite, Aspect aspect, NameValueCollection parameters)
+        {
+            foreach (string key in parameters.AllKeys)
+            {
+                if (
+                    !"orderBy".Equals(key, StringComparison.OrdinalIgnoreCase) &&
+                    !"orderByDirection".Equals(key, StringComparison.OrdinalIgnoreCase) &&
+                    !"page".Equals(key, StringComparison.OrdinalIgnoreCase) &&
+                    !"pageSize".Equals(StringComparison.OrdinalIgnoreCase) &&
+                    !aspect.HasMember(key))
+                {
+                    composite.AppendStandalone("input",
+                        new HtmlAttribute("type", "hidden"),
+                        new HtmlAttribute("name", key),
+                        new HtmlAttribute("value", parameters[key]));
+                }
+            }
+        }
+
         public HtmlComposite Execute<T>(ClassSelect<T> select)
+        {
+            return Execute(select, null);
+        }
+
+        public HtmlComposite Execute<T>(ClassSelect<T> select, NameValueCollection parameters)
         {
             ClassSelectResult<T> result = ExecuteSelect<T>(select);
 
@@ -307,20 +329,25 @@ namespace EixoX.Web
                 "form",
                 new HtmlAttribute("method", "get"));
 
-            form.AppendComposite("input",
+            form.AppendStandalone("input",
                 new HtmlAttribute("type", "hidden"),
                 new HtmlAttribute("name", "orderBy"),
                 new HtmlAttribute("value", this.OrderBy));
 
-            form.AppendComposite("input",
+            form.AppendStandalone("input",
                 new HtmlAttribute("type", "hidden"),
                 new HtmlAttribute("name", "orderByDirection"),
                 new HtmlAttribute("value", this.OrderByDirection));
 
-            form.AppendComposite("input",
+            form.AppendStandalone("input",
                 new HtmlAttribute("type", "hidden"),
                 new HtmlAttribute("name", "page"),
                 new HtmlAttribute("value", "0"));
+
+            if (parameters != null)
+            {
+                AppendUnrelatedFilters(form, select.Aspect, parameters);
+            }
 
             HtmlComposite table = form.AppendComposite(
                 "table",

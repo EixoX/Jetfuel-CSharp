@@ -138,57 +138,58 @@ namespace EixoX.Web
 
         public void RenderSearchBox(TextWriter writer)
         {
-            HtmlComposite searchBox = new HtmlComposite("div", new HtmlAttribute("class", "input-append input-prepend"));
+            HtmlComposite col1 = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-2"));
+            col1.AppendStandalone("input",
+                    new HtmlAttribute("type", "text"),
+                    new HtmlAttribute("placeholder", "Search"),
+                    new HtmlAttribute("name", _SearchFilter.Key),
+                    new HtmlAttribute("class", "form-control"),
+                    new HtmlAttribute("value", _SearchFilter.Value));
 
-            searchBox.AppendSimple(
-                    "span",
-                    "Filter",
-                    new HtmlAttribute("class", "add-on"))
-                .AppendStandalone("input",
-                new HtmlAttribute("type", "text"),
-                new HtmlAttribute("placeholder", "Search"),
-                new HtmlAttribute("name", _SearchFilter.Key),
-                new HtmlAttribute("class", "input-small"),
-                new HtmlAttribute("value", _SearchFilter.Value))
-                .AppendComposite(
-                    "button",
+            HtmlComposite col2 = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-1"));
+
+            col2.AppendComposite("button",
                     new HtmlAttribute("type", "text"),
                     new HtmlAttribute("class", "btn btn-primary"))
-                .AppendSimple("i",
-                    "",
-                    new HtmlAttribute("class", "icon-search icon-white"));
+                .AppendSimple("i","",
+                    new HtmlAttribute("class", "fa fa-search"));
 
-            searchBox.Write(writer);
+            col1.Write(writer);
+            col2.Write(writer);
         }
 
         public void RenderPageDropDown(TextWriter writer)
         {
-            HtmlComposite controlDiv = new HtmlComposite("div", new HtmlAttribute("class", "input-prepend"));
-            controlDiv.AppendSimple("span", "Page Size", new HtmlAttribute("class", "add-on"));
-            HtmlComposite dropdown = controlDiv.AppendComposite(
+            
+            HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-2"));
+            coldiv.AppendSimple("label", "Page Size", new HtmlAttribute("class", "control-label"));
+            coldiv.Write(writer);
+
+            coldiv  = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-1"));
+            HtmlComposite dropdown = coldiv.AppendComposite(
                 "select",
                 new HtmlAttribute("name", _PageSize.Key),
                 new HtmlAttribute("id", _PageSize.Key),
-                new HtmlAttribute("class", "input-mini changeReload"));
+                new HtmlAttribute("class", "form-control changeReload"));
 
             for (int i = 10; i <= 50; i += 10)
                 dropdown.AppendHtmlOption(i, i.ToString(), i == _PageSize.Value);
 
-            controlDiv.Write(writer);
+            coldiv.Write(writer);
         }
 
         public void RenderOrderBy(TextWriter writer)
         {
-            HtmlComposite divOrderBy = new HtmlComposite(
-                "div",
-                new HtmlAttribute("class", "input-prepend input-append"));
-
-            divOrderBy.AppendSimple(
-                "span",
+            HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("style", "display:none"));
+            coldiv.AppendSimple(
+                "label",
                 "Order by",
-                new HtmlAttribute("class", "add-on"));
+                new HtmlAttribute("class", "control-label"));
+            coldiv.Write(writer);
 
-            HtmlComposite selectOrderBy = divOrderBy.AppendComposite(
+
+            coldiv = new HtmlComposite("div", new HtmlAttribute("style", "display:none"));
+            HtmlComposite selectOrderBy = coldiv.AppendComposite(
                 "select",
                 new HtmlAttribute("name", _OrderBy.Key),
                 new HtmlAttribute("id", _OrderBy.Key),
@@ -197,8 +198,12 @@ namespace EixoX.Web
             EixoX.Data.DatabaseAspect<T> aspect = EixoX.Data.DatabaseAspect<T>.Instance;
             for (int i = 0; i < aspect.Count; i++)
                 selectOrderBy.AppendHtmlOption(i, aspect[i].Name, i == _OrderBy.Value);
-            
-            HtmlComposite selectDirection = divOrderBy.AppendComposite(
+
+            coldiv.Write(writer);
+
+
+            coldiv = new HtmlComposite("div", new HtmlAttribute("style", "display:none"));
+            HtmlComposite selectDirection = coldiv.AppendComposite(
                 "select",
                 new HtmlAttribute("name", _SortDirection.Key),
                 new HtmlAttribute("id", _SortDirection.Key),
@@ -231,25 +236,25 @@ namespace EixoX.Web
                         new HtmlAttribute("selected", "selected"));
             }
 
-            divOrderBy.Write(writer);
+            coldiv.Write(writer);
         }
 
         public void RenderPagination(TextWriter writer)
         {
-            HtmlComposite paginationDiv = new HtmlComposite(
-                "div",
-                new HtmlAttribute("class", "pagination pull-right"));
 
-            paginationDiv.AppendComposite(
+            HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-5"));
+
+            coldiv.AppendStandalone(
                 "input",
                 new HtmlAttribute("type", "hidden"),
                 new HtmlAttribute("name", _PageOrdinal.Key),
                 new HtmlAttribute("id", _PageOrdinal.Key),
                 new HtmlAttribute("value", Result.PageOrdinal));
 
-            HtmlComposite paginationUl = new HtmlComposite(
+
+            HtmlComposite paginationUl = coldiv.AppendComposite(
                 "ul",
-                new HtmlAttribute("class", ""));
+                new HtmlAttribute("class", "pagination"));
 
             paginationUl.AppendComposite(
                 "li",
@@ -299,8 +304,7 @@ namespace EixoX.Web
                     new HtmlAttribute("id", "lastPage"),
                     new HtmlAttribute("href", "#"));
 
-            paginationDiv.Children.AddLast(paginationUl);
-            paginationDiv.Write(writer);
+            coldiv.Write(writer);
         }
 
         private void RenderJSControls(TextWriter writer)
