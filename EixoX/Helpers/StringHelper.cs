@@ -162,6 +162,31 @@ namespace EixoX
                 return null;
        }
 
+        public static string Join(string separator, System.Collections.IEnumerable items, IFormatProvider formatProvider, string formatString)
+        {
+            if (items != null)
+            {
+                StringBuilder builder = new StringBuilder();
+                bool prependComma = false;
+                foreach (Object o in items)
+                {
+                    if (o != null)
+                    {
+                        if (prependComma)
+                            builder.Append(separator);
+                        else
+                            prependComma = true;
+
+                        builder.Append(string.Format(formatProvider, formatString, o));
+                    }
+                }
+
+                return builder.ToString();
+            }
+            else
+                return null;
+        }
+
         public static string Join<T>(string separator, IEnumerable<T> items)
         {
             if (items != null)
