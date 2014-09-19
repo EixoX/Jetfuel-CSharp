@@ -57,7 +57,7 @@ namespace EixoX.Html
             {
                 for (LinkedListNode<HtmlAttribute> node = this.First; node != null; node = node.Next)
                     if (name.Equals(node.Value.Name, StringComparison.OrdinalIgnoreCase))
-                        return node.Value;
+                        return node.Value.Value;
 
                 return null;
             }
@@ -83,10 +83,7 @@ namespace EixoX.Html
             for (LinkedListNode<HtmlAttribute> node = this.First; node != null; node = node.Next)
             {
                 writer.Write(' ');
-                writer.Write(HtmlHelper.HtmlFormat(node.Value.Name));
-                writer.Write("=\"");
-                writer.Write(HtmlHelper.HtmlDoubleQuoted(node.Value.Value));
-                writer.Write("\"");
+                node.Value.Write(writer);
             }
         }
     }

@@ -138,35 +138,44 @@ namespace EixoX.Web
 
         public void RenderSearchBox(TextWriter writer)
         {
-            HtmlComposite col1 = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-2"));
-            col1.AppendStandalone("input",
+            HtmlComposite col1 = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-3"));
+
+            HtmlComposite rowb1 = col1.AppendComposite("div", new HtmlAttribute("class", "row-fluid"));
+
+            HtmlComposite cellb1 = rowb1.AppendComposite("div", new HtmlAttribute("class", "col-xs-10"));
+
+            cellb1.AppendStandalone("input",
                     new HtmlAttribute("type", "text"),
                     new HtmlAttribute("placeholder", "Search"),
                     new HtmlAttribute("name", _SearchFilter.Key),
                     new HtmlAttribute("class", "form-control"),
                     new HtmlAttribute("value", _SearchFilter.Value));
 
-            HtmlComposite col2 = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-1"));
+            HtmlComposite cellb2 = rowb1.AppendComposite("div", new HtmlAttribute("class", "col-xs-2"));
 
-            col2.AppendComposite("button",
+            cellb2.AppendComposite("button",
                     new HtmlAttribute("type", "text"),
-                    new HtmlAttribute("class", "btn btn-primary"))
+                    new HtmlAttribute("class", "btn btn-primary pull-right"))
                 .AppendSimple("i","",
                     new HtmlAttribute("class", "fa fa-search"));
 
             col1.Write(writer);
-            col2.Write(writer);
         }
 
         public void RenderPageDropDown(TextWriter writer)
         {
             
-            HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-2"));
-            coldiv.AppendSimple("label", "Page Size", new HtmlAttribute("class", "control-label"));
-            coldiv.Write(writer);
+            HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-3"));
 
-            coldiv  = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-1"));
-            HtmlComposite dropdown = coldiv.AppendComposite(
+            HtmlComposite rowb1 = coldiv.AppendComposite("div", new HtmlAttribute("class", "row-fluid"));
+
+            HtmlComposite cellb1 = rowb1.AppendComposite("div", new HtmlAttribute("class", "col-xs-6"));
+
+            cellb1.AppendSimple("label", "Page Size", new HtmlAttribute("class", "control-label pull-right"));
+
+            HtmlComposite cellb2 = rowb1.AppendComposite("div", new HtmlAttribute("class", "col-xs-6"));
+
+            HtmlComposite dropdown = cellb2.AppendComposite(
                 "select",
                 new HtmlAttribute("name", _PageSize.Key),
                 new HtmlAttribute("id", _PageSize.Key),
@@ -242,7 +251,7 @@ namespace EixoX.Web
         public void RenderPagination(TextWriter writer)
         {
 
-            HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-5"));
+            HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-6"));
 
             coldiv.AppendStandalone(
                 "input",
@@ -254,7 +263,7 @@ namespace EixoX.Web
 
             HtmlComposite paginationUl = coldiv.AppendComposite(
                 "ul",
-                new HtmlAttribute("class", "pagination"));
+                new HtmlAttribute("class", "pagination pull-right"));
 
             paginationUl.AppendComposite(
                 "li",

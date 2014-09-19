@@ -44,7 +44,7 @@ namespace EixoX.Restrictions
                 value == 77777777777L ||
                 value == 88888888888L ||
                 value == 99999999999L ||
-                value == 0)
+                value < 100000000L)
                 return false;
 
 

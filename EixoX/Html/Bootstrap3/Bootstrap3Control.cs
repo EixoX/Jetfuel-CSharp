@@ -48,7 +48,18 @@ namespace EixoX.Html
             _Input = CreateInput(state);
 
             for (int i = 0; i < attributes.Length; i++)
-                _Input.Attributes[attributes[i].Name] = attributes[i].Value;
+                if (attributes[i].Value != null)
+                {
+                    object itemAtt = (object)_Input.Attributes[attributes[i].Name];
+                    if (itemAtt != null)
+                    {
+                        _Input.Attributes[attributes[i].Name] = itemAtt + " " + attributes[i].Value;
+                    }
+                    else
+                    {
+                        _Input.Attributes[attributes[i].Name] = attributes[i].Value;
+                    }
+                }
 
             _Input.Write(writer);
         }
@@ -79,7 +90,7 @@ namespace EixoX.Html
             RenderLabel(writer, state);
             RenderInput(writer, state, attributes);
             RenderHintOrError(writer, state);
-    
+
 
             writer.WriteLine("</div>");
 

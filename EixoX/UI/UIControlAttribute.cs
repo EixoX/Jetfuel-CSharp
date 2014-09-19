@@ -16,15 +16,23 @@ namespace EixoX.UI
         private readonly string _DefaultHint;
         private readonly UIControlChoices _ControlChoices;
 
+        private static UIControlChoices GetControlChoices(Type choiceSource)
+        {
+            if (choiceSource == null)
+                return null;
+            else if (choiceSource.IsEnum)
+                return new UIControlEnumChoices(choiceSource);
+            else if (typeof(UIControlChoices).IsAssignableFrom(choiceSource))
+                return (UIControlChoices)Activator.CreateInstance(choiceSource);
+            else
+                return new UIControlClassStorageChoices(choiceSource);
+        }
+
         public UIControlAttribute(string defaultLabel, string defaultHint, Type choiceSource)
         {
             this._DefaultLabel = defaultLabel;
             this._DefaultHint = defaultHint;
-            this._ControlChoices =
-                choiceSource == null ? null :
-                (choiceSource.IsEnum ?
-                (UIControlChoices)new UIControlEnumChoices(choiceSource) :
-                new UIControlClassStorageChoices(choiceSource));
+            this._ControlChoices = GetControlChoices(choiceSource);
         }
 
         public UIControlAttribute(int[] array)

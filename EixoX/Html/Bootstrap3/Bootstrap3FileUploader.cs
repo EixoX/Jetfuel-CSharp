@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EixoX.Html.Controls
 {
-    public class BootstrapF3ileUploader
+    public class Bootstrap3FileUploader
         : Bootstrap3Control
     {
         protected override HtmlNode CreateInput(UI.UIControlState state)
