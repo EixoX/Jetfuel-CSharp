@@ -88,6 +88,7 @@
     <Compile Include="Cached.cs" />
     <Compile Include="Database\PostgresDialect.cs" />
     <Compile Include="Formatters\CpfFormatter.cs" />
+    <Compile Include="Formatters\DataTableFormatter.cs" />
     <Compile Include="Formatters\Formatter.cs" />
     <Compile Include="Formatters\GenericFormatter.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
