@@ -552,5 +552,17 @@ namespace EixoX.Data
 
             return tree;
         }
+
+
+        public IEnumerable<object> GetMember(int memberOrdinal)
+        {
+            foreach (T item in this)
+                yield return _Aspect[memberOrdinal].GetValue(item);
+        }
+
+        public IEnumerable<object> GetMember(string memberName)
+        {
+            return GetMember(_Aspect.GetOrdinalOrException(memberName));
+        }
     }
 }
