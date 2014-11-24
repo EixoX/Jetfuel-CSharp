@@ -135,6 +135,7 @@
     <Compile Include="Restrictions\GuidAttribute.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />
     <Compile Include="Restrictions\MinAge.cs" />
+    <Compile Include="Text\DelimitedTextReader.cs" />
     <Compile Include="UsecaseResult.cs" />
     <Compile Include="Viewee.cs" />
     <Compile Include="LazyConstructor.cs" />
