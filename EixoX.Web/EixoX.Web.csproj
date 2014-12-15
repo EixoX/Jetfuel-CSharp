@@ -50,6 +50,7 @@
     <Compile Include="AuthComponent\AuthenticationRequired.cs" />
     <Compile Include="BootstrapClassSelectResult.cs" />
     <Compile Include="Gravatar.cs" />
+    <Compile Include="QueryStringHelper.cs" />
     <Compile Include="UIHtmlExtensions.cs" />
     <Compile Include="JavascriptBuilder.cs" />
     <Compile Include="WebContext.cs" />
