@@ -12,6 +12,7 @@ namespace EixoX.Text
         public int Length { get; set; }
         public string FormatString { get; set; }
         public string CultureInfoOverride { get; set; }
+        public Type ParserType { get; set; }
 
         public FixedLengthColumnAttribute(int offset, int length)
         {
@@ -19,10 +20,15 @@ namespace EixoX.Text
             this.Length = length;
         }
 
-        public FixedLengthColumnAttribute(int offset, int length, string formatString)
+        public FixedLengthColumnAttribute(int offset, int length, Type parserType)
+            : this(offset, length)
         {
-            this.Offset = offset;
-            this.Length = length;
+            this.ParserType = parserType;
+        }
+
+        public FixedLengthColumnAttribute(int offset, int length, string formatString)
+            : this(offset, length)
+        {
             this.FormatString = formatString;
         }
     }

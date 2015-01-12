@@ -16,10 +16,16 @@ namespace EixoX.Text
         public FixedLengthAspectMember(ClassAcessor acessor, FixedLengthColumnAttribute colAttriute)
             : base(acessor)
         {
-            this._Adapter = Adapters.SimpleAdapters.CreateInstance(acessor.DataType, colAttriute.FormatString, null);
+
             this._CultureOverride = string.IsNullOrEmpty(colAttriute.CultureInfoOverride) ?
                 null :
                 System.Globalization.CultureInfo.GetCultureInfo(colAttriute.CultureInfoOverride);
+
+            this._Adapter = colAttriute.ParserType == null ?
+                Adapters.SimpleAdapters.CreateInstance(acessor.DataType, colAttriute.FormatString, this._CultureOverride) :
+                (Adapters.SimpleAdapter)Activator.CreateInstance(colAttriute.ParserType);
+
+
             this._Offset = colAttriute.Offset;
             this._Length = colAttriute.Length;
 
@@ -64,6 +70,7 @@ namespace EixoX.Text
             else
             {
                 object value = _Adapter.ParseObject(content, _CultureOverride == null ? cultureInfo : _CultureOverride);
+                this.SetValue(entity, value);
             }
         }
 

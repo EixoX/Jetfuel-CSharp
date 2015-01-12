@@ -60,6 +60,16 @@ namespace EixoX.Text
         public CultureInfo CultureInfo { get { return this._CultureInfo; } }
 
 
+        public object Parse(string line)
+        {
+            object instance = Activator.CreateInstance(this.DataType);
+            foreach (FixedLengthAspectMember member in this)
+            {
+                member.SetFormattedMember(instance, _CultureInfo, line.Substring(member.Offset, member.Length));
+            }
+            return instance;
+        }
+
     }
 
 
