@@ -38,7 +38,6 @@ namespace EixoX
             return true;
         }
 
-
         public int Parse(NameValueCollection collection, object entity, IFormatProvider provider)
         {
             Interceptors.InterceptorAspect<T> interceptors = Interceptors.InterceptorAspect<T>.Instance;
@@ -93,6 +92,19 @@ namespace EixoX
         public int Parse(NameValueCollection collection, object entity)
         {
             return Parse(collection, entity, System.Globalization.CultureInfo.CurrentUICulture);
+        }
+    }
+
+    public class ObjectSchema : AbstractAspect<AspectMember>
+    {
+        public ObjectSchema(Type dataType) : base(dataType)
+        {
+        }
+
+        protected override bool CreateAspectFor(ClassAcessor acessor, out AspectMember member)
+        {
+            member = new AspectMember(acessor);
+            return true;
         }
     }
 }
