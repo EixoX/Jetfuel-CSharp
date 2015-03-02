@@ -74,6 +74,30 @@ namespace EixoX
                         {
                             value = string.Format(formatProvider, "{0}", value);
                         }
+                        else if (typeof(decimal?) == _Acessor.DataType)
+                        {
+                            if (value is string)
+                            {
+                                string aux = (string)value;
+                                value = string.IsNullOrEmpty(aux) ? null : new Nullable<decimal>(Convert.ToDecimal(value));
+                            }
+                            else
+                            {
+                                value = (decimal?)value;
+                            }
+                        }
+                        else if (typeof(int?) == _Acessor.DataType)
+                        {
+                            if (value is string)
+                            {
+                                string aux = (string)value;
+                                value = string.IsNullOrEmpty(aux) ? null : new Nullable<int>(Convert.ToInt32(value));
+                            }
+                            else
+                            {
+                                value = (int?)value;
+                            }
+                        }
                         else
                         {
                             value = Convert.ChangeType(value, _Acessor.DataType, formatProvider);
