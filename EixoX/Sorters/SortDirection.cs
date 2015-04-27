@@ -7,6 +7,7 @@ namespace EixoX.Data
     public enum SortDirection
     {
         Ascending,
-        Descending
+        Descending,
+        Random
     }
 }

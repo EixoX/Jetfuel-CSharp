@@ -457,5 +457,12 @@ namespace EixoX.Data
             object value = SingleResult();
             return value == null ? default(T) : (T)Convert.ChangeType(value, typeof(T));
         }
+
+        public ClassSelectMember OrderByRandom()
+        {
+            this._OrderFirst = new ClassSortNode(this._Aspect, -1, SortDirection.Random);
+            this._OrderLast = this._OrderFirst;
+            return this;
+        }
     }
 }

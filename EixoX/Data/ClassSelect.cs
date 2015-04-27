@@ -564,5 +564,12 @@ namespace EixoX.Data
         {
             return GetMember(_Aspect.GetOrdinalOrException(memberName));
         }
+
+        public ClassSelect<T> OrderByRandom()
+        {
+            this._OrderFirst = new ClassSortNode(this._Aspect, -1, SortDirection.Random);
+            this._OrderLast = this._OrderFirst;
+            return this;
+        }
     }
 }

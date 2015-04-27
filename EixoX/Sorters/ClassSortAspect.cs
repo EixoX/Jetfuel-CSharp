@@ -6,6 +6,8 @@ namespace EixoX.Data
 {
     public interface ClassSortAspect<TClass>
     {
+        TClass OrderByRandom();
+
         /// <summary>
         /// Sets the first ordering of the selection.
         /// </summary>

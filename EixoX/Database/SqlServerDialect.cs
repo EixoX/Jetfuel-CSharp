@@ -21,6 +21,14 @@ namespace EixoX.Data
             return new System.Data.SqlClient.SqlConnection(connectionString);
         }
 
+        public override void AppendSortTerm(StringBuilder builder, DataAspect aspect, ClassSortTerm term)
+        {
+            if (term.Direction == SortDirection.Random)
+                builder.Append(" NEWID()");
+            else
+                base.AppendSortTerm(builder, aspect, term);
+        }
+
         public override bool CanLimitRecords
         {
             get { return true; }
