@@ -89,6 +89,8 @@
     <Compile Include="Adapters\XmlElementStringAdapter.cs" />
     <Compile Include="Base36.cs" />
     <Compile Include="Cached.cs" />
+    <Compile Include="Components\Wizard.cs" />
+    <Compile Include="Components\WizardStep.cs" />
     <Compile Include="Database\OracleDb.cs" />
     <Compile Include="Database\OracleDialect.cs" />
     <Compile Include="Database\PostgresDialect.cs" />

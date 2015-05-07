@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EixoX.Components;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,7 +17,7 @@ namespace EixoX.Restrictions
             return member.HasRestrictions;
         }
 
-        public bool Validate(object entity)
+        public virtual bool Validate(object entity)
         {
             foreach (RestrictionAspectMember ram in this)
                 if (!ram.Validate(entity))
@@ -24,7 +25,7 @@ namespace EixoX.Restrictions
             return true;
         }
 
-        public bool Validate(object entity, params string[] names)
+        public virtual bool Validate(object entity, params string[] names)
         {
             for (int i = 0; i < names.Length; i++)
                 if (!base[names[i]].Validate(entity))
@@ -33,7 +34,7 @@ namespace EixoX.Restrictions
             return true;
         }
 
-        public bool Validate(object entity, List<string> exceptions)
+        public virtual bool Validate(object entity, List<string> exceptions)
         {
             foreach (RestrictionAspectMember ram in this)
                 if (!exceptions.Contains(ram.Name))
@@ -88,13 +89,44 @@ namespace EixoX.Restrictions
         : RestrictionAspect
     {
         private static RestrictionAspect<T> _Instance;
-        private RestrictionAspect() : base(typeof(T)) { }
+        public RestrictionAspect() : base(typeof(T)) { }
         public static RestrictionAspect<T> Instance
         {
             get
             {
                 return _Instance ?? (_Instance = new RestrictionAspect<T>());
             }
+        }
+    }
+
+    public class WizardRestrictionAspect<T> : RestrictionAspect
+    {
+        private static WizardRestrictionAspect<T> _Instance;
+        public WizardRestrictionAspect() : base(typeof(T)) { }
+        public static WizardRestrictionAspect<T> Instance
+        {
+            get
+            {
+                return _Instance ?? (_Instance = new WizardRestrictionAspect<T>());
+            }
+        }
+
+        public override bool Validate(object entity)
+        {
+            Wizard wizard = (Wizard)entity;
+            bool isEverythingOk = true;
+
+            foreach (RestrictionAspectMember ram in this)
+                if (!ram.Validate(entity))
+                {
+                    WizardStep stepAttr = ram.GetAttribute<WizardStep>(true);
+                    if (stepAttr != null)
+                        wizard.Invalidate(stepAttr, ram.Name, GetRestrictionMessage(entity));
+
+                    isEverythingOk = false;
+                }
+
+            return isEverythingOk;
         }
     }
 }
