@@ -26,5 +26,22 @@ namespace EixoX
             if (list.Count > 0)
                 yield return list;
         }
+
+        public static IEnumerable<T[]> Pack<T>(IEnumerable<T> source, int size)
+        {
+            T[] arr = new T[size];
+            using (IEnumerator<T> enu = source.GetEnumerator())
+            {
+                int i;
+                while (enu.MoveNext())
+                {
+                    for (i = 0; i < size && enu.MoveNext(); i++)
+                        arr[i] = enu.Current;
+                    for (; i < size; i++)
+                        arr[i] = default(T);
+                    yield return arr;
+                }
+            }
+        }
     }
 }
