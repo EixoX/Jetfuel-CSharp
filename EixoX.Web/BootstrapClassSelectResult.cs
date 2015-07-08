@@ -148,7 +148,8 @@ namespace EixoX.Web
                     new HtmlAttribute("type", "text"),
                     new HtmlAttribute("placeholder", "Search"),
                     new HtmlAttribute("name", _SearchFilter.Key),
-                    new HtmlAttribute("class", "form-control"),
+                    new HtmlAttribute("id", _SearchFilter.Key),
+                    new HtmlAttribute("class", "form-control changeReload"),
                     new HtmlAttribute("value", _SearchFilter.Value));
 
             HtmlComposite cellb2 = rowb1.AppendComposite("div", new HtmlAttribute("class", "col-xs-2"));
@@ -156,7 +157,7 @@ namespace EixoX.Web
             cellb2.AppendComposite("button",
                     new HtmlAttribute("type", "text"),
                     new HtmlAttribute("class", "btn btn-primary pull-right"))
-                .AppendSimple("i","",
+                .AppendSimple("i", "",
                     new HtmlAttribute("class", "fa fa-search"));
 
             col1.Write(writer);
@@ -164,7 +165,7 @@ namespace EixoX.Web
 
         public void RenderPageDropDown(TextWriter writer)
         {
-            
+
             HtmlComposite coldiv = new HtmlComposite("div", new HtmlAttribute("class", "col-xs-3"));
 
             HtmlComposite rowb1 = coldiv.AppendComposite("div", new HtmlAttribute("class", "row-fluid"));
@@ -306,49 +307,51 @@ namespace EixoX.Web
             //Last page button
             paginationUl.AppendComposite(
                 "li",
-                new HtmlAttribute("class", ""))
+                new HtmlAttribute("class", Result.HasMorePages ? "" : "disabled"))
                 .AppendSimple(
                     "a",
                     "Last",
                     new HtmlAttribute("id", "lastPage"),
-                    new HtmlAttribute("href", "#"));
+                    Result.HasMorePages ? new HtmlAttribute("href", "#") : new HtmlAttribute());
 
             coldiv.Write(writer);
         }
 
-        private void RenderJSControls(TextWriter writer)
+        public void RenderJSControls(TextWriter writer)
         {
-            StringBuilder builder = new StringBuilder();
             writer.Write("<script type=\"text/javascript\">");
 
             //PAGINATION
+
             //FirstPage
             writer.Write("$('#firstPage').click(function () {$('#" + this.FormName + "PageOrdinal').val(0);$(this).closest('form').submit();});");
-            //Previous Page
-            builder.Length = 0;
-            builder.Append("$('#previousPage').click(function () {$('#" + this.FormName + "PageOrdinal').val(");
-            builder.Append(Result.PageOrdinal - 1);
-            builder.Append(");$(this).closest('form').submit();});");
-            writer.Write(Result.HasPreviousPages ? builder.ToString() : "");
-            //Next Page
-            builder.Length = 0;
-            builder.Append("$('#nextPage').click(function () {$('#" + this.FormName + "PageOrdinal').val(");
-            builder.Append(Result.PageOrdinal + 1);
-            builder.Append(");$(this).closest('form').submit();});");
-            writer.Write(Result.HasMorePages ? builder.ToString() : "");
-            //Last Page
-            builder.Length = 0;
-            builder.Append("$('#lastPage').click(function () {$('#" + this.FormName + "PageOrdinal').val(");
-            builder.Append(Result.PageCount - 1);
-            builder.Append(");$(this).closest('form').submit();});");
-            writer.Write(builder.ToString());
+
+            if (Result.HasPreviousPages)
+            {
+                //Previous Page
+                writer.Write("$('#previousPage').click(function () {$('#" + this.FormName + "PageOrdinal').val(");
+                writer.Write(Result.PageOrdinal - 1);
+                writer.Write(");$(this).closest('form').submit();});");
+            }
+
+            if (Result.HasMorePages)
+            {
+                //Next Page
+                writer.Write("$('#nextPage').click(function () {$('#" + this.FormName + "PageOrdinal').val(");
+                writer.Write(Result.PageOrdinal + 1);
+                writer.Write(");$(this).closest('form').submit();});");
+
+                //Last Page
+                writer.Write("$('#lastPage').click(function () {$('#" + this.FormName + "PageOrdinal').val(");
+                writer.Write(Result.PageCount - 1);
+                writer.Write(");$(this).closest('form').submit();});");
+            }
+
 
             //DROPDOWNS
-            builder.Length = 0;
-            builder.Append("$('.changeReload').change(function() { $('#");
-            builder.Append(_PageOrdinal.Key);
-            builder.Append("').val(0); $(this).closest('form').submit()});");
-            writer.Write(builder.ToString());
+            writer.Write("$('.changeReload').change(function() { $('#");
+            writer.Write(_PageOrdinal.Key);
+            writer.Write("').val(0); $(this).closest('form').submit()});");
 
             writer.Write("</script>");
         }
