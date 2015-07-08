@@ -9,15 +9,11 @@ namespace EixoX.NFe
 {
     public class Nfe
     {
-        public string versao;
-        public string id;
-        public string item;
-
         /// <summary>
         /// Informar o código da UF do emitente do Documento Fiscal, utilizar a codificação do IBGE (Ex. SP->35, RS->43, etc.)
         /// </summary>
         [Required]
-        public int emitenteUf;
+        public int emitenteUfIbge;
 
         /// <summary>
         /// Informar o código numérico que compõe a Chave de Acesso. 
@@ -98,22 +94,63 @@ namespace EixoX.NFe
         /// </summary>
         public int icmsMunicipioOcorrencia;
 
-
-        /// <summary>
-        /// Informar o município de ocorrência do fato gerador do ICMS do transporte. Utilizar a Tabela do IBGE.
-        /// </summary>
-        public int icmsTransporteCodigoMunicipioGerador;
-
-        /// <summary>
-        /// Informar o código da forma de emissão
-        /// </summary>
-        public TipoFinalidadeNfe finalidade;
-
         /// <summary>
         /// Informar o código do dígito verificador - DV da Chave de Acesso da NF-e, o DV será calculado com a aplicação do algoritmo módulo 11 (base 2,9) da Chave de Acesso.
         /// </summary>
         public int nfeChaveAcessoDigitoVerificador;
 
+        /// <summary>
+        /// Informar o código de identificação do Ambiente:
+        /// 1 - Produção;
+        /// 2 - Homologação
+        /// </summary>
+        public TipoAmbiente nfeAmbiente;
 
+        /// <summary>
+        /// informar o código da finalidade de emissão da NF-e: 
+        /// 1 - NF-e normal;
+        /// 2 - NF-e complementar;
+        /// 3 - NF-e de ajuste;
+        /// 4 - Devolução(novo domínio) [23-12-13]
+        /// </summary>
+        public TipoFinalidadeNfe nfeFinalidade;
+
+        /// <summary>
+        /// Informar o indicador de operação com Consumidor final
+        /// </summary>
+        public TipoOperacaoComConsumidorFinal nfeConsumidorFinal;
+
+        /// <summary>
+        /// Informar o indicador de presença do comprador no estabelecimento comercial no momento da operação
+        /// </summary>
+        public TipoPresencaConsumidorFinal nfePresencaConsumidorFinal;
+
+        /// <summary>
+        /// Informar o código de identificação do processo de emissão da NF-e: Identificador do processo de emissão da NF-e:
+        /// </summary>
+        public TipoProcessoEmissao nfeProcessoEmissao;
+
+        /// <summary>
+        /// Informar a versão do processo de emissão da NF-e utilizada (aplicativo emissor de NF-e).
+        /// </summary>
+        public string nfeVersaoAplicativo;
+
+        /// <summary>
+        /// Informar a data e hora de entrada em contingência no padrão UTC - Universal Coordinated Time, onde TZD pode ser -02:00 (Fernando de Noronha), -03:00 (Brasília) ou -04:00(Manaus), no horário de verão serão - 01:00, -02:00 e -03:00. Ex.: 2010-08-19T13:00:15-03:00.
+        /// Importante: dhCont e xJust devem ser ambos informados ou omitidos. (alteração no tipo do campo) [23-12-13]
+        /// </summary>
+        public DateTime nfeDataContingencia;
+
+        /// <summary>
+        /// Informar a justificativa de entrada em contingência, deve ser informado sempre que tpEmis for diferente de 1.
+        /// Importante: dhCont e xJust devem ser ambos informados ou omitidos.
+        /// </summary>
+        public string nfeJustificativaContingencia;
+
+
+        public NfeEmitente emitente = new NfeEmitente();
+        public NfeDestinatario destinatario = new NfeDestinatario();
+
+        public List<NfeItem> items = new List<NfeItem>();
     }
 }

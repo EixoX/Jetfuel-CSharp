@@ -40,13 +40,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Nfe.cs" />
+    <Compile Include="NfeCOFINS.cs" />
+    <Compile Include="NfeCOFINSST.cs" />
+    <Compile Include="NfeDestinatario.cs" />
+    <Compile Include="NfeEmitente.cs" />
+    <Compile Include="NfeICMS.cs" />
+    <Compile Include="NfeII.cs" />
+    <Compile Include="NfeIPI.cs" />
+    <Compile Include="NfeISSQN.cs" />
+    <Compile Include="NfeItem.cs" />
+    <Compile Include="NfePIS.cs" />
+    <Compile Include="NfePISST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoAmbiente.cs" />
+    <Compile Include="TipoDestinatario.cs" />
     <Compile Include="TipoDestinoOperacao.cs" />
+    <Compile Include="TipoEmissao.cs" />
     <Compile Include="TipoFinalidadeNfe.cs" />
     <Compile Include="TipoFormaPagamento.cs" />
     <Compile Include="TipoImpressaoDanfe.cs" />
     <Compile Include="TipoModeloNfe.cs" />
     <Compile Include="TipoNfe.cs" />
+    <Compile Include="TipoOperacaoComConsumidorFinal.cs" />
+    <Compile Include="TipoPresencaConsumidorFinal.cs" />
+    <Compile Include="TipoProcessoEmissao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EixoX\EixoX.csproj">
