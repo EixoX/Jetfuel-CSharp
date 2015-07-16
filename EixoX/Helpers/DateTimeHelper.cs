@@ -21,5 +21,10 @@ namespace EixoX
             }
 
         }
+
+        public static long UnixTime(DateTime dt)
+        {
+            return (long)(dt.ToUniversalTime().Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+        }
     }
 }
