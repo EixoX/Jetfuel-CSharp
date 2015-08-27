@@ -23,7 +23,7 @@ namespace EixoX.Data
 
         public override void AppendSortTerm(StringBuilder builder, DataAspect aspect, ClassSortTerm term)
         {
-            if (term.Direction == SortDirection.Random)
+            if (term.Direction == EixoX.Data.SortDirection.Random)
                 builder.Append(" NEWID()");
             else
                 base.AppendSortTerm(builder, aspect, term);

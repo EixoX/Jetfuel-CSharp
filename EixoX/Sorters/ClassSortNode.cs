@@ -16,10 +16,10 @@ namespace EixoX.Data
             this._Aspect = sort.Aspect;
         }
 
-        public ClassSortNode(Aspect aspect, int ordinal, SortDirection direction)
+        public ClassSortNode(Aspect aspect, int ordinal, EixoX.Data.SortDirection direction)
             : this(new ClassSortTerm(aspect, ordinal, direction)) { }
 
-        public ClassSortNode(Aspect aspect, string name, SortDirection direction)
+        public ClassSortNode(Aspect aspect, string name, EixoX.Data.SortDirection direction)
             : this(aspect, aspect.GetOrdinalOrException(name), direction) { }
 
 
@@ -32,13 +32,13 @@ namespace EixoX.Data
             get { return this._next; }
         }
 
-        public ClassSortNode SetNext(int ordinal, SortDirection direction)
+        public ClassSortNode SetNext(int ordinal, EixoX.Data.SortDirection direction)
         {
             this._next = new ClassSortNode(_Aspect, ordinal, direction);
             return this._next;
         }
 
-        public ClassSortNode SetNext(string name, SortDirection direction)
+        public ClassSortNode SetNext(string name, EixoX.Data.SortDirection direction)
         {
             this._next = new ClassSortNode(_Aspect, name, direction);
             return this._next;

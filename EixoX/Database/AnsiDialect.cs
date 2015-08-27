@@ -238,10 +238,10 @@ namespace EixoX.Data
 
         public virtual void AppendSortTerm(StringBuilder builder, DataAspect aspect, ClassSortTerm term)
         {
-            if (term.Direction != SortDirection.Random)
+            if (term.Direction != EixoX.Data.SortDirection.Random)
             {
                 AppendName(builder, aspect[term.Ordinal].StoredName);
-                if (term.Direction == SortDirection.Descending)
+                if (term.Direction == EixoX.Data.SortDirection.Descending)
                     builder.Append(" DESC");
             }
         }

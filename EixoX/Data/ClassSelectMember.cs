@@ -247,7 +247,7 @@ namespace EixoX.Data
         /// <param name="name">The name of the member to use for ordering.</param>
         /// <param name="direction">The order direction.</param>
         /// <returns>The ClassSelectMember.</returns>
-        public ClassSelectMember OrderBy(string name, SortDirection direction)
+        public ClassSelectMember OrderBy(string name, EixoX.Data.SortDirection direction)
         {
             return OrderBy(direction, name);
         }
@@ -258,7 +258,7 @@ namespace EixoX.Data
         /// <param name="direction">The order direction.</param>
         /// <param name="names">The member names to use for ordering.</param>
         /// <returns>The T.</returns>
-        public ClassSelectMember OrderBy(SortDirection direction, params string[] names)
+        public ClassSelectMember OrderBy (EixoX.Data.SortDirection direction, params string[] names)
         {
             this._OrderFirst = new ClassSortNode(_Aspect, names[0], direction);
             this._OrderLast = this._OrderFirst;
@@ -274,7 +274,7 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelectMember OrderBy(params string[] names)
         {
-            return OrderBy(SortDirection.Ascending, names);
+            return OrderBy (EixoX.Data.SortDirection.Ascending, names);
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace EixoX.Data
         /// <param name="ordinal">The ordinal position of the members used to filter.</param>
         /// <param name="direction">The sort diretion.</param>
         /// <returns>The T.</returns>
-        public ClassSelectMember OrderBy(int ordinal, SortDirection direction)
+        public ClassSelectMember OrderBy(int ordinal, EixoX.Data.SortDirection direction)
         {
             return OrderBy(direction, ordinal);
         }
@@ -294,7 +294,7 @@ namespace EixoX.Data
         /// <param name="direction">The sort diretion.</param>
         /// <param name="ordinals">The ordinals of the members to order by.</param>
         /// <returns>The T.</returns>
-        public ClassSelectMember OrderBy(SortDirection direction, params int[] ordinals)
+        public ClassSelectMember OrderBy (EixoX.Data.SortDirection direction, params int[] ordinals)
         {
             this._OrderFirst = new ClassSortNode(_Aspect, ordinals[0], direction);
             this._OrderLast = this._OrderFirst;
@@ -310,7 +310,7 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelectMember OrderBy(params int[] ordinals)
         {
-            return OrderBy(SortDirection.Ascending, ordinals);
+            return OrderBy (EixoX.Data.SortDirection.Ascending, ordinals);
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace EixoX.Data
         /// <param name="name">The name of the member to use for ordering.</param>
         /// <param name="direction">The order direction.</param>
         /// <returns>The T.</returns>
-        public ClassSelectMember ThenBy(string name, SortDirection direction)
+        public ClassSelectMember ThenBy(string name, EixoX.Data.SortDirection direction)
         {
             return ThenBy(direction, name);
         }
@@ -330,7 +330,7 @@ namespace EixoX.Data
         /// <param name="direction">The order direction.</param>
         /// <param name="names">The member names to use for ordering.</param>
         /// <returns>The T.</returns>
-        public ClassSelectMember ThenBy(SortDirection direction, params string[] names)
+        public ClassSelectMember ThenBy (EixoX.Data.SortDirection direction, params string[] names)
         {
             for (int i = 0; i < names.Length; i++)
                 this._OrderLast = this._OrderLast.SetNext(names[i], direction);
@@ -344,7 +344,7 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelectMember ThenBy(params string[] names)
         {
-            return ThenBy(SortDirection.Ascending, names);
+            return ThenBy (EixoX.Data.SortDirection.Ascending, names);
         }
 
         /// <summary>
@@ -353,7 +353,7 @@ namespace EixoX.Data
         /// <param name="ordinal">The ordinal position of the members used to filter.</param>
         /// <param name="direction">The sort diretion.</param>
         /// <returns>The T.</returns>
-        public ClassSelectMember ThenBy(int ordinal, SortDirection direction)
+        public ClassSelectMember ThenBy(int ordinal, EixoX.Data.SortDirection direction)
         {
             return ThenBy(direction, ordinal);
         }
@@ -364,7 +364,7 @@ namespace EixoX.Data
         /// <param name="direction">The sort diretion.</param>
         /// <param name="ordinals">The ordinals of the members to order by.</param>
         /// <returns>The T.</returns>
-        public ClassSelectMember ThenBy(SortDirection direction, params int[] ordinals)
+        public ClassSelectMember ThenBy (EixoX.Data.SortDirection direction, params int[] ordinals)
         {
             for (int i = 0; i < ordinals.Length; i++)
                 this._OrderLast = this._OrderLast.SetNext(ordinals[i], direction);
@@ -378,7 +378,7 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSelectMember ThenBy(params int[] ordinals)
         {
-            return ThenBy(SortDirection.Ascending, ordinals);
+            return ThenBy (EixoX.Data.SortDirection.Ascending, ordinals);
         }
 
         #endregion
@@ -460,7 +460,7 @@ namespace EixoX.Data
 
         public ClassSelectMember OrderByRandom()
         {
-            this._OrderFirst = new ClassSortNode(this._Aspect, -1, SortDirection.Random);
+            this._OrderFirst = new ClassSortNode(this._Aspect, -1, EixoX.Data.SortDirection.Random);
             this._OrderLast = this._OrderFirst;
             return this;
         }

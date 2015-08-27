@@ -35,7 +35,7 @@ namespace EixoX.Web
         /// <summary>
         /// Ascending or Descending
         /// </summary>
-        private Pair<string, SortDirection> _SortDirection;
+        private Pair<string, EixoX.Data.SortDirection> _SortDirection;
 
         private Dictionary<string, string> DefaultParameterKeys;
 
@@ -90,7 +90,7 @@ namespace EixoX.Web
             this._PageOrdinal = GetValueFromCollection<int>(form, this.DefaultParameterKeys["PageOrdinal"], 0);
             this._PageSize = GetValueFromCollection<int>(form, this.DefaultParameterKeys["PageSize"], 20);
             this._OrderBy = GetValueFromCollection<int>(form, this.DefaultParameterKeys["OrderBy"], -1);
-            this._SortDirection = GetValueFromCollection<SortDirection>(form, this.DefaultParameterKeys["SortDirection"], SortDirection.Ascending);
+            this._SortDirection = GetValueFromCollection<SortDirection>(form, this.DefaultParameterKeys["SortDirection"], EixoX.Data.SortDirection.Ascending);
 
             ClassSelect<T> select = null;
 
@@ -119,7 +119,7 @@ namespace EixoX.Web
             }
             else
             {
-                select.OrderBy(0, SortDirection.Descending);
+                select.OrderBy(0, EixoX.Data.SortDirection.Descending);
             }
 
             select.Page(_PageSize.Value, _PageOrdinal.Value);
@@ -219,30 +219,30 @@ namespace EixoX.Web
                 new HtmlAttribute("id", _SortDirection.Key),
                 new HtmlAttribute("class", "input-small  changeReload"));
 
-            if (_SortDirection.Value == SortDirection.Ascending)
+            if (_SortDirection.Value == EixoX.Data.SortDirection.Ascending)
             {
                 selectDirection.AppendSimple(
                         "option",
-                        SortDirection.Ascending,
-                        new HtmlAttribute("value", SortDirection.Ascending),
+                        EixoX.Data.SortDirection.Ascending,
+                        new HtmlAttribute("value", EixoX.Data.SortDirection.Ascending),
                         new HtmlAttribute("selected", "selected"));
 
                 selectDirection.AppendSimple(
                         "option",
-                        SortDirection.Descending,
-                        new HtmlAttribute("value", SortDirection.Descending));
+                        EixoX.Data.SortDirection.Descending,
+                        new HtmlAttribute("value", EixoX.Data.SortDirection.Descending));
             }
             else
             {
                 selectDirection.AppendSimple(
                         "option",
-                        SortDirection.Ascending,
-                        new HtmlAttribute("value", SortDirection.Ascending));
+                        EixoX.Data.SortDirection.Ascending,
+                        new HtmlAttribute("value", EixoX.Data.SortDirection.Ascending));
 
                 selectDirection.AppendSimple(
                         "option",
-                        SortDirection.Descending,
-                        new HtmlAttribute("value", SortDirection.Descending),
+                        EixoX.Data.SortDirection.Descending,
+                        new HtmlAttribute("value", EixoX.Data.SortDirection.Descending),
                         new HtmlAttribute("selected", "selected"));
             }
 

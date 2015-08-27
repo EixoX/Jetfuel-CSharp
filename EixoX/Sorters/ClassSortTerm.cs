@@ -8,16 +8,16 @@ namespace EixoX.Data
     {
         private readonly Aspect _Aspect;
         private readonly int _Ordinal;
-        private readonly SortDirection _Direction;
+        private readonly EixoX.Data.SortDirection _Direction;
 
-        public ClassSortTerm(Aspect aspect, int ordinal, SortDirection direction)
+        public ClassSortTerm(Aspect aspect, int ordinal, EixoX.Data.SortDirection direction)
         {
             this._Aspect = aspect;
             this._Ordinal = ordinal;
             this._Direction = direction;
         }
 
-        public ClassSortTerm(Aspect aspect, string name, SortDirection direction)
+        public ClassSortTerm(Aspect aspect, string name, EixoX.Data.SortDirection direction)
             : this(aspect, aspect.GetOrdinalOrException(name), direction) { }
 
         public Aspect Aspect
@@ -30,7 +30,7 @@ namespace EixoX.Data
             get { return this._Ordinal; }
         }
 
-        public SortDirection Direction
+        public EixoX.Data.SortDirection Direction
         {
             get { return this._Direction; }
         }
@@ -136,7 +136,7 @@ namespace EixoX.Data
         {
             switch (_Direction)
             {
-                case SortDirection.Ascending:
+                case EixoX.Data.SortDirection.Ascending:
                     if (entities is IList<T>)
                     {
                         SortAscending<T>((IList<T>)entities);
@@ -153,7 +153,7 @@ namespace EixoX.Data
                         SortAscending<T>(list);
                         return list;
                     }
-                case SortDirection.Descending:
+                case EixoX.Data.SortDirection.Descending:
                     if (entities is IList<T>)
                     {
                         SortDescending<T>((IList<T>)entities);

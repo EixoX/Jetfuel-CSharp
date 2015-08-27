@@ -14,7 +14,7 @@ namespace EixoX.Data
         /// <param name="name">The name of the member to use for ordering.</param>
         /// <param name="direction">The order direction.</param>
         /// <returns>The T.</returns>
-        TClass OrderBy(string name, SortDirection direction);
+        TClass OrderBy(string name, EixoX.Data.SortDirection direction);
 
         /// <summary>
         /// Sets the first ordering of the selection.
@@ -22,7 +22,7 @@ namespace EixoX.Data
         /// <param name="direction">The order direction.</param>
         /// <param name="names">The member names to use for ordering.</param>
         /// <returns>The T.</returns>
-        TClass OrderBy(SortDirection direction, params string[] names);
+        TClass OrderBy (EixoX.Data.SortDirection direction, params string[] names);
 
         /// <summary>
         /// Sets the first ordering ascending of the selection.
@@ -37,7 +37,7 @@ namespace EixoX.Data
         /// <param name="ordinal">The ordinal position of the members used to filter.</param>
         /// <param name="direction">The sort diretion.</param>
         /// <returns>The T.</returns>
-        TClass OrderBy(int ordinal, SortDirection direction);
+        TClass OrderBy(int ordinal, EixoX.Data.SortDirection direction);
 
         /// <summary>
         /// Sets the first ordering of the selection.
@@ -45,7 +45,7 @@ namespace EixoX.Data
         /// <param name="direction">The sort diretion.</param>
         /// <param name="ordinals">The ordinals of the members to order by.</param>
         /// <returns>The T.</returns>
-        TClass OrderBy(SortDirection direction, params int[] ordinals);
+        TClass OrderBy (EixoX.Data.SortDirection direction, params int[] ordinals);
 
         /// <summary>
         /// Sets the first ordering (ascending) of the selection.
@@ -60,7 +60,7 @@ namespace EixoX.Data
         /// <param name="name">The name of the member to use for ordering.</param>
         /// <param name="direction">The order direction.</param>
         /// <returns>The T.</returns>
-        TClass ThenBy(string name, SortDirection direction);
+        TClass ThenBy(string name, EixoX.Data.SortDirection direction);
 
         /// <summary>
         /// Appends an ordering to the selection.
@@ -68,7 +68,7 @@ namespace EixoX.Data
         /// <param name="direction">The order direction.</param>
         /// <param name="names">The member names to use for ordering.</param>
         /// <returns>The T.</returns>
-        TClass ThenBy(SortDirection direction, params string[] names);
+        TClass ThenBy (EixoX.Data.SortDirection direction, params string[] names);
 
         /// <summary>
         /// Appends ordering to the selection.
@@ -83,7 +83,7 @@ namespace EixoX.Data
         /// <param name="ordinal">The ordinal position of the members used to filter.</param>
         /// <param name="direction">The sort diretion.</param>
         /// <returns>The T.</returns>
-        TClass ThenBy(int ordinal, SortDirection direction);
+        TClass ThenBy(int ordinal, EixoX.Data.SortDirection direction);
 
         /// <summary>
         /// Appends more ordering of the selection.
@@ -91,7 +91,7 @@ namespace EixoX.Data
         /// <param name="direction">The sort diretion.</param>
         /// <param name="ordinals">The ordinals of the members to order by.</param>
         /// <returns>The T.</returns>
-        TClass ThenBy(SortDirection direction, params int[] ordinals);
+        TClass ThenBy (EixoX.Data.SortDirection direction, params int[] ordinals);
 
         /// <summary>
         /// Appends more ordering of the selection.

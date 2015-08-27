@@ -16,7 +16,7 @@ namespace EixoX.Web
     {
         private readonly List<BootstrapQueryHelperColumn> columns = new List<BootstrapQueryHelperColumn>();
         public string OrderBy { get; set; }
-        public SortDirection OrderByDirection { get; set; }
+        public EixoX.Data.SortDirection OrderByDirection { get; set; }
         public int PageSize { get; set; }
         public int PageOrdinal { get; set; }
         public List<BootstrapQueryHelperColumn> Columns { get { return this.columns; } }
@@ -48,7 +48,7 @@ namespace EixoX.Web
             string direction = data["orderByDirection"];
             if (!string.IsNullOrEmpty(direction))
             {
-                this.OrderByDirection = (SortDirection)Enum.Parse(typeof(SortDirection), direction);
+                this.OrderByDirection =  (EixoX.Data.SortDirection)Enum.Parse(typeof (EixoX.Data.SortDirection), direction);
             }
             for (int i = 0; i < columns.Count; i++)
             {
@@ -217,7 +217,7 @@ namespace EixoX.Web
 
                 if (col.Name.Equals(this.OrderBy, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (this.OrderByDirection == SortDirection.Ascending)
+                    if (this.OrderByDirection == EixoX.Data.SortDirection.Ascending)
                     {
                         tha.AppendSimple(
                             "span",
@@ -225,7 +225,7 @@ namespace EixoX.Web
                             new HtmlAttribute("class", "fa fa-sort-asc"));
 
 
-                        tha.AppendAttribute("onclick", string.Concat("EixoX.sortGrid(this,'", col.Name, "','", SortDirection.Descending, "')"));
+                        tha.AppendAttribute("onclick", string.Concat("EixoX.sortGrid(this,'", col.Name, "','", EixoX.Data.SortDirection.Descending, "')"));
                     }
                     else
                     {
@@ -234,7 +234,7 @@ namespace EixoX.Web
                             "",
                             new HtmlAttribute("class", "fa fa-sort-desc"));
 
-                        tha.AppendAttribute("onclick", string.Concat("EixoX.sortGrid(this,'", col.Name, "','", SortDirection.Ascending, "')"));
+                        tha.AppendAttribute("onclick", string.Concat("EixoX.sortGrid(this,'", col.Name, "','", EixoX.Data.SortDirection.Ascending, "')"));
                     }
                 }
                 else
@@ -244,7 +244,7 @@ namespace EixoX.Web
                             "",
                             new HtmlAttribute("class", "fa fa-sort"));
 
-                    tha.AppendAttribute("onclick", string.Concat("EixoX.sortGrid(this,'", col.Name, "','", SortDirection.Ascending, "')"));
+                    tha.AppendAttribute("onclick", string.Concat("EixoX.sortGrid(this,'", col.Name, "','", EixoX.Data.SortDirection.Ascending, "')"));
                 }
             }
 

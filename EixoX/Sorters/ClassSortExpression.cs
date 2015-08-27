@@ -15,10 +15,10 @@ namespace EixoX.Data
             this._Last = this._First;
         }
 
-        public ClassSortExpression(Aspect aspect, int ordinal, SortDirection direction)
+        public ClassSortExpression(Aspect aspect, int ordinal, EixoX.Data.SortDirection direction)
             : this(new ClassSortTerm(aspect, ordinal, direction)) { }
 
-        public ClassSortExpression(Aspect aspect, string name, SortDirection direction)
+        public ClassSortExpression(Aspect aspect, string name, EixoX.Data.SortDirection direction)
             : this(aspect, aspect.GetOrdinalOrException(name), direction) { }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace EixoX.Data
         /// <param name="name">The name of the member to use for ordering.</param>
         /// <param name="direction">The order direction.</param>
         /// <returns>The T.</returns>
-        public ClassSortExpression ThenBy(string name, SortDirection direction)
+        public ClassSortExpression ThenBy(string name, EixoX.Data.SortDirection direction)
         {
             return ThenBy(direction, name);
         }
@@ -38,7 +38,7 @@ namespace EixoX.Data
         /// <param name="direction">The order direction.</param>
         /// <param name="names">The member names to use for ordering.</param>
         /// <returns>The T.</returns>
-        public ClassSortExpression ThenBy(SortDirection direction, params string[] names)
+        public ClassSortExpression ThenBy (EixoX.Data.SortDirection direction, params string[] names)
         {
             for (int i = 0; i < names.Length; i++)
                 this._Last = this._Last.SetNext(names[i], direction);
@@ -53,7 +53,7 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSortExpression ThenBy(params string[] names)
         {
-            return ThenBy(SortDirection.Ascending, names);
+            return ThenBy (EixoX.Data.SortDirection.Ascending, names);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace EixoX.Data
         /// <param name="ordinal">The ordinal position of the members used to filter.</param>
         /// <param name="direction">The sort diretion.</param>
         /// <returns>The T.</returns>
-        public ClassSortExpression ThenBy(int ordinal, SortDirection direction)
+        public ClassSortExpression ThenBy(int ordinal, EixoX.Data.SortDirection direction)
         {
             return ThenBy(direction, ordinal);
         }
@@ -73,7 +73,7 @@ namespace EixoX.Data
         /// <param name="direction">The sort diretion.</param>
         /// <param name="ordinals">The ordinals of the members to order by.</param>
         /// <returns>The T.</returns>
-        public ClassSortExpression ThenBy(SortDirection direction, params int[] ordinals)
+        public ClassSortExpression ThenBy (EixoX.Data.SortDirection direction, params int[] ordinals)
         {
             for (int i = 0; i < ordinals.Length; i++)
                 this._Last = this._Last.SetNext(ordinals[i], direction);
@@ -88,7 +88,7 @@ namespace EixoX.Data
         /// <returns>The T.</returns>
         public ClassSortExpression ThenBy(params int[] ordinals)
         {
-            return ThenBy(SortDirection.Ascending, ordinals);
+            return ThenBy (EixoX.Data.SortDirection.Ascending, ordinals);
         }
 
 
