@@ -42,7 +42,7 @@ namespace EixoX.Helpers
             {
                 try
                 {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("ISO-8859-1")))
                     {
                         try
                         {
@@ -60,6 +60,44 @@ namespace EixoX.Helpers
                 }
             }
 
+        }
+
+        public static string StripHtmlAttributes(string content)
+        {
+            int l = content.Length;
+            StringBuilder builder = new StringBuilder(l);
+            bool isInTag = false;
+            for (int i = 0; i < l; i++)
+            {
+                if (isInTag)
+                {
+                    if (Char.IsWhiteSpace(content[i]))
+                    {
+                        i = content.IndexOf('>', i) - 1;
+                        isInTag = false;
+                    }
+                    else if (content[i] == '>')
+                    {
+                        builder.Append('>');
+                        isInTag = false;
+                    }
+                    else
+                    {
+                        builder.Append(Char.ToLower(content[i]));
+                    }
+                }
+                else if (content[i] == '<')
+                {
+                    isInTag = true;
+                    builder.Append(content[i]);
+                }
+                else
+                {
+                    builder.Append(content[i]);
+                }
+            }
+
+            return builder.ToString();
         }
     }
 }
