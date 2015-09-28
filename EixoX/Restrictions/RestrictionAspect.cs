@@ -78,6 +78,20 @@ namespace EixoX.Restrictions
             return null;
         }
 
+        public string GetRestrictionMessage(object entity, string name, int lcid)
+        {
+            foreach (RestrictionAspectMember ram in this)
+            {
+                if (ram.Name.CompareTo(name) == 0)
+                {
+                    string msg = ram.GetRestrictionMessage(entity, lcid);
+                    if (msg != null)
+                        return msg;
+                }
+            }
+            return null;
+        }
+
         public RestrictionList GetRestrictionList(string name)
         {
             int ordinal = base.GetOrdinal(name);
@@ -113,7 +127,7 @@ namespace EixoX.Restrictions
 
         public override bool Validate(object entity)
         {
-            Wizard wizard = (Wizard)entity;
+            Wizard<T> wizard = (Wizard<T>)entity;
             bool isEverythingOk = true;
 
             foreach (RestrictionAspectMember ram in this)
