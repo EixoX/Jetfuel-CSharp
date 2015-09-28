@@ -147,6 +147,7 @@
     <Compile Include="Restrictions\MinAge.cs" />
     <Compile Include="Text\DelimitedTextReader.cs" />
     <Compile Include="Text\FixedLengthTextReader.cs" />
+    <Compile Include="Text\FixedLengthTextWriter.cs" />
     <Compile Include="Text\Tokenizer.cs" />
     <Compile Include="UsecaseResult.cs" />
     <Compile Include="Viewee.cs" />
