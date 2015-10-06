@@ -29,7 +29,7 @@ namespace EixoX.RocketLauncher
 
                     foreach (string setting in settings)
                     {
-                        string[] kvp = setting.Split('=');
+                        string[] kvp = setting.Split('>');
                         if (kvp.Length == 2)
                             if (!KeyValueSettings.ContainsKey(kvp[0]))
                             {
