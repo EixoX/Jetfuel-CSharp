@@ -8,7 +8,7 @@ namespace EixoX
     {
         Exception_Raised = 0,
         Failed = 1,
-        Sucess = 2,
+        Success = 2,
         Restrictions_Failed = 3
     }
 }
