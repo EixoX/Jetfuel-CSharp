@@ -19,7 +19,8 @@ namespace EixoX
         {
             byte[] buffer = Encoding.UTF8.GetBytes(text);
             SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
-            return BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
+            byte[] hash = cryptoTransformSHA1.ComputeHash(buffer);
+            return BitConverter.ToString(hash).Replace("-", "");
         }
 
         public static string Sha1(string text)
