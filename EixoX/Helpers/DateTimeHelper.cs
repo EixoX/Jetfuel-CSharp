@@ -6,7 +6,6 @@ namespace EixoX
 {
     public static class DateTimeHelper
     {
-
         public static int GetAgeInYears(DateTime big, DateTime small)
         {
             if (
@@ -133,8 +132,7 @@ namespace EixoX
                 return false;
             }
         }
-
-
+        
         public static bool TryParse(string input, IFormatProvider formatProvider, DateTime defaultDate, out DateTime date)
         {
 
@@ -167,6 +165,22 @@ namespace EixoX
                 else
                     return TryParseYMD(input, defaultDate, out date);
             }
+        }
+
+        public static DateTime EnsureBusinessDay(DateTime date, bool up)
+        {
+            return EnsureBusinessDay(date, up ? 1 : -1);
+        }
+
+        public static DateTime EnsureBusinessDay(DateTime date, int direction)
+        {
+            if (direction != 1 && direction != -1)
+                throw new ArgumentException("Direction must be 1 or -1");
+            
+            if (date.DayOfWeek != DayOfWeek.Sunday && date.DayOfWeek != DayOfWeek.Saturday)
+                return date;
+            
+            return EnsureBusinessDay(date.AddDays(direction), direction);
         }
     }
 }
