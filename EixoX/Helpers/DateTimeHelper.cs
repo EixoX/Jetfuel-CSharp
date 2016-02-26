@@ -182,5 +182,17 @@ namespace EixoX
             
             return EnsureBusinessDay(date.AddDays(direction), direction);
         }
+
+        public static DateTime AddBusinessDay(DateTime date, int days)
+        {
+            for (int i = 0, bd = 0; bd < Math.Abs(days); date = date.AddDays(days > 0 ? 1 : -1))
+            {
+                if (date.DayOfWeek != DayOfWeek.Sunday && date.DayOfWeek != DayOfWeek.Saturday)
+                    bd++;
+                i++;
+            }
+
+            return date;
+        }
     }
 }
