@@ -12,6 +12,7 @@
   <Message for="EixoX.Restrictions.MaxExclusive" lcid="1046">Valor acima do máximo.</Message>
   <Message for="EixoX.Restrictions.MaxInclusive" lcid="1046">Valor acima do máximo.</Message>
   <Message for="EixoX.Restrictions.MaxLength" lcid="1046">Texto muito grande.</Message>
+  <Message for="EixoX.Restrictions.Phone" lcid="1046">Número de telefone inválido</Message>
   
   <Message for="EixoX.Restrictions.MinExclusive" lcid="1046">Valor abaixo do mínimo.</Message>
   <Message for="EixoX.Restrictions.MinInclusive" lcid="1046">Valor abaixo do mínimo.</Message>

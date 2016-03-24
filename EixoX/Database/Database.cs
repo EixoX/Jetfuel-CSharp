@@ -69,6 +69,10 @@ namespace EixoX.Data
                         return cmd.ExecuteScalar();
                     }
                 }
+                catch (Exception e)
+                {
+                    return null;
+                }
                 finally
                 {
                     conn.Close();

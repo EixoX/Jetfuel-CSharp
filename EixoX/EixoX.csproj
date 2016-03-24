@@ -142,6 +142,7 @@
     <Compile Include="Html\Bootstrap3\Bootstrap3Presenter.cs" />
     <Compile Include="Html\Bootstrap3\Bootstrap3PresenterControl.cs" />
     <Compile Include="Html\HtmlRaw.cs" />
+    <Compile Include="Restrictions\Phone.cs" />
     <Compile Include="Restrictions\GuidAttribute.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />
     <Compile Include="Restrictions\MinAge.cs" />
@@ -360,7 +361,7 @@
     <Content Include="References\Npgsql.pdb" />
     <Content Include="References\Npgsql.xml" />
     <Content Include="Restrictions\RestrictionMessages.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
