@@ -22,14 +22,17 @@ namespace System
         {
             if (string.IsNullOrEmpty(input))
                 return input;
-            else if (length > input.Length)
+            else if (length >= input.Length)
                 return input;
             else
             {
-                while (!char.IsWhiteSpace(input, length - 1) && length > 0)
-                    length--;
+                StringBuilder sb = new StringBuilder();
+                int aux = 0;
+                while (aux <= length)
+                    if (input[aux] != ' ')
+                        sb.Append(input[aux++]);
 
-                return input.Substring(0, length) + "...";
+                return sb.ToString() + "...";
             }
 
         }
