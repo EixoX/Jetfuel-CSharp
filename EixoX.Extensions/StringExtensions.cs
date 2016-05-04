@@ -22,7 +22,7 @@ namespace System
         {
             if (string.IsNullOrEmpty(input))
                 return input;
-            else if (length > input.Length)
+            else if (length >= input.Length || length == 0)
                 return input;
             else
             {
