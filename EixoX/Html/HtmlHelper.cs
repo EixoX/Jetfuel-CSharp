@@ -131,5 +131,38 @@ namespace EixoX.Html
                 }
             }
         }
+
+        public static void WriteHtmlTable<T>(TextWriter writer, IEnumerable<T> collection, params Pair<string, string>[] names)
+        {
+
+            AspectMember[] members = new AspectMember[names.Length];
+
+            for (int i = 0; i < members.Length; i++)
+                members[i] = ClassSchema<T>.Instance.GetMember(names[i].Key);
+
+            writer.WriteLine("<table>");
+            writer.WriteLine("<tr>");
+            for(int i=0; i < members.Length; i++)
+            {
+                writer.Write("<th>");
+                writer.Write(HtmlFormat(names[i].Value));
+                writer.WriteLine("</th>");
+            }
+            writer.WriteLine("</tr>");
+
+            foreach(T item in collection)
+            {
+                writer.WriteLine("<tr>");
+                for (int i = 0; i < members.Length; i++)
+                {
+                    writer.Write("<th>");
+                    writer.Write(members[i].GetValue(item));
+                    writer.WriteLine("</th>");
+                }
+                writer.WriteLine("</tr>");
+            }
+
+            writer.WriteLine("</table>");
+        }
     }
 }
