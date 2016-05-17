@@ -306,14 +306,17 @@ namespace EixoX.Data
             bool prependComma = false;
             foreach (AspectMemberValue value in values)
             {
-                if (prependComma)
-                    builder.Append(", ");
-                else
-                    prependComma = true;
+                if (!value.Member.HasAttribute<NonUpdateable>(false))
+                {
+                    if (prependComma)
+                        builder.Append(", ");
+                    else
+                        prependComma = true;
 
-                AppendName(builder, aspect[value.Ordinal].StoredName);
-                builder.Append(" = ");
-                AppendValue(builder, value.Value);
+                    AppendName(builder, aspect[value.Ordinal].StoredName);
+                    builder.Append(" = ");
+                    AppendValue(builder, value.Value);
+                }
             }
             if (filter != null)
             {
