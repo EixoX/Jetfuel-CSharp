@@ -142,6 +142,7 @@
     <Compile Include="Html\Bootstrap3\Bootstrap3Presenter.cs" />
     <Compile Include="Html\Bootstrap3\Bootstrap3PresenterControl.cs" />
     <Compile Include="Html\HtmlRaw.cs" />
+    <Compile Include="Restrictions\ChaveNFe.cs" />
     <Compile Include="Restrictions\Phone.cs" />
     <Compile Include="Restrictions\GuidAttribute.cs" />
     <Compile Include="Restrictions\MaxAge.cs" />
