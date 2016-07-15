@@ -9,6 +9,32 @@ namespace EixoX
     {
         public const string HexAlphabet = "0123456789abcdef";
 
+        public static bool IsNumeric(string value)
+        {
+            foreach (char item in value)
+                if (Char.IsLetter(item))
+                    return false;
+
+            return true;
+        }
+
+        public static string GetFirstNumber(string value)
+        {
+            StringBuilder number = new StringBuilder();
+            int numberStartIndex = 0;
+            while (!Char.IsDigit(value[numberStartIndex])) { numberStartIndex++; }
+
+            for (int i = numberStartIndex; i < value.Length; i++)
+            {
+                if (Char.IsDigit(value[i]))
+                    number.Append(value[i]);
+                else
+                    break;
+            }
+
+            return number.ToString();
+        }
+
         public static string DigitsOnly(string value)
         {
             if (string.IsNullOrEmpty(value))
