@@ -22,7 +22,7 @@ namespace EixoX
         {
             StringBuilder number = new StringBuilder();
             int numberStartIndex = 0;
-            while (!Char.IsDigit(value[numberStartIndex])) { numberStartIndex++; }
+            while (numberStartIndex < value.Length  && !Char.IsDigit(value[numberStartIndex])) { numberStartIndex++; }
 
             for (int i = numberStartIndex; i < value.Length; i++)
             {
