@@ -45,6 +45,7 @@
     <Compile Include="BrasilDbModel.cs" />
     <Compile Include="CepLookup.cs" />
     <Compile Include="Cidade.cs" />
+    <Compile Include="DistinctCities.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="Logradouro.cs" />
     <Compile Include="Mesoregiao.cs" />

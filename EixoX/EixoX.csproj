@@ -90,6 +90,7 @@
     <Compile Include="Adapters\XmlDocumentStringAdapter.cs" />
     <Compile Include="Adapters\XmlElementStringAdapter.cs" />
     <Compile Include="Base36.cs" />
+    <Compile Include="BaseUsecase.cs" />
     <Compile Include="Cached.cs" />
     <Compile Include="Components\Wizard.cs" />
     <Compile Include="Components\WizardStep.cs" />
