@@ -1,6 +1,7 @@
 ﻿using EixoX.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.OracleClient;
 using System.Text;
 
 namespace EixoX.Data
@@ -11,7 +12,7 @@ namespace EixoX.Data
 
         public override System.Data.IDbConnection CreateConnection(string connectionString)
         {
-            return new System.Data.OracleClient.OracleConnection(connectionString);
+            return new OracleConnection(connectionString);
         }
     }
 }

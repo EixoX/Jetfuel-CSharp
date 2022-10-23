@@ -1,39 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0A418683-14D0-433F-BA4D-C4919C8069A7}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EixoX</RootNamespace>
-    <AssemblyName>EixoX</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>ExtendedCorrectnessRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
@@ -44,315 +16,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Npgsql.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Adapters\AnsiCharAdapter.cs" />
-    <Compile Include="Adapters\AnsiStringAdapter.cs" />
-    <Compile Include="Adapters\AnsiStringFixedLengthAdapter.cs" />
-    <Compile Include="Adapters\AnsiStringMaxLengthAdapter.cs" />
-    <Compile Include="Adapters\BinaryAdapter.cs" />
-    <Compile Include="Adapters\BooleanAdapter.cs" />
-    <Compile Include="Adapters\ByteAdapter.cs" />
-    <Compile Include="Adapters\CharAdapter.cs" />
-    <Compile Include="Adapters\CompositeAdapter.cs" />
-    <Compile Include="Adapters\CurrencyAdapter.cs" />
-    <Compile Include="Adapters\DateTime2Adapter.cs" />
-    <Compile Include="Adapters\DateAdapter.cs" />
-    <Compile Include="Adapters\DateTimeAdapter.cs" />
-    <Compile Include="Adapters\DateTimeOffsetAdapter.cs" />
-    <Compile Include="Adapters\DateYmdAdapter.cs" />
-    <Compile Include="Adapters\DecimalAdapter.cs" />
-    <Compile Include="Adapters\DoubleAdapter.cs" />
-    <Compile Include="Adapters\GuidAdapter.cs" />
-    <Compile Include="Adapters\Int16Adapter.cs" />
-    <Compile Include="Adapters\Int32Adapter.cs" />
-    <Compile Include="Adapters\Int64Adapter.cs" />
-    <Compile Include="Adapters\ObjectAdapter.cs" />
-    <Compile Include="Adapters\SimpleAdapter.cs" />
-    <Compile Include="Adapters\SByteAdapter.cs" />
-    <Compile Include="Adapters\SimpleAdapterBase.cs" />
-    <Compile Include="Adapters\SimpleAdapters.cs" />
-    <Compile Include="Adapters\SingleAdapter.cs" />
-    <Compile Include="Adapters\StringAdapter.cs" />
-    <Compile Include="Adapters\StringFixedLengthAdapter.cs" />
-    <Compile Include="Adapters\StringMaxLengthAdapter.cs" />
-    <Compile Include="Adapters\TextAdapter.cs" />
-    <Compile Include="Adapters\TimeAdapter.cs" />
-    <Compile Include="Adapters\TimeSpanAdapter.cs" />
-    <Compile Include="Adapters\UInt16Adapter.cs" />
-    <Compile Include="Adapters\UInt32Adapter.cs" />
-    <Compile Include="Adapters\UInt64Adapter.cs" />
-    <Compile Include="Adapters\VarNumericAdapter.cs" />
-    <Compile Include="Adapters\XmlDocumentStringAdapter.cs" />
-    <Compile Include="Adapters\XmlElementStringAdapter.cs" />
-    <Compile Include="Base36.cs" />
-    <Compile Include="BaseUsecase.cs" />
-    <Compile Include="Cached.cs" />
-    <Compile Include="Components\Wizard.cs" />
-    <Compile Include="Components\WizardStep.cs" />
-    <Compile Include="Database\NonUpdateable.cs" />
-    <Compile Include="Database\OracleDb.cs" />
-    <Compile Include="Database\OracleDialect.cs" />
-    <Compile Include="Database\PostgresDialect.cs" />
-    <Compile Include="Formatters\CpfFormatter.cs" />
-    <Compile Include="Formatters\DataTableFormatter.cs" />
-    <Compile Include="Formatters\Formatter.cs" />
-    <Compile Include="Formatters\GenericFormatter.cs" />
-    <Compile Include="Helpers\DateTimeHelper.cs" />
-    <Compile Include="Helpers\CharHelper.cs" />
-    <Compile Include="Helpers\EnumerationHelper.cs" />
-    <Compile Include="Helpers\RandomHelper.cs" />
-    <Compile Include="Helpers\UrlPathHelper.cs" />
-    <Compile Include="Helpers\WebHelper.cs" />
-    <Compile Include="Helpers\XmlHelper.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapControl.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapControlFactory.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapPresenter.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapPresenterControl.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapCheckbox.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapCheckboxGroup.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapDatepicker.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapDropdown.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapHidden.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapHtmlEditor.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapMultiline.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapPassword.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapRadioGroup.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapSingleline.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapTimepicker.cs" />
-    <Compile Include="Html\Bootstrap2\BootstrapFileUploader.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Checkbox.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3CheckboxGroup.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Datepicker.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Dropdown.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3FileUploader.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Hidden.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3HtmlEditor.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Multiline.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Password.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3RadioGroup.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Singleline.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Timepicker.cs" />
-    <Compile Include="Html\Vanilla\HtmlFileUploader.cs" />
-    <Compile Include="Html\Vanilla\HtmlColorPicker.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Control.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3ControlFactory.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3Presenter.cs" />
-    <Compile Include="Html\Bootstrap3\Bootstrap3PresenterControl.cs" />
-    <Compile Include="Html\HtmlRaw.cs" />
-    <Compile Include="Restrictions\ChaveNFe.cs" />
-    <Compile Include="Restrictions\Phone.cs" />
-    <Compile Include="Restrictions\GuidAttribute.cs" />
-    <Compile Include="Restrictions\MaxAge.cs" />
-    <Compile Include="Restrictions\MinAge.cs" />
-    <Compile Include="Text\DelimitedTextReader.cs" />
-    <Compile Include="Text\FixedLengthTextReader.cs" />
-    <Compile Include="Text\FixedLengthTextWriter.cs" />
-    <Compile Include="Text\Tokenizer.cs" />
-    <Compile Include="UsecaseResult.cs" />
-    <Compile Include="Viewee.cs" />
-    <Compile Include="LazyConstructor.cs" />
-    <Compile Include="Pair.cs" />
-    <Compile Include="Reflection\PrimitiveTypes.cs" />
-    <Compile Include="Reflection\CompositeAnnotationAspect.cs" />
-    <Compile Include="Reflection\CompositeAnnotationMember.cs" />
-    <Compile Include="Data\ClassSelectMember.cs" />
-    <Compile Include="Data\ClassStorageEngine.cs" />
-    <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\DatabaseAspect.cs" />
-    <Compile Include="Database\DatabaseCommand.cs" />
-    <Compile Include="Database\DatabaseDialect.cs" />
-    <Compile Include="Database\AnsiDialect.cs" />
-    <Compile Include="Database\DatabaseStorage.cs" />
-    <Compile Include="Database\OdbcDialect.cs" />
-    <Compile Include="Database\Odbc.cs" />
-    <Compile Include="Database\OleDbDialect.cs" />
-    <Compile Include="Database\OleDb.cs" />
-    <Compile Include="Database\DatabaseColumnAttribute.cs" />
-    <Compile Include="Database\DatabaseColumnKind.cs" />
-    <Compile Include="Database\SqlServerDialect.cs" />
-    <Compile Include="Database\SqlServer.cs" />
-    <Compile Include="Database\DatabaseTableAttribute.cs" />
-    <Compile Include="Delegates.cs" />
-    <Compile Include="Globalization\GlobalizationList.cs" />
-    <Compile Include="Globalization\IGlobalization.cs" />
-    <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Html\Vanilla\HtmlCheckbox.cs" />
-    <Compile Include="Html\Vanilla\HtmlCheckboxGroup.cs" />
-    <Compile Include="Html\Vanilla\HtmlFile.cs" />
-    <Compile Include="Html\Vanilla\HtmlHidden.cs" />
-    <Compile Include="Html\HtmlControlFactory.cs" />
-    <Compile Include="Html\Vanilla\HtmlDatepicker.cs" />
-    <Compile Include="Html\Vanilla\HtmlDropdown.cs" />
-    <Compile Include="Html\Vanilla\HtmlMultiline.cs" />
-    <Compile Include="Html\Vanilla\HtmlPassword.cs" />
-    <Compile Include="Html\Vanilla\HtmlRadioGroup.cs" />
-    <Compile Include="Html\Vanilla\HtmlSingleline.cs" />
-    <Compile Include="Html\HtmlAttribute.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlAttributeCollection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlBuilder.cs" />
-    <Compile Include="Html\HtmlComposite.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlControl.cs" />
-    <Compile Include="Html\HtmlHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlNode.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlNodeCollection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\Vanilla\HtmlPresenter.cs" />
-    <Compile Include="Html\Vanilla\HtmlPresenterControl.cs" />
-    <Compile Include="Html\HtmlSimple.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlStandalone.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Html\HtmlText.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interceptors\Lowercase.cs" />
-    <Compile Include="Restrictions\CreditCardNumber.cs" />
-    <Compile Include="Reflection\SingleAnnotationAspect.cs" />
-    <Compile Include="Reflection\SingleAnnotationAspectMember.cs" />
-    <Compile Include="Text\DelimitedTextTableAttribute.cs" />
-    <Compile Include="Data\ClassStorage.cs" />
-    <Compile Include="Collections\Tree.cs" />
-    <Compile Include="Collections\TreeNode.cs" />
-    <Compile Include="Reflection\Aspect.cs" />
-    <Compile Include="Reflection\AbstractAspect.cs" />
-    <Compile Include="Reflection\AspectMember.cs" />
-    <Compile Include="Reflection\AspectMemberValue.cs" />
-    <Compile Include="Reflection\ClassAcessor.cs" />
-    <Compile Include="Reflection\ClassField.cs" />
-    <Compile Include="Filters\ClassFilterAspect.cs" />
-    <Compile Include="Reflection\ClassProperty.cs" />
-    <Compile Include="Reflection\ClassSchema.cs" />
-    <Compile Include="Helpers\CryptoHelper.cs" />
-    <Compile Include="Sorters\ClassSortAspect.cs" />
-    <Compile Include="Data\ClassUpdate.cs" />
-    <Compile Include="Data\DataAspect.cs" />
-    <Compile Include="Data\DataAspectMember.cs" />
-    <Compile Include="Data\ClassSelectResult.cs" />
-    <Compile Include="Sorters\ClassSortExpression.cs" />
-    <Compile Include="Sorters\ClassSortTerm.cs" />
-    <Compile Include="Data\ClassDelete.cs" />
-    <Compile Include="Data\ClassInsert.cs" />
-    <Compile Include="Data\ClassSelect.cs" />
-    <Compile Include="Collections\EnumerableLimit.cs" />
-    <Compile Include="Collections\EnumerableOffset.cs" />
-    <Compile Include="Collections\EnumerablePager.cs" />
-    <Compile Include="Collections\EnumerableSelect.cs" />
-    <Compile Include="Filters\ClassFilter.cs" />
-    <Compile Include="Data\DataScope.cs" />
-    <Compile Include="Filters\FilterComparison.cs" />
-    <Compile Include="Filters\ClassFilterExpression.cs" />
-    <Compile Include="Filters\ClassFilterNode.cs" />
-    <Compile Include="Filters\FilterOperation.cs" />
-    <Compile Include="Filters\ClassFilterTerm.cs" />
-    <Compile Include="Sorters\ClassSort.cs" />
-    <Compile Include="Sorters\SortDirection.cs" />
-    <Compile Include="Sorters\ClassSortNode.cs" />
-    <Compile Include="Helpers\FormatHelper.cs" />
-    <Compile Include="Generators\Generator.cs" />
-    <Compile Include="Generators\GeneratorAspect.cs" />
-    <Compile Include="Generators\GeneratorAspectMember.cs" />
-    <Compile Include="Generators\GetDateGenerator.cs" />
-    <Compile Include="Generators\NewGuidGenerator.cs" />
-    <Compile Include="Globalization\Example.cs" />
-    <Compile Include="Globalization\GlobalizationAspect.cs" />
-    <Compile Include="Globalization\GlobalizationAspectMember.cs" />
-    <Compile Include="Initializable.cs" />
-    <Compile Include="Interceptors\Capitalize.cs" />
-    <Compile Include="Interceptors\DigitsOnly.cs" />
-    <Compile Include="Interceptors\Interceptor.cs" />
-    <Compile Include="Interceptors\InterceptorAspect.cs" />
-    <Compile Include="Interceptors\InterceptorAspectMember.cs" />
-    <Compile Include="Interceptors\InterceptorList.cs" />
-    <Compile Include="Interceptors\Whitespace.cs" />
-    <Compile Include="Interceptors\WhitespaceStrategy.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Restrictions\Cnpj.cs" />
-    <Compile Include="Restrictions\Cpf.cs" />
-    <Compile Include="Restrictions\CpfOrCnpj.cs" />
-    <Compile Include="Restrictions\Email.cs" />
-    <Compile Include="Restrictions\Enumeration.cs" />
-    <Compile Include="Restrictions\EnumerationList.cs" />
-    <Compile Include="Restrictions\Length.cs" />
-    <Compile Include="Restrictions\MaxExclusive.cs" />
-    <Compile Include="Restrictions\MaxInclusive.cs" />
-    <Compile Include="Restrictions\MaxLength.cs" />
-    <Compile Include="Restrictions\MinExclusive.cs" />
-    <Compile Include="Restrictions\MinInclusive.cs" />
-    <Compile Include="Restrictions\MinLength.cs" />
-    <Compile Include="Restrictions\Required.cs" />
-    <Compile Include="Restrictions\Restriction.cs" />
-    <Compile Include="Restrictions\RestrictionAspect.cs" />
-    <Compile Include="Restrictions\RestrictionAspectMember.cs" />
-    <Compile Include="Restrictions\RestrictionException.cs" />
-    <Compile Include="Restrictions\RestrictionMessages.cs" />
-    <Compile Include="Restrictions\RestrictionList.cs" />
-    <Compile Include="Restrictions\Url.cs" />
-    <Compile Include="Singleton.cs" />
-    <Compile Include="Text\DelimitedTextAspect.cs" />
-    <Compile Include="Text\DelimitedTextAspectMember.cs" />
-    <Compile Include="Text\DelimitedTextColumnAttribute.cs" />
-    <Compile Include="Text\FixedLengthAspect.cs" />
-    <Compile Include="Text\FixedLengthColumnAttribute.cs" />
-    <Compile Include="Text\FixedLengthTableAttribute.cs" />
-    <Compile Include="Text\FixedLengthAspectMember.cs" />
-    <Compile Include="Text\TextColumn.cs" />
-    <Compile Include="Text\TextColumnSchema.cs" />
-    <Compile Include="Text\TextDataReader.cs" />
-    <Compile Include="Helpers\ValidationHelper.cs" />
-    <Compile Include="UI\UIControl.cs" />
-    <Compile Include="UI\UIControlArrayChoices.cs" />
-    <Compile Include="UI\UIControlChoices.cs" />
-    <Compile Include="UI\UIControlClassStorageChoices.cs" />
-    <Compile Include="UI\UIControlEnumChoices.cs" />
-    <Compile Include="UI\UIControlGroup.cs" />
-    <Compile Include="UI\UIControls\UIFileUploader.cs" />
-    <Compile Include="UI\UIControls\UIColorPicker.cs" />
-    <Compile Include="UI\UIControls\UIHidden.cs" />
-    <Compile Include="UI\UIControls\UITimepicker.cs" />
-    <Compile Include="UI\UIPresenter.cs" />
-    <Compile Include="UI\UIAspect.cs" />
-    <Compile Include="UI\UIControls\UICheckbox.cs" />
-    <Compile Include="UI\UIControls\UICheckboxGroup.cs" />
-    <Compile Include="UI\UIControlAttribute.cs" />
-    <Compile Include="UI\UIControlFactory.cs" />
-    <Compile Include="UI\UIControlState.cs" />
-    <Compile Include="UI\UIControls\UIDatepicker.cs" />
-    <Compile Include="UI\UIControls\UIDropdown.cs" />
-    <Compile Include="UI\UIControls\UIHtmlEditor.cs" />
-    <Compile Include="UI\UIControls\UIMultiline.cs" />
-    <Compile Include="UI\UIControls\UIPassword.cs" />
-    <Compile Include="UI\UIPresenterControl.cs" />
-    <Compile Include="UI\UIControls\UIRadioGroup.cs" />
-    <Compile Include="UI\UIReflectionFactory.cs" />
-    <Compile Include="UI\UIControls\UISingleline.cs" />
-    <Compile Include="UsecaseResultType.cs" />
-    <Compile Include="Xml\XmlAspect.cs" />
-    <Compile Include="Xml\XmlAspectMember.cs" />
-    <Compile Include="Xml\XmlAspectMemberCDATA.cs" />
-    <Compile Include="Xml\XmlAspectMemberComposite.cs" />
-    <Compile Include="Xml\XmlAspectMemberList.cs" />
-    <Compile Include="Xml\XmlAspectMemberAttribute.cs" />
-    <Compile Include="Xml\XmlAspectMemberText.cs" />
-    <Compile Include="Xml\XmlType.cs" />
-    <Compile Include="Xml\XmlAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Globalization\EixoX.Globalization.Example.xml">
@@ -368,13 +31,104 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Compile Remove="Database\Adapters\DbAnsiCharAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbAnsiStringAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbAnsiStringFixedLengthAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbAnsiStringMaxLengthAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbBinaryAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbCurrencyAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbDataTime2Adapter.cs" />
+    <Compile Remove="Database\Adapters\DbDateAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbDateTimeOffsetAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbGuidAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbInt16Adapter.cs" />
+    <Compile Remove="Database\Adapters\DbInt32Adapter.cs" />
+    <Compile Remove="Database\Adapters\DbInt64Adapter.cs" />
+    <Compile Remove="Database\Adapters\DbStringFixedLengthAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbStringMaxLengthAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbTextAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbTimeAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbVarNumericAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbXmlDocumentAdapter.cs" />
+    <Compile Remove="Database\Adapters\DbXmlElementAdapter.cs" />
+    <Compile Remove="Database\DbAspect.cs" />
+    <Compile Remove="Database\DbAspectAdapter.cs" />
+    <Compile Remove="Database\DbAspectMember.cs" />
+    <Compile Remove="Database\DbClassCount.cs" />
+    <Compile Remove="Database\DbClassDelete.cs" />
+    <Compile Remove="Database\DbClassExists.cs" />
+    <Compile Remove="Database\DbClassInsert.cs" />
+    <Compile Remove="Database\DbClassSelect.cs" />
+    <Compile Remove="Database\DbClassSelectMember.cs" />
+    <Compile Remove="Database\DbClassUpdate.cs" />
+    <Compile Remove="Database\DbColumnAttribute.cs" />
+    <Compile Remove="Database\DbColumnKind.cs" />
+    <Compile Remove="Database\DbCommand.cs" />
+    <Compile Remove="Database\DbCommandBuilder.cs" />
+    <Compile Remove="Database\DbCommandPart.cs" />
+    <Compile Remove="Database\DbDialect.cs" />
+    <Compile Remove="Database\DbEngine.cs" />
+    <Compile Remove="Database\DbStorage.cs" />
+    <Compile Remove="Database\DbTableAttribute.cs" />
+    <Compile Remove="Database\DbTransient.cs" />
+    <Compile Remove="Data\IdentityAttribute.cs" />
+    <Compile Remove="Data\NullableAttribute.cs" />
+    <Compile Remove="Data\PreparedClassDelete.cs" />
+    <Compile Remove="Data\PreparedClassInsert.cs" />
+    <Compile Remove="Data\PreparedClassSelect.cs" />
+    <Compile Remove="Data\PreparedClassUpdate.cs" />
+    <Compile Remove="Data\PrimaryKeyAttribute.cs" />
+    <Compile Remove="Data\StoredAsAttribute.cs" />
+    <Compile Remove="Data\UniqueAttribute.cs" />
+    <Compile Remove="EmailTemplate.cs" />
+    <Compile Remove="HashcodeComparer.cs" />
+    <Compile Remove="Html\HtmlInputAspect.cs" />
+    <Compile Remove="Html\HtmlInputType.cs" />
+    <Compile Remove="Text\Adapters2\AbstractTextAdapter.cs" />
+    <Compile Remove="Text\Adapters2\ByteAdapter.cs" />
+    <Compile Remove="Text\Adapters2\ByteArrayAdapter.cs" />
+    <Compile Remove="Text\Adapters2\DateTimeAdapter.cs" />
+    <Compile Remove="Text\Adapters2\DateYmdAdapter.cs" />
+    <Compile Remove="Text\Adapters2\DecimalAdapter.cs" />
+    <Compile Remove="Text\Adapters2\DoubleAdapter.cs" />
+    <Compile Remove="Text\Adapters2\FloatAdapter.cs" />
+    <Compile Remove="Text\Adapters2\GuidAdapter.cs" />
+    <Compile Remove="Text\Adapters2\ImageAdapter.cs" />
+    <Compile Remove="Text\Adapters2\Int16Adapter.cs" />
+    <Compile Remove="Text\Adapters2\Int32Adapter.cs" />
+    <Compile Remove="Text\Adapters2\Int64Adapter.cs" />
+    <Compile Remove="Text\Adapters2\SByteAdapter.cs" />
+    <Compile Remove="Text\Adapters2\TextAdapter.cs" />
+    <Compile Remove="Text\Adapters2\TextAdapters.cs" />
+    <Compile Remove="Text\Adapters2\TimespanAdapter.cs" />
+    <Compile Remove="Text\Adapters2\UInt16Adapter.cs" />
+    <Compile Remove="Text\Adapters2\UInt32Adapter.cs" />
+    <Compile Remove="Text\Adapters2\UInt64Adapter.cs" />
+    <Compile Remove="Text\Adapters\Base64Adapter.cs" />
+    <Compile Remove="Text\Adapters\BooleanAdapter.cs" />
+    <Compile Remove="Text\Adapters\ByteAdapter.cs" />
+    <Compile Remove="Text\Adapters\CharAdapter.cs" />
+    <Compile Remove="Text\Adapters\CompositeAdapter.cs" />
+    <Compile Remove="Text\Adapters\DateTimeAdapter.cs" />
+    <Compile Remove="Text\Adapters\DecimalAdapter.cs" />
+    <Compile Remove="Text\Adapters\DoubleAdapter.cs" />
+    <Compile Remove="Text\Adapters\EnumAdapter.cs" />
+    <Compile Remove="Text\Adapters\ObjectAdapter.cs" />
+    <Compile Remove="Text\Adapters\SByteAdapter.cs" />
+    <Compile Remove="Text\Adapters\SimpleAdapter.cs" />
+    <Compile Remove="Text\Adapters\SimpleAdapterBase.cs" />
+    <Compile Remove="Text\Adapters\SimpleAdapters.cs" />
+    <Compile Remove="Text\Adapters\SingleAdapter.cs" />
+    <Compile Remove="Text\Adapters\StringAdapter.cs" />
+    <Compile Remove="Text\Adapters\UInt16Adapter.cs" />
+    <Compile Remove="Text\Adapters\UInt32Adapter.cs" />
+    <Compile Remove="Text\Adapters\UInt64Adapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Data.Odbc" Version="6.0.1" />
+    <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
+    <PackageReference Include="System.Data.OracleClient" Version="1.0.8" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
+  </ItemGroup>
 </Project>
