@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EixoX.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EixoX.Tests
 {

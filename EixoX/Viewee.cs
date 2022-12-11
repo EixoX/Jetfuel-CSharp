@@ -8,4 +8,14 @@ namespace EixoX
     {
         void OnException(Exception ex);
     }
+
+    public interface ListerViewee : Viewee
+    {
+        void OnEmptyList();
+    }
+
+    public interface RestrictionViewee : Viewee
+    {
+        void OnViolatedRestrictions();
+    }
 }
